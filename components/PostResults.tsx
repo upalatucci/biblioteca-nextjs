@@ -1,25 +1,30 @@
-import Link from "next/link";
-import Image from "next/image";
+import Image from 'next/image';
+import Link from 'next/link';
+import { FC } from 'react';
+
 //to use Image with an external url, add some config on next.config.js
 //for more info, check out these docs https://nextjs.org/docs/basic-features/image-optimization
+import { getDate } from '../utils/utils';
 
-import { getDate } from "../utils/utils";
+interface PostProps {
+  post: Record<string, any>;
+}
 
-export default function Post({ post, featuredMedia }) {
+const Post: FC<PostProps> = ({ post }) => {
+  const image = post.featured_media ? post.featured_media[0] : null;
+
   return (
     <div className="card mb-3" style={{ maxWidth: "540px" }}>
       <div className="row g-0">
-        {featuredMedia && (
+        {image && (
           <div className="col-md-4">
             <Link href={`/posts/${post.slug}`}>
               <a>
                 <Image
-                  src={
-                    featuredMedia["media_details"].sizes.medium["source_url"]
-                  }
+                  src={image["media_details"].sizes.medium["source_url"]}
                   width={180}
                   height={120}
-                  alt={featuredMedia["alt_text"]}
+                  alt={image["alt_text"]}
                 />
               </a>
             </Link>
@@ -30,7 +35,9 @@ export default function Post({ post, featuredMedia }) {
             <h5 className="card-title">{post.title.rendered}</h5>
             <div
               className="card-text"
-              dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+              dangerouslySetInnerHTML={{
+                __html: `${post.content.rendered.substring(0, 200)}...`,
+              }}
             ></div>
             <p className="card-text">
               <small className="text-muted">On {getDate(post.modified)}</small>
@@ -43,4 +50,6 @@ export default function Post({ post, featuredMedia }) {
       </div>
     </div>
   );
-}
+};
+
+export default Post;

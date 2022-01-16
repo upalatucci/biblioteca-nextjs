@@ -1,6 +1,7 @@
-import Link from "next/link";
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Link from 'next/link';
 
-import { getPost, getSlugs } from "../../utils/wordpress";
+import { getPost, getSlugs } from '../../lib/wordpress';
 
 export default function PostPage({ post }) {
   return (
@@ -18,7 +19,7 @@ export default function PostPage({ post }) {
 }
 
 //hey Next, these are the possible slugs
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getSlugs("posts");
 
   return {
@@ -27,11 +28,11 @@ export async function getStaticPaths() {
     //e.g when a new blogpost is added to the app
     fallback: "blocking",
   };
-}
+};
 
 //access the router, get the id, and get the data for that post
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await getPost(params.slug);
 
   return {
@@ -39,4 +40,4 @@ export async function getStaticProps({ params }) {
       post,
     },
   };
-}
+};
