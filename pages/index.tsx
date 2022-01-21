@@ -21,7 +21,7 @@ export default function Home({ posts }) {
 
     setSearchedPosts(
       mapElasticResultToPost(jsonResponse)?.map((post) => (
-        <PostResults post={post} />
+        <PostResults post={post} key={post.id} />
       ))
     );
   };
@@ -50,9 +50,7 @@ export default function Home({ posts }) {
           <div className="col-lg-8">
             <h2 className="pb-3">Our blog posts</h2>
             <Search onSearch={onSearchPost} />
-            {searchedPosts}
-            ------------------
-            {jsxPosts}
+            {searchedPosts ? searchedPosts : jsxPosts}
           </div>
         </div>
       </div>
