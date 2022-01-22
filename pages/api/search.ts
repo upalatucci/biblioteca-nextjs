@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import fetch from 'node-fetch';
+import { NextApiRequest, NextApiResponse } from "next";
+import fetch from "node-fetch";
 
 const authorization = btoa(
   `${process.env.ELASTIC_SEARCH_USERNAME}:${process.env.ELASTIC_SEARCH_PASSWORD}`
@@ -23,7 +23,7 @@ export default async function handler(
       },
     };
 
-    const exactMatch = textQuery?.match(/"[\w ]+"/);
+    const exactMatch = textQuery?.match(/".*"/);
 
     exactMatch?.forEach((match) => {
       textQuery = textQuery.replace(match, "");
@@ -44,6 +44,8 @@ export default async function handler(
           fields: ["post_content", "post_title"],
         },
       });
+
+    // il cosneguimento "la buddità"
 
     console.log("Search for", elasticQuery.query.bool.must);
 

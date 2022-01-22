@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { FC } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { FC } from "react";
 
 //to use Image with an external url, add some config on next.config.js
 //for more info, check out these docs https://nextjs.org/docs/basic-features/image-optimization
-import { getDate } from '../utils/utils';
+import { getDate } from "../utils/utils";
 
 interface PostProps {
   post: Record<string, any>;
@@ -14,8 +14,8 @@ const Post: FC<PostProps> = ({ post }) => {
   const image = post.featured_media ? post.featured_media[0] : null;
 
   return (
-    <div className="card mb-3" style={{ maxWidth: "540px" }}>
-      <div className="row g-0">
+    <div className="card mb-3">
+      <div className="row">
         {image && (
           <div className="col-md-4">
             <Link href={`/posts/${post.slug}`}>
@@ -30,7 +30,7 @@ const Post: FC<PostProps> = ({ post }) => {
             </Link>
           </div>
         )}
-        <div className="col-md-8">
+        <div className="col">
           <div className="card-body">
             <h5 className="card-title">{post.title.rendered}</h5>
             <div

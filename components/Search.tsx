@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useState } from "react";
 
 interface SearchProps {
   onSearch: (searchText: string) => void;
@@ -14,7 +14,7 @@ const Search: FC<SearchProps> = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="text-center p-5">
       <input
         type="search"
         value={searchText}

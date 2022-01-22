@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { FC } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { FC } from "react";
 
 //to use Image with an external url, add some config on next.config.js
 //for more info, check out these docs https://nextjs.org/docs/basic-features/image-optimization
-import { getDate } from '../utils/utils';
+import { getDate } from "../utils/utils";
 
 interface PostProps {
   post: Record<string, any>;
@@ -37,6 +37,7 @@ const Post: FC<PostProps> = ({ post }) => {
               className="card-text"
               dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
             ></div>
+
             <p className="card-text">
               <small className="text-muted">On {getDate(post.modified)}</small>
             </p>

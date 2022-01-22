@@ -1,11 +1,11 @@
-import { GetStaticProps } from 'next';
-import Head from 'next/head';
-import { useState } from 'react';
+import { GetStaticProps } from "next";
+import Head from "next/head";
+import { useState } from "react";
 
-import PostResults from '../components/PostResults';
-import Search from '../components/Search';
-import { getPosts } from '../lib/wordpress';
-import { mapElasticResultToPost } from '../utils/elasticSearchUtils';
+import PostResults from "../components/PostResults";
+import Search from "../components/Search";
+import { getPosts } from "../lib/wordpress";
+import { mapElasticResultToPost } from "../utils/elasticSearchUtils";
 
 export default function Home({ posts }) {
   const [searchedPosts, setSearchedPosts] = useState();
@@ -47,7 +47,7 @@ export default function Home({ posts }) {
       <div className="container pt-5">
         <h1 className="text-center pb-5">Nichiren Library</h1>
         <div className="row">
-          <div className="col-lg-8">
+          <div className="col-lg-12">
             <h2 className="pb-3">Our blog posts</h2>
             <Search onSearch={onSearchPost} />
             {searchedPosts ? searchedPosts : jsxPosts}

@@ -1,15 +1,26 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
-import Link from 'next/link';
+import { GetStaticPaths, GetStaticProps } from "next";
+import Link from "next/link";
 
-import { getPost, getSlugs } from '../../lib/wordpress';
+import { getPost, getSlugs } from "../../lib/wordpress";
+import postStyle from "../../styles/post.module.css";
 
 export default function PostPage({ post }) {
   return (
-    <div className="container pt-5">
+    <div className={`${postStyle.post} container pt-5`}>
       <h1 className="text-center pb-5">{post.title.rendered}</h1>
       <div
         className="card-text pb-5"
         dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+      ></div>
+
+      <div
+        className="card-text pb-5"
+        dangerouslySetInnerHTML={{ __html: post.acf.acf_notes }}
+      ></div>
+
+      <div
+        className="card-text pb-5"
+        dangerouslySetInnerHTML={{ __html: post.acf.acf_cenni_storici }}
       ></div>
       <Link href="/">
         <a className="btn btn-primary">Back to Home</a>
@@ -18,7 +29,6 @@ export default function PostPage({ post }) {
   );
 }
 
-//hey Next, these are the possible slugs
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getSlugs("posts");
 
@@ -30,11 +40,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-//access the router, get the id, and get the data for that post
-
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await getPost(params.slug);
-
   return {
     props: {
       post,
