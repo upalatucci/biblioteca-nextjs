@@ -1,9 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fetch from "node-fetch";
 
-const authorization = btoa(
+const authorization = Buffer.from(
   `${process.env.ELASTIC_SEARCH_USERNAME}:${process.env.ELASTIC_SEARCH_PASSWORD}`
-);
+).toString("base64");
+
 const Headers = {
   Authorization: `Basic ${authorization}`,
 };
