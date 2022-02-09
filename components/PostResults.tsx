@@ -36,7 +36,7 @@ const Post: FC<PostProps> = ({ post }) => {
             <div
               className="card-text"
               dangerouslySetInnerHTML={{
-                __html: `${post.content.rendered.substring(0, 200)}...`,
+                __html: `${post.content.rendered.substring(0, 600)}...`,
               }}
             ></div>
             <p className="card-text">

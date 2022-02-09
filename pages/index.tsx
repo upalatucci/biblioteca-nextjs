@@ -47,7 +47,8 @@ export default function Home({ posts }) {
       <div className="container pt-5">
         <h1 className="text-center pb-5">Nichiren Library</h1>
         <div className="row">
-          <div className="col-lg-12">
+          <div className="col-lg-2"></div>
+          <div className="col-lg-8">
             <h2 className="pb-3">Our blog posts</h2>
             <Search onSearch={onSearchPost} />
             {searchedPosts ? searchedPosts : jsxPosts}
