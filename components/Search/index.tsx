@@ -17,6 +17,7 @@ const Search: FC<SearchProps> = ({ onSearch }) => {
     <form onSubmit={onSubmit} className="text-center p-5">
       <input
         type="search"
+        className="search"
         value={searchText}
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           setSearchText(event.currentTarget.value)
