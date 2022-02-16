@@ -22,6 +22,14 @@ export default async function handler(
           must: [],
         },
       },
+      highlight: {
+        pre_tags : ["<span>"],
+        post_tags : ["</span>"],
+        fields : {
+            post_content : {},
+            post_title: {}
+        }
+      }
     };
 
     const exactMatch = textQuery?.match(/".*"/);
@@ -33,7 +41,7 @@ export default async function handler(
         multi_match: {
           query: match.replace('"', ""),
           type: "phrase",
-          fields: ["post_content", "post_title"],
+          fields: ["post_content", "post_title^3"],
         },
       });
     });
@@ -42,7 +50,7 @@ export default async function handler(
       elasticQuery.query.bool.must.push({
         multi_match: {
           query: textQuery,
-          fields: ["post_content", "post_title"],
+          fields: ["post_content", "post_title^3"],
         },
       });
 

@@ -26,3 +26,11 @@ input.search  {
   width: 100%;
   padding: 0 10px;
 }
+
+.card-title span {
+  background-color: yellow;
+}
+
+.card-text span {
+  background-color: yellow;
+}
