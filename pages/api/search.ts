@@ -9,6 +9,10 @@ const Headers = {
   Authorization: `Basic ${authorization}`,
 };
 
+const fieldsMapping = {
+  'destinatario': 'meta.acf_destinatario.value'
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -31,6 +35,18 @@ export default async function handler(
         }
       }
     };
+
+    const destinatario = textQuery?.match(/\(destinatario:[\w ]+\)/)
+
+    if (destinatario && destinatario.length) {
+      textQuery = textQuery.replace(/\(destinatario:[\w ]+\)/, '')
+      elasticQuery.query.bool.must.push({
+          query_string: {
+            query: destinatario[0].replace("(destinatario:", '').replace(')', ''),
+            fields: [fieldsMapping['destinatario']]
+        }
+      });
+    }
 
     const exactMatch = textQuery?.match(/".*"/);
 
