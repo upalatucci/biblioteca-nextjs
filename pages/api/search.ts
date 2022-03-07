@@ -48,7 +48,7 @@ export default async function handler(
       });
     }
 
-    const exactMatch = textQuery?.match(/".*"/);
+    const exactMatch = textQuery?.match(/".*"!~/);
 
     exactMatch?.forEach((match) => {
       textQuery = textQuery.replace(match, "");
