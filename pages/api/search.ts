@@ -48,10 +48,10 @@ export default async function handler(
 
     if (textQuery)
       elasticQuery.query.bool.must.push({
-        multi_match: {
-          query: textQuery,
-          fields: ["post_content", "post_title^3"],
-        },
+          query_string: {
+            query: textQuery,
+            fields: ["post_content", "post_title^3"]
+        }
       });
 
     // il cosneguimento "la buddità"
