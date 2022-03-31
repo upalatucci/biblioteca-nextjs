@@ -1,4 +1,11 @@
 
+
+#### Requirements
+
+- Install [Node](https://nodejs.org/it/download/)
+- Install [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable)
+
+
 #### Configuration
 ------------
 
