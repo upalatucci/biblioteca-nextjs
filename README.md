@@ -25,7 +25,7 @@ WORDPRESS_API_ENDPOINT=https://ereditadellavita.it/library/wp-json/wp/v2
 - Install dependencies with `yarn install`
 
 
-- Run the server with `yarn start`
+- Run the server with `yarn dev`
 
 
 #### Build for production
