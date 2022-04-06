@@ -1,0 +1,22 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+@mixin onTablet {
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        @content;
+    }
+}
+
+
+
+@mixin onDesktop {
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+        @content;
+    }
+}

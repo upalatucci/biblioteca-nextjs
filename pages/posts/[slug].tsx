@@ -2,11 +2,10 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
 
 import { getPost, getSlugs } from "../../lib/wordpress";
-import postStyle from "../../styles/post.module.css";
 
 export default function PostPage({ post }) {
   return (
-    <div className={`${postStyle.post} container pt-5`}>
+    <div className="post container pt-5">
       <h1 className="text-center pb-5">{post.title.rendered}</h1>
       <div
         className="card-text pb-5"
