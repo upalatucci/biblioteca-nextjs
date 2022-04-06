@@ -1,0 +1,16 @@
+@import './mediaQueries.scss';
+
+.search-card {
+    border-radius: var(--border-radius-md);
+    background-color: var(--background);
+    padding: var(--space-lg) var(--space-2xl);
+    margin: var(--space-lg) 0;
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+    text-align: center;
+
+    @include onDesktop {
+        min-width: 600px;
+    }
+
+}

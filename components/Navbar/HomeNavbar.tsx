@@ -23,7 +23,7 @@ const HomeNavbar = () => {
       </button>
       <div className="navItems">
         <NavbarItem
-          href="/"
+          href="/rsnd-vol1"
           upText="Raccolta degli Scritti di"
           title="NICHIREN DAISHONIN"
           downText="VOLUME I"
@@ -40,7 +40,9 @@ const HomeNavbar = () => {
 
         <NavbarItem href="/" title="GLOSSARIO" />
       </div>
-      <button className="primary">RICERCA</button>
+      <Link href="/ricerca" passHref>
+        <button className="primary">RICERCA</button>
+      </Link>
     </nav>
   );
 };

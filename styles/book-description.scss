@@ -1,0 +1,35 @@
+.book-description {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+
+    img {
+        border-radius: var(--border-radius-md);
+    }
+
+    .index {
+        background-color: white;
+        border-radius: var(--border-radius-md);
+        padding: var(--space-lg);
+
+        ul {
+            font-family: var(--secondary-font);
+            list-style: none;
+            padding-left: 0;
+
+            li:not(:last-child) {
+                border-bottom: 1px dashed var(--color-gray);
+            }
+
+            & > li {
+                font-weight: bold;
+            }
+        }
+    }
+}

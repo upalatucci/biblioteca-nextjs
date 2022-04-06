@@ -2,6 +2,9 @@
 @import './posts.scss';
 @import './nav.scss';
 @import './search.scss';
+@import './search-card.scss';
+@import './search-input.scss';
+@import './book-description.scss';
 @import './mediaQueries.scss';
 
 html,
@@ -12,6 +15,7 @@ body {
   --color-text: #2B4261;
   --primary-color: #00A2C3;
   --background: #F8F8F8;
+  --color-gray: #DADADA;
   --primary-font: 'Playfair Display', serif;
   --secondary-font: 'Roboto', sans-serif;
   --border-radius-md: 25px;
@@ -22,11 +26,14 @@ body {
   --space-2xl: 4rem;
   --space-4xl: 8rem;
   --shadow: 0px 5px 25px #00000029;
+  --shadow-sm: 0px 3px 6px #00000029;
+
 
 
   color: var(--color-text);
   background-color: var(--background);
 }
+
 
 a {
   color: inherit;
@@ -88,26 +95,55 @@ section {
   }
 }
 
+section.blank-section {
+  background-color: white;
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--space-lg);
+  max-width: 100%;
+  padding: var(--space-lg) var(--space-2xl);
+  box-shadow: var(--shadow);
+}
+
+button {
+  cursor: pointer;
+}
+
 button.primary {
   background-color: var(--primary-color);
   border-radius: var(--border-radius-md);
   border: none;
-  min-width: 180px;
+  min-width: 150px;
   min-height: 40px;
   color: white;
   font-family: var(--secondary-font);
-  font-size: 20px;
-  padding: 0 var(--space-lg);
+  font-size: 18px;
+  padding: 0 var(--space-md);
+
+
+
+  @include onTablet {
+    min-width: 180px;
+    font-size: 20px;
+    padding: 0 var(--space-lg);
+  }
+
 }
 
 button.secondary {
   background-color: transparent;
   border-radius: var(--border-radius-md);
   border: 1px solid var(--color-text);
-  min-width: 180px;
+  min-width: 150px;
   min-height: 40px;
   color: var(--color-text);
   font-family: var(--secondary-font);
-  font-size: 20px;
-  padding: 0 var(--space-lg);
+  font-size: 18px;
+  padding: 0 var(--space-md);
+
+
+  @include onTablet {
+    min-width: 180px;
+    font-size: 20px;
+    padding: 0 var(--space-lg);
+  }
 }

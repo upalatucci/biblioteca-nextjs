@@ -20,3 +20,19 @@ $grid-breakpoints: (
         @content;
     }
 }
+
+
+
+@mixin onLargeDesktop {
+    @media screen and (min-width: map-get($grid-breakpoints, 'xl')) {
+        @content;
+    }
+}
+
+
+
+@mixin onExtraLargeDesktop {
+    @media screen and (min-width: map-get($grid-breakpoints, 'xxl')) {
+        @content;
+    }
+}

@@ -1,0 +1,52 @@
+@import './mediaQueries.scss';
+
+.search-page {
+    section {
+        font-family: var(--secondary-font);
+        display: flex;
+        min-height: 40vh;
+
+
+        .inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: 0 auto;
+            width: 100%;
+
+            h2 {
+                font-family: var(--primary-font);
+                padding-left: var(--space-lg);
+                align-self: flex-start;
+                margin: 0;
+            }
+
+            .action-buttons {
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                width: 300px;
+
+
+                @include onDesktop {
+                    width: 450px;
+                }
+            }
+
+
+            @include onDesktop {
+                max-width: 800px;
+            }
+
+            @include onLargeDesktop {
+                max-width: 1000px;
+            }
+
+
+            @include onExtraLargeDesktop {
+                max-width: 1200px;
+            }
+        }
+    }
+}

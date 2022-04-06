@@ -14,8 +14,11 @@ import sutraDelLoto from "../public/sutra-del-loto.jpeg";
 import sfogliaGlossario from "../public/sfoglia.jpeg";
 import ascolta from "../public/ascolta.jpeg";
 import Link from "next/link";
+import SearchInput from "../components/SearchInput";
 
-export default function Home({ posts }) {
+export default function Home() {
+  const [searchText, setSearchText] = useState("");
+
   // const [searchedPosts, setSearchedPosts] = useState();
 
   // const jsxPosts = posts.map((post) => {
@@ -75,21 +78,24 @@ export default function Home({ posts }) {
             title="Sfoglia il glossario"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu ipsum urna."
             width={800}
-            height={700}
+            height={500}
           />
           <ImageWithTextOverlay
             width={800}
-            height={700}
+            height={500}
             image={ascolta}
             title="Ascolta la Raccolta degli Scritti di Nichiren Daishonin"
             description="Nam eu ipsum urna. Aenean odio nulla, mattis sit amet ipsum vel, commodo porttitor metus."
           />
         </section>
 
-        <section className="section-search">
+        <section className="section-search blank-section">
           <h2>Cosa vuoi approfondire oggi?</h2>
           <div className="simple-search">
-            <input type="search" placeholder="Inserisci la parola o frase..." />
+            <SearchInput
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
             <button className="primary">Cerca</button>
           </div>
 
@@ -119,11 +125,11 @@ export default function Home({ posts }) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const posts = await getPosts();
-  return {
-    props: {
-      posts,
-    },
-  };
-};
+// export const getStaticProps: GetStaticProps = async ({ params }) => {
+//   const posts = await getPosts();
+//   return {
+//     props: {
+//       posts,
+//     },
+//   };
+// };
