@@ -1,6 +1,13 @@
 import { ChangeEventHandler, FC } from "react";
 import SearchInput from "./SearchInput";
 
+enum BOOKS {
+  RSND1,
+  RSND2,
+  SUTRA,
+  GLOSSARIO,
+}
+
 interface SearchProps {
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
@@ -12,26 +19,26 @@ const Search: FC<SearchProps> = ({ value, onChange }) => (
 
     <div className="checkboxes">
       <span className="span-checkbox">
-        <input type="checkbox" value="" />
         <label>
+          <input type="checkbox" value={BOOKS.RSND1} />
           <strong>RSND</strong> VOL. I
         </label>
       </span>
       <span className="span-checkbox">
-        <input type="checkbox" value="" />
         <label>
+          <input type="checkbox" value={BOOKS.RSND2} />
           <strong>RSND</strong> VOL. II
         </label>
       </span>
       <span className="span-checkbox">
-        <input type="checkbox" value="" />
         <label>
+          <input type="checkbox" value={BOOKS.SUTRA} />
           <strong>Il Sutra del Loto</strong>
         </label>
       </span>
       <span className="span-checkbox">
-        <input type="checkbox" value="" />
         <label>
+          <input type="checkbox" value={BOOKS.GLOSSARIO} />
           <strong>Glossario</strong>
         </label>
       </span>

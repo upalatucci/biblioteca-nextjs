@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
+import { PostResultType } from "../utils/elasticSearchUtils";
 
 //to use Image with an external url, add some config on next.config.js
 //for more info, check out these docs https://nextjs.org/docs/basic-features/image-optimization
 import { getDate } from "../utils/utils";
 
 interface PostProps {
-  post: Record<string, any>;
+  post: PostResultType;
 }
 
 const Post: FC<PostProps> = ({ post }) => {

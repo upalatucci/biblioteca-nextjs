@@ -1,4 +1,27 @@
-export const mapElasticResultToPost = (result) => {
+export type PostResultType = {
+  categories: string[],
+  comment_status: string,
+  content: {
+    rendered: string,
+  },
+  date: string,
+  date_gmt: string,
+  excerpt: { rendered: string },
+  featured_media: 0,
+  format: "standard",
+  guid: { rendered: string },
+  id: string,
+  link: string,
+  meta: string,
+  modified:string,
+  ping_status: string,
+  slug: string,
+  title: { rendered: string },
+  type: string,
+}
+
+
+export const mapElasticResultToPost = (result: any): PostResultType[] => {
   return result?.hits?.hits?.map(({ _source, highlight }) => ({
     categories:
       _source.terms?.category?.map((category) => category.term_id) || [],

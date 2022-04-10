@@ -3,14 +3,33 @@
 .search-card {
     border-radius: var(--border-radius-md);
     background-color: var(--background);
-    padding: var(--space-lg) var(--space-2xl);
-    margin: var(--space-lg) 0;
+    padding: var(--space-3xl) var(--space-2xl);
+    margin: var(--space-lg) 0 var(--space-2xl);
     box-shadow: var(--shadow-sm);
     width: 100%;
     text-align: center;
+
+    label {
+        font-family: var(--primary-font);
+        cursor: pointer;
+    }
 
     @include onDesktop {
         min-width: 600px;
     }
 
+    .checkboxes > * {
+        margin-right: var(--space-lg);
+    }
+
+    input[type='checkbox'] {
+        margin-right: var(--space-sm);
+        cursor: pointer;
+    }
+
+
+
+    .search-input {
+        margin-bottom: var(--space-2xl);
+    }
 }

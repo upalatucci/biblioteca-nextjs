@@ -1,13 +1,8 @@
-import { GetStaticProps } from "next";
 import Head from "next/head";
 import { useState } from "react";
 import ImageWithTextOverlay from "../components/ImageWithTextOverlay";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
 
-import PostResults from "../components/PostResults";
-import Search from "../components/Search";
-import { getPosts } from "../lib/wordpress";
-import { mapElasticResultToPost } from "../utils/elasticSearchUtils";
 import raccoltaVol1 from "../public/raccolta-nichiren-vol1.jpeg";
 import raccoltaVol2 from "../public/raccolta-nichiren-vol2.jpeg";
 import sutraDelLoto from "../public/sutra-del-loto.jpeg";

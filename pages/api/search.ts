@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fetch from "node-fetch";
+import searchQuery from "../../utils/searchQuery";
 
 const authorization = Buffer.from(
   `${process.env.ELASTIC_SEARCH_USERNAME}:${process.env.ELASTIC_SEARCH_PASSWORD}`
@@ -18,57 +19,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    let textQuery = req.query["q"] as string;
-
-    let elasticQuery = {
-      query: {
-        bool: {
-          must: [],
-        },
-      },
-      highlight: {
-        pre_tags : ["<span>"],
-        post_tags : ["</span>"],
-        fields : {
-            post_content : {},
-            post_title: {}
-        }
-      }
-    };
-
-    const destinatario = textQuery?.match(/\(destinatario:[\w ]+\)/)
-
-    if (destinatario && destinatario.length) {
-      textQuery = textQuery.replace(/\(destinatario:[\w ]+\)/, '')
-      elasticQuery.query.bool.must.push({
-          query_string: {
-            query: destinatario[0].replace("(destinatario:", '').replace(')', ''),
-            fields: [fieldsMapping['destinatario']]
-        }
-      });
-    }
-
-    const exactMatch = textQuery?.match(/".*"!~/);
-
-    exactMatch?.forEach((match) => {
-      textQuery = textQuery.replace(match, "");
-
-      elasticQuery.query.bool.must.push({
-        multi_match: {
-          query: match.replace('"', ""),
-          type: "phrase",
-          fields: ["post_content", "post_title^3"],
-        },
-      });
-    });
-
-    if (textQuery)
-      elasticQuery.query.bool.must.push({
-          query_string: {
-            query: textQuery,
-            fields: ["post_content", "post_title^3"]
-        }
-      });
+    const elasticQuery = searchQuery(req.query.q as string)
 
     // il cosneguimento "la buddità"
 

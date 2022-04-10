@@ -23,7 +23,9 @@ body {
   --space-sm: .5rem;
   --space-md: 1rem;
   --space-lg: 2rem;
+  --space-xl: 3rem;
   --space-2xl: 4rem;
+  --space-3xl: 5rem;
   --space-4xl: 8rem;
   --shadow: 0px 5px 25px #00000029;
   --shadow-sm: 0px 3px 6px #00000029;
@@ -48,6 +50,10 @@ h1 {
   font-size: 50px;
   font-weight: 900;
   color: var(--color-title);
+}
+
+hr {
+  border-color: var(--primary-color);
 }
 
 h2 {
