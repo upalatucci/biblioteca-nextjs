@@ -40,9 +40,11 @@ const HomeNavbar = () => {
 
         <NavbarItem href="/" title="GLOSSARIO" />
       </div>
-      <Link href="/ricerca" passHref>
-        <button className="primary">RICERCA</button>
-      </Link>
+      <span className="nav-search">
+        <Link href="/ricerca" passHref>
+          <button className="primary">RICERCA</button>
+        </Link>
+      </span>
     </nav>
   );
 };

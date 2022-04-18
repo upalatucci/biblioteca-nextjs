@@ -15,7 +15,7 @@ const Post: FC<PostProps> = ({ post }) => {
   const image = post.featured_media ? post.featured_media[0] : null;
 
   return (
-    <div className="card mb-3">
+    <div className="post-result card mb-3">
       <div className="row">
         {image && (
           <div className="col-md-4">
