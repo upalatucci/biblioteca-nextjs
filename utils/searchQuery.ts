@@ -22,8 +22,8 @@ const searchQuery = (textQuery: string): ElasticQuery  => {
         },
       },
       highlight: {
-        pre_tags : ["<span>"],
-        post_tags : ["</span>"],
+        pre_tags : ["<mark>"],
+        post_tags : ["</mark>"],
         fields : {
             post_content : {},
             post_title: {}
@@ -57,13 +57,29 @@ const searchQuery = (textQuery: string): ElasticQuery  => {
       });
     });
 
-    if (textQueryCopy)
+    // if (textQueryCopy)
+    //   elasticQuery.query.bool.must.push({
+    //       query_string: {
+    //         query: textQueryCopy.replace(' ', '~ '),
+    //         fields: ["post_content", "post_title^3"],
+    //         fuzziness: '10'
+    //     }
+    //   });
+
+    if (textQueryCopy) {
       elasticQuery.query.bool.must.push({
-          query_string: {
-            query: textQueryCopy,
-            fields: ["post_content", "post_title^3"]
+        multi_match: {
+          query: textQueryCopy,
+          fields: ["post_title^5",  "post_content^3",  "acf_cenni_storici",  "acf_cenni_notes"],
+          fuzziness: '1',
+          slop: "1",
+          minimum_should_match: '75%'
         }
-      });
+      })
+    }
+
+    console.log(elasticQuery)
+
     return elasticQuery
 }
 

@@ -10,13 +10,16 @@ import {
 } from "../utils/elasticSearchUtils";
 
 export default function Ricerca() {
+  const router = useRouter();
   const [searchText, setSearchText] = useState("");
   const [searchedPosts, setSearchedPosts] = useState<PostResultType[]>();
-  const router = useRouter();
 
   const onSubmit = useCallback(
     (event) => {
       event.preventDefault();
+
+      if (!searchText) return;
+
       router.query.q = searchText;
       router.push(router);
     },
@@ -32,7 +35,10 @@ export default function Ricerca() {
   };
 
   useEffect(() => {
-    onSearchPost(router.query.q);
+    if (router.query.q) {
+      setSearchText(router.query.q as string);
+      onSearchPost(router.query.q);
+    }
   }, [router.query.q]);
 
   return (
