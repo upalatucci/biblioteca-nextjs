@@ -1,27 +1,29 @@
-@import './home.scss';
-@import './posts.scss';
-@import './nav.scss';
-@import './search.scss';
-@import './search-card.scss';
-@import './search-input.scss';
-@import './book-description.scss';
-@import './mediaQueries.scss';
-@import './post-result.scss';
+@import "./home.scss";
+@import "./posts.scss";
+@import "./nav.scss";
+@import "./search.scss";
+@import "./search-card.scss";
+@import "./search-input.scss";
+@import "./book-description.scss";
+@import "./mediaQueries.scss";
+@import "./post-result.scss";
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Playfair Display', serif;
-  --color-text: #2B4261;
-  --primary-color: #00A2C3;
-  --background: #F8F8F8;
-  --color-gray: #DADADA;
-  --primary-font: 'Playfair Display', serif;
-  --secondary-font: 'Roboto', sans-serif;
+  font-family: "Playfair Display", serif;
+  --color-text: #2b4261;
+  --primary-color: #00a2c3;
+  --background: #f8f8f8;
+  --color-gray: #dadada;
+  --primary-font: "Playfair Display", serif;
+  --secondary-font: "Roboto", sans-serif;
+  --border-radius-sm: 10px;
   --border-radius-md: 25px;
   --border-radius-lg: 50px;
-  --space-sm: .5rem;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 2rem;
   --space-xl: 3rem;
@@ -31,12 +33,9 @@ body {
   --shadow: 0px 5px 25px #00000029;
   --shadow-sm: 0px 3px 6px #00000029;
 
-
-
   color: var(--color-text);
   background-color: var(--background);
 }
-
 
 a {
   color: inherit;
@@ -61,21 +60,18 @@ h2 {
   font-size: 42px;
 }
 
-input.search  {
+input.search {
   height: 50px;
   font-size: 18px;
   width: 100%;
   padding: 0 10px;
 }
 
-
 .title {
   font-size: 18px;
 
-
   @include onDesktop {
     font-size: 24px;
-  
   }
 }
 
@@ -84,20 +80,24 @@ input.search  {
   margin-left: auto;
   margin-right: auto;
 
-
   @include onTablet {
     padding: 0;
     max-width: 700px;
   }
 
   @include onDesktop {
-    padding: 0;
+    padding: 0 var(--space-md);
+    max-width: 1100px;
+  }
+
+  @include onLargeDesktop {
+    padding: 0 var(--space-md);
     max-width: 1400px;
   }
 }
 
 section {
-  @include onTablet {
+  @include onDesktop {
     min-height: 60vh;
   }
 }
@@ -126,14 +126,11 @@ button.primary {
   font-size: 18px;
   padding: 0 var(--space-md);
 
-
-
   @include onTablet {
     min-width: 180px;
     font-size: 20px;
     padding: 0 var(--space-lg);
   }
-
 }
 
 button.secondary {
@@ -146,7 +143,6 @@ button.secondary {
   font-family: var(--secondary-font);
   font-size: 18px;
   padding: 0 var(--space-md);
-
 
   @include onTablet {
     min-width: 180px;

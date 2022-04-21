@@ -77,9 +77,6 @@ const searchQuery = (textQuery: string): ElasticQuery  => {
         }
       })
     }
-
-    console.log(elasticQuery)
-
     return elasticQuery
 }
 

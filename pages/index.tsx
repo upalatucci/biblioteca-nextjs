@@ -73,11 +73,11 @@ export default function Home() {
             title="Sfoglia il glossario"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu ipsum urna."
             width={800}
-            height={500}
+            height={700}
           />
           <ImageWithTextOverlay
             width={800}
-            height={500}
+            height={700}
             image={ascolta}
             title="Ascolta la Raccolta degli Scritti di Nichiren Daishonin"
             description="Nam eu ipsum urna. Aenean odio nulla, mattis sit amet ipsum vel, commodo porttitor metus."

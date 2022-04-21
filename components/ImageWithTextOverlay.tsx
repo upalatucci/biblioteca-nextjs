@@ -7,6 +7,7 @@ type BookType = {
   textOverlayHeight?: number;
   width: number;
   height: number;
+  className?: string;
 };
 
 const ImageWithTextOverlay: React.FC<BookType> = ({
@@ -16,12 +17,13 @@ const ImageWithTextOverlay: React.FC<BookType> = ({
   textOverlayHeight = 1,
   width,
   height,
+  className,
 }) => (
-  <div className="image-with-text-overlay">
+  <div className={"image-with-text-overlay " + className}>
     <Image
       src={image}
       alt={title}
-      layout="intrinsic"
+      layout="responsive"
       width={width}
       height={height}
       objectFit="cover"

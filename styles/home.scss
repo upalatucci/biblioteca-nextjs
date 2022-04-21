@@ -1,107 +1,139 @@
-@import './mediaQueries.scss';
+@import "./mediaQueries.scss";
 
 .home-page {
-    margin-top: var(--space-lg);
+  margin-top: var(--space-lg);
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 .books {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-bottom: var(--space-4xl);
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  min-height: auto;
 
-    .image-with-text-overlay {
+  @include onDesktop {
+    margin-bottom: var(--space-lg);
+  }
+
+  @include onLargeDesktop {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .image-with-text-overlay {
+    margin: var(--space-md);
+    position: relative;
+    width: 200px;
+    margin-bottom: var(--space-2xl);
+
+    @include onDesktop {
+      width: 300px;
+    }
+
+    @include onLargeDesktop {
+      width: 400px;
+    }
+
+    img {
+      border-radius: var(--border-radius-md);
+    }
+
+    .text {
+      margin: var(--space-xs);
+      background-color: white;
+      padding: var(--space-sm) var(--space-xs) var(--space-xs);
+      border-radius: var(--border-radius-md);
+      position: absolute;
+      bottom: -20%;
+      right: var(--space-md);
+      left: var(--space-md);
+      text-align: center;
+      box-shadow: var(--shadow);
+
+      font-size: 11px;
+
+      .title {
+        font-size: 12px;
+      }
+
+      &.text-overlay-height-1 {
+        height: 120px;
+      }
+
+      @include onDesktop {
+        padding: var(--space-md);
         margin: var(--space-md);
-        position: relative;
-        width: 100%;
-        
-        img {
-            border-radius: var(--border-radius-md);
-            height: 200px;
+        &.text-overlay-height-1 {
+          height: 150px;
         }
-        
-        .text {
 
-            margin: var(--space-md);
-            background-color: white;
-            padding: var(--space-md) var(--space-lg);
-            border-radius: var(--border-radius-md);
-            position: absolute;
-            bottom: -20%;
-            right: var(--space-md);
-            left: var(--space-md);
-            text-align: center;
-            box-shadow: var(--shadow);
+        font-size: inherit;
 
-            &.text-overlay-height-1 {
-                height: 150px;
-            }
-
-            @include onDesktop {
-                &.text-overlay-height-1 {
-                    height: 250px;
-                }
-            }
-
+        .title {
+          font-size: inherit;
         }
-        
-    }
-} 
+      }
 
-.section-search {
-    font-family: var(--secondary-font);
-
-    h2 {
-        font-family: var(--primary-font);
-    }
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-
-    .simple-search {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        max-width: 600px;
-
-        & > * {
-            margin: 0 var(--space-md);
+      @include onLargeDesktop {
+        padding: var(--space-lg) var(--space-lg) var(--space-md);
+        margin: var(--space-md);
+        &.text-overlay-height-1 {
+          height: 200px;
         }
-        
+      }
     }
-
-    .advanced-search {
-        padding-bottom: 2px;
-        border-bottom: 1px solid var(--color-text);
-        font-size: 25px;
-
-        span {
-            margin-left: 4px;
-        }
-    }
-
-
+  }
 }
 
+.section-search {
+  font-family: var(--secondary-font);
+
+  h2 {
+    font-family: var(--primary-font);
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .simple-search {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+
+    & > * {
+      margin: 0 var(--space-md);
+    }
+  }
+
+  .advanced-search {
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--color-text);
+    font-size: 25px;
+
+    span {
+      margin-left: 4px;
+    }
+  }
+}
 
 .section-nichiren-library {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    max-width: 800px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  max-width: 800px;
+  margin: 0 auto;
 
-    p {
-        font-size: 22px;
-        line-height: 32px;
-        text-align: center;
-    }
+  p {
+    font-size: 22px;
+    line-height: 32px;
+    text-align: center;
+  }
 }
