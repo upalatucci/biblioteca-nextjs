@@ -102,13 +102,16 @@ h1 {
   justify-content: space-evenly;
 
   .simple-search {
-    display: flex;
-    justify-content: center;
     width: 100%;
     max-width: 600px;
 
-    & > * {
-      margin: 0 var(--space-md);
+    form {
+      display: flex;
+      justify-content: center;
+
+      & > * {
+        margin: 0 var(--space-md);
+      }
     }
   }
 

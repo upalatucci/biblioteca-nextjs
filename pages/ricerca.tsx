@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
+import Loading from "../components/Loading";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
 import Results from "../components/Results";
 import Search from "../components/Search";
@@ -12,6 +13,7 @@ import {
 export default function Ricerca() {
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
+  const [loading, setLoading] = useState(false);
   const [searchedPosts, setSearchedPosts] = useState<PostResultType[]>();
 
   const onSubmit = useCallback(
@@ -27,11 +29,14 @@ export default function Ricerca() {
   );
 
   const onSearchPost = async (searchText) => {
+    setSearchedPosts();
+    setLoading(true);
     const response = await fetch(`/api/search?q=${searchText}`);
 
     const jsonResponse = await response.json();
 
     setSearchedPosts(mapElasticResultToPost(jsonResponse));
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -68,6 +73,7 @@ export default function Ricerca() {
             </div>
           </section>
         </form>
+        {loading && <Loading />}
         {searchedPosts !== undefined && <Results data={searchedPosts} />}
       </div>
     </>

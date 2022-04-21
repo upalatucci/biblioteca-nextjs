@@ -10,8 +10,10 @@ import sfogliaGlossario from "../public/sfoglia.jpeg";
 import ascolta from "../public/ascolta.jpeg";
 import Link from "next/link";
 import SearchInput from "../components/SearchInput";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
   const [searchText, setSearchText] = useState("");
 
   // const [searchedPosts, setSearchedPosts] = useState();
@@ -31,6 +33,14 @@ export default function Home() {
   //     ))
   //   );
   // };
+  const onSearch = () => {
+    const query = searchText ? { q: searchText } : null;
+
+    router.push({
+      pathname: "/ricerca",
+      query,
+    });
+  };
 
   return (
     <>
@@ -87,11 +97,15 @@ export default function Home() {
         <section className="section-search blank-section">
           <h2>Cosa vuoi approfondire oggi?</h2>
           <div className="simple-search">
-            <SearchInput
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-            <button className="primary">Cerca</button>
+            <form onSubmit={onSearch}>
+              <SearchInput
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+              <button className="primary" type="submit">
+                Cerca
+              </button>
+            </form>
           </div>
 
           <Link href="/ricerca-avanzata" passHref>
