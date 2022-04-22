@@ -29,7 +29,7 @@ export default function Ricerca() {
   );
 
   const onSearchPost = async (searchText) => {
-    setSearchedPosts();
+    setSearchedPosts(undefined);
     setLoading(true);
     const response = await fetch(`/api/search?q=${searchText}`);
 

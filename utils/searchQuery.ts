@@ -72,7 +72,7 @@ const searchQuery = (textQuery: string): ElasticQuery  => {
           query: textQueryCopy,
           fields: ["post_title^5",  "post_content^3",  "acf_cenni_storici",  "acf_cenni_notes"],
           fuzziness: '1',
-          slop: "1",
+          slop: "2",
           minimum_should_match: '75%'
         }
       })
