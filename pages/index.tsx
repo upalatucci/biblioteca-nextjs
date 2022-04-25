@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import React, { useState } from "react";
 import ImageWithTextOverlay from "../components/ImageWithTextOverlay";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
 
@@ -33,7 +33,8 @@ export default function Home() {
   //     ))
   //   );
   // };
-  const onSearch = () => {
+  const onSearch = (e: React.FormEvent) => {
+    e.preventDefault();
     const query = searchText ? { q: searchText } : null;
 
     router.push({
