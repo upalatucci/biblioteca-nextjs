@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fetch from "node-fetch";
-import { BOOKS, FIELDS } from "../../utils/constants";
 import searchQuery from "../../utils/searchQuery";
 
 const authorization = Buffer.from(
@@ -11,31 +10,41 @@ const Headers = {
   Authorization: `Basic ${authorization}`,
 };
 
-const fieldsMapping = {
-  destinatario: "meta.acf_destinatario.value",
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const fields = Array.isArray(req.query.fields)
-      ? (req.query.fields as FIELDS[])
-      : [req.query.fields as FIELDS];
-    const sources = Array.isArray(req.query.sources)
-      ? (req.query.sources as BOOKS[])
-      : [req.query.sources as BOOKS];
-
-    const elasticQuery = searchQuery(
-      req.query.q as string,
-      fields,
-      sources,
-      req.query.recipient as string,
-      req.query.place as string,
-      req.query.from as string,
-      req.query.to as string
-    );
+    let elasticQuery = {
+      query: {
+        bool: {
+          must: [
+            {
+              multi_match: {
+                query: req.query.q as string,
+                fields: [
+                  "post_title^5",
+                  "post_content^3",
+                  "meta.acf_cenni_storici.value",
+                  "meta.acf_cenni_notes.value",
+                ],
+                fuzziness: "1",
+                slop: "2",
+                minimum_should_match: "75%",
+              },
+            },
+          ],
+        },
+      },
+      highlight: {
+        pre_tags: ["<mark>"],
+        post_tags: ["</mark>"],
+        fields: {
+          post_content: {},
+          post_title: {},
+        },
+      },
+    };
 
     console.log("Search for", elasticQuery.query.bool.must);
 

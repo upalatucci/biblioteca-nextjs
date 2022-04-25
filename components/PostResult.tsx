@@ -11,48 +11,47 @@ interface PostProps {
   post: PostResultType;
 }
 
-const Post: FC<PostProps> = ({ post }) => {
-  const image = post.featured_media ? post.featured_media[0] : null;
+const humanizedField = {
+  post_content: "CONTENUTO",
+  "meta.acf_cenni_storici.value": "CENNI STORICI",
+  "meta.acf_note.value": "NOTE",
+};
 
+const Post: FC<PostProps> = ({ post }) => {
   return (
-    <div className="post-result card mb-3">
-      <div className="row">
-        {image && (
-          <div className="col-md-4">
-            <Link href={`/posts/${post.slug}`}>
-              <a>
-                <Image
-                  src={image["media_details"].sizes.medium["source_url"]}
-                  width={180}
-                  height={120}
-                  alt={image["alt_text"]}
-                />
-              </a>
-            </Link>
-          </div>
-        )}
-        <div className="col">
-          <div className="card-body">
-            <h5
-              className="card-title"
-              dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-            />
-            <div
-              className="card-text"
-              dangerouslySetInnerHTML={{
-                __html: `${post.content.rendered.substring(0, 600)}...`,
-              }}
-            ></div>
-            <p className="card-text">
-              <small className="text-muted">On {getDate(post.modified)}</small>
-            </p>
-            <Link href={`/posts/${post.slug}`}>
-              <a className="btn btn-primary">See more</a>
-            </Link>
-          </div>
+    <Link href={`/posts/${post.slug}`} passHref>
+      <div className="post-result card mb-3">
+        <div className="card-body">
+          <h5
+            className="card-title"
+            dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+          />
+          <div
+            className="card-text"
+            dangerouslySetInnerHTML={{
+              __html: `${post.content.rendered.substring(0, 600)}...`,
+            }}
+          ></div>
+          <p className="card-text">
+            {post.highlight_fields
+              .filter((field) => field !== "post_title")
+              .map((highlightField) => (
+                <Link
+                  key={highlightField}
+                  href={`/posts/${post.slug}`}
+                  passHref
+                >
+                  <span className="badge">
+                    {humanizedField[highlightField]}
+                  </span>
+                </Link>
+              ))}
+
+            <small className="text-muted">On {getDate(post.modified)}</small>
+          </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

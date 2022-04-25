@@ -7,6 +7,8 @@
 @import "./book-description.scss";
 @import "./mediaQueries.scss";
 @import "./post-result.scss";
+@import "./advanced-search.scss";
+@import "./results.scss";
 
 html,
 body {
@@ -173,4 +175,41 @@ button.secondary {
   100% {
     transform: rotateZ(360deg);
   }
+}
+
+span.badge {
+  font-size: 14px;
+  padding: var(--space-xs) var(--space-sm);
+  margin-right: var(--space-sm);
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius-md);
+}
+
+.primary-select {
+  position: relative;
+
+  select {
+    display: none;
+  }
+
+  .options {
+    position: absolute;
+    background-color: var(--background);
+    width: max-content;
+    border: 1px solid var(--color-text);
+    border-bottom-left-radius: var(--border-radius-md);
+    border-bottom-right-radius: var(--border-radius-md);
+    padding: var(--space-xs) var(--space-sm);
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+  }
+
+  border: 1px solid var(--color-text);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-sm) var(--space-sm);
+  background-color: var(--background);
+  color: var(--color-text);
 }

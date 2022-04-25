@@ -1,83 +1,116 @@
+import { BOOKS, FIELDS } from "./constants";
 
 const fieldsMapping = {
-    'destinatario': 'meta.acf_destinatario.value'
-  }
+  destinatario: "meta.acf_destinatario.value",
+};
 
 type ElasticQuery = {
+  query: {
+    [key in string]: any;
+  };
+  highlight: {
+    [key in string]: any;
+  };
+};
+
+const mapElasticSearchFields = {
+  [FIELDS.CONTENT]: "post_content^3",
+  [FIELDS.CENNI_STORICI]: "meta.acf_cenni_storici.value",
+  [FIELDS.NOTE]: "meta.acf_cenni_notes.value",
+};
+
+const mapElasticSearchSourcesSlug = {
+  [BOOKS.RSND1]: "vol1",
+  [BOOKS.RSND2]: "vol2",
+  [BOOKS.SUTRA]: "sdl",
+  [BOOKS.GLOSSARIO]: "glossario",
+};
+
+const searchQuery = (
+  textQuery: string,
+  fields: FIELDS[] = [FIELDS.CONTENT],
+  sources: BOOKS[] = [BOOKS.RSND1],
+  recipient: string = null,
+  place: string = null,
+  from: string = null,
+  to: string = null
+): ElasticQuery => {
+  let textQueryCopy = textQuery.concat();
+
+  const queryFields = ["post_title^5"].concat(
+    fields.map((field) => mapElasticSearchFields[field])
+  );
+
+  const querySources = sources.map(
+    (source) => mapElasticSearchSourcesSlug[source]
+  );
+
+  let elasticQuery: ElasticQuery = {
     query: {
-        [key in string]:  any;
+      bool: {
+        must: [],
+        filter: [
+          {
+            term: {
+              "terms.category.slug": "vol1" || querySources,
+            },
+          },
+        ],
+      },
     },
     highlight: {
-        [key in string]: any;
-    }
-}
-
-const searchQuery = (textQuery: string): ElasticQuery  => {
-    let textQueryCopy = textQuery.concat()
-
-    let elasticQuery: ElasticQuery = {
-      query: {
-        bool: {
-          must: [],
-        },
+      pre_tags: ["<mark>"],
+      post_tags: ["</mark>"],
+      fields: {
+        post_content: {},
+        post_title: {},
+        "meta.acf_cenni_notes.value": {},
+        "meta.acf_cenni_storici.value": {},
       },
-      highlight: {
-        pre_tags : ["<mark>"],
-        post_tags : ["</mark>"],
-        fields : {
-            post_content : {},
-            post_title: {}
-        }
-      }
-    };
+    },
+  };
 
-    const destinatario = textQueryCopy?.match(/\(destinatario:[\w ]+\)/)
+  if (recipient) {
+    elasticQuery.query.bool.must.push({
+      query_string: {
+        query: recipient,
+        fields: ["meta.acf_destinatario.value"],
+      },
+    });
+  }
 
-    if (destinatario && destinatario.length) {
-      textQueryCopy = textQueryCopy.replace(/\(destinatario:[\w ]+\)/, '')
-      elasticQuery.query.bool.must.push({
-          query_string: {
-            query: destinatario[0].replace("(destinatario:", '').replace(')', ''),
-            fields: [fieldsMapping['destinatario']]
-        }
-      });
-    }
+  // if (from && to) {
+  //   elasticQuery.query.bool.must.push({
+  //     range: {
+  //       "meta.acf_data.value": { gte: from, lte: to },
+  //     },
+  //   });
+  // }
 
-    const exactMatch = textQueryCopy?.match(/".*"!~/);
+  const exactMatch = textQueryCopy?.match(/".*"!~/);
 
-    exactMatch?.forEach((match) => {
-      textQueryCopy = textQueryCopy.replace(match, "");
+  exactMatch?.forEach((match) => {
+    textQueryCopy = textQueryCopy.replace(match, "");
 
-      elasticQuery.query.bool.must.push({
-        multi_match: {
-          query: match.replace('"', ""),
-          type: "phrase",
-          fields: ["post_content", "post_title^3"],
-        },
-      });
+    elasticQuery.query.bool.must.push({
+      multi_match: {
+        query: match.replace('"', ""),
+        type: "phrase",
+        fields: queryFields,
+      },
+    });
+  });
+
+  if (textQueryCopy)
+    elasticQuery.query.bool.must.push({
+      query_string: {
+        query: textQueryCopy.replace(" ", "~ "),
+        fields: queryFields,
+        fuzziness: "2",
+      },
     });
 
-    // if (textQueryCopy)
-    //   elasticQuery.query.bool.must.push({
-    //       query_string: {
-    //         query: textQueryCopy.replace(' ', '~ '),
-    //         fields: ["post_content", "post_title^3"],
-    //         fuzziness: '10'
-    //     }
-    //   });
+  return elasticQuery;
+};
 
-    if (textQueryCopy) {
-      elasticQuery.query.bool.must.push({
-        multi_match: {
-          query: textQueryCopy,
-          fields: ["post_title^5",  "post_content^3",  "acf_cenni_storici",  "acf_cenni_notes"],
-          fuzziness: '1',
-          slop: "2",
-          minimum_should_match: '75%'
-        }
-      })
-    }
-    return elasticQuery
-}
-
-export default searchQuery
+export default searchQuery;

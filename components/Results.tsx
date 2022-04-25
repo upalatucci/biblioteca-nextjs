@@ -5,7 +5,7 @@ type ResultsProps = {
   data: PostResultType[];
 };
 const Results: React.FC<ResultsProps> = ({ data }) => (
-  <div className="container">
+  <div className="results container">
     {data.length === 0 && <h2>Spiacenti nessun risultato trovato</h2>}
     {data.length !== 0 && (
       <>

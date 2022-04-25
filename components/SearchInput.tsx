@@ -10,7 +10,7 @@ const SearchInput: FC<SearchInputProps> = ({ value, onChange }) => (
     type="search"
     className="search-input"
     placeholder="Inserisci la parola o frase..."
-    value={value}
+    value={value || ""}
     onChange={onChange}
   />
 );

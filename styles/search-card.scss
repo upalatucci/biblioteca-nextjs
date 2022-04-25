@@ -1,35 +1,45 @@
-@import './mediaQueries.scss';
+@import "./mediaQueries.scss";
 
 .search-card {
-    border-radius: var(--border-radius-md);
-    background-color: var(--background);
-    padding: var(--space-3xl) var(--space-2xl);
-    margin: var(--space-lg) 0 var(--space-2xl);
-    box-shadow: var(--shadow-sm);
-    width: 100%;
-    text-align: center;
+  border-radius: var(--border-radius-md);
+  background-color: var(--background);
+  padding: var(--space-3xl) var(--space-2xl);
+  margin: var(--space-lg) 0 var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  text-align: center;
 
-    label {
-        font-family: var(--primary-font);
-        cursor: pointer;
-    }
+  label {
+    font-family: var(--primary-font);
+    cursor: pointer;
+  }
 
-    @include onDesktop {
-        min-width: 600px;
-    }
+  @include onDesktop {
+    min-width: 600px;
+  }
 
-    .checkboxes > * {
-        margin-right: var(--space-lg);
-    }
+  .checkboxes > * {
+    margin-right: var(--space-lg);
+  }
 
-    input[type='checkbox'] {
-        margin-right: var(--space-sm);
-        cursor: pointer;
-    }
+  input[type="checkbox"] {
+    margin-right: var(--space-sm);
+    cursor: pointer;
+  }
 
+  .search-input {
+    margin-bottom: var(--space-2xl);
+  }
 
+  .span-checkbox label {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-    .search-input {
-        margin-bottom: var(--space-2xl);
-    }
+  .checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
 }

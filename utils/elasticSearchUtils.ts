@@ -1,25 +1,25 @@
 export type PostResultType = {
-  categories: string[],
-  comment_status: string,
+  categories: string[];
+  comment_status: string;
   content: {
-    rendered: string,
-  },
-  date: string,
-  date_gmt: string,
-  excerpt: { rendered: string },
-  featured_media: 0,
-  format: "standard",
-  guid: { rendered: string },
-  id: string,
-  link: string,
-  meta: string,
-  modified:string,
-  ping_status: string,
-  slug: string,
-  title: { rendered: string },
-  type: string,
-}
-
+    rendered: string;
+  };
+  date: string;
+  date_gmt: string;
+  excerpt: { rendered: string };
+  featured_media: 0;
+  format: "standard";
+  guid: { rendered: string };
+  id: string;
+  link: string;
+  meta: string;
+  modified: string;
+  ping_status: string;
+  slug: string;
+  title: { rendered: string };
+  type: string;
+  highlight_fields: string[];
+};
 
 export const mapElasticResultToPost = (result: any): PostResultType[] => {
   return result?.hits?.hits?.map(({ _source, highlight }) => ({
@@ -43,5 +43,6 @@ export const mapElasticResultToPost = (result: any): PostResultType[] => {
     slug: _source.post_name,
     title: { rendered: highlight?.post_title || _source.post_title },
     type: _source.post_type,
+    highlight_fields: Object.keys(highlight),
   }));
 };
