@@ -33,7 +33,7 @@ export default function Ricerca() {
     if (router.query.q && router.query.sources && router.query.fields) {
       onSearch();
     }
-  }, [onSearch, router.query.fields, router.query.q, router.query.sources]);
+  }, [onSearch, router.query]);
 
   return (
     <>

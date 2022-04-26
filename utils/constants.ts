@@ -10,3 +10,9 @@ export enum FIELDS {
   CENNI_STORICI = "CENNI_STORICI",
   NOTE = "NOTE",
 }
+
+export enum SEARCH_TYPE {
+  AND = "AND",
+  OR = "OR",
+  EXACT = "EXACT",
+}

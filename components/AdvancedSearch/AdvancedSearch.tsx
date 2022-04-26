@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { FC, useCallback, useReducer } from "react";
-import { BOOKS, FIELDS } from "../../utils/constants";
+import { BOOKS, FIELDS, SEARCH_TYPE } from "../../utils/constants";
 import SearchInput from "../SearchInput";
 import Select from "../Select";
 import reducer, { ACTION_TYPES, initializeState } from "./reducer";
@@ -9,6 +9,12 @@ type SearchProps = {};
 
 const DEFAULT = "Tutte";
 
+const mapSearchType: Record<SEARCH_TYPE, string> = {
+  [SEARCH_TYPE.OR]: "OR",
+  [SEARCH_TYPE.AND]: "AND",
+  [SEARCH_TYPE.EXACT]: "Ricerca Esatta",
+};
+
 const AdvancedSearch: FC<SearchProps> = () => {
   const router = useRouter();
 
@@ -16,7 +22,16 @@ const AdvancedSearch: FC<SearchProps> = () => {
     initializeState(router.asPath)
   );
 
-  const { sources, fields, searchText, recipient, place, from, to } = state;
+  const {
+    sources,
+    fields,
+    searchText,
+    recipient,
+    place,
+    from,
+    to,
+    searchType,
+  } = state;
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -28,6 +43,7 @@ const AdvancedSearch: FC<SearchProps> = () => {
     router.query.fields = fields;
     router.query.from = from;
     router.query.to = to;
+    router.query.searchType = searchType;
 
     if (recipient) router.query.recipient = recipient;
     else delete router.query.recipient;
@@ -97,7 +113,18 @@ const AdvancedSearch: FC<SearchProps> = () => {
           <h2>Fai la tua ricerca:</h2>
 
           <div className="search-card advanced">
-            <SearchInput value={searchText} onChange={onSearchTextChange} />
+            <div className="searchbox">
+              <Select
+                onChange={onChangeSelect(ACTION_TYPES.CHANGE_SEARCH_TYPE)}
+                value={searchType}
+                name="type"
+                options={Object.values(SEARCH_TYPE).map((type) => ({
+                  value: type,
+                  label: mapSearchType[type],
+                }))}
+              />
+              <SearchInput value={searchText} onChange={onSearchTextChange} />
+            </div>
 
             <div className="checkboxes">
               <span className="span-checkbox">

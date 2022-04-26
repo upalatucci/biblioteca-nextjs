@@ -1,4 +1,4 @@
-import { BOOKS, FIELDS } from "./constants";
+import { BOOKS, FIELDS, SEARCH_TYPE } from "./constants";
 
 const fieldsMapping = {
   destinatario: "meta.acf_destinatario.value",
@@ -28,6 +28,7 @@ const mapElasticSearchSourcesSlug = {
 
 const searchQuery = (
   textQuery: string,
+  searchType: SEARCH_TYPE,
   fields: FIELDS[] = [FIELDS.CONTENT],
   sources: BOOKS[] = [BOOKS.RSND1],
   recipient: string = null,
@@ -101,12 +102,21 @@ const searchQuery = (
     });
   });
 
-  if (textQueryCopy)
+  if (textQueryCopy && searchType !== SEARCH_TYPE.EXACT)
     elasticQuery.query.bool.must.push({
       query_string: {
-        query: textQueryCopy.replace(" ", "~ "),
+        query: textQueryCopy,
         fields: queryFields,
-        fuzziness: "2",
+        default_operator: searchType,
+      },
+    });
+
+  if (textQueryCopy && searchType === SEARCH_TYPE.EXACT)
+    elasticQuery.query.bool.must.push({
+      multi_match: {
+        query: textQueryCopy,
+        type: "phrase",
+        fields: queryFields,
       },
     });
 

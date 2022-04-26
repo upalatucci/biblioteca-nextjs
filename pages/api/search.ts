@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fetch from "node-fetch";
-import { BOOKS, FIELDS } from "../../utils/constants";
+import { BOOKS, FIELDS, SEARCH_TYPE } from "../../utils/constants";
 import searchQuery from "../../utils/searchQuery";
 
 const authorization = Buffer.from(
@@ -20,6 +20,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+    const searchText = req.query.q as string;
+    const searchType = req.query.searchType as SEARCH_TYPE;
+
     const fields = Array.isArray(req.query.fields)
       ? (req.query.fields as FIELDS[])
       : [req.query.fields as FIELDS];
@@ -28,7 +31,8 @@ export default async function handler(
       : [req.query.sources as BOOKS];
 
     const elasticQuery = searchQuery(
-      req.query.q as string,
+      searchText,
+      searchType,
       fields,
       sources,
       req.query.recipient as string,

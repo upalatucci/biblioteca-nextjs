@@ -21,13 +21,21 @@ export type PostResultType = {
   highlight_fields: string[];
 };
 
+const removeUnclosedTags = (text: string): string => {
+  const div = document.createElement("div");
+  div.innerHTML = text;
+  return div.innerHTML;
+};
+
 export const mapElasticResultToPost = (result: any): PostResultType[] => {
   return result?.hits?.hits?.map(({ _source, highlight }) => ({
     categories:
       _source.terms?.category?.map((category) => category.term_id) || [],
     comment_status: _source.comment_status,
     content: {
-      rendered: highlight?.post_content?.join("[...]") || _source.post_content,
+      rendered:
+        removeUnclosedTags(highlight?.post_content?.join("[...]")) ||
+        _source.post_content,
     },
     date: _source.post_date,
     date_gmt: _source.post_date_gmt,

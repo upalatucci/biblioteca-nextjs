@@ -1,5 +1,6 @@
+import { stat } from "fs";
 import { parse } from "querystring";
-import { BOOKS, FIELDS } from "../../utils/constants";
+import { BOOKS, FIELDS, SEARCH_TYPE } from "../../utils/constants";
 
 export enum ACTION_TYPES {
   ADD_SOURCE,
@@ -11,6 +12,7 @@ export enum ACTION_TYPES {
   CHANGE_PLACE,
   CHANGE_FROM,
   CHANGE_TO,
+  CHANGE_SEARCH_TYPE,
 }
 
 type Action =
@@ -25,7 +27,8 @@ type Action =
   | { type: ACTION_TYPES.CHANGE_RECIPIENT; payload: string }
   | { type: ACTION_TYPES.CHANGE_PLACE; payload: string }
   | { type: ACTION_TYPES.CHANGE_FROM; payload: string }
-  | { type: ACTION_TYPES.CHANGE_TO; payload: string };
+  | { type: ACTION_TYPES.CHANGE_TO; payload: string }
+  | { type: ACTION_TYPES.CHANGE_SEARCH_TYPE; payload: string };
 
 type State = {
   sources: BOOKS[];
@@ -35,6 +38,7 @@ type State = {
   place: string;
   from: string;
   to: string;
+  searchType: SEARCH_TYPE;
 };
 
 export const initialState: State = {
@@ -45,6 +49,7 @@ export const initialState: State = {
   place: null,
   from: "1256",
   to: "1270",
+  searchType: SEARCH_TYPE.OR,
 };
 
 const getSearchString = (path: string) => {
@@ -74,6 +79,9 @@ export const initializeState = (path: string): State => {
       ? (query.fields as FIELDS[])
       : [query.fields as FIELDS];
   }
+
+  if (query.searchType) state.searchType = query.searchType as SEARCH_TYPE;
+  else state.searchType = SEARCH_TYPE.OR;
 
   return state;
 };
@@ -129,6 +137,11 @@ const reducer = (state = initialState, { type, payload }: Action) => {
       return {
         ...state,
         to: payload,
+      };
+    case ACTION_TYPES.CHANGE_SEARCH_TYPE:
+      return {
+        ...state,
+        searchType: payload,
       };
     default:
       return state;

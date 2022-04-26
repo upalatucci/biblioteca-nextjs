@@ -1,11 +1,33 @@
 import * as React from "react";
 
+type OptionType = string | { value: string; label: string };
+
 type SelectProps = {
   value: string;
   onChange: (newValue: string) => void;
   name?: string;
-  options?: string[];
-  defaultValue: string;
+  options?: OptionType[];
+  defaultValue?: string;
+};
+
+type OptionPtops = {
+  option: OptionType;
+};
+
+const Option: React.FC<OptionPtops> = ({ option }) => {
+  if (typeof option === "string") {
+    return (
+      <option key={option} value={option}>
+        {option}
+      </option>
+    );
+  } else {
+    return (
+      <option key={option.value} value={option.value}>
+        {option.label}
+      </option>
+    );
+  }
 };
 
 const Select: React.FC<SelectProps> = ({
@@ -28,11 +50,12 @@ const Select: React.FC<SelectProps> = ({
       onChange={(e) => onChange(e.target.value)}
       name={name}
     >
-      <option value={""}>{defaultValue}</option>
+      {defaultValue && <Option option={{ value: "", label: defaultValue }} />}
       {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
+        <Option
+          key={typeof option === "string" ? option : option?.value}
+          option={option}
+        />
       ))}
     </select>
   );
