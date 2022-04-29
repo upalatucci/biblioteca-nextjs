@@ -47,8 +47,8 @@ export const initialState: State = {
   searchText: "",
   recipient: null,
   place: null,
-  from: "1256",
-  to: "1270",
+  from: null,
+  to: null,
   searchType: SEARCH_TYPE.OR,
 };
 

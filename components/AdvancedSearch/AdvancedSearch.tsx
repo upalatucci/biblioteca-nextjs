@@ -246,7 +246,7 @@ const AdvancedSearch: FC<SearchProps> = () => {
                       value={from}
                       name="da"
                       defaultValue={DEFAULT}
-                      options={["1256"]}
+                      options={["1200"]}
                     />
                     -
                     <Select

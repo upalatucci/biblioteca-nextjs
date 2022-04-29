@@ -81,13 +81,13 @@ const searchQuery = (
     });
   }
 
-  // if (from && to) {
-  //   (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
-  //     range: {
-  //       "meta.acf_data.value": { gte: from, lte: to },
-  //     },
-  //   });
-  // }
+  if (from && to) {
+    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
+      range: {
+        "meta.acf_data.value": { gte: from, lte: to },
+      },
+    });
+  }
 
   if (place) {
     (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
