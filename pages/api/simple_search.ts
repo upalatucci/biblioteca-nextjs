@@ -1,21 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import fetch from "node-fetch";
-import searchQuery from "../../utils/searchQuery";
-
-const authorization = Buffer.from(
-  `${process.env.ELASTIC_SEARCH_USERNAME}:${process.env.ELASTIC_SEARCH_PASSWORD}`
-).toString("base64");
-
-const Headers = {
-  Authorization: `Basic ${authorization}`,
-};
+import { client } from "../../utils/searchQuery";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    let elasticQuery = {
+    const elasticResult = await client.search({
+      index: process.env.ELASTIC_SEARCH_INDEX,
+
       query: {
         bool: {
           must: [
@@ -29,7 +22,7 @@ export default async function handler(
                   "meta.acf_cenni_notes.value",
                 ],
                 fuzziness: "1",
-                slop: "2",
+                slop: 2,
                 minimum_should_match: "75%",
               },
             },
@@ -44,25 +37,9 @@ export default async function handler(
           post_title: {},
         },
       },
-    };
+    });
 
-    console.log("Search for", elasticQuery.query.bool.must);
-
-    const elasticResponse = await fetch(
-      `${process.env.ELASTIC_SEARCH_URL}/${process.env.ELASTIC_SEARCH_INDEX}/_search`,
-      {
-        method: "POST",
-        headers: {
-          ...Headers,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(elasticQuery),
-      }
-    );
-
-    const elasticJsonResponse = await elasticResponse.json();
-
-    res.status(200).json(elasticJsonResponse);
+    res.status(200).json(elasticResult);
   } catch (error) {
     console.error(error);
     res.status(500).json(error);

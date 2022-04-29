@@ -1,17 +1,18 @@
 import { BOOKS, FIELDS, SEARCH_TYPE } from "./constants";
 
-const fieldsMapping = {
-  destinatario: "meta.acf_destinatario.value",
-};
+import { Client } from "@elastic/elasticsearch";
+import {
+  QueryDslQueryContainer,
+  SearchRequest,
+} from "@elastic/elasticsearch/lib/api/types";
 
-type ElasticQuery = {
-  query: {
-    [key in string]: any;
-  };
-  highlight: {
-    [key in string]: any;
-  };
-};
+export const client = new Client({
+  node: process.env.ELASTIC_SEARCH_URL,
+  auth: {
+    username: process.env.ELASTIC_SEARCH_USERNAME,
+    password: process.env.ELASTIC_SEARCH_PASSWORD,
+  },
+});
 
 const mapElasticSearchFields = {
   [FIELDS.CONTENT]: "post_content^3",
@@ -35,7 +36,7 @@ const searchQuery = (
   place: string = null,
   from: string = null,
   to: string = null
-): ElasticQuery => {
+): SearchRequest => {
   let textQueryCopy = textQuery.concat();
 
   const queryFields = ["post_title^5"].concat(
@@ -46,14 +47,14 @@ const searchQuery = (
     (source) => mapElasticSearchSourcesSlug[source]
   );
 
-  let elasticQuery: ElasticQuery = {
+  let elasticQuery: SearchRequest = {
     query: {
       bool: {
         must: [],
         filter: [
           {
-            term: {
-              "terms.category.slug": "vol1" || querySources,
+            terms: {
+              "terms.category.slug": querySources,
             },
           },
         ],
@@ -72,7 +73,7 @@ const searchQuery = (
   };
 
   if (recipient) {
-    elasticQuery.query.bool.must.push({
+    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
       query_string: {
         query: recipient,
         fields: ["meta.acf_destinatario.value"],
@@ -81,19 +82,27 @@ const searchQuery = (
   }
 
   // if (from && to) {
-  //   elasticQuery.query.bool.must.push({
+  //   (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
   //     range: {
   //       "meta.acf_data.value": { gte: from, lte: to },
   //     },
   //   });
   // }
 
+  if (place) {
+    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
+      term: {
+        "meta.acf_luogo.value.raw": place,
+      },
+    });
+  }
+
   const exactMatch = textQueryCopy?.match(/".*"!~/);
 
   exactMatch?.forEach((match) => {
     textQueryCopy = textQueryCopy.replace(match, "");
 
-    elasticQuery.query.bool.must.push({
+    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
       multi_match: {
         query: match.replace('"', ""),
         type: "phrase",
@@ -103,7 +112,7 @@ const searchQuery = (
   });
 
   if (textQueryCopy && searchType !== SEARCH_TYPE.EXACT)
-    elasticQuery.query.bool.must.push({
+    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
       query_string: {
         query: textQueryCopy,
         fields: queryFields,
@@ -112,7 +121,7 @@ const searchQuery = (
     });
 
   if (textQueryCopy && searchType === SEARCH_TYPE.EXACT)
-    elasticQuery.query.bool.must.push({
+    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
       multi_match: {
         query: textQueryCopy,
         type: "phrase",
