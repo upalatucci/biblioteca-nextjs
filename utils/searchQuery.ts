@@ -51,6 +51,7 @@ const searchQuery = (
     query: {
       bool: {
         must: [],
+        should: [],
         filter: [
           {
             terms: {
@@ -97,37 +98,41 @@ const searchQuery = (
     });
   }
 
-  const exactMatch = textQueryCopy?.match(/".*"!~/);
+  // const exactMatch = textQueryCopy?.match(/".*"!~/);
 
-  exactMatch?.forEach((match) => {
-    textQueryCopy = textQueryCopy.replace(match, "");
+  // exactMatch?.forEach((match) => {
+  //   textQueryCopy = textQueryCopy.replace(match, "");
 
-    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
-      multi_match: {
-        query: match.replace('"', ""),
-        type: "phrase",
-        fields: queryFields,
-      },
-    });
-  });
+  //   (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
+  //     multi_match: {
+  //       query: match.replace('"', ""),
+  //       type: "phrase",
+  //       fields: queryFields,
+  //     },
+  //   });
+  // });
 
   if (textQueryCopy && searchType !== SEARCH_TYPE.EXACT)
     (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
-      query_string: {
+      multi_match: {
         query: textQueryCopy,
         fields: queryFields,
-        default_operator: searchType,
+        operator: searchType,
       },
     });
 
-  if (textQueryCopy && searchType === SEARCH_TYPE.EXACT)
-    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
-      multi_match: {
-        query: textQueryCopy,
-        type: "phrase",
-        fields: queryFields,
-      },
+  if (textQueryCopy && searchType === SEARCH_TYPE.EXACT) {
+    queryFields.forEach((field) => {
+      (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
+        match_phrase: {
+          [field.split("^")[0]]: {
+            query: textQueryCopy,
+            slop: 1,
+          },
+        },
+      });
     });
+  }
 
   return elasticQuery;
 };
