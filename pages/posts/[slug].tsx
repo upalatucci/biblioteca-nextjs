@@ -10,16 +10,19 @@ export default function PostPage({ post }) {
       <div
         className="card-text pb-5"
         dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+        id="contenuto"
       ></div>
 
       <div
         className="card-text pb-5"
         dangerouslySetInnerHTML={{ __html: post.acf.acf_notes }}
+        id="note"
       ></div>
 
       <div
         className="card-text pb-5"
         dangerouslySetInnerHTML={{ __html: post.acf.acf_cenni_storici }}
+        id="cenni-storici"
       ></div>
       <Link href="/">
         <a className="btn btn-primary">Back to Home</a>

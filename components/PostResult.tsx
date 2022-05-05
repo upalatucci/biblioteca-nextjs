@@ -17,6 +17,12 @@ const humanizedField = {
   "meta.acf_note.value": "NOTE",
 };
 
+const linkField = {
+  post_content: "contenuto",
+  "meta.acf_cenni_storici.value": "cenni_storici",
+  "meta.acf_note.value": "note",
+};
+
 const Post: FC<PostProps> = ({ post }) => {
   return (
     <Link href={`/posts/${post.slug}`} passHref>
@@ -38,7 +44,7 @@ const Post: FC<PostProps> = ({ post }) => {
               .map((highlightField) => (
                 <Link
                   key={highlightField}
-                  href={`/posts/${post.slug}`}
+                  href={`/posts/${post.slug}#${linkField[highlightField]}`}
                   passHref
                 >
                   <span className="badge">
