@@ -11,7 +11,7 @@ export default async function handler(
 
       query: {
         bool: {
-          must: [
+          should: [
             {
               multi_match: {
                 query: req.query.q as string,
