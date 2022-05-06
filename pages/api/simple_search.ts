@@ -16,8 +16,8 @@ export default async function handler(
               multi_match: {
                 query: req.query.q as string,
                 fields: [
-                  "post_title^5",
-                  "post_content^3",
+                  "post_title",
+                  "post_content",
                   "meta.acf_cenni_storici.value",
                   "meta.acf_cenni_notes.value",
                 ],
