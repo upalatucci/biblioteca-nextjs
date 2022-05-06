@@ -15,7 +15,7 @@ export const client = new Client({
 });
 
 const mapElasticSearchFields = {
-  [FIELDS.CONTENT]: "post_content^3",
+  [FIELDS.CONTENT]: "post_content",
   [FIELDS.CENNI_STORICI]: "meta.acf_cenni_storici.value",
   [FIELDS.NOTE]: "meta.acf_cenni_notes.value",
 };
@@ -39,7 +39,7 @@ const searchQuery = (
 ): SearchRequest => {
   let textQueryCopy = textQuery.concat();
 
-  const queryFields = ["post_title^5"].concat(
+  const queryFields = ["post_title"].concat(
     fields.map((field) => mapElasticSearchFields[field])
   );
 
