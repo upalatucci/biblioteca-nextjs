@@ -12,10 +12,10 @@ export default async function handler(
 
     const fields = Array.isArray(req.query.fields)
       ? (req.query.fields as FIELDS[])
-      : [req.query.fields as FIELDS];
+      : [(req.query.fields as FIELDS) || FIELDS.CONTENT];
     const sources = Array.isArray(req.query.sources)
       ? (req.query.sources as BOOKS[])
-      : [req.query.sources as BOOKS];
+      : [(req.query.sources as BOOKS) || BOOKS.RSND1];
 
     const elasticQuery = searchQuery(
       searchText,

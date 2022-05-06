@@ -27,6 +27,55 @@ const mapElasticSearchSourcesSlug = {
   [BOOKS.GLOSSARIO]: "glossario",
 };
 
+export const simpleSearchQuery = (
+  textQuery: string,
+  sources: BOOKS[] = [BOOKS.RSND1]
+): SearchRequest => {
+  const querySources = sources.map(
+    (source) => mapElasticSearchSourcesSlug[source]
+  );
+
+  return {
+    query: {
+      bool: {
+        should: [
+          {
+            multi_match: {
+              query: textQuery,
+              fields: [
+                "post_title",
+                "post_content",
+                "meta.acf_cenni_storici.value",
+                "meta.acf_cenni_notes.value",
+              ],
+              fuzziness: "AUTO",
+              slop: 1,
+              minimum_should_match: "75%",
+            },
+          },
+        ],
+        filter: [
+          {
+            terms: {
+              "terms.category.slug": querySources,
+            },
+          },
+        ],
+      },
+    },
+    highlight: {
+      pre_tags: ["<mark>"],
+      post_tags: ["</mark>"],
+      fields: {
+        post_content: {},
+        post_title: {},
+        "meta.acf_cenni_notes.value": {},
+        "meta.acf_cenni_storici.value": {},
+      },
+    },
+  };
+};
+
 const searchQuery = (
   textQuery: string,
   searchType: SEARCH_TYPE,

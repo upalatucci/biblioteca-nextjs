@@ -266,7 +266,9 @@ const AdvancedSearch: FC<SearchProps> = () => {
               Cerca
             </button>
 
-            <button className="secondary">Reset</button>
+            <button className="secondary" type="button">
+              Reset
+            </button>
           </div>
         </div>
       </section>

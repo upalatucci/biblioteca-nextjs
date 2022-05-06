@@ -62,7 +62,6 @@ export const initializeState = (path: string): State => {
   const state = { ...initialState };
 
   const query = parse(getSearchString(path));
-  const q = query.q as string;
 
   if (query.q) {
     state.searchText = query.q as string;

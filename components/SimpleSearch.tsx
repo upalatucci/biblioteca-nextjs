@@ -1,41 +1,51 @@
 import { useRouter } from "next/router";
-import { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
+import { BOOKS } from "../utils/constants";
 import SearchInput from "./SearchInput";
 
-enum BOOKS {
-  RSND1,
-  RSND2,
-  SUTRA,
-  GLOSSARIO,
-}
+type SearchProps = {};
 
-type SearchProps = {
-  onSearch: (searchText: string) => void;
-};
-
-const SimpleSearch: FC<SearchProps> = ({ onSearch }) => {
+const SimpleSearch: FC<SearchProps> = () => {
   const router = useRouter();
   const [searchText, setSearchText] = useState(router.query.q as string);
 
-  const onSubmit = useCallback(
-    (event) => {
-      event.preventDefault();
+  const initialSources: BOOKS[] = Array.isArray(router.query.sources)
+    ? (router.query.sources as BOOKS[])
+    : [(router.query.sources as BOOKS) || BOOKS.RSND1];
 
-      if (!searchText) return;
+  const [searchResouces, setSearchResouces] = useState(initialSources);
 
-      router.query.q = searchText;
-      router.push(router);
-    },
-    [router, searchText]
-  );
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    if (!searchText) return;
+
+    router.query.q = searchText;
+    router.query.sources = searchResouces as string[];
+    router.push(router);
+  };
 
   useEffect(() => {
     const searchQueryString = router.query.q as string;
     if (searchQueryString) {
       setSearchText(searchQueryString);
-      onSearch(searchQueryString);
     }
-  }, [onSearch, router.query.q]);
+  }, [router.query.q]);
+
+  const onResouceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (searchResouces.includes(event.target.value as BOOKS)) {
+      let filterResouces = searchResouces.filter(
+        (resouce) => resouce !== event.target.value
+      );
+
+      if (filterResouces.length === 0) filterResouces = [BOOKS.RSND1];
+      setSearchResouces(filterResouces);
+    } else {
+      setSearchResouces((resouces) =>
+        resouces.concat([event.target.value as BOOKS])
+      );
+    }
+  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -52,25 +62,45 @@ const SimpleSearch: FC<SearchProps> = ({ onSearch }) => {
             <div className="checkboxes">
               <span className="span-checkbox">
                 <label>
-                  <input type="checkbox" value={BOOKS.RSND1} />
+                  <input
+                    type="checkbox"
+                    value={BOOKS.RSND1}
+                    checked={searchResouces.includes(BOOKS.RSND1)}
+                    onChange={onResouceChange}
+                  />
                   <strong>RSND</strong> VOL. I
                 </label>
               </span>
               <span className="span-checkbox">
                 <label>
-                  <input type="checkbox" value={BOOKS.RSND2} />
+                  <input
+                    type="checkbox"
+                    value={BOOKS.RSND2}
+                    checked={searchResouces.includes(BOOKS.RSND2)}
+                    onChange={onResouceChange}
+                  />
                   <strong>RSND</strong> VOL. II
                 </label>
               </span>
               <span className="span-checkbox">
                 <label>
-                  <input type="checkbox" value={BOOKS.SUTRA} />
+                  <input
+                    type="checkbox"
+                    value={BOOKS.SUTRA}
+                    checked={searchResouces.includes(BOOKS.SUTRA)}
+                    onChange={onResouceChange}
+                  />
                   <strong>Il Sutra del Loto</strong>
                 </label>
               </span>
               <span className="span-checkbox">
                 <label>
-                  <input type="checkbox" value={BOOKS.GLOSSARIO} />
+                  <input
+                    type="checkbox"
+                    value={BOOKS.GLOSSARIO}
+                    checked={searchResouces.includes(BOOKS.GLOSSARIO)}
+                    onChange={onResouceChange}
+                  />
                   <strong>Glossario</strong>
                 </label>
               </span>
@@ -81,7 +111,9 @@ const SimpleSearch: FC<SearchProps> = ({ onSearch }) => {
               Cerca
             </button>
 
-            <button className="secondary">Reset</button>
+            <button className="secondary" type="button">
+              Reset
+            </button>
           </div>
         </div>
       </section>

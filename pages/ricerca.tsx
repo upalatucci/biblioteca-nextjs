@@ -13,18 +13,23 @@ import {
 export default function Ricerca() {
   const [loading, setLoading] = useState(false);
   const [searchedPosts, setSearchedPosts] = useState<PostResultType[]>();
+  const router = useRouter();
 
-  const onSearch = useCallback(async (searchText) => {
+  const onSearch = useCallback(async () => {
     setSearchedPosts(undefined);
     setLoading(true);
 
-    const response = await fetch(`/api/simple_search?q=${searchText}`);
+    const response = await fetch(`/api/simple_search${location.search}`);
 
     const jsonResponse = await response.json();
 
     setSearchedPosts(mapElasticResultToPost(jsonResponse));
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    if (router.query.q) onSearch();
+  }, [onSearch, router.query]);
 
   return (
     <>
@@ -36,7 +41,7 @@ export default function Ricerca() {
         <h1>NICHIREN Library</h1>
         <HomeNavbar />
 
-        <SimpleSearch onSearch={onSearch} />
+        <SimpleSearch />
         {loading && <Loading />}
         {searchedPosts !== undefined && <Results data={searchedPosts} />}
       </div>
