@@ -48,6 +48,7 @@ export const simpleSearchQuery = (
                 "meta.acf_cenni_storici.value",
                 "meta.acf_cenni_notes.value",
               ],
+              // preferibile mettere = 1
               fuzziness: "AUTO",
               slop: 1,
               minimum_should_match: "75%",
