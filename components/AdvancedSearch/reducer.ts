@@ -42,7 +42,7 @@ type State = {
 };
 
 export const initialState: State = {
-  sources: [BOOKS.RSND1],
+  sources: [BOOKS.RSND],
   fields: [FIELDS.CONTENT],
   searchText: "",
   recipient: null,
@@ -80,7 +80,7 @@ export const initializeState = (path: string): State => {
   }
 
   if (query.searchType) state.searchType = query.searchType as SEARCH_TYPE;
-  else state.searchType = SEARCH_TYPE.OR;
+  else state.searchType = SEARCH_TYPE.BASE;
 
   return state;
 };
@@ -95,6 +95,8 @@ const reducer = (state = initialState, { type, payload }: Action) => {
     case ACTION_TYPES.REMOVE_SOURCE:
       const nextSources = state.sources.filter((source) => source !== payload);
 
+      if (nextSources.length === 0) nextSources.push(BOOKS.RSND);
+
       return {
         ...state,
         sources: nextSources.length ? nextSources : initialState.sources,
@@ -107,6 +109,8 @@ const reducer = (state = initialState, { type, payload }: Action) => {
 
     case ACTION_TYPES.REMOVE_FIELD:
       const nextField = state.fields.filter((field) => field !== payload);
+
+      if (nextField.length === 0) nextField.push(FIELDS.CONTENT);
 
       return {
         ...state,

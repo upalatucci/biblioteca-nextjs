@@ -1,6 +1,5 @@
 export enum BOOKS {
-  RSND1 = "RSND1",
-  RSND2 = "RSND2",
+  RSND = "RSND",
   SUTRA = "SUTRA",
   GLOSSARIO = "GLOSSARIO",
 }
@@ -12,6 +11,7 @@ export enum FIELDS {
 }
 
 export enum SEARCH_TYPE {
+  BASE = "BASE",
   AND = "AND",
   OR = "OR",
   EXACT = "EXACT",

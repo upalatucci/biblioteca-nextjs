@@ -51,3 +51,13 @@
     }
   }
 }
+
+.go-to-advanced-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a.primary {
+    background-color: #2b4261;
+  }
+}

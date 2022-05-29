@@ -117,7 +117,8 @@ button {
   cursor: pointer;
 }
 
-button.primary {
+button.primary,
+a.primary {
   background-color: var(--primary-color);
   border-radius: var(--border-radius-md);
   border: none;
@@ -133,6 +134,11 @@ button.primary {
     font-size: 20px;
     padding: 0 var(--space-lg);
   }
+}
+
+a.primary {
+  display: flex;
+  align-items: center;
 }
 
 button.secondary {
@@ -212,4 +218,8 @@ span.badge {
   padding: var(--space-sm) var(--space-sm);
   background-color: var(--background);
   color: var(--color-text);
+}
+
+a {
+  cursor: pointer;
 }

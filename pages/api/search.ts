@@ -15,7 +15,7 @@ export default async function handler(
       : [(req.query.fields as FIELDS) || FIELDS.CONTENT];
     const sources = Array.isArray(req.query.sources)
       ? (req.query.sources as BOOKS[])
-      : [(req.query.sources as BOOKS) || BOOKS.RSND1];
+      : [(req.query.sources as BOOKS) || BOOKS.RSND];
 
     const elasticQuery = searchQuery(
       searchText,

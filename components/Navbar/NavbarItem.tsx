@@ -15,11 +15,13 @@ const NavbarItem: React.FC<NavbarItemProps> = ({
   href,
 }) => (
   <Link href={href} passHref>
-    <span className="navbar-item-root">
-      {upText && <span className="upText">{upText}</span>}
-      <span className="title">{title}</span>
-      {downText && <span className="downText">{downText}</span>}
-    </span>
+    <a>
+      <span className="navbar-item-root">
+        {upText && <span className="upText">{upText}</span>}
+        <span className="title">{title}</span>
+        {downText && <span className="downText">{downText}</span>}
+      </span>
+    </a>
   </Link>
 );
 

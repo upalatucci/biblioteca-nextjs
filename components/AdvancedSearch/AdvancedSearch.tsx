@@ -10,9 +10,10 @@ type SearchProps = {};
 const DEFAULT = "Tutte";
 
 const mapSearchType: Record<SEARCH_TYPE, string> = {
-  [SEARCH_TYPE.OR]: "OR",
-  [SEARCH_TYPE.AND]: "AND",
-  [SEARCH_TYPE.EXACT]: "Ricerca Esatta",
+  [SEARCH_TYPE.OR]: "Almeno una di queste parole",
+  [SEARCH_TYPE.AND]: "Tutte queste parole",
+  [SEARCH_TYPE.BASE]: "Le parole o la frase",
+  [SEARCH_TYPE.EXACT]: "Questa esatta parola o frase",
 };
 
 const AdvancedSearch: FC<SearchProps> = () => {
@@ -50,7 +51,8 @@ const AdvancedSearch: FC<SearchProps> = () => {
 
     if (place) router.query.place = place;
     else delete router.query.place;
-    router.push(router);
+
+    router.push(router, null, { scroll: false });
   };
 
   const onSourceChange = useCallback(
@@ -131,22 +133,11 @@ const AdvancedSearch: FC<SearchProps> = () => {
                 <label>
                   <input
                     type="checkbox"
-                    value={BOOKS.RSND1}
-                    checked={sources.includes(BOOKS.RSND1)}
+                    value={BOOKS.RSND}
+                    checked={sources.includes(BOOKS.RSND)}
                     onChange={onSourceChange}
                   />
-                  <strong>RSND</strong> VOL. I
-                </label>
-              </span>
-              <span className="span-checkbox">
-                <label>
-                  <input
-                    type="checkbox"
-                    value={BOOKS.RSND2}
-                    checked={sources.includes(BOOKS.RSND2)}
-                    onChange={onSourceChange}
-                  />
-                  <strong>RSND</strong> VOL. II
+                  <strong>RSND</strong>
                 </label>
               </span>
               <span className="span-checkbox">

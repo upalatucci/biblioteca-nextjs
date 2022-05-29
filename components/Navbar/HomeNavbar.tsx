@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import NavbarItem from "./NavbarItem";
+import Logo from "../../public/istituto-buddista-soka-gakkai.svg";
+import Image from "next/image";
 
 const CLOSE = 1;
 const SHOW = 3;
@@ -19,7 +21,11 @@ const HomeNavbar = () => {
 
   return (
     <nav className="container">
-      <Link href="/">SGI Logo</Link>
+      <Link href="/" passHref>
+        <a>
+          <Image src={Logo} alt="logo istituto buddista italiano soka gakkai" />
+        </a>
+      </Link>
       <button className="mobileMenu" onClick={closeMobileMenu}>
         <svg
           className="w-6 h-6"
@@ -43,17 +49,21 @@ const HomeNavbar = () => {
             mobileMenuOpen === SHOW ? "show" : "hide"
           }`}
         >
-          <Link href="/rsnd-vol1">
-            Raccolta degli Scritti di Nichiren Daishonin VOLUME I
+          <Link href="/rsnd-vol1" passHref>
+            <a>Raccolta degli Scritti di Nichiren Daishonin VOLUME I</a>
           </Link>
 
-          <Link href="/rsnd-vol1">
-            Raccolta degli Scritti di Nichiren Daishonin VOLUME II
+          <Link href="/rsnd-vol1" passHref>
+            <a>Raccolta degli Scritti di Nichiren Daishonin VOLUME II</a>
           </Link>
 
-          <Link href="/rsnd-vol1">Sutra del Loto</Link>
+          <Link href="/rsnd-vol1" passHref>
+            <a>Sutra del Loto</a>
+          </Link>
 
-          <Link href="/rsnd-vol1">Glossario</Link>
+          <Link href="/rsnd-vol1" passHref>
+            <a>Glossario</a>
+          </Link>
         </div>
       )}
 

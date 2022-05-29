@@ -2,6 +2,7 @@ import { BOOKS, FIELDS, SEARCH_TYPE } from "./constants";
 
 import { Client } from "@elastic/elasticsearch";
 import {
+  QueryDslOperator,
   QueryDslQueryContainer,
   SearchRequest,
 } from "@elastic/elasticsearch/lib/api/types";
@@ -20,20 +21,29 @@ const mapElasticSearchFields = {
   [FIELDS.NOTE]: "meta.acf_cenni_notes.value",
 };
 
-const mapElasticSearchSourcesSlug = {
-  [BOOKS.RSND1]: "vol1",
-  [BOOKS.RSND2]: "vol2",
-  [BOOKS.SUTRA]: "sdl",
-  [BOOKS.GLOSSARIO]: "glossario",
+const mapElasticSearchSourcesSlug = (sources: BOOKS[]) => {
+  return sources.reduce((elasticSources, source) => {
+    switch (source) {
+      case BOOKS.RSND:
+        elasticSources.push("vol1");
+        elasticSources.push("vol2");
+        break;
+      case BOOKS.SUTRA:
+        elasticSources.push("sdl");
+        break;
+      case BOOKS.GLOSSARIO:
+        elasticSources.push("glossario");
+        break;
+    }
+    return elasticSources;
+  }, [] as string[]);
 };
 
 export const simpleSearchQuery = (
   textQuery: string,
-  sources: BOOKS[] = [BOOKS.RSND1]
+  sources: BOOKS[] = [BOOKS.RSND]
 ): SearchRequest => {
-  const querySources = sources.map(
-    (source) => mapElasticSearchSourcesSlug[source]
-  );
+  const querySources = mapElasticSearchSourcesSlug(sources);
 
   return {
     query: {
@@ -81,7 +91,7 @@ const searchQuery = (
   textQuery: string,
   searchType: SEARCH_TYPE,
   fields: FIELDS[] = [FIELDS.CONTENT],
-  sources: BOOKS[] = [BOOKS.RSND1],
+  sources: BOOKS[] = [BOOKS.RSND],
   recipient: string = null,
   place: string = null,
   from: string = null,
@@ -93,11 +103,10 @@ const searchQuery = (
     fields.map((field) => mapElasticSearchFields[field])
   );
 
-  const querySources = sources.map(
-    (source) => mapElasticSearchSourcesSlug[source]
-  );
+  const querySources = mapElasticSearchSourcesSlug(sources);
 
   let elasticQuery: SearchRequest = {
+    min_score: 0.5,
     query: {
       bool: {
         must: [],
@@ -162,12 +171,12 @@ const searchQuery = (
   //   });
   // });
 
-  if (textQueryCopy && searchType !== SEARCH_TYPE.EXACT)
+  if (textQueryCopy && [SEARCH_TYPE.OR, SEARCH_TYPE.AND].includes(searchType))
     (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
       multi_match: {
         query: textQueryCopy,
         fields: queryFields,
-        operator: searchType,
+        operator: searchType as QueryDslOperator,
       },
     });
 
@@ -181,6 +190,18 @@ const searchQuery = (
           },
         },
       });
+    });
+  }
+
+  if (textQueryCopy && searchType === SEARCH_TYPE.BASE) {
+    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
+      multi_match: {
+        query: textQuery,
+        fields: queryFields,
+        fuzziness: "AUTO",
+        slop: 1,
+        minimum_should_match: "75%",
+      },
     });
   }
 

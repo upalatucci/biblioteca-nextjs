@@ -22,6 +22,8 @@ export type PostResultType = {
 };
 
 const removeUnclosedTags = (text: string): string => {
+  if (!text) return;
+
   const div = document.createElement("div");
   div.innerHTML = text;
   return div.innerHTML;
@@ -51,6 +53,6 @@ export const mapElasticResultToPost = (result: any): PostResultType[] => {
     slug: _source.post_name,
     title: { rendered: highlight?.post_title || _source.post_title },
     type: _source.post_type,
-    highlight_fields: Object.keys(highlight),
+    highlight_fields: highlight ? Object.keys(highlight) : [],
   }));
 };
