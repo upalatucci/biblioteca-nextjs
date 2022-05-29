@@ -20,7 +20,30 @@ export default function Ricerca() {
           index={[
             "Prefazione di Daisaku Ikeda all'edizione italiana",
             "Prefazione",
-            "Introduzione",
+            {
+              title: "Introduzione",
+              paragraphs: [
+                "Panorama storico",
+                "Panorama culturale e religioso",
+              ],
+            },
+            "Note dei traduttori",
+            {
+              title: "Appendici",
+              paragraphs: [
+                "A. Scritti contenuti in questo volume e loro titoli giapponesi",
+                "B",
+                "C",
+                "E",
+                "F",
+                "G",
+                "H",
+                "I",
+                "L",
+                "M",
+                "N",
+              ],
+            },
           ]}
         />
         <section className="container blank-section">
