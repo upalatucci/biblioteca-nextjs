@@ -33,6 +33,10 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
+
+      .span-select {
+        margin: 10px 0;
+      }
     }
 
     h3 {
@@ -50,10 +54,41 @@
         margin: var(--space-sm);
       }
     }
+
+    & .select-wrapper {
+      margin-left: 6px;
+    }
   }
 
-  .searchbox > * {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+  .searchbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    margin-bottom: var(--space-2xl);
+
+    
+    & > * {
+      margin: .5rem;
+    }
+
+    & .select-wrapper {
+      width: 100%;
+      max-width: 500px;
+
+      .select-container {
+        width: 100%;
+        min-width: 100%;
+      }
+    }
+
+    @include onDesktop {
+      & .select-wrapper {
+        max-width: 300px;
+      }
+
+      flex-direction: row;
+    }
   }
 }

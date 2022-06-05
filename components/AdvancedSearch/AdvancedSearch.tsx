@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { FC, useCallback, useReducer } from "react";
 import { BOOKS, FIELDS, SEARCH_TYPE } from "../../utils/constants";
 import SearchInput from "../SearchInput";
-import Select from "../Select";
+import Select, { OptionType } from "../Select";
 import reducer, { ACTION_TYPES, initializeState } from "./reducer";
 
 type SearchProps = {};
@@ -14,6 +14,15 @@ const mapSearchType: Record<SEARCH_TYPE, string> = {
   [SEARCH_TYPE.AND]: "Tutte queste parole",
   [SEARCH_TYPE.BASE]: "Le parole o la frase",
   [SEARCH_TYPE.EXACT]: "Questa esatta parola o frase",
+};
+
+const generateOptionsFromStringArray = (
+  stringArray: string[]
+): OptionType[] => {
+  return stringArray.map((option, index) => ({
+    value: index.toString(),
+    label: option,
+  }));
 };
 
 const AdvancedSearch: FC<SearchProps> = () => {
@@ -211,7 +220,9 @@ const AdvancedSearch: FC<SearchProps> = () => {
                       value={recipient}
                       name="destinatario"
                       defaultValue={DEFAULT}
-                      options={["Takahashi Rokuro Hyoe"]}
+                      options={generateOptionsFromStringArray([
+                        "Takahashi Rokuro Hyoe",
+                      ])}
                     />
                   </label>
                 </span>
@@ -224,7 +235,7 @@ const AdvancedSearch: FC<SearchProps> = () => {
                       value={place}
                       name="luogo"
                       defaultValue={DEFAULT}
-                      options={["Kamakura"]}
+                      options={generateOptionsFromStringArray(["Kamakura"])}
                     />
                   </label>
                 </span>
@@ -237,7 +248,7 @@ const AdvancedSearch: FC<SearchProps> = () => {
                       value={from}
                       name="da"
                       defaultValue={DEFAULT}
-                      options={["1200"]}
+                      options={generateOptionsFromStringArray(["1200"])}
                     />
                     -
                     <Select
@@ -245,7 +256,7 @@ const AdvancedSearch: FC<SearchProps> = () => {
                       value={to}
                       name="a"
                       defaultValue={DEFAULT}
-                      options={["1270"]}
+                      options={generateOptionsFromStringArray(["1270"])}
                     />
                   </label>
                 </span>

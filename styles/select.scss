@@ -1,0 +1,73 @@
+div.select-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  div.select-container {
+    width: 100px;
+  }
+
+  button {
+    border: 0;
+    border-radius: var(--border-radius-sm);
+    background-color: white;
+    border: 1px solid var(--color-gray);
+    width: 100%;
+    padding: 6px 8px;
+    position: relative;
+    text-align: left;
+
+    &.expanded {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: 1px dashed var(--color-gray);
+    }
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
+  button::after {
+    position: absolute;
+    right: 6px;
+    top: 4px;
+    content: "\2191";
+  }
+
+  button.expanded::after {
+    content: "\2193";
+  }
+
+  ul.options {
+    border: 1px solid var(--color-gray);
+    display: none;
+    list-style: none;
+    padding: 4px 0;
+    margin-top: -4px;
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    z-index: 30;
+  }
+
+  ul.show {
+    display: block;
+  }
+
+  ul.options li {
+    padding: 6px 10px;
+
+    &:not(:last-child) {
+        border-bottom: 1px dashed var(--color-gray);
+    }
+  }
+
+  ul.options li:active,
+  ul.options li:focus,
+  ul.options li:hover,
+  ul.options li[aria-selected="true"] {
+    background: var(--color-gray);
+    cursor: pointer;
+  }
+}

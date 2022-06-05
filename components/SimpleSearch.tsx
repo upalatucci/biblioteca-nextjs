@@ -49,7 +49,7 @@ const SimpleSearch: FC<SearchProps> = () => {
   };
 
   return (
-    <>
+    <div className="simple-search">
       <form onSubmit={onSubmit}>
         <section className="container blank-section">
           <div className="inner">
@@ -114,7 +114,7 @@ const SimpleSearch: FC<SearchProps> = () => {
           <a className="primary">Vai alla ricerca avanzata</a>
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 
