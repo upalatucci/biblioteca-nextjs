@@ -16,23 +16,6 @@ export default function Home() {
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
 
-  // const [searchedPosts, setSearchedPosts] = useState();
-
-  // const jsxPosts = posts.map((post) => {
-  //   return <PostResults post={post} key={post.id} />;
-  // });
-
-  // const onSearchPost = async (searchText) => {
-  //   const response = await fetch(`/api/search?q=${searchText}`);
-
-  //   const jsonResponse = await response.json();
-
-  //   setSearchedPosts(
-  //     mapElasticResultToPost(jsonResponse)?.map((post) => (
-  //       <PostResults post={post} key={post.id} />
-  //     ))
-  //   );
-  // };
   const onSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const query = searchText ? { q: searchText } : null;
@@ -52,7 +35,7 @@ export default function Home() {
       <div>
         <h1>NICHIREN Library</h1>
         <HomeNavbar />
-        <section className="books">
+        <div>
           <ImageWithTextOverlay
             image={raccoltaVol1}
             title="Raccolta degli Scritti di Nichiren Daishonin"
@@ -76,7 +59,7 @@ export default function Home() {
             width={475}
             height={530}
           />
-        </section>
+        </div>
 
         <section className="books container">
           <ImageWithTextOverlay

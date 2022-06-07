@@ -48,23 +48,31 @@ nav {
     z-index: 1000;
     box-shadow: var(--shadow-sm);
     position: absolute;
-    top: 45px;
+    top: 88px;
+    height: 500px;
     left: 0;
     right: 0;
     display: flex;
     flex-direction: column;
-    opacity: 0;
-    transition: all 0.4s;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: white;
+    border-radius: var(--border-radius-sm);
 
-    &.show {
-      height: auto;
-      opacity: 1;
-      background-color: white;
-      border-radius: var(--border-radius-sm);
+    &.showing {
+      animation: show-menu 0.2s;
+    }
+
+    &.closing {
+      animation: show-menu 0.5s reverse;
     }
 
     @include onDesktop {
       display: none;
+    }
+
+    & a {
+      text-align: center;
     }
   }
 
@@ -101,5 +109,59 @@ nav {
     .nav-search {
       display: block;
     }
+  }
+}
+
+.mobileMenu {
+  height: 30px;
+  width: 33px;
+  position: relative;
+  padding: 0;
+
+  .ham {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 3px;
+    width: 33px;
+    border-radius: 20px;
+    background-color: #0e3933;
+    display: block;
+    position: relative;
+    opacity: 1;
+    transition: all 0.4s;
+  }
+
+  .ham:first-child {
+    top: -10px;
+  }
+
+  .ham:last-child {
+    top: 10px;
+  }
+
+  &.open .ham:first-child {
+    transform: translateY(11px) rotate(45deg);
+  }
+
+  &.open .ham:last-child {
+    transform: translateY(-12px) rotate(-45deg);
+  }
+
+  &.open .ham:nth-child(2) {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes show-menu {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }

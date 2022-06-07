@@ -3,17 +3,21 @@ import { useState } from "react";
 import NavbarItem from "./NavbarItem";
 import Logo from "../../public/istituto-buddista-soka-gakkai.svg";
 import Image from "next/image";
+import classNames from "classnames";
 
-const CLOSE = 1;
-const SHOW = 3;
-const CLOSING = 2;
+const CLOSE = "close";
+const SHOW = "show";
+const SHOWING = "showing";
+const CLOSING = "closing";
 
 const HomeNavbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(CLOSE);
 
   const closeMobileMenu = () => {
-    if (mobileMenuOpen === CLOSE) setMobileMenuOpen(SHOW);
-    else if (mobileMenuOpen === SHOW) {
+    if (mobileMenuOpen === CLOSE) {
+      setMobileMenuOpen(SHOWING);
+      setTimeout(() => setMobileMenuOpen(SHOW), 400);
+    } else if (mobileMenuOpen === SHOW) {
       setMobileMenuOpen(CLOSING);
       setTimeout(() => setMobileMenuOpen(CLOSE), 400);
     }
@@ -26,29 +30,19 @@ const HomeNavbar = () => {
           <Image src={Logo} alt="logo istituto buddista italiano soka gakkai" />
         </a>
       </Link>
-      <button className="mobileMenu" onClick={closeMobileMenu}>
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
+      <button
+        className={classNames("mobileMenu", {
+          open: [SHOW, SHOWING].includes(mobileMenuOpen),
+        })}
+        onClick={closeMobileMenu}
+      >
+        <span className="ham"></span>
+        <span className="ham"></span>
+        <span className="ham"></span>
       </button>
 
       {mobileMenuOpen !== CLOSE && (
-        <div
-          className={`mobile-nav-items ${
-            mobileMenuOpen === SHOW ? "show" : "hide"
-          }`}
-        >
+        <div className={`mobile-nav-items ${mobileMenuOpen}`}>
           <Link href="/rsnd-vol1" passHref>
             <a>Raccolta degli Scritti di Nichiren Daishonin VOLUME I</a>
           </Link>
