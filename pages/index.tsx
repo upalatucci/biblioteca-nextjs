@@ -52,7 +52,7 @@ export default function Home() {
       <div>
         <h1>NICHIREN Library</h1>
         <HomeNavbar />
-        <section className="books container">
+        <section className="books">
           <ImageWithTextOverlay
             image={raccoltaVol1}
             title="Raccolta degli Scritti di Nichiren Daishonin"

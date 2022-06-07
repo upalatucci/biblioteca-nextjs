@@ -1,4 +1,5 @@
 import Image from "next/image";
+import classnames from "classnames";
 
 type BookType = {
   title: string;
@@ -19,15 +20,17 @@ const ImageWithTextOverlay: React.FC<BookType> = ({
   height,
   className,
 }) => (
-  <div className={"image-with-text-overlay " + className}>
-    <Image
-      src={image}
-      alt={title}
-      layout="responsive"
-      width={width}
-      height={height}
-      objectFit="cover"
-    />
+  <div className={classnames("image-with-text-overlay", className)}>
+    <div className="image">
+      <Image
+        src={image}
+        alt={title}
+        layout="responsive"
+        width={width}
+        height={height}
+        objectFit="cover"
+      />
+    </div>
     <div className={`text text-overlay-height-${textOverlayHeight}`}>
       <h3 className="title">{title}</h3>
       <span>{description}</span>

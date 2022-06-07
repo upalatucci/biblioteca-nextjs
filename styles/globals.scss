@@ -60,7 +60,11 @@ hr {
 }
 
 h2 {
-  font-size: 42px;
+  font-size: 26px;
+
+  @include onTablet {
+    font-size: 42px;
+  }
 }
 
 input.search {
@@ -110,8 +114,12 @@ section.blank-section {
   border-radius: var(--border-radius-md);
   margin-bottom: var(--space-lg);
   max-width: 100%;
-  padding: var(--space-lg) var(--space-2xl);
+  padding: var(--space-sm) var(--space-md);
   box-shadow: var(--shadow);
+
+  @include onTablet {
+    padding: var(--space-lg) var(--space-2xl);
+  }
 }
 
 button {
