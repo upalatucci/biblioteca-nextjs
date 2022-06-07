@@ -19,8 +19,6 @@ h1 {
   justify-content: space-evenly;
   min-height: auto;
 
-  overflow-x: scroll;
-
   @include onDesktop {
     margin-bottom: var(--space-lg);
   }
@@ -28,72 +26,73 @@ h1 {
   @include onLargeDesktop {
     margin-bottom: var(--space-2xl);
   }
+}
 
-  .image-with-text-overlay {
-    flex: 0 0 300px;
-    margin: var(--space-md);
-    position: relative;
+.image-with-text-overlay {
+  flex: 0 0 300px;
+  margin: var(--space-md);
+  position: relative;
+  max-width: 300px;
+  margin-bottom: var(--space-2xl);
+
+  @include onTablet {
+    max-width: 250px;
+  }
+
+  @include onDesktop {
     max-width: 300px;
-    margin-bottom: var(--space-2xl);
+  }
 
-    @include onTablet {
-      max-width: 250px;
+  @include onLargeDesktop {
+    max-width: 350px;
+  }
+
+  img {
+    pointer-events: none !important;
+    border-radius: var(--border-radius-md);
+  }
+
+  .text {
+    margin: var(--space-xs);
+    background-color: white;
+    padding: var(--space-sm) var(--space-xs) var(--space-xs);
+    border-radius: var(--border-radius-md);
+    position: absolute;
+    bottom: -20%;
+    right: var(--space-md);
+    left: var(--space-md);
+    text-align: center;
+    box-shadow: var(--shadow);
+
+    font-size: 11px;
+
+    .title {
+      font-size: 12px;
+    }
+
+    &.text-overlay-height-1 {
+      height: 120px;
     }
 
     @include onDesktop {
-      max-width: 300px;
+      padding: var(--space-md);
+      margin: var(--space-md);
+      &.text-overlay-height-1 {
+        height: 150px;
+      }
+
+      font-size: inherit;
+
+      .title {
+        font-size: inherit;
+      }
     }
 
     @include onLargeDesktop {
-      max-width: 350px;
-    }
-
-    .img {
-      border-radius: var(--border-radius-md);
-    }
-
-    .text {
-      margin: var(--space-xs);
-      background-color: white;
-      padding: var(--space-sm) var(--space-xs) var(--space-xs);
-      border-radius: var(--border-radius-md);
-      position: absolute;
-      bottom: -20%;
-      right: var(--space-md);
-      left: var(--space-md);
-      text-align: center;
-      box-shadow: var(--shadow);
-
-      font-size: 11px;
-
-      .title {
-        font-size: 12px;
-      }
-
+      padding: var(--space-lg) var(--space-lg) var(--space-md);
+      margin: var(--space-md);
       &.text-overlay-height-1 {
-        height: 120px;
-      }
-
-      @include onDesktop {
-        padding: var(--space-md);
-        margin: var(--space-md);
-        &.text-overlay-height-1 {
-          height: 150px;
-        }
-
-        font-size: inherit;
-
-        .title {
-          font-size: inherit;
-        }
-      }
-
-      @include onLargeDesktop {
-        padding: var(--space-lg) var(--space-lg) var(--space-md);
-        margin: var(--space-md);
-        &.text-overlay-height-1 {
-          height: 200px;
-        }
+        height: 200px;
       }
     }
   }
