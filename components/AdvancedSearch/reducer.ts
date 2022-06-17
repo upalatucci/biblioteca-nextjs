@@ -1,6 +1,7 @@
 import { stat } from "fs";
 import { parse } from "querystring";
 import { BOOKS, FIELDS, SEARCH_TYPE } from "../../utils/constants";
+import { DATES } from "./constants";
 
 export enum ACTION_TYPES {
   ADD_SOURCE,
@@ -36,8 +37,8 @@ type State = {
   searchText: string;
   recipient: string;
   place: string;
-  from: string;
-  to: string;
+  from: string | number;
+  to: string | number;
   searchType: SEARCH_TYPE;
 };
 
@@ -47,8 +48,8 @@ export const initialState: State = {
   searchText: "",
   recipient: null,
   place: null,
-  from: null,
-  to: null,
+  from: DATES[0].value,
+  to: DATES[1].value,
   searchType: SEARCH_TYPE.OR,
 };
 

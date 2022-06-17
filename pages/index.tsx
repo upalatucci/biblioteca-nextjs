@@ -52,6 +52,7 @@ const presentationItems = [
     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu ipsum urna."
     width={800}
     height={700}
+    className="presentation-item"
   />,
   <ImageWithTextOverlay
     width={800}
@@ -59,6 +60,7 @@ const presentationItems = [
     image={ascolta}
     title="Ascolta la Raccolta degli Scritti di Nichiren Daishonin"
     description="Nam eu ipsum urna. Aenean odio nulla, mattis sit amet ipsum vel, commodo porttitor metus."
+    className="presentation-item"
   />,
 ];
 

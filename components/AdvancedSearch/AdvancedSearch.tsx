@@ -3,27 +3,15 @@ import React, { FC, useCallback, useReducer } from "react";
 import { BOOKS, FIELDS, SEARCH_TYPE } from "../../utils/constants";
 import SearchInput from "../SearchInput";
 import Select, { OptionType } from "../Select";
+import {
+  DATES,
+  mapSearchType,
+  PLACES_OPTIONS,
+  RECIPIENTS_OPTIONS,
+} from "./constants";
 import reducer, { ACTION_TYPES, initializeState } from "./reducer";
 
 type SearchProps = {};
-
-const DEFAULT = "Tutte";
-
-const mapSearchType: Record<SEARCH_TYPE, string> = {
-  [SEARCH_TYPE.OR]: "Almeno una di queste parole",
-  [SEARCH_TYPE.AND]: "Tutte queste parole",
-  [SEARCH_TYPE.BASE]: "Le parole o la frase",
-  [SEARCH_TYPE.EXACT]: "Questa esatta parola o frase",
-};
-
-const generateOptionsFromStringArray = (
-  stringArray: string[]
-): OptionType[] => {
-  return stringArray.map((option, index) => ({
-    value: index.toString(),
-    label: option,
-  }));
-};
 
 const AdvancedSearch: FC<SearchProps> = () => {
   const router = useRouter();
@@ -51,8 +39,8 @@ const AdvancedSearch: FC<SearchProps> = () => {
     router.query.q = searchText;
     router.query.sources = sources;
     router.query.fields = fields;
-    router.query.from = from;
-    router.query.to = to;
+    router.query.from = from.toString();
+    router.query.to = to.toString();
     router.query.searchType = searchType;
 
     if (recipient) router.query.recipient = recipient;
@@ -112,7 +100,7 @@ const AdvancedSearch: FC<SearchProps> = () => {
     return (newValue) => {
       dispatch({
         type,
-        payload: newValue === DEFAULT ? null : newValue,
+        payload: newValue === 0 ? null : newValue,
       });
     };
   };
@@ -217,12 +205,9 @@ const AdvancedSearch: FC<SearchProps> = () => {
                     <span>Destinatario</span>
                     <Select
                       onChange={onChangeSelect(ACTION_TYPES.CHANGE_RECIPIENT)}
-                      value={recipient}
+                      value={recipient || RECIPIENTS_OPTIONS[0].value}
                       name="destinatario"
-                      defaultValue={DEFAULT}
-                      options={generateOptionsFromStringArray([
-                        "Takahashi Rokuro Hyoe",
-                      ])}
+                      options={RECIPIENTS_OPTIONS}
                     />
                   </label>
                 </span>
@@ -232,10 +217,9 @@ const AdvancedSearch: FC<SearchProps> = () => {
                     <span>Scritto a</span>
                     <Select
                       onChange={onChangeSelect(ACTION_TYPES.CHANGE_PLACE)}
-                      value={place}
+                      value={place || PLACES_OPTIONS[0].value}
                       name="luogo"
-                      defaultValue={DEFAULT}
-                      options={generateOptionsFromStringArray(["Kamakura"])}
+                      options={PLACES_OPTIONS}
                     />
                   </label>
                 </span>
@@ -247,16 +231,14 @@ const AdvancedSearch: FC<SearchProps> = () => {
                       onChange={onChangeSelect(ACTION_TYPES.CHANGE_FROM)}
                       value={from}
                       name="da"
-                      defaultValue={DEFAULT}
-                      options={generateOptionsFromStringArray(["1200"])}
+                      options={DATES}
                     />
                     -
                     <Select
                       onChange={onChangeSelect(ACTION_TYPES.CHANGE_TO)}
                       value={to}
                       name="a"
-                      defaultValue={DEFAULT}
-                      options={generateOptionsFromStringArray(["1270"])}
+                      options={DATES}
                     />
                   </label>
                 </span>

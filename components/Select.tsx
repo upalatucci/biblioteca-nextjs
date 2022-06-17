@@ -1,20 +1,21 @@
 import * as React from "react";
 
-export type OptionType = { value: string; label: string };
+export type OptionType = { value: string | number; label: string };
 
 type SelectProps = {
-  value: string;
+  value: OptionType["value"];
   onChange: (newValue: string) => void;
   name?: string;
   options?: OptionType[];
-  defaultValue?: string;
 };
 
 export type OptionProps = {
   option: OptionType;
   onOptionClick: (onOptionChange: OptionType) => void;
-  handleKeyDown: (value: string) => (event: React.KeyboardEvent) => void;
-  selected: string;
+  handleKeyDown: (
+    value: OptionType["value"]
+  ) => (event: React.KeyboardEvent) => void;
+  selected: OptionType["value"];
 };
 
 const Option: React.FC<OptionProps> = ({
@@ -23,27 +24,29 @@ const Option: React.FC<OptionProps> = ({
   handleKeyDown,
   selected,
 }) => {
+  const _onOptionClick = React.useCallback(
+    (e) => {
+      e.preventDefault();
+      onOptionClick(option);
+    },
+    [onOptionClick, option]
+  );
+
   return (
     <li
-      id={option.value}
+      id={option.value.toString()}
       role="option"
       aria-selected={selected == option.value}
       tabIndex={0}
       onKeyDown={handleKeyDown(option.value)}
-      onClick={() => onOptionClick(option)}
+      onClick={_onOptionClick}
     >
       {option.label}
     </li>
   );
 };
 
-const Select: React.FC<SelectProps> = ({
-  value,
-  onChange,
-  name,
-  options,
-  defaultValue,
-}) => {
+const Select: React.FC<SelectProps> = ({ value, onChange, name, options }) => {
   const [isOpen, setOpen] = React.useState(false);
 
   const indexSelectedOption = React.useMemo(
@@ -60,6 +63,7 @@ const Select: React.FC<SelectProps> = ({
   };
 
   const handleKeyDown = (value) => (e) => {
+    e.preventDefault();
     switch (e.key) {
       case " ":
       case "SpaceBar":
@@ -74,6 +78,7 @@ const Select: React.FC<SelectProps> = ({
 
   const handleListKeyDown = React.useCallback(
     (e) => {
+      e.preventDefault();
       switch (e.key) {
         case "Escape":
           e.preventDefault();
@@ -111,7 +116,7 @@ const Select: React.FC<SelectProps> = ({
           onClick={toggleOptions}
           onKeyDown={handleListKeyDown}
         >
-          {options[indexSelectedOption]?.label || defaultValue}
+          {options[indexSelectedOption]?.label}
         </button>
         <ul
           className={`options ${isOpen ? "show" : ""}`}
