@@ -22,6 +22,7 @@ const responsive = {
 const books = [
   <ImageWithTextOverlay
     image={raccoltaVol1}
+    path="rsnd-vol1"
     title="Raccolta degli Scritti di Nichiren Daishonin"
     description="Le lettere che il Daishonin inviava ai suoi discepoli"
     width={475}
@@ -30,6 +31,7 @@ const books = [
 
   <ImageWithTextOverlay
     image={raccoltaVol2}
+    path="rsnd-vol1"
     title="Raccolta degli Scritti di Nichiren Daishonin"
     description="Le lettere che il Daishonin inviava ai suoi discepoli"
     width={475}
@@ -38,6 +40,7 @@ const books = [
 
   <ImageWithTextOverlay
     image={sutraDelLoto}
+    path="rsnd-vol1"
     title="Raccolta degli Scritti di Nichiren Daishonin"
     description="Le lettere che il Daishonin inviava ai suoi discepoli"
     width={475}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import BookDescription from "../components/BookDescription";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
 import raccoltaNichirenVol1 from "../public/raccolta-nichiren-vol1.jpeg";
+import jsonData from "../books/rsnd1.json";
 
 export default function Ricerca() {
   return (
@@ -48,6 +49,11 @@ export default function Ricerca() {
         />
         <section className="container blank-section">
           <h2>Scritti</h2>
+          <ul>
+            {jsonData.map((post) => (
+              <li>{post.title}</li>
+            ))}
+          </ul>
         </section>
       </div>
     </>
