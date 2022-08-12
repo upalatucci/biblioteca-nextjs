@@ -1,6 +1,72 @@
-.post {
-    max-width: 800px;
+@import "./mediaQueries.scss";
+
+.post-background {
     margin: auto;
     font-size: 20px;
+    background-color: white;
+    padding: var(--space-lg);
 
+    .post {
+        max-width: 1400px;
+        padding: 0 var(--space-md);
+        margin: 0 auto;
+        display: grid;
+        gap: var(--space-lg);
+        grid-template-areas: 'title title' 'content menu';
+
+        .post-content {
+            grid-area: content;
+        }
+
+        .post-menu {
+            grid-area: menu;
+        }
+
+
+        .card-menu {
+            width: 250px;
+            font-size: 16px;
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            border-radius: var(--border-radius-md);
+            background-color: var(--background);
+            box-shadow: var(--shadow-sm);
+
+            ul {
+                padding-left: 0;
+                margin: 0;
+            }
+
+            li {
+                list-style-type: none;
+                padding: var(--space-xs) 0;
+                &:not(:last-of-type) {
+                    border-bottom: 1px dotted var(--color-text);
+                }
+            }
+        }
+    }
+
+
+    h2 {
+        grid-area: title;
+        font-size: 28px;
+
+        
+        @include onDesktop {
+            font-size: 42px;
+        }
+
+        text-align: left;
+        padding-bottom: var(--space-lg);
+        border-bottom: 3px solid var(--color-text);
+    }
+
+    h3 {
+        font-size: 22px;
+        
+      @include onDesktop {
+        font-size: 36px;
+      }
+    }
 }

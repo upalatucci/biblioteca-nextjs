@@ -1,33 +1,53 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
 import Link from "next/link";
+import HomeNavbar from "../../components/Navbar/HomeNavbar";
+import PostMenu from "../../components/PostMenu";
 
 import { getPost, getSlugs } from "../../lib/wordpress";
 
 export default function PostPage({ post }) {
   return (
-    <div className="post container pt-5">
-      <h1 className="text-center pb-5">{post.title.rendered}</h1>
-      <div
-        className="card-text pb-5"
-        dangerouslySetInnerHTML={{ __html: post.content.rendered }}
-        id="contenuto"
-      ></div>
+    <>
+      <Head>
+        <title>{post.title.rendered} | NICHIREN Library</title>
+      </Head>
+      <div>
+        <h1>NICHIREN Library</h1>
+        <HomeNavbar />
+        <div className="post-background">
+          <div className="post">
+            <h2 className="text-center ">{post.title.rendered}</h2>
+            <div className="post-content">
+              <div
+                dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+                id="contenuto"
+              ></div>
 
-      <div
-        className="card-text pb-5"
-        dangerouslySetInnerHTML={{ __html: post.acf.acf_notes }}
-        id="note"
-      ></div>
+              <div id="cenni-storici">
+                <h3>Cenni Storici</h3>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: post.acf.acf_cenni_storici.replace(
+                      "CENNI STORICI – ",
+                      ""
+                    ),
+                  }}
+                ></div>
+              </div>
 
-      <div
-        className="card-text pb-5"
-        dangerouslySetInnerHTML={{ __html: post.acf.acf_cenni_storici }}
-        id="cenni-storici"
-      ></div>
-      <Link href="/">
-        <a className="btn btn-primary">Back to Home</a>
-      </Link>
-    </div>
+              <div id="note">
+                <h3>Note</h3>
+                <div
+                  dangerouslySetInnerHTML={{ __html: post.acf.acf_notes }}
+                ></div>
+              </div>
+            </div>
+            <PostMenu />
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -7,7 +7,7 @@ async function getPosts() {
 
   while (true) {
     const postsResponse = await fetch(
-      `https://ereditadellavita.it/library/wp-json/wp/v2/posts?per_page=100&page=${page}`
+      `https://biblioteca.sgi-italia.org/wp-json/wp/v2/posts?per_page=100&page=${page}`
     );
     const posts = await postsResponse.json();
 
@@ -28,7 +28,10 @@ getPosts().then((posts) => {
   const postsCategory = posts.filter((post) => post.categories.includes(1));
 
   console.log(postsCategory[0]);
-  const json = postsCategory.map((post) => ({ title: post.title.rendered }));
+  const json = postsCategory.map((post) => ({
+    title: post.title.rendered,
+    slug: post.slug,
+  }));
 
   fs.writeFile("./books/rsnd1.json", JSON.stringify(json), (err) =>
     console.error(err)

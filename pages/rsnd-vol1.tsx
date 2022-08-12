@@ -4,6 +4,7 @@ import BookDescription from "../components/BookDescription";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
 import raccoltaNichirenVol1 from "../public/raccolta-nichiren-vol1.jpeg";
 import jsonData from "../books/rsnd1.json";
+import Link from "next/link";
 
 export default function Ricerca() {
   return (
@@ -51,7 +52,11 @@ export default function Ricerca() {
           <h2>Scritti</h2>
           <ul>
             {jsonData.map((post) => (
-              <li>{post.title}</li>
+              <li>
+                <Link href={`/posts/${post.slug}`}>
+                  <a>{post.title}</a>
+                </Link>
+              </li>
             ))}
           </ul>
         </section>
