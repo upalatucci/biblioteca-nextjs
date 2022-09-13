@@ -2,11 +2,31 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import HomeNavbar from "../../components/Navbar/HomeNavbar";
+import ParagraphWithNotes from "../../components/ParagraphWithNotes";
 import PostMenu from "../../components/PostMenu";
 
 import { getPost, getSlugs } from "../../lib/wordpress";
 
+
+const extractNotes = (notesHTML: string): string[] => {
+  const replaceRegex = new RegExp('<div id="nota-\\d+">\\d+. <a href=\"#ref-\\d+\">↑</a>\t')
+  const splitRegex = new RegExp('</div>')
+  return notesHTML.split(splitRegex).filter(note => note).map(note => note.replace(replaceRegex, ''))
+}
+
+const extractParagraphs = (content: string): string[] => {
+  const a = content.split('</p>\n')
+  const b = a.filter(p => p)
+  const c = b.map(p => p.replaceAll(/^<p>/g, ''))
+
+  return c
+}
+
 export default function PostPage({ post }) {
+  const notesArray = extractNotes(post.acf.acf_notes)
+  const paragraphs = extractParagraphs(post.content.rendered)
+
+  
   return (
     <>
       <Head>
@@ -19,10 +39,9 @@ export default function PostPage({ post }) {
           <div className="post">
             <h2 className="text-center ">{post.title.rendered}</h2>
             <div className="post-content">
-              <div
-                dangerouslySetInnerHTML={{ __html: post.content.rendered }}
-                id="contenuto"
-              ></div>
+              {paragraphs.map(p => (
+                <ParagraphWithNotes content={p}  notes={notesArray} key={p} />
+              ))}
 
               <div id="cenni-storici">
                 <h3>Cenni Storici</h3>
@@ -31,7 +50,7 @@ export default function PostPage({ post }) {
                     __html: post.acf.acf_cenni_storici.replace(
                       "CENNI STORICI – ",
                       ""
-                    ),
+                    ).replaceAll('\n', '<br>'),
                   }}
                 ></div>
               </div>

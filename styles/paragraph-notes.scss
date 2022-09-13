@@ -1,0 +1,25 @@
+.paragraph-note {
+    position: relative;
+
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-text);
+    color: white;
+    padding: var(--space-md) var(--space-sm);
+
+
+    &-x-button {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+
+        background-color: transparent;
+        border: none;
+        color: white;
+
+    }
+
+
+    &:not(:last-of-type) {
+        margin-bottom: var(--space-sm);
+    }
+}
