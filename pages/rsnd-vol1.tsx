@@ -5,6 +5,7 @@ import HomeNavbar from "../components/Navbar/HomeNavbar";
 import raccoltaNichirenVol1 from "../public/raccolta-nichiren-vol1.jpeg";
 import jsonData from "../books/rsnd1.json";
 import Link from "next/link";
+import GoshoList from "../components/GoshoList";
 
 export default function Ricerca() {
   return (
@@ -13,7 +14,7 @@ export default function Ricerca() {
         <title>NICHIREN Library | Ricerca</title>
       </Head>
 
-      <div className="search-page">
+      <div>
         <h1>NICHIREN Library</h1>
         <HomeNavbar />
         <BookDescription
@@ -48,18 +49,7 @@ export default function Ricerca() {
             },
           ]}
         />
-        <section className="container blank-section">
-          <h2>Scritti</h2>
-          <ul>
-            {jsonData.map((post) => (
-              <li>
-                <Link href={`/posts/${post.slug}`}>
-                  <a>{post.title}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <GoshoList jsonData={jsonData} />
       </div>
     </>
   );

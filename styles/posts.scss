@@ -86,7 +86,7 @@
                     text-align: left;
 
                     &:not(:last-of-type) {
-                        border-bottom: 1px dotted var(--color-text);
+                        border-bottom: 1px dashed var(--color-text);
                     }
                 }
             }

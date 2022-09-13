@@ -4,7 +4,7 @@ export type OptionType = { value: string | number; label: string };
 
 type SelectProps = {
   value: OptionType["value"];
-  onChange: (newValue: string) => void;
+  onChange: (newValue: OptionType["value"]) => void;
   name?: string;
   options?: OptionType[];
 };

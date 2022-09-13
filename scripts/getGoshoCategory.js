@@ -17,10 +17,10 @@ async function getPosts() {
 
     if (!totalPages || (totalPages && parseInt(totalPages, 10) === page)) {
       return totalPosts;
-    } else {
+    } 
       page++;
       console.log("Total posts fetched", totalPosts.length);
-    }
+    
   }
 }
 
@@ -31,6 +31,9 @@ getPosts().then((posts) => {
   const json = postsCategory.map((post) => ({
     title: post.title.rendered,
     slug: post.slug,
+    destinatario: post.acf.acf_destinatario,
+    luogo: post.acf.acf_luogo,
+    data: post.acf.acf_data
   }));
 
   fs.writeFile("./books/rsnd1.json", JSON.stringify(json), (err) =>
