@@ -24,20 +24,37 @@
 
         .post-menu {
             grid-area: menu;
+            display: flex;
+            flex-direction: column;
         }
 
 
         .card-menu {
-            width: 250px;
+            width: 100%;
             font-size: 16px;
             margin-bottom: var(--space-md);
             padding: var(--space-sm) var(--space-md);
             border-radius: var(--border-radius-md);
             background-color: var(--background);
             box-shadow: var(--shadow-sm);
-            width: 100%;
+
+            h3 {
+                font-size: 24px;
+            }
+
+            &.gosho {
+                flex: 1;
+                h3 { 
+                    border-bottom: 2px solid var(--color-text);
+                    padding-bottom: var(--space-md);
+                }
+
+                position: relative;
+                width: 400px;
+            }
 
             @include onDesktop {
+                width: 400px;
                 padding: var(--space-md) var(--space-lg);
                 margin-bottom: var(--space-lg);
             }
@@ -73,6 +90,27 @@
                     flex-direction: column;
                     align-items: stretch;
                     justify-content: flex-start;
+                }
+
+                &.gosho-list {     
+                    position: absolute;
+                    bottom: 10px;
+                    right: 4px;
+                    left: 24px;
+                    top: 100px;               
+                    flex-wrap: nowrap;
+                    font-size: 16px;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+
+                    li {
+                        padding: var(--space-sm) 0;
+                        font-weight: 600;
+
+                        &.active {
+                            color: var(--primary-color)
+                        }
+                    }
                 }
             }
 

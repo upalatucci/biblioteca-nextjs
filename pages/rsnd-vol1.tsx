@@ -1,10 +1,8 @@
 import Head from "next/head";
-import Image from "next/image";
 import BookDescription from "../components/BookDescription";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
 import raccoltaNichirenVol1 from "../public/raccolta-nichiren-vol1.jpeg";
 import jsonData from "../books/rsnd1.json";
-import Link from "next/link";
 import GoshoList from "../components/GoshoList";
 
 export default function Ricerca() {
