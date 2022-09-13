@@ -50,6 +50,16 @@
       }
     }
   }
+
+
+
+  .simple-search {
+    
+    .search-input {
+      margin-bottom: var(--space-2xl);
+    }
+  }
+
 }
 
 .go-to-advanced-search {
@@ -59,12 +69,5 @@
 
   a.primary {
     background-color: #2b4261;
-  }
-}
-
-.simple-search {
-  
-  .search-input {
-    margin-bottom: var(--space-2xl);
   }
 }

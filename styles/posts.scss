@@ -12,7 +12,11 @@
         margin: 0 auto;
         display: grid;
         gap: var(--space-lg);
-        grid-template-areas: 'title title' 'content menu';
+        grid-template-areas: 'title' 'menu' 'content';
+
+        @include onDesktop {
+            grid-template-areas: 'title title' 'content menu';
+        }
 
         .post-content {
             grid-area: content;
@@ -26,24 +30,68 @@
         .card-menu {
             width: 250px;
             font-size: 16px;
-            margin-bottom: var(--space-lg);
-            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+            padding: var(--space-sm) var(--space-md);
             border-radius: var(--border-radius-md);
             background-color: var(--background);
             box-shadow: var(--shadow-sm);
+            width: 100%;
+
+            @include onDesktop {
+                padding: var(--space-md) var(--space-lg);
+                margin-bottom: var(--space-lg);
+            }
+
+            &.desktop {
+                display: none;
+
+                @include onDesktop {
+                    display: block;
+                }
+    
+            }
+
+
+            &.dark {
+                background-color: var(--color-text);
+                color: white;
+                
+                li:not(:last-of-type) {
+                    border-bottom: 1px dotted white;
+                }
+            }
 
             ul {
                 padding-left: 0;
                 margin: 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                flex-wrap: wrap;
+
+                @include onDesktop {
+                    flex-direction: column;
+                    align-items: stretch;
+                    justify-content: flex-start;
+                }
             }
 
             li {
                 list-style-type: none;
-                padding: var(--space-xs) 0;
-                &:not(:last-of-type) {
-                    border-bottom: 1px dotted var(--color-text);
+                text-align: center;
+                padding: var(--space-sm);
+
+                @include onDesktop {
+                    padding: var(--space-xs) 0;
+                    text-align: left;
+
+                    &:not(:last-of-type) {
+                        border-bottom: 1px dotted var(--color-text);
+                    }
                 }
             }
+
+
         }
     }
 

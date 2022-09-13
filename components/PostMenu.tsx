@@ -10,7 +10,7 @@ const PostMenu = () => {
           <li>Dimensione del testo</li>
         </ul>
       </div>
-      <div className="card-menu dark">
+      <div className="card-menu dark desktop">
         <ul>
           <li>
             <a href="#cenni-storici">Vai ai cenni storici</a>
