@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 import { PostResultType } from "../utils/elasticSearchUtils";
@@ -7,20 +6,20 @@ import { PostResultType } from "../utils/elasticSearchUtils";
 //for more info, check out these docs https://nextjs.org/docs/basic-features/image-optimization
 import { getDate } from "../utils/utils";
 
-interface PostProps {
+type PostProps = {
   post: PostResultType;
-}
+};
 
 const humanizedField = {
   post_content: "CONTENUTO",
   "meta.acf_cenni_storici.value": "CENNI STORICI",
-  "meta.acf_note.value": "NOTE",
+  "meta.acf_note.value": "NOTE"
 };
 
 const linkField = {
   post_content: "contenuto",
   "meta.acf_cenni_storici.value": "cenni_storici",
-  "meta.acf_note.value": "note",
+  "meta.acf_note.value": "note"
 };
 
 const Post: FC<PostProps> = ({ post }) => {
@@ -35,7 +34,7 @@ const Post: FC<PostProps> = ({ post }) => {
           <div
             className="card-text"
             dangerouslySetInnerHTML={{
-              __html: `${post.content.rendered.substring(0, 600)}...`,
+              __html: `${post.content.rendered.substring(0, 600)}...`
             }}
           ></div>
           <p className="card-text">

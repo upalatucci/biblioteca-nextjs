@@ -2,18 +2,16 @@ import { useRouter } from "next/router";
 import React, { FC, useCallback, useReducer } from "react";
 import { BOOKS, FIELDS, SEARCH_TYPE } from "../../utils/constants";
 import SearchInput from "../SearchInput";
-import Select, { OptionType } from "../Select";
+import Select from "../Select";
 import {
   DATES,
   mapSearchType,
   PLACES_OPTIONS,
-  RECIPIENTS_OPTIONS,
+  RECIPIENTS_OPTIONS
 } from "./constants";
 import reducer, { ACTION_TYPES, initializeState } from "./reducer";
 
-type SearchProps = {};
-
-const AdvancedSearch: FC<SearchProps> = () => {
+const AdvancedSearch: FC = () => {
   const router = useRouter();
 
   const [state, dispatch] = useReducer(reducer, null, () =>
@@ -28,7 +26,7 @@ const AdvancedSearch: FC<SearchProps> = () => {
     place,
     from,
     to,
-    searchType,
+    searchType
   } = state;
 
   const onSubmit = (event) => {
@@ -57,12 +55,12 @@ const AdvancedSearch: FC<SearchProps> = () => {
       if (event.target.checked) {
         dispatch({
           type: ACTION_TYPES.ADD_SOURCE,
-          payload: event.target.value as BOOKS,
+          payload: event.target.value as BOOKS
         });
       } else {
         dispatch({
           type: ACTION_TYPES.REMOVE_SOURCE,
-          payload: event.target.value as BOOKS,
+          payload: event.target.value as BOOKS
         });
       }
     },
@@ -74,12 +72,12 @@ const AdvancedSearch: FC<SearchProps> = () => {
       if (event.target.checked) {
         dispatch({
           type: ACTION_TYPES.ADD_FIELD,
-          payload: event.target.value as FIELDS,
+          payload: event.target.value as FIELDS
         });
       } else {
         dispatch({
           type: ACTION_TYPES.REMOVE_FIELD,
-          payload: event.target.value as FIELDS,
+          payload: event.target.value as FIELDS
         });
       }
     },
@@ -90,7 +88,7 @@ const AdvancedSearch: FC<SearchProps> = () => {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       dispatch({
         type: ACTION_TYPES.CHANGE_SEARCH_TEXT,
-        payload: event.target.value,
+        payload: event.target.value
       });
     },
     []
@@ -100,7 +98,7 @@ const AdvancedSearch: FC<SearchProps> = () => {
     return (newValue) => {
       dispatch({
         type,
-        payload: newValue === 0 ? null : newValue,
+        payload: newValue === 0 ? null : newValue
       });
     };
   };
@@ -119,7 +117,7 @@ const AdvancedSearch: FC<SearchProps> = () => {
                 name="type"
                 options={Object.values(SEARCH_TYPE).map((type) => ({
                   value: type,
-                  label: mapSearchType[type],
+                  label: mapSearchType[type]
                 }))}
               />
               <SearchInput value={searchText} onChange={onSearchTextChange} />

@@ -5,10 +5,9 @@ import AdvancedSearch from "../components/AdvancedSearch/AdvancedSearch";
 import Loading from "../components/Loading";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
 import Results from "../components/Results";
-import qs from "querystring";
 import {
   mapElasticResultToPost,
-  PostResultType,
+  PostResultType
 } from "../utils/elasticSearchUtils";
 
 export default function Ricerca() {

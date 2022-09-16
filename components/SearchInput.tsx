@@ -1,12 +1,16 @@
-import { ChangeEventHandler, FC, FormEvent, useState } from "react";
+import { ChangeEventHandler, FC } from "react";
 
-interface SearchInputProps {
+type SearchInputProps = {
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
-}
+};
 
-const SearchInput: FC<SearchInputProps> = ({ value, onChange, placeholder }) => (
+const SearchInput: FC<SearchInputProps> = ({
+  value,
+  onChange,
+  placeholder
+}) => (
   <input
     type="search"
     className="search-input"

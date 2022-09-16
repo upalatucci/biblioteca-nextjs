@@ -4,9 +4,8 @@ import React, { FC, useEffect, useState } from "react";
 import { BOOKS } from "../utils/constants";
 import SearchInput from "./SearchInput";
 
-type SearchProps = {};
 
-const SimpleSearch: FC<SearchProps> = () => {
+const SimpleSearch: FC = () => {
   const router = useRouter();
   const [searchText, setSearchText] = useState(router.query.q as string);
 

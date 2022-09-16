@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import { parse } from "querystring";
 import { BOOKS, FIELDS, SEARCH_TYPE } from "../../utils/constants";
 import { DATES } from "./constants";

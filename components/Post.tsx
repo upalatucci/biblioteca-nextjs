@@ -6,7 +6,7 @@ import { FC } from "react";
 //for more info, check out these docs https://nextjs.org/docs/basic-features/image-optimization
 import { getDate } from "../utils/utils";
 
-interface PostProps {
+type PostProps = {
   post: Record<string, any>;
 }
 

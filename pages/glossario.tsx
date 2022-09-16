@@ -1,13 +1,8 @@
 import Head from "next/head";
-import Image from "next/image";
-import BookDescription from "../components/BookDescription";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
-import raccoltaNichirenVol1 from "../public/raccolta-nichiren-vol1.jpeg";
-import jsonData from "../books/rsnd1.json";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import SearchInput from "../components/SearchInput";
+import { useState } from "react";
 import glossario from "../books/glossario.json";
+import SearchInput from "../components/SearchInput";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
 
@@ -17,7 +12,7 @@ type RicercaGlossarioProps = {
 };
 const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   lettera,
-  filterText,
+  filterText
 }) => {
   let glossarioFiltrato = glossario;
 
@@ -34,7 +29,10 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   return (
     <ul>
       {glossarioFiltrato?.map((glossarioRicerca) => (
-        <li dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }} />
+        <li
+          dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
+          key={glossarioRicerca.title}
+        />
       ))}
     </ul>
   );
@@ -65,6 +63,7 @@ export default function Glossario() {
         <div className="lettere-glossario">
           {alfabeto.map((lettera) => (
             <button
+              key={lettera}
               className={`lettera  ${
                 letteraSelezionata === lettera ? "selected" : ""
               }`}

@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 
 const responsive = {
   0: { items: 1.3 },
-  700: { items: 2.3 },
+  700: { items: 2.3 }
 };
 
 const books = [
@@ -27,6 +27,7 @@ const books = [
     description="Le lettere che il Daishonin inviava ai suoi discepoli"
     width={475}
     height={530}
+    key={1}
   />,
 
   <ImageWithTextOverlay
@@ -36,6 +37,7 @@ const books = [
     description="Le lettere che il Daishonin inviava ai suoi discepoli"
     width={475}
     height={530}
+    key={2}
   />,
 
   <ImageWithTextOverlay
@@ -45,7 +47,8 @@ const books = [
     description="Le lettere che il Daishonin inviava ai suoi discepoli"
     width={475}
     height={530}
-  />,
+    key={3}
+  />
 ];
 
 const presentationItems = [
@@ -56,6 +59,7 @@ const presentationItems = [
     width={800}
     height={700}
     className="presentation-item"
+    key={4}
   />,
   <ImageWithTextOverlay
     width={800}
@@ -64,7 +68,8 @@ const presentationItems = [
     title="Ascolta la Raccolta degli Scritti di Nichiren Daishonin"
     description="Nam eu ipsum urna. Aenean odio nulla, mattis sit amet ipsum vel, commodo porttitor metus."
     className="presentation-item"
-  />,
+    key={5}
+  />
 ];
 
 export default function Home() {
@@ -78,7 +83,7 @@ export default function Home() {
 
     router.push({
       pathname: "/ricerca",
-      query,
+      query
     });
   };
 
