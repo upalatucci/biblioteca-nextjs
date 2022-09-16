@@ -5,7 +5,7 @@ import raccoltaNichirenVol1 from "../public/raccolta-nichiren-vol1.jpeg";
 import jsonData from "../books/rsnd1.json";
 import GoshoList from "../components/GoshoList";
 
-export default function Ricerca() {
+export default function RSND1() {
   return (
     <>
       <Head>

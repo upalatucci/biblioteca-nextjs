@@ -55,7 +55,7 @@ const HomeNavbar = () => {
             <a>Sutra del Loto</a>
           </Link>
 
-          <Link href="/rsnd-vol1" passHref>
+          <Link href="/glossario" passHref>
             <a>Glossario</a>
           </Link>
         </div>
@@ -78,7 +78,7 @@ const HomeNavbar = () => {
 
         <NavbarItem href="/" title="SUTRA DEL LOTO" />
 
-        <NavbarItem href="/" title="GLOSSARIO" />
+        <NavbarItem href="/glossario" title="GLOSSARIO" />
       </div>
       <span className="nav-search">
         <Link href="/ricerca" passHref>
