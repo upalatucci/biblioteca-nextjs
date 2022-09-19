@@ -17,15 +17,17 @@ const Results: React.FC<ResultsProps> = ({ data }) => {
   }, [ref]);
 
   return (
-    <div className="results container" id="search-results" ref={ref}>
-      {data.length === 0 && <h2>Spiacenti nessun risultato trovato</h2>}
+    <div className="container mx-auto pt-8 px-14" id="search-results" ref={ref}>
+      {data.length === 0 && <h2 className="text-3xl md:text-4xl px-4 font-bold">Spiacenti nessun risultato trovato</h2>}
       {data.length !== 0 && (
         <>
-          <h2>Abbiamo trovato:</h2>
-          <hr />
+          <h2 className="text-4xl md:text-5xl py-4 font-bold">Abbiamo trovato</h2>
+          <hr className="border border-secondary" />
+          <div className="divide-y-2 divide-dashed pt-4">
           {data?.map((postResult) => (
             <PostResults key={postResult.id} post={postResult} />
           ))}
+          </div>
         </>
       )}
     </div>

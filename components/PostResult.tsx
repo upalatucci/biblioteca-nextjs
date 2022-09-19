@@ -24,39 +24,40 @@ const linkField = {
 
 const Post: FC<PostProps> = ({ post }) => {
   return (
-    <Link href={`/posts/${post.slug}`} passHref>
-      <div className="post-result card mb-3">
-        <div className="card-body">
-          <h5
-            className="card-title"
-            dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-          />
-          <div
-            className="card-text"
-            dangerouslySetInnerHTML={{
-              __html: `${post.content.rendered.substring(0, 600)}...`
-            }}
-          ></div>
-          <p className="card-text">
-            {post.highlight_fields
-              .filter((field) => field !== "post_title")
-              .map((highlightField) => (
-                <Link
-                  key={highlightField}
-                  href={`/posts/${post.slug}#${linkField[highlightField]}`}
-                  passHref
-                >
-                  <span className="badge">
-                    {humanizedField[highlightField]}
-                  </span>
-                </Link>
-              ))}
+    <div className="py-6">
+      <Link href={`/posts/${post.slug}`} passHref>
+        <a>
+          <div className="font-sans">
+            <h5
+              className="font-bold pb-4 text-lg text-primary"
+              dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+            />
+            <div
+            className="lg:mr-20"
+              dangerouslySetInnerHTML={{
+                __html: `${post.content.rendered.substring(0, 400)}...`
+              }}
+            ></div>
+            <p className="flex items-center mt-4">
+              {post.highlight_fields
+                .filter((field) => field !== "post_title")
+                .map((highlightField) => (
+                  <Link
+                    key={highlightField}
+                    href={`/posts/${post.slug}#${linkField[highlightField]}`}
+                    passHref
+                  >
+                    <span className="border border-primary rounded-xl px-4 mr-2 text-md">
+                      {humanizedField[highlightField]}
+                    </span>
+                  </Link>
+                ))}
 
-            <small className="text-muted">On {getDate(post.modified)}</small>
-          </p>
-        </div>
-      </div>
-    </Link>
+            </p>
+          </div>
+        </a>
+      </Link>
+    </div>
   );
 };
 

@@ -58,7 +58,6 @@ const presentationItems = [
     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu ipsum urna."
     width={800}
     height={700}
-    className="presentation-item"
     key={4}
   />,
   <ImageWithTextOverlay
@@ -66,8 +65,7 @@ const presentationItems = [
     height={700}
     image={ascolta}
     title="Ascolta la Raccolta degli Scritti di Nichiren Daishonin"
-    description="Nam eu ipsum urna. Aenean odio nulla, mattis sit amet ipsum vel, commodo porttitor metus."
-    className="presentation-item"
+    description="Nam eu ipsum urna. Aenean odio nulla, "
     key={5}
   />
 ];
@@ -106,7 +104,6 @@ export default function Home() {
       </Head>
 
       <div>
-        <h1>NICHIREN Library</h1>
         <HomeNavbar />
 
         {isMobile ? (
@@ -120,7 +117,7 @@ export default function Home() {
             disableDotsControls
           />
         ) : (
-          <section className="books">{books}</section>
+          <section className="w-full flex items-center justify-evenly m-0 p-0 lg:mb-4 xl:mb-8">{books}</section>
         )}
 
         {isMobile ? (
@@ -134,33 +131,34 @@ export default function Home() {
             disableDotsControls
           />
         ) : (
-          <section className="books container">{presentationItems}</section>
+          <section className="w-full flex items-center justify-evenly m-0 p-0">{presentationItems}</section>
         )}
 
-        <section className="section-search blank-section">
-          <h2>Cosa vuoi approfondire oggi?</h2>
-          <div className="simple-search">
-            <form onSubmit={onSearch}>
+        <section className="bg-white flex flex-col py-14 items-center justify-center">
+          <h2 className="mt-4 mb-8 font-bold text-3xl md:text-4xl text-center">Cosa vuoi approfondire oggi?</h2>
+          <div className="w-full mt-4 mb-8">
+            <form onSubmit={onSearch} className='flex flex-col items-center w-full'>
               <SearchInput
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button className="primary" type="submit">
+              <button className="btn bg-sky-600 hover:bg-sky-800 rounded-2xl w-36 h-8 mt-10 text-white text-lg" type="submit">
                 Cerca
               </button>
             </form>
           </div>
 
-          <Link href="/ricerca-avanzata" passHref>
-            <span className="advanced-search">
-              Vai alla ricerca avanzata <span>{">"}</span>
-            </span>
-          </Link>
+          {/* <Link href="/ricerca-avanzata" passHref>
+            <a className="text-lg">
+              <span>Vai alla ricerca avanzata <span>{">"}</span></span>
+            </a>
+          </Link> */}
         </section>
 
-        <section className="section-nichiren-library">
-          <h2>Che cos&apos;è la Nichiren Library</h2>
-          <p>
+        <section className="py-14">
+          <div className="container flex flex-col items-center justify-center my-16">
+          <h2 className="font-bold my-8  text-3xl md:text-4xl text-center">Che cos&apos;è la Nichiren Library</h2>
+          <p className="text-center mx-8 md:mx-32 lg:mx-64 mb-12">
             Praesent vel urna turpis. Aenean ultrices pharetra justo quis
             ultricies. Vestibulum imperdiet aliquam interdum. Nunc laoreet eget
             metus vitae semper. Class aptent taciti sociosqu ad litora torquent
@@ -170,7 +168,8 @@ export default function Home() {
             sit amet arcu nulla. Nullam vitae libero ullamcorper, mollis massa
             vel, malesuada elit. Nulla vulputate ex a ligula mollis pharetra.
           </p>
-          <button className="secondary">Approfondisci</button>
+          <button className="btn border border-secondary text-secondary hover:text-white hover:bg-secondary rounded-3xl py-2 px-16">Approfondisci</button>
+          </div>
         </section>
       </div>
     </>

@@ -1,14 +1,14 @@
-@import "./home.scss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "./posts.scss";
 @import "./nav.scss";
-@import "./search.scss";
-@import "./search-card.scss";
 @import "./search-input.scss";
 @import "./book-description.scss";
 @import "./mediaQueries.scss";
-@import "./post-result.scss";
 @import "./advanced-search.scss";
-@import "./results.scss";
 @import "./select.scss";
 @import "./paragraph-notes.scss";
 @import "./gosho-list.scss";
@@ -22,6 +22,7 @@ body {
   font-family: "Playfair Display", serif;
   --color-text: #2b4261;
   --primary-color: #00a2c3;
+  --secondary-color: #2b4261;
   --background: #f8f8f8;
   --color-gray: #dadada;
   --primary-font: "Playfair Display", serif;
@@ -53,23 +54,10 @@ a {
   box-sizing: border-box;
 }
 
-h1 {
-  font-size: 50px;
-  font-weight: 900;
-  color: var(--color-title);
-}
-
 hr {
   border-color: var(--primary-color);
 }
 
-h2 {
-  font-size: 26px;
-
-  @include onTablet {
-    font-size: 42px;
-  }
-}
 
 input.search {
   height: 50px;
@@ -83,33 +71,6 @@ input.search {
 
   @include onDesktop {
     font-size: 24px;
-  }
-}
-
-.container {
-  padding: 0 var(--space-sm);
-  margin-left: auto;
-  margin-right: auto;
-
-  @include onTablet {
-    padding: 0;
-    max-width: 700px;
-  }
-
-  @include onDesktop {
-    padding: 0 var(--space-md);
-    max-width: 1100px;
-  }
-
-  @include onLargeDesktop {
-    padding: 0 var(--space-md);
-    max-width: 1400px;
-  }
-}
-
-section {
-  @include onDesktop {
-    min-height: 60vh;
   }
 }
 
@@ -195,14 +156,6 @@ button.secondary {
   100% {
     transform: rotateZ(360deg);
   }
-}
-
-span.badge {
-  font-size: 14px;
-  padding: var(--space-xs) var(--space-sm);
-  margin-right: var(--space-sm);
-  border: 1px solid var(--primary-color);
-  border-radius: var(--border-radius-md);
 }
 
 .primary-select {

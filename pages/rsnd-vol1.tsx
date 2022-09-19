@@ -13,7 +13,6 @@ export default function RSND1() {
       </Head>
 
       <div>
-        <h1>NICHIREN Library</h1>
         <HomeNavbar />
         <BookDescription
           image={raccoltaNichirenVol1}

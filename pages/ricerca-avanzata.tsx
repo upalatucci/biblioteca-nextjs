@@ -41,7 +41,6 @@ export default function Ricerca() {
       </Head>
 
       <div className="search-page">
-        <h1>NICHIREN Library</h1>
         <HomeNavbar />
 
         <AdvancedSearch />

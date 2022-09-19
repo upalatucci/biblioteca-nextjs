@@ -48,69 +48,69 @@ const SimpleSearch: FC = () => {
   };
 
   return (
-    <div className="simple-search">
+    <div className="bg-white  py-14">
       <form onSubmit={onSubmit}>
-        <section className="container blank-section">
-          <div className="inner">
-            <h2>Fai la tua ricerca:</h2>
+        <section className="font-sans md:px-10">
+          <div className="container mx-auto md:px-10">
+            <h2 className="text-4xl md:text-5xl px-4 font-bold">Fai la tua ricerca:</h2>
 
-            <div className="search-card">
+            <div className="rounded-2xl bg-defaultBg p-8 my-14 shadow-md flex flex-col items-center justify-evenly h-80">
               <SearchInput
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
 
-              <div className="checkboxes">
-                <span className="span-checkbox">
-                  <label>
+              <div className="flex items-center">
+                <span className="mx-4">
+                  <label className='flex'>
                     <input
                       type="checkbox"
                       value={BOOKS.RSND}
                       checked={searchResouces.includes(BOOKS.RSND)}
                       onChange={onResouceChange}
                     />
-                    <strong>RSND</strong>
+                    <strong className="ml-2">RSND</strong>
                   </label>
                 </span>
-                <span className="span-checkbox">
-                  <label>
+                <span className="mx-4">
+                  <label className='flex'>
                     <input
                       type="checkbox"
                       value={BOOKS.SUTRA}
                       checked={searchResouces.includes(BOOKS.SUTRA)}
                       onChange={onResouceChange}
                     />
-                    <strong>Il Sutra del Loto</strong>
+                    <strong className="ml-2">Il Sutra del Loto</strong>
                   </label>
                 </span>
-                <span className="span-checkbox">
-                  <label>
+                <span className="mx-4">
+                  <label className='flex'>
                     <input
                       type="checkbox"
                       value={BOOKS.GLOSSARIO}
                       checked={searchResouces.includes(BOOKS.GLOSSARIO)}
                       onChange={onResouceChange}
                     />
-                    <strong>Glossario</strong>
+                    <strong className="ml-2">Glossario</strong>
                   </label>
                 </span>
               </div>
             </div>
-            <div className="action-buttons">
-              <button className="primary" type="submit">
+            <div className="px-4 flex items-center justify-center mb-12">
+              <button className="btn bg-sky-600 hover:bg-sky-800 rounded-3xl w-36 h-10 text-white text-lg mx-4" type="submit">
                 Cerca
               </button>
 
-              <button className="secondary" type="button">
+              <button className="btn rounded-3xl h-10 w-36 border border-secondary hover:text-white hover:bg-secondary" type="button">
                 Reset
               </button>
             </div>
           </div>
         </section>
       </form>
-      <div className="go-to-advanced-search">
+      <div className="mt-4 flex items-center justify-center">
         <Link href="/ricerca-avanzata" passHref>
-          <a className="primary">Vai alla ricerca avanzata</a>
+          <a className="btn bg-secondary text-white rounded-3xl text-center py-2 px-8">Vai alla ricerca avanzata</a>
         </Link>
       </div>
     </div>

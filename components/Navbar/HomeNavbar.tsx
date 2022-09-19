@@ -24,6 +24,8 @@ const HomeNavbar = () => {
   };
 
   return (
+    <>
+    <h1 className="text-center font-bold text-3xl md:text-5xl mb-8 mt-4">NICHIREN Library</h1>
     <nav className="container">
       <Link href="/" passHref>
         <a>
@@ -85,7 +87,7 @@ const HomeNavbar = () => {
           <button className="primary">RICERCA</button>
         </Link>
       </span>
-    </nav>
+    </nav></>
   );
 };
 
