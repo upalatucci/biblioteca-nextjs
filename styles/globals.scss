@@ -8,7 +8,6 @@
 @import "./book-description.scss";
 @import "./mediaQueries.scss";
 @import "./select.scss";
-@import "./paragraph-notes.scss";
 @import "./gosho-list.scss";
 @import "./posts.scss";
 @import "./glossario.scss";
@@ -41,6 +40,7 @@ body {
 
   color: var(--color-text);
   background-color: var(--background);
+  scroll-behavior: smooth;
 }
 
 a {

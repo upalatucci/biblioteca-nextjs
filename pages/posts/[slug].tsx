@@ -35,18 +35,17 @@ export default function PostPage({ post }) {
         <title>{post.title.rendered} | NICHIREN Library</title>
       </Head>
       <div>
-        <h1>NICHIREN Library</h1>
         <HomeNavbar />
-        <div className="post-background">
-          <div className="post">
-            <h2 className="text-center ">{post.title.rendered}</h2>
+        <div className="bg-white px-2 py-8 lg:p-8">
+          <div className="post container lg:px-10 mx-auto">
+            <h2 className="text-4xl md:text-5xl text-secondary pb-6 border-b-2 border-secondary">{post.title.rendered}</h2>
             <div className="post-content">
               {paragraphs.map((p) => (
                 <ParagraphWithNotes content={p} notes={notesArray} key={p} />
               ))}
 
               <div id="cenni-storici">
-                <h3>Cenni Storici</h3>
+                <h3 className="text-3xl md:text-4xl font-serif text-secondary font-bold mt-4 mb-6">Cenni Storici</h3>
                 <div
                   dangerouslySetInnerHTML={{
                     __html: post.acf.acf_cenni_storici
@@ -57,7 +56,7 @@ export default function PostPage({ post }) {
               </div>
 
               <div id="note">
-                <h3>Note</h3>
+                <h3 className="text-3xl md:text-4xl font-serif text-secondary font-bold mt-4 mb-6">Note</h3>
                 <div
                   dangerouslySetInnerHTML={{ __html: post.acf.acf_notes }}
                 ></div>
