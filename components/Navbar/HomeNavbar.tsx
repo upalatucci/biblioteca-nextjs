@@ -26,14 +26,14 @@ const HomeNavbar = () => {
   return (
     <>
     <h1 className="text-center font-bold text-3xl md:text-5xl mb-8 mt-4">NICHIREN Library</h1>
-    <nav className="container">
+    <nav className="container mx-auto px-4 md:px-0 flex items-center justify-between mb-4 relative">
       <Link href="/" passHref>
         <a>
           <Image src={Logo} alt="logo istituto buddista italiano soka gakkai" />
         </a>
       </Link>
       <button
-        className={classNames("mobileMenu", {
+        className={classNames("mobileMenu block relative lg:hidden w-12 h-10", {
           open: [SHOW, SHOWING].includes(mobileMenuOpen),
         })}
         onClick={closeMobileMenu}
@@ -44,9 +44,10 @@ const HomeNavbar = () => {
       </button>
 
       {mobileMenuOpen !== CLOSE && (
-        <div className={`mobile-nav-items ${mobileMenuOpen}`}>
+        <div className={`p-2 z-40 shadow-sm absolute top-28 h-80 bg-white left-4 md:left-0 right-4 md:right-0 flex flex-col items-center justify-evenly
+         border rounded-md transition-all mobile-nav-items ${mobileMenuOpen}`}>
           <Link href="/rsnd-vol1" passHref>
-            <a>Raccolta degli Scritti di Nichiren Daishonin VOLUME I</a>
+            <a >Raccolta degli Scritti di Nichiren Daishonin VOLUME I</a>
           </Link>
 
           <Link href="/rsnd-vol1" passHref>
@@ -60,10 +61,13 @@ const HomeNavbar = () => {
           <Link href="/glossario" passHref>
             <a>Glossario</a>
           </Link>
+          <Link href="/ricerca" passHref>
+            <a>Ricerca</a>
+          </Link>
         </div>
       )}
 
-      <div className="navItems">
+      <div className="hidden lg:flex items-center justify-evenly w-full">
         <NavbarItem
           href="/rsnd-vol1"
           upText="Raccolta degli Scritti di"
@@ -82,9 +86,9 @@ const HomeNavbar = () => {
 
         <NavbarItem href="/glossario" title="GLOSSARIO" />
       </div>
-      <span className="nav-search">
+      <span className="hidden lg:block">
         <Link href="/ricerca" passHref>
-          <button className="primary">RICERCA</button>
+          <button className="btn bg-primary text-white px-8 h-10 border rounded-3xl font-bold font-sans ">RICERCA</button>
         </Link>
       </span>
     </nav></>

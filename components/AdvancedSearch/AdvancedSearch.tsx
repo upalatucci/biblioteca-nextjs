@@ -105,7 +105,7 @@ const AdvancedSearch: FC = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <section className="container blank-section">
+      <section className="container">
         <div className="inner">
           <h2>Fai la tua ricerca:</h2>
 

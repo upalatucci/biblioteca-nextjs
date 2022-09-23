@@ -110,7 +110,7 @@ const SimpleSearch: FC = () => {
       </form>
       <div className="mt-4 flex items-center justify-center">
         <Link href="/ricerca-avanzata" passHref>
-          <a className="btn bg-secondary text-white rounded-3xl text-center py-2 px-8">Vai alla ricerca avanzata</a>
+          <a className="btn bg-secondary text-white rounded-3xl text-center font-sans py-2 px-8">Vai alla ricerca avanzata</a>
         </Link>
       </div>
     </div>

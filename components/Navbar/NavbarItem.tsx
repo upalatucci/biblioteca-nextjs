@@ -16,10 +16,10 @@ const NavbarItem: React.FC<NavbarItemProps> = ({
 }) => (
   <Link href={href} passHref>
     <a>
-      <span className="navbar-item-root">
-        {upText && <span className="upText">{upText}</span>}
-        <span className="title">{title}</span>
-        {downText && <span className="downText">{downText}</span>}
+      <span className="flex flex-col">
+        {upText && <span className="font-sm">{upText}</span>}
+        <span className="font-lg font-bold font-sans">{title}</span>
+        {downText && <span className="font-sm font-sans text-primary">{downText}</span>}
       </span>
     </a>
   </Link>

@@ -3,7 +3,7 @@ import NavbarItem from "./NavbarItem";
 
 const Navbar = () => {
   return (
-    <nav className="container">
+    <nav className="container mx-auto">
       <Link href="/">SGI Logo</Link>
       <button className="mobileMenu">
         <svg

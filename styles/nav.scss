@@ -1,63 +1,7 @@
 @import "./mediaQueries.scss";
 
-.navbar-item-root {
-  display: flex;
-  flex-direction: column;
-
-  .upText {
-    font-size: 12px;
-  }
-
-  .title {
-    font-size: 14px;
-    font-weight: bold;
-    font-family: var(--secondary-font);
-  }
-
-  .downText {
-    font-size: 12px;
-    color: var(--primary-color);
-    font-weight: bold;
-    font-family: var(--secondary-font);
-  }
-
-  @include onTablet {
-    .upText {
-      font-size: 18px;
-    }
-
-    .title {
-      font-size: 17px;
-    }
-
-    .downText {
-      font-size: 14px;
-    }
-  }
-}
-
 nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-2xl);
-  position: relative;
-
   .mobile-nav-items {
-    padding: var(--space-sm);
-    z-index: 1000;
-    box-shadow: var(--shadow-sm);
-    position: absolute;
-    top: 88px;
-    height: 500px;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: white;
-    border-radius: var(--border-radius-sm);
 
     &.showing {
       animation: show-menu 0.2s;
@@ -86,37 +30,9 @@ nav {
     }
   }
 
-  .navItems {
-    width: 100%;
-    display: none;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-
-  .nav-search {
-    display: none;
-  }
-
-  @include onDesktop {
-    .mobileMenu {
-      display: none;
-    }
-
-    .navItems {
-      display: flex;
-    }
-
-    .nav-search {
-      display: block;
-    }
-  }
 }
 
 .mobileMenu {
-  height: 30px;
-  width: 33px;
-  position: relative;
-  padding: 0;
 
   .ham {
     position: absolute;
