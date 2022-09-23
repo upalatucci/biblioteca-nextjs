@@ -18,7 +18,7 @@ const generateRecipients = (jsonData) => {
     if (recipient)
       recipientOptions.push({
         value: recipientOptions.length,
-        label: recipient
+        label: recipient,
       });
   });
 
@@ -56,20 +56,20 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   );
 
   return (
-    <section className="blank-section">
-      <div className="gosho-list-section container">
-        <h2>Scritti</h2>
-        <form>
-          <label>
-            Titolo
+    <section className="bg-white">
+      <div className="container mx-auto py-8">
+        <h2 className="text-4xl md:text-5xl text-secondary mb-8">Scritti</h2>
+        <form className="border-b-2 border-secondary pb-2 flex items-center justify-between flex-wrap">
+          <label className="mb-4">
+            <span className="mr-4">Titolo</span>
             <SearchInput
               value={titleFilter}
               onChange={(e) => setTitleFilter(e.target.value)}
               placeholder="Inserisci il titolo del Gosho che stai cercando"
             />
           </label>
-          <label>
-            Destinatario
+          <label className="mb-4 flex items-center">
+            <span className="mr-4">Destinatario</span>
             <Select
               onChange={setRecipient}
               value={recipient}
@@ -77,8 +77,8 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
               options={recipientOptions}
             />
           </label>
-          <label>
-            Ordine alfabetico
+          <label className="mb-4">
+            <span className="mr-4">Ordine alfabetico</span>
             <input
               type="checkbox"
               value="alphabeticOrder"
@@ -87,11 +87,14 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
             />
           </label>
         </form>
-        <ul className="gosho-list">
-          {goshoOrdered.map((post) => (
-            <li key={post.slug}>
+        <ul className="mt-4 divide-y-2 divide-gray-300 divide-dashed text-xl">
+          {goshoOrdered.map((post, index) => (
+            <li key={post.slug} className="py-3">
               <Link href={`/posts/${post.slug}`}>
-                <a>{post.title}</a>
+                <a className="flex">
+                  <span className="mr-8 lg:mr-14">{index + 1}.</span>{" "}
+                  <span>{post.title}</span>
+                </a>
               </Link>
             </li>
           ))}

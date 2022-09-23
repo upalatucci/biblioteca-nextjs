@@ -3,6 +3,7 @@ import HomeNavbar from "../components/Navbar/HomeNavbar";
 import { useState } from "react";
 import glossario from "../books/glossario.json";
 import SearchInput from "../components/SearchInput";
+import classNames from "classnames";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
 
@@ -12,7 +13,7 @@ type RicercaGlossarioProps = {
 };
 const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   lettera,
-  filterText
+  filterText,
 }) => {
   let glossarioFiltrato = glossario;
 
@@ -27,12 +28,14 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   }
 
   return (
-    <ul>
+    <ul className="divide-y-2 divide-gray-200 divide-dashed">
       {glossarioFiltrato?.map((glossarioRicerca) => (
-        <li
-          dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
-          key={glossarioRicerca.title}
-        />
+        <li className="py-4" key={glossarioRicerca.title}>
+          <span
+            className="font-bold text-lg"
+            dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
+          ></span>
+        </li>
       ))}
     </ul>
   );
@@ -47,41 +50,69 @@ export default function Glossario() {
         <title>NICHIREN Library | Glossario</title>
       </Head>
 
-      <div className="search-page">
-        <h1>NICHIREN Library</h1>
+      <div>
         <HomeNavbar />
 
-        <div className="filtri-glossario">
-          <label>
-            <SearchInput
-              onChange={(e) => setRicercaTesto(e.currentTarget.value)}
-              value={ricercaTesto}
-              placeholder="Inserisci la parola che stai cercando"
-            />
-          </label>
-        </div>
-        <div className="lettere-glossario">
-          {alfabeto.map((lettera) => (
-            <button
-              key={lettera}
-              className={`lettera  ${
-                letteraSelezionata === lettera ? "selected" : ""
-              }`}
-              onClick={() =>
-                lettera === letteraSelezionata
-                  ? setLetteraSelezionata("")
-                  : setLetteraSelezionata(lettera)
-              }
-            >
-              {lettera}
-            </button>
-          ))}
-        </div>
+        <section className="bg-white">
+          <div className="container mx-auto py-8 px-4">
+            <h2 className="text-4xl md:text-5xl px-4 font-bold mb-8">Glossario</h2>
+            <form className="flex flex-col flex-wrap">
+              <div className="mb-4 flex items-stretch lg:items-center justify-between flex-wrap flex-col xl:flex-row">
+                <label className="bg-defaultBg shadow-md px-8 py-4 rounded-xl mb-6 md:flex w-full xl:w-auto">
+                  <span className="text-primary font-bold text-xl">Filtra i risultati per:</span>
 
-        <RicercaGlossario
-          lettera={letteraSelezionata}
-          filterText={ricercaTesto}
-        />
+                  <div className="flex flex-col md:flex-row items-start md:items-center justify-start ml-4 md:ml-0 ">
+                  <label className="md:ml-6">
+                    <input type="checkbox" className="mr-4" />
+                    <span>RSND vol. I/II</span>
+                  </label>
+                  <label className="md:ml-6">
+                    <input type="checkbox" className="mr-4" />
+                    <span>Il Sutra del Loto</span>
+                  </label>
+                  </div>
+                </label>
+                <div className="hidden xl:block mb-6 h-8 w-1 border-r-2 border-gray-100"></div>
+                <div className="mb-6 self-center">
+                  <label>
+                    <span className="font-bold text-xl mr-4">Cerca un termine</span>
+                    <SearchInput
+                      onChange={(e) => setRicercaTesto(e.currentTarget.value)}
+                      value={ricercaTesto}
+                      placeholder="Inserisci la parola che stai cercando"
+                    />
+                  </label>
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center justify-center gap-1">
+                {alfabeto.map((lettera) => (
+                  <button
+                    key={lettera}
+                    className={classNames(
+                      "h-10 w-10 rounded-2xl border-secondary border",
+                      {
+                        "bg-secondary text-white":
+                          letteraSelezionata === lettera,
+                      }
+                    )}
+                    onClick={() =>
+                      lettera === letteraSelezionata
+                        ? setLetteraSelezionata("")
+                        : setLetteraSelezionata(lettera)
+                    }
+                  >
+                    {lettera}
+                  </button>
+                ))}
+              </div>
+            </form>
+
+            <RicercaGlossario
+              lettera={letteraSelezionata}
+              filterText={ricercaTesto}
+            />
+          </div>
+        </section>
       </div>
     </>
   );
