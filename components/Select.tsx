@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React from "react";
 
 export type OptionType = { value: string | number; label: string };
@@ -7,6 +8,7 @@ type SelectProps = {
   onChange: (newValue: OptionType["value"]) => void;
   name?: string;
   options?: OptionType[];
+  className?: string;
 };
 
 export type OptionProps = {
@@ -46,7 +48,7 @@ const Option: React.FC<OptionProps> = ({
   );
 };
 
-const Select: React.FC<SelectProps> = ({ value, onChange, name, options }) => {
+const Select: React.FC<SelectProps> = ({ value, onChange, name, options, className }) => {
   const [isOpen, setOpen] = React.useState(false);
 
   const indexSelectedOption = React.useMemo(
@@ -106,7 +108,7 @@ const Select: React.FC<SelectProps> = ({ value, onChange, name, options }) => {
   const otherOptions = options.filter((option) => option.value !== value);
 
   return (
-    <div className="select-wrapper">
+    <div className={classNames(className, "select-wrapper")}>
       <div className="select-container">
         <button
           type="button"

@@ -17,7 +17,7 @@ const Results: React.FC<ResultsProps> = ({ data }) => {
   }, [ref]);
 
   return (
-    <div className="container mx-auto pt-8 px-14" id="search-results" ref={ref}>
+    <div className="container mx-auto pt-8 xl:px-14" id="search-results" ref={ref}>
       {data.length === 0 && <h2 className="text-3xl md:text-4xl px-4 font-bold">Spiacenti nessun risultato trovato</h2>}
       {data.length !== 0 && (
         <>
