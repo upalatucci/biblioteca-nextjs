@@ -4,6 +4,7 @@ import HomeNavbar from "../components/Navbar/HomeNavbar";
 import raccoltaNichirenVol1 from "../public/raccolta-nichiren-vol1.jpeg";
 import jsonData from "../books/rsnd1.json";
 import GoshoList from "../components/GoshoList";
+import Footer from "../components/Footer";
 
 export default function RSND1() {
   return (
@@ -12,8 +13,8 @@ export default function RSND1() {
         <title>NICHIREN Library | Ricerca</title>
       </Head>
 
-      <div>
-        <HomeNavbar />
+      <HomeNavbar />
+      <main>
         <BookDescription
           image={raccoltaNichirenVol1}
           imageAlt="Raccolta degli scritti di Nichiren Daishonin"
@@ -47,7 +48,8 @@ export default function RSND1() {
           ]}
         />
         <GoshoList jsonData={jsonData} />
-      </div>
+      </main>
+      <Footer />
     </>
   );
 }

@@ -13,6 +13,7 @@ import ascolta from "../public/ascolta.jpeg";
 import Link from "next/link";
 import SearchInput from "../components/SearchInput";
 import { useRouter } from "next/router";
+import Footer from "../components/Footer";
 
 const responsive = {
   0: { items: 1.3 },
@@ -103,9 +104,9 @@ export default function Home() {
         <title>NICHIREN Library</title>
       </Head>
 
-      <div>
         <HomeNavbar />
 
+        <main>
         {isMobile ? (
           <AliceCarousel
             mouseTracking
@@ -171,7 +172,8 @@ export default function Home() {
           <button className="btn border border-secondary text-secondary hover:text-white hover:bg-secondary rounded-3xl py-2 px-16">Approfondisci</button>
           </div>
         </section>
-      </div>
+        <Footer />
+      </main>
     </>
   );
 }

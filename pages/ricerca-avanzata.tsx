@@ -2,12 +2,13 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import AdvancedSearch from "../components/AdvancedSearch/AdvancedSearch";
+import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
 import Results from "../components/Results";
 import {
   mapElasticResultToPost,
-  PostResultType
+  PostResultType,
 } from "../utils/elasticSearchUtils";
 
 export default function Ricerca() {
@@ -40,13 +41,13 @@ export default function Ricerca() {
         <title>NICHIREN Library | Ricerca</title>
       </Head>
 
-      <div className="search-page">
-        <HomeNavbar />
-
+      <HomeNavbar />
+      <main className="search-page">
         <AdvancedSearch />
         {loading && <Loading />}
         {searchedPosts !== undefined && <Results data={searchedPosts} />}
-      </div>
+      </main>
+      <Footer />
     </>
   );
 }
