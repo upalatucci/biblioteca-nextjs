@@ -2,6 +2,8 @@ import Link from "next/link";
 import * as React from "react";
 import SearchInput from "./SearchInput";
 import Select from "./Select";
+import fuzzy from "fuzzy";
+import unescape from "underscore/modules/unescape";
 
 type GoshoListProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,15 +27,18 @@ const generateRecipients = (jsonData) => {
   return recipientOptions;
 };
 
-const alphabeticOrderFunction = (a, b) => (a.title > b.title ? 1 : -1);
+const alphabeticOrderFunction = (a, b) =>
+  a.original.title > b.original.title ? 1 : -1;
 
-const chronologicalOrder = (a, b) => (a.data > b.data ? 1 : -1);
+const chronologicalOrder = (a, b) =>
+  a.original.data > b.original.data ? 1 : -1;
 
 const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   const recipientOptions = React.useMemo(
     () => generateRecipients(jsonData),
     [jsonData]
   );
+
   const [alphabeticOrder, setAlphabeticOrder] = React.useState(false);
 
   const [titleFilter, setTitleFilter] = React.useState("");
@@ -41,23 +46,35 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
     recipientOptions[0].value
   );
 
-  const goshoFilteredByTitle = jsonData.filter((post) =>
-    post.title.toLowerCase().includes(titleFilter.toLocaleLowerCase())
+  const goshoFilteredByTitle = React.useMemo(
+    () =>
+      fuzzy.filter(titleFilter, jsonData, {
+        extract: (el: { title: string; destinatario: string; slug: string }) =>
+          unescape(el.title),
+      }),
+    [titleFilter, jsonData]
   );
 
   const goshoFilteredByRecipient = recipient
     ? goshoFilteredByTitle.filter(
-        (gosho) => gosho.destinatario === recipientOptions[recipient].label
+        ({ original: gosho }) =>
+          gosho.destinatario === recipientOptions[recipient].label
       )
     : goshoFilteredByTitle;
 
-  const goshoOrdered = goshoFilteredByRecipient.sort(
-    alphabeticOrder ? alphabeticOrderFunction : chronologicalOrder
-  );
+  let goshoOrdered
+
+  if (titleFilter && !alphabeticOrder) {
+    goshoOrdered = goshoFilteredByRecipient
+  } else {
+    goshoOrdered = goshoFilteredByRecipient.sort(
+      alphabeticOrder ? alphabeticOrderFunction : chronologicalOrder
+    );
+  }
 
   return (
     <section className="bg-white">
-      <div className="container mx-auto py-8">
+      <div className="container mx-auto py-8 min-h-[50vh]">
         <h2 className="text-4xl md:text-5xl text-secondary mb-8">Scritti</h2>
         <form className="border-b-2 border-secondary pb-2 flex items-center justify-between flex-wrap">
           <label className="mb-4">
@@ -87,18 +104,25 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
             />
           </label>
         </form>
-        <ul className="mt-4 divide-y-2 divide-gray-300 divide-dashed text-xl">
-          {goshoOrdered.map((post, index) => (
-            <li key={post.slug} className="py-3">
-              <Link href={`/posts/${post.slug}`}>
-                <a className="flex">
-                  <span className="mr-8 lg:mr-14">{index + 1}.</span>{" "}
-                  <span>{post.title}</span>
-                </a>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {goshoOrdered.length === 0 && (
+          <div className="mt-4 text-3xl">
+            Nessun risultato per questo tipo di ricerca
+          </div>
+        )}
+        {goshoOrdered.length > 0 && (
+          <ul className="mt-4 divide-y-2 divide-gray-300 divide-dashed text-xl">
+            {goshoOrdered.map(({ original: post }, index) => (
+              <li key={post.slug} className="py-3">
+                <Link href={`/posts/${post.slug}`}>
+                  <a className="flex">
+                    <span className="mr-8 lg:mr-14">{index + 1}.</span>{" "}
+                    <span>{post.title}</span>
+                  </a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

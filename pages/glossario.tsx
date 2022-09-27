@@ -4,6 +4,8 @@ import { useState } from "react";
 import glossario from "../books/glossario.json";
 import SearchInput from "../components/SearchInput";
 import classNames from "classnames";
+import fuzzy from 'fuzzy'
+import unescape from "underscore/modules/unescape";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
 
@@ -18,9 +20,7 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   let glossarioFiltrato = glossario;
 
   if (filterText) {
-    glossarioFiltrato = glossarioFiltrato.filter((termine) =>
-      termine?.title?.toLowerCase().includes(filterText.toLowerCase())
-    );
+    glossarioFiltrato = fuzzy.filter(filterText, glossarioFiltrato, {extract: (el: {title: string, slug: string, content: string}) => unescape(el.title)}).map(result => result.original)
   } else if (lettera) {
     glossarioFiltrato = glossarioFiltrato.filter((termine) =>
       termine?.title?.toLowerCase().startsWith(lettera)
@@ -87,6 +87,7 @@ export default function Glossario() {
               <div className="flex flex-wrap items-center justify-center gap-1">
                 {alfabeto.map((lettera) => (
                   <button
+                    type='button'
                     key={lettera}
                     className={classNames(
                       "h-10 w-10 rounded-2xl border-secondary border",
