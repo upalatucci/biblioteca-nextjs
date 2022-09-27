@@ -42,14 +42,10 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
         array={glossarioFiltrato}
         renderer={(glossarioRicerca) => (
           <li className="py-4" key={glossarioRicerca.title}>
-            <Link href={`/glossario/${glossarioRicerca.slug}`} passHref>
-              <a>
-                <span
-                  className="font-bold text-lg"
-                  dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
-                ></span>
-              </a>
-            </Link>
+            <span
+              className="font-bold text-lg"
+              dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
+            ></span>
           </li>
         )}
       />

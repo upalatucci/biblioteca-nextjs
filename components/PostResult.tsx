@@ -25,49 +25,56 @@ const linkField = {
   "meta.acf_note.value": "note"
 };
 
+const PostResultContent: FC<PostProps> = ({ post }) => (
+  <div className="font-sans">
+    <h5
+      className="font-bold pb-4 text-lg text-primary"
+      dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+    />
+    <div
+      className="lg:mr-20"
+      dangerouslySetInnerHTML={{
+        __html: `${post.content.rendered.substring(0, 400)}...`
+      }}
+    ></div>
+    <p className="flex items-center mt-4">
+      {post.highlight_fields
+        .filter((field) => field !== "post_title")
+        .map((highlightField) => (
+          <Link
+            key={highlightField}
+            href={`/posts/${post.slug}#${linkField[highlightField]}`}
+            passHref
+          >
+            <span className="border border-primary rounded-xl px-4 mr-2 text-md">
+              {humanizedField[highlightField]}
+            </span>
+          </Link>
+        ))}
+
+      <span className="font-semibold">
+        {post?.type === "glossario"
+          ? "Glossario"
+          : humanizeCategory(post.categories)}
+      </span>
+    </p>
+  </div>
+);
+
 const Post: FC<PostProps> = ({ post }) => {
+  if (post?.type === "glossario") {
+    return (
+      <li className="py-6">
+        <PostResultContent post={post} />
+      </li>
+    );
+  }
+
   return (
     <li className="py-6">
-      <Link
-        href={`/${post?.type === "glossario" ? post?.type : "posts"}/${
-          post.slug
-        }`}
-        passHref
-      >
+      <Link href={`/posts/${post.slug}`} passHref>
         <a>
-          <div className="font-sans">
-            <h5
-              className="font-bold pb-4 text-lg text-primary"
-              dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-            />
-            <div
-              className="lg:mr-20"
-              dangerouslySetInnerHTML={{
-                __html: `${post.content.rendered.substring(0, 400)}...`
-              }}
-            ></div>
-            <p className="flex items-center mt-4">
-              {post.highlight_fields
-                .filter((field) => field !== "post_title")
-                .map((highlightField) => (
-                  <Link
-                    key={highlightField}
-                    href={`/posts/${post.slug}#${linkField[highlightField]}`}
-                    passHref
-                  >
-                    <span className="border border-primary rounded-xl px-4 mr-2 text-md">
-                      {humanizedField[highlightField]}
-                    </span>
-                  </Link>
-                ))}
-
-              <span className="font-semibold">
-                {post?.type === "glossario"
-                  ? "Glossario"
-                  : humanizeCategory(post.categories)}
-              </span>
-            </p>
-          </div>
+          <PostResultContent post={post} />
         </a>
       </Link>
     </li>
