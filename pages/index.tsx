@@ -143,7 +143,7 @@ export default function Home() {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button className="btn bg-sky-600 hover:bg-sky-800 rounded-2xl w-36 h-8 mt-10 text-white text-lg" type="submit">
+              <button className="btn bg-primary hover:bg-primaryHover rounded-2xl w-36 h-8 mt-10 text-white text-lg" type="submit">
                 Cerca
               </button>
             </form>

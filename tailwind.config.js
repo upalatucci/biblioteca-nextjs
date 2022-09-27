@@ -15,7 +15,8 @@ module.exports = {
       },
     colors: {
       ...colors,
-      primary: '#00a2c3',
+      primary: '#0E83A4',
+      primaryHover: '#116b85',
       secondary: '#2b4261',
       defaultBg: '#f8f8f8',
       customGray: '#dadada'

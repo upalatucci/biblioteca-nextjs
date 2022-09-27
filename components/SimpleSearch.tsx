@@ -97,7 +97,7 @@ const SimpleSearch: FC = () => {
               </div>
             </div>
             <div className="px-4 flex items-center justify-center mb-12">
-              <button className="btn font-sans bg-sky-600 hover:bg-sky-800 rounded-3xl w-36 h-10 text-white text-lg mx-4" type="submit">
+              <button className="btn font-sans bg-primary hover:bg-primaryHover rounded-3xl w-36 h-10 text-white text-lg mx-4" type="submit">
                 Cerca
               </button>
 
