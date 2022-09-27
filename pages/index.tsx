@@ -156,7 +156,7 @@ export default function Home() {
         </section>
 
         <section className="py-14">
-          <div className="container flex flex-col items-center justify-center my-16">
+          <div className="container mx-auto flex flex-col items-center justify-center my-16">
           <h2 className="font-bold my-8  text-3xl md:text-4xl text-center">Che cos&apos;è la Nichiren Library</h2>
           <p className="text-center mx-8 md:mx-32 lg:mx-64 mb-12">
             Praesent vel urna turpis. Aenean ultrices pharetra justo quis
