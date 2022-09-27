@@ -5,10 +5,11 @@ import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
 import Results from "../components/Results";
+import ResultsLoading from "../components/ResultsLoading";
 import SimpleSearch from "../components/SimpleSearch";
 import {
   mapElasticResultToPost,
-  PostResultType,
+  PostResultType
 } from "../utils/elasticSearchUtils";
 
 export default function Ricerca() {
@@ -70,7 +71,7 @@ export default function Ricerca() {
             </span>
           </div>
         )}
-        {loading && <Loading />}
+        {loading && <ResultsLoading />}
         {searchedPosts !== undefined && <Results data={searchedPosts} />}
       </main>
       <Footer />

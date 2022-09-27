@@ -12,21 +12,31 @@ const Results: React.FC<ResultsProps> = ({ data }) => {
       (ref.current as HTMLDivElement).scrollIntoView({
         behavior: "smooth",
         block: "start",
-        inline: "start",
+        inline: "start"
       });
   }, [ref]);
 
   return (
-    <div className="container mx-auto pt-8 xl:px-14" id="search-results" ref={ref}>
-      {data.length === 0 && <h2 className="text-3xl md:text-4xl px-4 font-bold">Spiacenti nessun risultato trovato</h2>}
+    <div
+      className="container mx-auto pt-8 xl:px-14 min-h-[50vh]"
+      id="search-results"
+      ref={ref}
+    >
+      {data.length === 0 && (
+        <h2 className="text-3xl md:text-4xl px-4 font-bold">
+          Spiacenti nessun risultato trovato
+        </h2>
+      )}
       {data.length !== 0 && (
         <>
-          <h2 className="text-4xl md:text-5xl py-4 font-bold">Abbiamo trovato</h2>
+          <h2 className="text-4xl md:text-5xl py-4 font-bold">
+            Abbiamo trovato
+          </h2>
           <hr className="border border-secondary" />
           <div className="divide-y-2 divide-dashed pt-4">
-          {data?.map((postResult) => (
-            <PostResults key={postResult.id} post={postResult} />
-          ))}
+            {data?.map((postResult) => (
+              <PostResults key={postResult.id} post={postResult} />
+            ))}
           </div>
         </>
       )}
