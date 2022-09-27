@@ -25,8 +25,7 @@ const mapElasticSearchSourcesSlug = (sources: BOOKS[]) => {
   return sources.reduce((elasticSources, source) => {
     switch (source) {
       case BOOKS.RSND:
-        elasticSources.push("vol1");
-        elasticSources.push("vol2");
+        elasticSources.push("post");
         break;
       case BOOKS.SUTRA:
         elasticSources.push("sdl");
@@ -67,9 +66,10 @@ export const simpleSearchQuery = (
         ],
         filter: [
           {
-            terms: {
-              "terms.category.slug": querySources,
-            },
+            query_string: {
+                default_field: "post_type",
+                query: querySources.join(' OR ')
+            }
           },
         ],
       },
@@ -97,7 +97,7 @@ const searchQuery = (
   from: string = null,
   to: string = null
 ): SearchRequest => {
-  let textQueryCopy = textQuery.concat();
+  const textQueryCopy = textQuery.concat();
 
   const queryFields = ["post_title"].concat(
     fields.map((field) => mapElasticSearchFields[field])
@@ -105,7 +105,7 @@ const searchQuery = (
 
   const querySources = mapElasticSearchSourcesSlug(sources);
 
-  let elasticQuery: SearchRequest = {
+  const elasticQuery: SearchRequest = {
     min_score: 0.5,
     query: {
       bool: {
@@ -114,7 +114,7 @@ const searchQuery = (
         filter: [
           {
             terms: {
-              "terms.category.slug": querySources,
+              "post_type": querySources,
             },
           },
         ],

@@ -2,10 +2,6 @@ import Link from "next/link";
 import { FC } from "react";
 import { PostResultType } from "../utils/elasticSearchUtils";
 
-//to use Image with an external url, add some config on next.config.js
-//for more info, check out these docs https://nextjs.org/docs/basic-features/image-optimization
-import { getDate } from "../utils/utils";
-
 type PostProps = {
   post: PostResultType;
 };
@@ -25,7 +21,12 @@ const linkField = {
 const Post: FC<PostProps> = ({ post }) => {
   return (
     <div className="py-6">
-      <Link href={`/posts/${post.slug}`} passHref>
+      <Link
+        href={`/${post?.type === "glossario" ? post?.type : "posts"}/${
+          post.slug
+        }`}
+        passHref
+      >
         <a>
           <div className="font-sans">
             <h5
@@ -33,7 +34,7 @@ const Post: FC<PostProps> = ({ post }) => {
               dangerouslySetInnerHTML={{ __html: post.title.rendered }}
             />
             <div
-            className="lg:mr-20"
+              className="lg:mr-20"
               dangerouslySetInnerHTML={{
                 __html: `${post.content.rendered.substring(0, 400)}...`
               }}
@@ -52,7 +53,6 @@ const Post: FC<PostProps> = ({ post }) => {
                     </span>
                   </Link>
                 ))}
-
             </p>
           </div>
         </a>

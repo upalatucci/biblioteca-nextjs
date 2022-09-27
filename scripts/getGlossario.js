@@ -29,7 +29,7 @@ getGlossario().then((posts) => {
     .map((post) => ({
       title: post.title.rendered,
       slug: post.slug,
-      content: post.content.rendered,
+      content: post.content.rendered
     }))
     .sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
 

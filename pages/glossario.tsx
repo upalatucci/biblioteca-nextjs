@@ -5,9 +5,10 @@ import glossario from "../books/glossario.json";
 import SearchInput from "../components/SearchInput";
 import classNames from "classnames";
 import fuzzy from "fuzzy";
-import unescape from "underscore/modules/unescape";
+import { unescape } from "underscore";
 import Footer from "../components/Footer";
 import Pagination from "../components/Pagination";
+import Link from "next/link";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
 
@@ -17,7 +18,7 @@ type RicercaGlossarioProps = {
 };
 const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   lettera,
-  filterText,
+  filterText
 }) => {
   let glossarioFiltrato = glossario;
 
@@ -25,7 +26,7 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
     glossarioFiltrato = fuzzy
       .filter(filterText, glossarioFiltrato, {
         extract: (el: { title: string; slug: string; content: string }) =>
-          unescape(el.title),
+          unescape(el.title)
       })
       .map((result) => result.original);
   } else if (lettera) {
@@ -38,20 +39,29 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
     <ul className="divide-y-2 divide-gray-200 divide-dashed">
       {glossarioFiltrato?.map((glossarioRicerca) => (
         <li className="py-4" key={glossarioRicerca.title}>
-          <span
-            className="font-bold text-lg"
-            dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
-          ></span>
+          <Link href={`/glossario/${glossarioRicerca.slug}`} passHref>
+            <a>
+              <span
+                className="font-bold text-lg"
+                dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
+              ></span>
+            </a>
+          </Link>
         </li>
       ))}
-      <Pagination page={1} totalPage={10} array={glossarioFiltrato} renderer={(glossarioRicerca) => (
-        <li className="py-4" key={glossarioRicerca.title}>
-          <span
-            className="font-bold text-lg"
-            dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
-          ></span>
-        </li>
-      )}/>
+      <Pagination
+        page={1}
+        totalPage={10}
+        array={glossarioFiltrato}
+        renderer={(glossarioRicerca) => (
+          <li className="py-4" key={glossarioRicerca.title}>
+            <span
+              className="font-bold text-lg"
+              dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
+            ></span>
+          </li>
+        )}
+      />
     </ul>
   );
 };
@@ -113,7 +123,7 @@ export default function Glossario() {
                       "h-10 w-10 rounded-2xl border-secondary border",
                       {
                         "bg-secondary text-white":
-                          letteraSelezionata === lettera,
+                          letteraSelezionata === lettera
                       }
                     )}
                     onClick={() =>

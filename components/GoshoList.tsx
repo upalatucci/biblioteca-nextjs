@@ -3,7 +3,7 @@ import * as React from "react";
 import SearchInput from "./SearchInput";
 import Select from "./Select";
 import fuzzy from "fuzzy";
-import unescape from "underscore/modules/unescape";
+import { unescape } from "underscore";
 
 type GoshoListProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,7 +20,7 @@ const generateRecipients = (jsonData) => {
     if (recipient)
       recipientOptions.push({
         value: recipientOptions.length,
-        label: recipient,
+        label: recipient
       });
   });
 
@@ -50,7 +50,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
     () =>
       fuzzy.filter(titleFilter, jsonData, {
         extract: (el: { title: string; destinatario: string; slug: string }) =>
-          unescape(el.title),
+          unescape(el.title)
       }),
     [titleFilter, jsonData]
   );
@@ -62,10 +62,10 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
       )
     : goshoFilteredByTitle;
 
-  let goshoOrdered
+  let goshoOrdered;
 
   if (titleFilter && !alphabeticOrder) {
-    goshoOrdered = goshoFilteredByRecipient
+    goshoOrdered = goshoFilteredByRecipient;
   } else {
     goshoOrdered = goshoFilteredByRecipient.sort(
       alphabeticOrder ? alphabeticOrderFunction : chronologicalOrder
