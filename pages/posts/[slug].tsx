@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
+import Footer from "../../components/Footer";
 import HomeNavbar from "../../components/Navbar/HomeNavbar";
 import ParagraphWithNotes from "../../components/ParagraphWithNotes";
 import PostMenu from "../../components/PostMenu";
@@ -34,8 +35,8 @@ export default function PostPage({ post }) {
       <Head>
         <title>{post.title.rendered} | NICHIREN Library</title>
       </Head>
-      <div>
         <HomeNavbar />
+      <main>
         <div className="bg-white px-2 py-8 lg:p-8">
           <div className="post container lg:px-10 mx-auto">
             <h2 className="text-4xl md:text-5xl text-secondary pb-6 border-b-2 border-secondary">{post.title.rendered}</h2>
@@ -65,7 +66,8 @@ export default function PostPage({ post }) {
             <PostMenu currentPostTitle={post.title.rendered} />
           </div>
         </div>
-      </div>
+      </main>
+      <Footer />
     </>
   );
 }

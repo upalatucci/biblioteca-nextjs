@@ -46,7 +46,7 @@ const Footer: React.FC = () => {
                     </li>
                     <li className="mt-4">
                     <a href="#" title="" className="flex items-center opacity-75 hover:opacity-100">
-                    Scritti di Nichiren Daishonin II
+                        Scritti di Nichiren Daishonin II
                     </a>
                     </li>
                     <li className="mt-4">

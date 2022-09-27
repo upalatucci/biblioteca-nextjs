@@ -7,6 +7,7 @@ import classNames from "classnames";
 import fuzzy from "fuzzy";
 import unescape from "underscore/modules/unescape";
 import Footer from "../components/Footer";
+import Pagination from "../components/Pagination";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
 
@@ -43,6 +44,14 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
           ></span>
         </li>
       ))}
+      <Pagination page={1} totalPage={10} array={glossarioFiltrato} renderer={(glossarioRicerca) => (
+        <li className="py-4" key={glossarioRicerca.title}>
+          <span
+            className="font-bold text-lg"
+            dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
+          ></span>
+        </li>
+      )}/>
     </ul>
   );
 };
