@@ -15,8 +15,19 @@ export default async function handler(
 
     const elasticQuery = simpleSearchQuery(searchText, sources);
 
+    
+    const pageQuery = parseInt(
+      Array.isArray(req?.query?.page)
+        ? req?.query?.page[0]
+        : req?.query?.page
+    );
+
+    const page = pageQuery && !isNaN(pageQuery) ? pageQuery : 1;
+
     const elasticResult = await client.search({
       ...elasticQuery,
+      size: 20,
+      from: (page - 1) * 20,
       index: process.env.ELASTIC_SEARCH_INDEX,
     });
 

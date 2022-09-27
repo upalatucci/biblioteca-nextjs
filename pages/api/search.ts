@@ -17,6 +17,16 @@ export default async function handler(
       ? (req.query.sources as BOOKS[])
       : [(req.query.sources as BOOKS) || BOOKS.RSND];
 
+      
+    const pageQuery = parseInt(
+      Array.isArray(req?.query?.page)
+        ? req?.query?.page[0]
+        : req?.query?.page
+    );
+
+    const page = pageQuery && !isNaN(pageQuery) ? pageQuery : 1;
+
+    
     const elasticQuery = searchQuery(
       searchText,
       searchType,
@@ -36,6 +46,8 @@ export default async function handler(
 
     const searchResult = await client.search({
       ...elasticQuery,
+      size: 20,
+      from: (page - 1) * 20,
       index: process.env.ELASTIC_SEARCH_INDEX,
     });
 

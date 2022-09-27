@@ -27,7 +27,7 @@ const linkField = {
 
 const Post: FC<PostProps> = ({ post }) => {
   return (
-    <div className="py-6">
+    <li className="py-6">
       <Link
         href={`/${post?.type === "glossario" ? post?.type : "posts"}/${
           post.slug
@@ -70,7 +70,7 @@ const Post: FC<PostProps> = ({ post }) => {
           </div>
         </a>
       </Link>
-    </div>
+    </li>
   );
 };
 

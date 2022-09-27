@@ -36,14 +36,6 @@ const chronologicalOrder = (a, b) =>
   a.original.data > b.original.data ? 1 : -1;
 
 const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
-  const router = useRouter();
-
-  const page = parseInt(
-    Array.isArray(router?.query?.page)
-      ? router?.query?.page[0]
-      : router?.query?.page
-  );
-
   const recipientOptions = React.useMemo(
     () => generateRecipients(jsonData),
     [jsonData]
@@ -122,10 +114,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
         {goshoOrdered.length > 0 && (
           <ul className="mt-4 divide-y-2 divide-gray-300 divide-dashed text-xl">
             <Pagination
-              page={page && !isNaN(page) ? page : 1}
-              totalPage={Math.ceil(
-                goshoOrdered.length / DEFAULT_ITEMS_PER_PAGE
-              )}
+              totalResults={goshoOrdered.length}
               array={goshoOrdered}
               anchorHash="gosho-list"
               renderer={({ original: post }, index) => (

@@ -7,9 +7,8 @@ import classNames from "classnames";
 import fuzzy from "fuzzy";
 import { unescape } from "underscore";
 import Footer from "../components/Footer";
-import Pagination, { DEFAULT_ITEMS_PER_PAGE } from "../components/Pagination";
+import Pagination from "../components/Pagination";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
 
@@ -21,14 +20,6 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   lettera,
   filterText
 }) => {
-  const router = useRouter();
-
-  const page = parseInt(
-    Array.isArray(router?.query?.page)
-      ? router?.query?.page[0]
-      : router?.query?.page
-  );
-
   let glossarioFiltrato = glossario;
 
   if (filterText) {
@@ -47,8 +38,7 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   return (
     <ul className="divide-y-2 divide-gray-200 divide-dashed">
       <Pagination
-        page={page && !isNaN(page) ? page : 1}
-        totalPage={Math.ceil(glossarioFiltrato.length / DEFAULT_ITEMS_PER_PAGE)}
+        totalResults={glossarioFiltrato.length}
         array={glossarioFiltrato}
         renderer={(glossarioRicerca) => (
           <li className="py-4" key={glossarioRicerca.title}>

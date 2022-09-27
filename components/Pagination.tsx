@@ -5,12 +5,12 @@ import * as React from "react";
 import { UrlObject } from "url";
 
 type PaginationProps = {
-  page: number;
-  totalPage: number;
+  totalResults: number;
   array: any[];
   renderer: (item: any, index: number) => React.ReactNode;
   itemsPerPage?: number;
   anchorHash?: string;
+  arrayStatic?: boolean;
 };
 
 const pageClassName =
@@ -20,16 +20,27 @@ const pageNumerDisabledClassName = "text-gray-300 border-gray-300";
 export const DEFAULT_ITEMS_PER_PAGE = 20;
 
 const Pagination: React.FC<PaginationProps> = ({
-  page = 1,
   array,
-  totalPage,
+  totalResults = 1,
   renderer,
   itemsPerPage = DEFAULT_ITEMS_PER_PAGE,
-  anchorHash
+  anchorHash,
+  arrayStatic = true
 }) => {
   const router = useRouter();
+
+  const pageQuery = parseInt(
+    Array.isArray(router?.query?.page)
+      ? router?.query?.page[0]
+      : router?.query?.page
+  );
+
+  const page = pageQuery && !isNaN(pageQuery) ? pageQuery : 1;
+
   const prevPage = page - 1;
   const prevPrevPage = page - 2;
+
+  const totalPage = Math.ceil(totalResults / itemsPerPage);
 
   const nextPages = Array(Math.min(totalPage - page + 1, 5))
     .fill(0)
@@ -51,13 +62,15 @@ const Pagination: React.FC<PaginationProps> = ({
     };
   };
 
+  const items = arrayStatic
+    ? array.slice(itemsPerPage * (page - 1), itemsPerPage * page)
+    : array;
+
   return (
     <>
-      {array
-        .slice(itemsPerPage * (page - 1), itemsPerPage * page)
-        .map((item, index) =>
-          renderer(item, itemsPerPage * (page - 1) + index)
-        )}
+      {items.map((item, index) =>
+        renderer(item, itemsPerPage * (page - 1) + index)
+      )}
       <div className="flex items-center justify-center pt-10">
         <Link href={generateHref(page - 1)} passHref>
           <a

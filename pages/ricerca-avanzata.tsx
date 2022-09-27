@@ -16,6 +16,7 @@ export default function Ricerca() {
   const router = useRouter();
 
   const [searchedPosts, setSearchedPosts] = useState<PostResultType[]>();
+  const [totalResults, setTotalResults] = useState<number>();
 
   const onSearch = useCallback(async () => {
     setSearchedPosts(undefined);
@@ -26,6 +27,7 @@ export default function Ricerca() {
     const jsonResponse = await response.json();
 
     setSearchedPosts(mapElasticResultToPost(jsonResponse));
+    setTotalResults(jsonResponse?.hits?.total?.value);
     setLoading(false);
   }, []);
 
@@ -45,7 +47,9 @@ export default function Ricerca() {
       <main className="search-page">
         <AdvancedSearch />
         {loading && <ResultsLoading />}
-        {searchedPosts !== undefined && <Results data={searchedPosts} />}
+        {searchedPosts !== undefined && (
+          <Results data={searchedPosts} totalResults={totalResults} />
+        )}
       </main>
       <Footer />
     </>

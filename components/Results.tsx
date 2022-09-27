@@ -1,15 +1,17 @@
 import { useEffect, useRef } from "react";
 import { PostResultType } from "../utils/elasticSearchUtils";
+import Pagination from "./Pagination";
 import PostResults from "./PostResult";
 
 type ResultsProps = {
   data: PostResultType[];
+  totalResults: number;
 };
-const Results: React.FC<ResultsProps> = ({ data }) => {
-  const ref = useRef();
+const Results: React.FC<ResultsProps> = ({ data, totalResults }) => {
+  const ref = useRef<HTMLDivElement>();
   useEffect(() => {
     if (ref.current && data.length > 0)
-      (ref.current as HTMLDivElement).scrollIntoView({
+      ref.current.scrollIntoView({
         behavior: "smooth",
         block: "start",
         inline: "start"
@@ -33,11 +35,17 @@ const Results: React.FC<ResultsProps> = ({ data }) => {
             Abbiamo trovato
           </h2>
           <hr className="border border-secondary" />
-          <div className="divide-y-2 divide-dashed pt-4">
-            {data?.map((postResult) => (
-              <PostResults key={postResult.id} post={postResult} />
-            ))}
-          </div>
+          <ul className="divide-y-2 divide-dashed pt-4 mb-10">
+            <Pagination
+              totalResults={totalResults}
+              anchorHash="search-results"
+              array={data}
+              arrayStatic={false}
+              renderer={(postResult) => (
+                <PostResults key={postResult.id} post={postResult} />
+              )}
+            />
+          </ul>
         </>
       )}
     </div>

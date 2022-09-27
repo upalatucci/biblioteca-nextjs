@@ -16,6 +16,7 @@ export default function Ricerca() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchedPosts, setSearchedPosts] = useState<PostResultType[]>();
+  const [totalResults, setTotalResults] = useState<number>();
   const router = useRouter();
 
   const onSearch = useCallback(async () => {
@@ -28,6 +29,7 @@ export default function Ricerca() {
       const jsonResponse = await response.json();
 
       setSearchedPosts(mapElasticResultToPost(jsonResponse));
+      setTotalResults(jsonResponse?.hits?.total?.value);
     } catch (apiError) {
       setError("Si e' verificato un errore durante la ricerca");
     } finally {
@@ -72,7 +74,9 @@ export default function Ricerca() {
           </div>
         )}
         {loading && <ResultsLoading />}
-        {searchedPosts !== undefined && <Results data={searchedPosts} />}
+        {searchedPosts !== undefined && (
+          <Results data={searchedPosts} totalResults={totalResults} />
+        )}
       </main>
       <Footer />
     </>
