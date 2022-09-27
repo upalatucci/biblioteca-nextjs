@@ -7,7 +7,7 @@ import {
   DATES,
   mapSearchType,
   PLACES_OPTIONS,
-  RECIPIENTS_OPTIONS,
+  RECIPIENTS_OPTIONS
 } from "./constants";
 import reducer, { ACTION_TYPES, initializeState } from "./reducer";
 
@@ -26,7 +26,7 @@ const AdvancedSearch: FC = () => {
     place,
     from,
     to,
-    searchType,
+    searchType
   } = state;
 
   const onSubmit = (event) => {
@@ -37,14 +37,22 @@ const AdvancedSearch: FC = () => {
     router.query.q = searchText;
     router.query.sources = sources;
     router.query.fields = fields;
-    router.query.from = from.toString();
-    router.query.to = to.toString();
+
     router.query.searchType = searchType;
 
-    if (recipient) router.query.recipient = recipient;
+    if (!sources.includes(BOOKS.GLOSSARIO)) {
+      router.query.from = from.toString();
+      router.query.to = to.toString();
+    } else {
+      delete router.query.from;
+      delete router.query.to;
+    }
+
+    if (recipient && !sources.includes(BOOKS.GLOSSARIO))
+      router.query.recipient = recipient;
     else delete router.query.recipient;
 
-    if (place) router.query.place = place;
+    if (place && !sources.includes(BOOKS.GLOSSARIO)) router.query.place = place;
     else delete router.query.place;
 
     router.push(router, null, { scroll: false });
@@ -55,12 +63,12 @@ const AdvancedSearch: FC = () => {
       if (event.target.checked) {
         dispatch({
           type: ACTION_TYPES.ADD_SOURCE,
-          payload: event.target.value as BOOKS,
+          payload: event.target.value as BOOKS
         });
       } else {
         dispatch({
           type: ACTION_TYPES.REMOVE_SOURCE,
-          payload: event.target.value as BOOKS,
+          payload: event.target.value as BOOKS
         });
       }
     },
@@ -72,12 +80,12 @@ const AdvancedSearch: FC = () => {
       if (event.target.checked) {
         dispatch({
           type: ACTION_TYPES.ADD_FIELD,
-          payload: event.target.value as FIELDS,
+          payload: event.target.value as FIELDS
         });
       } else {
         dispatch({
           type: ACTION_TYPES.REMOVE_FIELD,
-          payload: event.target.value as FIELDS,
+          payload: event.target.value as FIELDS
         });
       }
     },
@@ -88,7 +96,7 @@ const AdvancedSearch: FC = () => {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       dispatch({
         type: ACTION_TYPES.CHANGE_SEARCH_TEXT,
-        payload: event.target.value,
+        payload: event.target.value
       });
     },
     []
@@ -98,7 +106,7 @@ const AdvancedSearch: FC = () => {
     return (newValue) => {
       dispatch({
         type,
-        payload: newValue === 0 ? null : newValue,
+        payload: newValue === 0 ? null : newValue
       });
     };
   };
@@ -119,7 +127,7 @@ const AdvancedSearch: FC = () => {
                 name="type"
                 options={Object.values(SEARCH_TYPE).map((type) => ({
                   value: type,
-                  label: mapSearchType[type],
+                  label: mapSearchType[type]
                 }))}
                 className="w-80 mr-4"
               />
@@ -170,42 +178,42 @@ const AdvancedSearch: FC = () => {
                   </span>
                 </div>
                 <div className="flex items-center justify-start flex-wrap">
-                <span className="w-32 lg:w-40">
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      value={FIELDS.CONTENT}
-                      onChange={onFieldsChange}
-                      checked={fields.includes(FIELDS.CONTENT)}
-                      className="mr-4"
-                    />
-                    Contenuto
-                  </label>
-                </span>
-                <span className="w-32 lg:w-40">
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      value={FIELDS.CENNI_STORICI}
-                      onChange={onFieldsChange}
-                      checked={fields.includes(FIELDS.CENNI_STORICI)}
-                      className="mr-4"
-                    />
-                    Cenni storici
-                  </label>
-                </span>
-                <span className="w-32 lg:w-40">
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      value={FIELDS.NOTE}
-                      onChange={onFieldsChange}
-                      checked={fields.includes(FIELDS.NOTE)}
-                      className="mr-4"
-                    />
-                    Note
-                  </label>
-                </span>
+                  <span className="w-32 lg:w-40">
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        value={FIELDS.CONTENT}
+                        onChange={onFieldsChange}
+                        checked={fields.includes(FIELDS.CONTENT)}
+                        className="mr-4"
+                      />
+                      Contenuto
+                    </label>
+                  </span>
+                  <span className="w-32 lg:w-40">
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        value={FIELDS.CENNI_STORICI}
+                        onChange={onFieldsChange}
+                        checked={fields.includes(FIELDS.CENNI_STORICI)}
+                        className="mr-4"
+                      />
+                      Cenni storici
+                    </label>
+                  </span>
+                  <span className="w-32 lg:w-40">
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        value={FIELDS.NOTE}
+                        onChange={onFieldsChange}
+                        checked={fields.includes(FIELDS.NOTE)}
+                        className="mr-4"
+                      />
+                      Note
+                    </label>
+                  </span>
                 </div>
               </div>
               <h3 className="text-lg font-serif md:text-xl text-primary font-bold mt-4 mb-6">
@@ -237,7 +245,7 @@ const AdvancedSearch: FC = () => {
                   </label>
                 </span>
 
-                <span  className="mb-4">
+                <span className="mb-4">
                   <label className="flex items-center">
                     <span className="mr-4">Scritto nel</span>
                     <Select

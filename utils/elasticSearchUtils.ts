@@ -1,5 +1,5 @@
 export type PostResultType = {
-  categories: string[];
+  categories: {name: string, slug: string}[];
   comment_status: string;
   content: {
     rendered: string;
@@ -32,7 +32,7 @@ const removeUnclosedTags = (text: string): string => {
 export const mapElasticResultToPost = (result: any): PostResultType[] => {
   return result?.hits?.hits?.map(({ _source, highlight }) => ({
     categories:
-      _source.terms?.category?.map((category) => category.term_id) || [],
+      _source.terms?.category || [],
     comment_status: _source.comment_status,
     content: {
       rendered:

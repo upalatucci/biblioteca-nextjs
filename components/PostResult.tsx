@@ -12,6 +12,13 @@ const humanizedField = {
   "meta.acf_note.value": "NOTE"
 };
 
+const humanizeCategory = (categories) => {
+  if (categories.find((category) => category.slug === "vol1"))
+    return "Raccolta degli scritti di Nichiren Daishonin I";
+  if (categories.find((category) => category.slug === "vol2"))
+    return "Raccolta degli scritti di Nichiren Daishonin II";
+};
+
 const linkField = {
   post_content: "contenuto",
   "meta.acf_cenni_storici.value": "cenni_storici",
@@ -53,6 +60,12 @@ const Post: FC<PostProps> = ({ post }) => {
                     </span>
                   </Link>
                 ))}
+
+              <span className="font-semibold">
+                {post?.type === "glossario"
+                  ? "Glossario"
+                  : humanizeCategory(post.categories)}
+              </span>
             </p>
           </div>
         </a>

@@ -8,7 +8,7 @@ type ResultsProps = {
 const Results: React.FC<ResultsProps> = ({ data }) => {
   const ref = useRef();
   useEffect(() => {
-    if (ref.current)
+    if (ref.current && data.length > 0)
       (ref.current as HTMLDivElement).scrollIntoView({
         behavior: "smooth",
         block: "start",

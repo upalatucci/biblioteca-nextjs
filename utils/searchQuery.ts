@@ -113,9 +113,10 @@ const searchQuery = (
         should: [],
         filter: [
           {
-            terms: {
-              "post_type": querySources,
-            },
+            query_string: {
+                default_field: "post_type",
+                query: querySources.join(' OR ')
+            }
           },
         ],
       },
