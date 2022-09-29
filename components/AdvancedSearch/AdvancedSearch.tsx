@@ -115,12 +115,12 @@ const AdvancedSearch: FC = () => {
     <form onSubmit={onSubmit}>
       <section className="bg-white">
         <div className="container py-8 mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mt-8 mb-14">
+          <h2 className="text-4xl md:text-5xl font-bold mt-8 mb-14 px-4 sm:px-0">
             Fai la tua ricerca:
           </h2>
 
-          <div className="bg-defaultBg rounded-xl shadow-md mb-8 mx-auto p-8 font-sans">
-            <div className="flex items-center justify-center w-full mb-8">
+          <div className="bg-defaultBg rounded-xl shadow-md mb-8 mx-auto py-8 px-0 sm:px-8 font-sans">
+            <div className="flex items-center justify-center w-full mb-8 px-4 sm:px-0">
               <Select
                 onChange={onChangeSelect(ACTION_TYPES.CHANGE_SEARCH_TYPE)}
                 value={searchType}

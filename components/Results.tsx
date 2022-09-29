@@ -20,7 +20,7 @@ const Results: React.FC<ResultsProps> = ({ data, totalResults }) => {
 
   return (
     <div
-      className="container mx-auto pt-8 xl:px-14 min-h-[50vh]"
+      className="container mx-auto px-4 pt-8 xl:px-14 min-h-[50vh]"
       id="search-results"
       ref={ref}
     >

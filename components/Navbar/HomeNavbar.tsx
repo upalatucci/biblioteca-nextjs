@@ -88,7 +88,7 @@ const HomeNavbar = () => {
       </div>
       <span className="hidden lg:block">
         <Link href="/ricerca" passHref>
-          <button className="btn bg-primary text-white px-8 h-10 border rounded-3xl font-bold font-sans ">RICERCA</button>
+          <button className="btn bg-primary hover:bg-primaryHover text-white px-8 h-10 border rounded-3xl font-bold font-sans ">RICERCA</button>
         </Link>
       </span>
     </nav></>

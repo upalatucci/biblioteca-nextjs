@@ -78,7 +78,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
 
   return (
     <section className="bg-white" id="gosho-list">
-      <div className="container mx-auto py-8 min-h-[50vh]">
+      <div className="container mx-auto px-4 py-8 min-h-[50vh]">
         <h2 className="text-4xl md:text-5xl text-secondary mb-8">Scritti</h2>
         <form className="border-b-2 border-secondary pb-2 flex items-center justify-between flex-wrap">
           <label className="mb-4">

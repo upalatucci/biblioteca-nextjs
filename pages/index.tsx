@@ -135,15 +135,15 @@ export default function Home() {
           <section className="w-full flex items-center justify-evenly m-0 p-0">{presentationItems}</section>
         )}
 
-        <section className="bg-white flex flex-col py-14 items-center justify-center">
-          <h2 className="mt-4 mb-8 font-bold text-3xl md:text-4xl text-center">Cosa vuoi approfondire oggi?</h2>
+        <section className="bg-white px-4 flex flex-col py-14 items-center justify-center">
+          <h2 className="mt-4 mb-8 font-bold text-2xl sm:text-3xl md:text-4xl text-center">Cosa vuoi approfondire oggi?</h2>
           <div className="w-full mt-4 mb-8">
             <form onSubmit={onSearch} className='flex flex-col items-center w-full'>
               <SearchInput
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
-              <button className="btn bg-primary hover:bg-primaryHover rounded-2xl w-36 h-8 mt-10 text-white text-lg" type="submit">
+              <button className="btn bg-primary hover:bg-primaryHover rounded-3xl w-36 h-10 mt-10 text-white text-lg" type="submit">
                 Cerca
               </button>
             </form>
@@ -157,9 +157,9 @@ export default function Home() {
         </section>
 
         <section className="py-14">
-          <div className="container mx-auto flex flex-col items-center justify-center my-16">
+          <div className="container px-4 mx-auto flex flex-col items-center justify-center my-16">
           <h2 className="font-bold my-8  text-3xl md:text-4xl text-center">Che cos&apos;è la Nichiren Library</h2>
-          <p className="text-center mx-8 md:mx-32 lg:mx-64 mb-12">
+          <p className="text-center mx-4 md:mx-32 lg:mx-64 mb-12">
             Praesent vel urna turpis. Aenean ultrices pharetra justo quis
             ultricies. Vestibulum imperdiet aliquam interdum. Nunc laoreet eget
             metus vitae semper. Class aptent taciti sociosqu ad litora torquent

@@ -38,7 +38,7 @@ export default function PostPage({ post }) {
       <HomeNavbar />
       <main>
         <div className="bg-white px-2 py-8 lg:p-8">
-          <div className="post container lg:px-10 mx-auto">
+          <div className="post container px-4 lg:px-10 mx-auto">
             <h2 className="text-4xl md:text-5xl text-secondary pb-6 border-b-2 border-secondary">
               {post.title.rendered}
             </h2>
