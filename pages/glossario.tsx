@@ -4,13 +4,14 @@ import { useState } from "react";
 import glossario from "../books/glossario.json";
 import SearchInput from "../components/SearchInput";
 import classNames from "classnames";
-import fuzzy from "fuzzy";
-import { unescape } from "underscore";
 import Footer from "../components/Footer";
 import Pagination from "../components/Pagination";
-import Link from "next/link";
+import Fuse from "fuse.js";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
+const fuse = new Fuse(glossario,  { keys: [
+  "title",
+]});
 
 type RicercaGlossarioProps = {
   filterText: string;
@@ -20,19 +21,16 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   lettera,
   filterText
 }) => {
-  let glossarioFiltrato = glossario;
+  let glossarioFiltrato;
 
   if (filterText) {
-    glossarioFiltrato = fuzzy
-      .filter(filterText, glossarioFiltrato, {
-        extract: (el: { title: string; slug: string; content: string }) =>
-          unescape(el.title)
-      })
-      .map((result) => result.original);
+    glossarioFiltrato = fuse.search(filterText).map(result => result.item)
   } else if (lettera) {
     glossarioFiltrato = glossarioFiltrato.filter((termine) =>
       termine?.title?.toLowerCase().startsWith(lettera)
     );
+  } else {
+    glossarioFiltrato = glossario
   }
 
   return (

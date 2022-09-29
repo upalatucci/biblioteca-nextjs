@@ -1,7 +1,6 @@
 import Head from "next/head";
 import BookDescription from "../components/BookDescription";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
-import raccoltaNichirenVol1 from "../public/raccolta-nichiren-vol1.jpeg";
 import jsonData from "../books/rsnd1.json";
 import GoshoList from "../components/GoshoList";
 import Footer from "../components/Footer";
@@ -16,8 +15,6 @@ export default function RSND1() {
       <HomeNavbar />
       <main>
         <BookDescription
-          image={raccoltaNichirenVol1}
-          imageAlt="Raccolta degli scritti di Nichiren Daishonin"
           index={[
             "Prefazione di Daisaku Ikeda all'edizione italiana",
             "Prefazione",

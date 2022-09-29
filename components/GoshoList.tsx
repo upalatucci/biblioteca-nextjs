@@ -2,10 +2,9 @@ import Link from "next/link";
 import * as React from "react";
 import SearchInput from "./SearchInput";
 import Select from "./Select";
-import fuzzy from "fuzzy";
 import { unescape } from "underscore";
-import Pagination, { DEFAULT_ITEMS_PER_PAGE } from "./Pagination";
-import { useRouter } from "next/router";
+import Pagination from "./Pagination";
+import Fuse from "fuse.js";
 
 type GoshoListProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,10 +29,10 @@ const generateRecipients = (jsonData) => {
 };
 
 const alphabeticOrderFunction = (a, b) =>
-  a.original.title > b.original.title ? 1 : -1;
+  a.title > b.title ? 1 : -1;
 
 const chronologicalOrder = (a, b) =>
-  a.original.data > b.original.data ? 1 : -1;
+  a.data > b.data ? 1 : -1;
 
 const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   const recipientOptions = React.useMemo(
@@ -49,17 +48,29 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   );
 
   const goshoFilteredByTitle = React.useMemo(
+<<<<<<< Updated upstream
     () =>
       fuzzy.filter(titleFilter, jsonData, {
         extract: (el: { title: string; destinatario: string; slug: string }) =>
           unescape(el.title)
       }),
+=======
+    () => {
+      if (!titleFilter) return jsonData
+
+      const fuse = new Fuse(jsonData,  { keys: [
+        "title",
+      ]});
+
+      return fuse.search(titleFilter).map(result => result.item as any)
+    },
+>>>>>>> Stashed changes
     [titleFilter, jsonData]
   );
 
   const goshoFilteredByRecipient = recipient
     ? goshoFilteredByTitle.filter(
-        ({ original: gosho }) =>
+        (gosho) =>
           gosho.destinatario === recipientOptions[recipient].label
       )
     : goshoFilteredByTitle;
@@ -113,6 +124,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
         )}
         {goshoOrdered.length > 0 && (
           <ul className="mt-4 divide-y-2 divide-gray-300 divide-dashed text-xl">
+<<<<<<< Updated upstream
             <Pagination
               totalResults={goshoOrdered.length}
               array={goshoOrdered}
@@ -128,6 +140,18 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
                 </li>
               )}
             />
+=======
+            {goshoOrdered.map((post, index) => (
+              <li key={post.slug} className="py-3">
+                <Link href={`/posts/${post.slug}`}>
+                  <a className="flex">
+                    <span className="mr-8 lg:mr-14">{index + 1}.</span>{" "}
+                    <span>{post.title}</span>
+                  </a>
+                </Link>
+              </li>
+            ))}
+>>>>>>> Stashed changes
           </ul>
         )}
       </div>
