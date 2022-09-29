@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import Pagination from "../components/Pagination";
 import Fuse from "fuse.js";
 
+
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
 const fuse = new Fuse(glossario,  { keys: [
   "title",
@@ -26,7 +27,7 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   if (filterText) {
     glossarioFiltrato = fuse.search(filterText).map(result => result.item)
   } else if (lettera) {
-    glossarioFiltrato = glossarioFiltrato.filter((termine) =>
+    glossarioFiltrato = glossario.filter((termine) =>
       termine?.title?.toLowerCase().startsWith(lettera)
     );
   } else {
@@ -39,12 +40,12 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
         totalResults={glossarioFiltrato.length}
         array={glossarioFiltrato}
         renderer={(glossarioRicerca) => (
-          <li className="py-4" key={glossarioRicerca.title}>
-            <span
-              className="font-bold text-lg"
-              dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
-            ></span>
-          </li>
+            <li className="py-4">
+              <span
+                className="font-bold text-lg"
+                dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
+              ></span>
+            </li>          
         )}
       />
     </ul>

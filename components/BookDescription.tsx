@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 export type ChapterWithParagraphs = {
   title: string;
@@ -8,26 +7,13 @@ export type ChapterWithParagraphs = {
 export type IndexType = Array<string | ChapterWithParagraphs>;
 
 type BookDescriptionProps = {
-  image: StaticImageData;
-  imageAlt: string;
   index: IndexType;
 };
 
 const BookDescription: React.FC<BookDescriptionProps> = ({
-  image,
-  imageAlt,
   index,
 }) => (
   <div className="book-description">
-    <div className="book-image">
-      <Image
-        src={image}
-        alt={imageAlt}
-        width={475}
-        height={600}
-        objectFit="fill"
-      />
-    </div>
     <div className="index">
       <h3>Indice</h3>
       <ul>

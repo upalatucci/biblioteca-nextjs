@@ -2,7 +2,6 @@ import Link from "next/link";
 import * as React from "react";
 import SearchInput from "./SearchInput";
 import Select from "./Select";
-import { unescape } from "underscore";
 import Pagination from "./Pagination";
 import Fuse from "fuse.js";
 
@@ -48,13 +47,6 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   );
 
   const goshoFilteredByTitle = React.useMemo(
-<<<<<<< Updated upstream
-    () =>
-      fuzzy.filter(titleFilter, jsonData, {
-        extract: (el: { title: string; destinatario: string; slug: string }) =>
-          unescape(el.title)
-      }),
-=======
     () => {
       if (!titleFilter) return jsonData
 
@@ -64,7 +56,6 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
 
       return fuse.search(titleFilter).map(result => result.item as any)
     },
->>>>>>> Stashed changes
     [titleFilter, jsonData]
   );
 
@@ -124,25 +115,12 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
         )}
         {goshoOrdered.length > 0 && (
           <ul className="mt-4 divide-y-2 divide-gray-300 divide-dashed text-xl">
-<<<<<<< Updated upstream
             <Pagination
               totalResults={goshoOrdered.length}
               array={goshoOrdered}
               anchorHash="gosho-list"
-              renderer={({ original: post }, index) => (
+              renderer={(post, index) => (
                 <li key={post.slug} className="py-3">
-                  <Link href={`/posts/${post.slug}`}>
-                    <a className="flex">
-                      <span className="mr-8 lg:mr-14">{index + 1}.</span>{" "}
-                      <span>{post.title}</span>
-                    </a>
-                  </Link>
-                </li>
-              )}
-            />
-=======
-            {goshoOrdered.map((post, index) => (
-              <li key={post.slug} className="py-3">
                 <Link href={`/posts/${post.slug}`}>
                   <a className="flex">
                     <span className="mr-8 lg:mr-14">{index + 1}.</span>{" "}
@@ -150,8 +128,8 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
                   </a>
                 </Link>
               </li>
-            ))}
->>>>>>> Stashed changes
+              )}
+            />
           </ul>
         )}
       </div>
