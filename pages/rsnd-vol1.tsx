@@ -7,13 +7,13 @@ import { useEffect, useState } from "react";
 import GoshoListSkeleton from "@components/GoshoListSkeleton";
 
 export default function RSND1() {
-  const [jsonData, setJSONData ] = useState<GoshoType[]>([])
+  const [jsonData, setJSONData] = useState<GoshoType[]>([]);
 
   useEffect(() => {
-    import("@books/rsnd1.json").then(goshoData => {
-      setJSONData(goshoData.default)
-    })
-  }, [])
+    import("@books/rsnd1.json").then((goshoData) => {
+      setJSONData(goshoData.default);
+    });
+  }, []);
 
   return (
     <>
@@ -50,11 +50,15 @@ export default function RSND1() {
               "I. Titoli dei capitoli del Sutra del Loro e loro forme abbreviate",
               "L. Nomi delle scuole buddiste",
               "M. Eventi nella vita di Nichiren Daishonin",
-              "N. Luoghi correlati a Nichiren Daishonin"
-            ]
+              "N. Luoghi correlati a Nichiren Daishonin",
+            ],
           }}
         />
-        {jsonData.length > 0 ? <GoshoList jsonData={jsonData} /> : <GoshoListSkeleton />}
+        {jsonData.length > 0 ? (
+          <GoshoList jsonData={jsonData} />
+        ) : (
+          <GoshoListSkeleton />
+        )}
       </main>
       <Footer />
     </>

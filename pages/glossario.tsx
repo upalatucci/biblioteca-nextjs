@@ -1,81 +1,16 @@
 import Head from "next/head";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import SearchInput from "@components/SearchInput";
 import classNames from "classnames";
 import Footer from "@components/Footer";
-import Pagination from "@components/Pagination";
-import Fuse from "fuse.js";
-import DictionarySkeleton from "@components/DictionarySkeleton";
-
+import DictionarySearch from "@components/DictionarySearch";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
-type RicercaGlossarioProps = {
-  filterText: string;
-  lettera: string;
-};
-
-type DictionaryItem = {
-  title: string;
-  content: string;
-}
-
-const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
-  lettera,
-  filterText
-}) => {
-  const [glossario, setGlossario] = useState<DictionaryItem[]>()
-  const fuseRef = useRef<Fuse<DictionaryItem>>()
-
-  useEffect(() => {
-    import("../books/glossario.json").then(fetchedDictionary => {
-      const fuse = new Fuse(fetchedDictionary.default,  { keys: [
-        "title",
-      ]});
-  
-      fuseRef.current = fuse
-      setGlossario(fetchedDictionary.default)
-    })
-  }, [])
-
-  if (!glossario) {
-    return <DictionarySkeleton />
-  }
-
-  let glossarioFiltrato
-
-
-  if (filterText) {
-    glossarioFiltrato = fuseRef.current.search(filterText).map(result => result.item)
-  } else if (lettera) {
-    glossarioFiltrato = glossario.filter((termine) =>
-      termine?.title?.charAt(0).toUpperCase().startsWith(lettera)
-    );
-  } else {
-    glossarioFiltrato = glossario
-  }
-
-  return (
-    <ul className="divide-y-2 divide-gray-200 divide-dashed mt-4">
-      <Pagination
-        totalResults={glossarioFiltrato.length}
-        array={glossarioFiltrato}
-        renderer={(glossarioRicerca) => (
-            <li className="py-4" key={glossarioRicerca.title}>
-              <span
-                className="font-bold text-lg"
-                dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
-              ></span>
-            </li>          
-        )}
-      />
-    </ul>
-  );
-};
 
 export default function Glossario() {
-  const [letteraSelezionata, setLetteraSelezionata] = useState("");
-  const [ricercaTesto, setRicercaTesto] = useState("");
+  const [selectedLetter, setSelectedLetter] = useState("");
+  const [searchText, setSearchText] = useState("");
   return (
     <>
       <Head>
@@ -114,8 +49,8 @@ export default function Glossario() {
                       Cerca un termine
                     </span>
                     <SearchInput
-                      onChange={(e) => setRicercaTesto(e.currentTarget.value)}
-                      value={ricercaTesto}
+                      onChange={(e) => setSearchText(e.currentTarget.value)}
+                      value={searchText}
                       placeholder="Inserisci la parola che stai cercando"
                     />
                   </label>
@@ -129,14 +64,13 @@ export default function Glossario() {
                     className={classNames(
                       "h-10 w-10 rounded-2xl border-secondary border",
                       {
-                        "bg-secondary text-white":
-                          letteraSelezionata === lettera
+                        "bg-secondary text-white": selectedLetter === lettera,
                       }
                     )}
                     onClick={() =>
-                      lettera === letteraSelezionata
-                        ? setLetteraSelezionata("")
-                        : setLetteraSelezionata(lettera)
+                      lettera === selectedLetter
+                        ? setSelectedLetter("")
+                        : setSelectedLetter(lettera)
                     }
                   >
                     {lettera}
@@ -146,10 +80,7 @@ export default function Glossario() {
             </form>
 
             <hr className="border border-secondary mt-6" />
-            <RicercaGlossario
-              lettera={letteraSelezionata}
-              filterText={ricercaTesto}
-            />
+            <DictionarySearch letter={selectedLetter} filterText={searchText} />
           </div>
         </section>
       </main>
