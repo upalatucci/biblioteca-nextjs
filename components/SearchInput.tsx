@@ -13,7 +13,7 @@ const SearchInput: FC<SearchInputProps> = ({
 }) => (
   <input
     type="search"
-    className="border border-secondary w-full max-w-lg px-4 py-1 rounded-2xl bg-defaultBg"
+    className="border border-secondary w-full max-w-lg px-4 py-1 rounded-2xl bg-defaultBg placeholder:text-secondary"
     placeholder={placeholder || "Inserisci la parola o frase..."}
     value={value || ""}
     onChange={onChange}

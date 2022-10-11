@@ -88,8 +88,8 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
     <section className="bg-white" id="gosho-list">
       <div className="container mx-auto px-4 py-8 min-h-[50vh]">
         <h2 className="text-4xl md:text-5xl text-secondary mb-8">Scritti</h2>
-        <form className="border-b-2 border-secondary pb-2 flex items-center justify-between flex-wrap">
-          <label className="mb-4">
+        <form className="border-b-2 border-secondary flex items-start flex-col md:flex-row md:items-center justify-between flex-wrap gap-4 pb-4">
+          <label className="flex-1">
             <span className="mr-4 font-bold">Titolo</span>
             <SearchInput
               value={titleFilter}
@@ -97,7 +97,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
               placeholder="Inserisci il titolo del Gosho che stai cercando"
             />
           </label>
-          <label className="mb-4 flex items-center">
+          <label className="flex items-center flex-wrap">
             <span className="mr-4">Destinatario</span>
             <Select
               onChange={setRecipient}
@@ -107,7 +107,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
               className="w-64"
             />
           </label>
-          <label className="mb-4">
+          <label className="">
             <span className="mr-4">Ordine alfabetico</span>
             <input
               type="checkbox"
