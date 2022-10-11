@@ -1,10 +1,9 @@
 import Link from "next/link";
-import React, {useEffect, useRef, useState} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import SearchInput from "./SearchInput";
 import Select from "./Select";
 import Pagination from "./Pagination";
 import Fuse from "fuse.js";
-
 
 const generateRecipients = (jsonData: GoshoType[]) => {
   const recipientOptions = [{ value: 0, label: "Tutti" }];
@@ -16,7 +15,7 @@ const generateRecipients = (jsonData: GoshoType[]) => {
     if (recipient)
       recipientOptions.push({
         value: recipientOptions.length,
-        label: recipient
+        label: recipient,
       });
   });
 
@@ -35,53 +34,55 @@ export type GoshoType = {
   destinatario: string;
   luogo: string;
   data: string;
-}
-
+};
 
 type GoshoListProps = {
   jsonData: GoshoType[];
 };
 
 const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
-  const fuseRef = useRef<Fuse<GoshoType>>()
-
-  useEffect(() => {
-    fuseRef.current = new Fuse(jsonData, { keys: [
-      "title",
-    ]});
-  }, [jsonData])
-
   const recipientOptions = React.useMemo(
     () => generateRecipients(jsonData),
     [jsonData]
   );
 
+  const fuseRef = useRef<Fuse<GoshoType>>();
   const [alphabeticOrder, setAlphabeticOrder] = React.useState(false);
-
   const [titleFilter, setTitleFilter] = React.useState("");
   const [recipient, setRecipient] = React.useState<string | number>(
     recipientOptions[0].value
   );
 
-  const goshoFilteredByTitle = React.useMemo(
-    () => {
-      if (!titleFilter || !fuseRef.current) return jsonData
+  useEffect(() => {
+    fuseRef.current = new Fuse(jsonData, { keys: ["title"] });
+  }, [jsonData]);
 
-      return fuseRef.current?.search(titleFilter).map(result => result.item)
-    },
-    [titleFilter, jsonData]
-  );
+  const clearFilters = useCallback(() => {
+    setTitleFilter("");
+    setRecipient(recipientOptions[0].value);
+  }, []);
+
+  const goshoFilteredByTitle = React.useMemo(() => {
+    if (!titleFilter || !fuseRef.current) return jsonData;
+
+    return fuseRef.current?.search(titleFilter).map((result) => result.item);
+  }, [titleFilter, jsonData]);
 
   const goshoFilteredByRecipient = recipient
     ? goshoFilteredByTitle.filter(
-        (gosho) =>
-          gosho.destinatario === recipientOptions[recipient].label
+        (gosho) => gosho.destinatario === recipientOptions[recipient].label
       )
     : goshoFilteredByTitle;
 
-  const goshoOrdered  = goshoFilteredByRecipient.sort(
-    alphabeticOrder ? alphabeticOrderFunction : chronologicalOrder
-  );
+  let goshoOrdered;
+
+  if (titleFilter && !alphabeticOrder) {
+    goshoOrdered = goshoFilteredByRecipient;
+  } else {
+    goshoOrdered = goshoFilteredByRecipient.sort(
+      alphabeticOrder ? alphabeticOrderFunction : chronologicalOrder
+    );
+  }
 
   return (
     <section className="bg-white" id="gosho-list">
@@ -103,7 +104,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
               value={recipient}
               name="destinatario"
               options={recipientOptions}
-              className='w-64'
+              className="w-64"
             />
           </label>
           <label className="mb-4">
@@ -117,8 +118,13 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
           </label>
         </form>
         {goshoOrdered.length === 0 && (
-          <div className="mt-4 text-3xl">
-            Nessun risultato per questo tipo di ricerca
+          <div>
+            <div className="mt-4 mb-2 text-3xl">
+              Nessun risultato per questo tipo di ricerca
+            </div>
+            <button className="font-sans text-primary" onClick={clearFilters}>
+              Rimuovi filtri
+            </button>
           </div>
         )}
         {goshoOrdered.length > 0 && (
@@ -129,13 +135,13 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
               anchorHash="gosho-list"
               renderer={(post, index) => (
                 <li key={post.slug} className="py-3">
-                <Link href={`/posts/${post.slug}`}>
-                  <a className="flex hover:text-primary">
-                    <span className="mr-8 lg:mr-14">{index + 1}.</span>{" "}
-                    <span>{post.title}</span>
-                  </a>
-                </Link>
-              </li>
+                  <Link href={`/posts/${post.slug}`}>
+                    <a className="flex hover:text-primary">
+                      <span className="mr-8 lg:mr-14">{index + 1}.</span>{" "}
+                      <span>{post.title}</span>
+                    </a>
+                  </Link>
+                </li>
               )}
             />
           </ul>

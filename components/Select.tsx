@@ -48,7 +48,13 @@ const Option: React.FC<OptionProps> = ({
   );
 };
 
-const Select: React.FC<SelectProps> = ({ value, onChange, name, options, className }) => {
+const Select: React.FC<SelectProps> = ({
+  value,
+  onChange,
+  name,
+  options,
+  className,
+}) => {
   const [isOpen, setOpen] = React.useState(false);
 
   const indexSelectedOption = React.useMemo(
@@ -108,8 +114,13 @@ const Select: React.FC<SelectProps> = ({ value, onChange, name, options, classNa
   const otherOptions = options.filter((option) => option.value !== value);
 
   return (
-    <div className={classNames(className, "select-wrapper")}>
-      <select className="hidden" defaultValue={value} name={name} aria-label={options[indexSelectedOption]?.label}></select>
+    <div className={classNames("select-wrapper", className)}>
+      <select
+        className="hidden"
+        defaultValue={value}
+        name={name}
+        aria-label={options[indexSelectedOption]?.label}
+      ></select>
       <div className="select-container">
         <button
           type="button"
