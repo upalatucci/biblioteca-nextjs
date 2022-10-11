@@ -11,6 +11,7 @@ async function getGlossario() {
     );
     const posts = await postsResponse.json();
 
+    console.log(posts);
     totalPosts = [...totalPosts, ...posts];
 
     const totalPages = postsResponse.headers.get("x-wp-totalpages");
@@ -28,7 +29,7 @@ getGlossario().then((posts) => {
   const json = posts
     .map((post) => ({
       title: post.title.rendered,
-      content: post.content.rendered
+      content: post.content.rendered,
     }))
     .sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
 

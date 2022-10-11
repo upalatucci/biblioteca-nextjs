@@ -25,7 +25,7 @@ const mapElasticSearchSourcesSlug = (sources: BOOKS[]) => {
   return sources.reduce((elasticSources, source) => {
     switch (source) {
       case BOOKS.RSND:
-        elasticSources.push("post");
+        elasticSources.push("rsnd");
         break;
       case BOOKS.SUTRA:
         elasticSources.push("sdl");
@@ -67,9 +67,9 @@ export const simpleSearchQuery = (
         filter: [
           {
             query_string: {
-                default_field: "post_type",
-                query: querySources.join(' OR ')
-            }
+              default_field: "post_type",
+              query: querySources.join(" OR "),
+            },
           },
         ],
       },
@@ -114,9 +114,9 @@ const searchQuery = (
         filter: [
           {
             query_string: {
-                default_field: "post_type",
-                query: querySources.join(' OR ')
-            }
+              default_field: "post_type",
+              query: querySources.join(" OR "),
+            },
           },
         ],
       },

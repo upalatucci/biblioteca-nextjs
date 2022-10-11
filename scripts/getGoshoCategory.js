@@ -7,7 +7,7 @@ async function getPosts() {
 
   while (true) {
     const postsResponse = await fetch(
-      `https://biblioteca.sgi-italia.org/wp-json/wp/v2/posts?per_page=100&page=${page}`
+      `https://biblioteca.sgi-italia.org/wp-json/wp/v2/rsnd?per_page=100&page=${page}`
     );
     const posts = await postsResponse.json();
 
@@ -17,23 +17,19 @@ async function getPosts() {
 
     if (!totalPages || (totalPages && parseInt(totalPages, 10) === page)) {
       return totalPosts;
-    } 
-      page++;
-      console.log("Total posts fetched", totalPosts.length);
-    
+    }
+    page++;
+    console.log("Total posts fetched", totalPosts.length);
   }
 }
 
 getPosts().then((posts) => {
-  const postsCategory = posts.filter((post) => post.categories.includes(1));
-
-  console.log(postsCategory[0]);
-  const json = postsCategory.map((post) => ({
+  const json = posts.map((post) => ({
     title: post.title.rendered,
     slug: post.slug,
     destinatario: post.acf.acf_destinatario,
     luogo: post.acf.acf_luogo,
-    data: post.acf.acf_data
+    data: post.acf.acf_data,
   }));
 
   fs.writeFile("./books/rsnd1.json", JSON.stringify(json), (err) =>
