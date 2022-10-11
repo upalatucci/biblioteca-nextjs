@@ -18,7 +18,7 @@ const NavbarItem: React.FC<NavbarItemProps> = ({
     <a>
       <span className="flex flex-col">
         {upText && <span className="font-sm">{upText}</span>}
-        <span className="font-lg font-bold font-sans">{title}</span>
+        <span className="font-lg font-bold font-sans hover:text-primary">{title}</span>
         {downText && <span className="font-sm font-sans text-primary">{downText}</span>}
       </span>
     </a>

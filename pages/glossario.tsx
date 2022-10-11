@@ -1,46 +1,68 @@
 import Head from "next/head";
 import HomeNavbar from "../components/Navbar/HomeNavbar";
-import { useState } from "react";
-import glossario from "../books/glossario.json";
+import { useEffect, useRef, useState } from "react";
 import SearchInput from "../components/SearchInput";
 import classNames from "classnames";
 import Footer from "../components/Footer";
 import Pagination from "../components/Pagination";
 import Fuse from "fuse.js";
+import DictionarySkeleton from "../components/DictionarySkeleton";
 
 
-const alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
-const fuse = new Fuse(glossario,  { keys: [
-  "title",
-]});
-
+const alfabeto = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 type RicercaGlossarioProps = {
   filterText: string;
   lettera: string;
 };
+
+type DictionaryItem = {
+  title: string;
+  slug: string;
+  content: string;
+}
+
 const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   lettera,
   filterText
 }) => {
-  let glossarioFiltrato;
+  const [glossario, setGlossario] = useState<DictionaryItem[]>()
+  const fuseRef = useRef<Fuse<{ title: string; slug: string; content: string; }>>()
+
+  useEffect(() => {
+    import("../books/glossario.json").then(fetchedDictionary => {
+      const fuse = new Fuse(fetchedDictionary.default,  { keys: [
+        "title",
+      ]});
+  
+      fuseRef.current = fuse
+      setGlossario(fetchedDictionary.default)
+    })
+  }, [])
+
+  if (!glossario) {
+    return <DictionarySkeleton />
+  }
+
+  let glossarioFiltrato
+
 
   if (filterText) {
-    glossarioFiltrato = fuse.search(filterText).map(result => result.item)
+    glossarioFiltrato = fuseRef.current.search(filterText).map(result => result.item)
   } else if (lettera) {
     glossarioFiltrato = glossario.filter((termine) =>
-      termine?.title?.toLowerCase().startsWith(lettera)
+      termine?.title?.charAt(0).toUpperCase().startsWith(lettera)
     );
   } else {
     glossarioFiltrato = glossario
   }
 
   return (
-    <ul className="divide-y-2 divide-gray-200 divide-dashed">
+    <ul className="divide-y-2 divide-gray-200 divide-dashed mt-4">
       <Pagination
         totalResults={glossarioFiltrato.length}
         array={glossarioFiltrato}
         renderer={(glossarioRicerca) => (
-            <li className="py-4">
+            <li className="py-4" key={glossarioRicerca.title}>
               <span
                 className="font-bold text-lg"
                 dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
@@ -68,7 +90,7 @@ export default function Glossario() {
             <h2 className="text-4xl md:text-5xl px-4 font-bold mb-8">
               Glossario
             </h2>
-            <form className="flex flex-col flex-wrap">
+            <form className="flex flex-col flex-wrap font-sans">
               <div className="mb-4 flex items-stretch lg:items-center justify-between flex-wrap flex-col xl:flex-row">
                 <label className="bg-defaultBg shadow-md px-8 py-4 rounded-xl mb-6 md:flex w-full xl:w-auto">
                   <span className="text-primary font-bold text-xl">
@@ -100,7 +122,7 @@ export default function Glossario() {
                   </label>
                 </div>
               </div>
-              <div className="flex flex-wrap items-center justify-center gap-1">
+              <div className="flex flex-wrap items-center justify-center xl:justify-between gap-1">
                 {alfabeto.map((lettera) => (
                   <button
                     type="button"
@@ -124,6 +146,7 @@ export default function Glossario() {
               </div>
             </form>
 
+            <hr className="border border-secondary mt-6" />
             <RicercaGlossario
               lettera={letteraSelezionata}
               filterText={ricercaTesto}
