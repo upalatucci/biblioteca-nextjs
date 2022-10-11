@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FC } from "react";
-import { PostResultType } from "../utils/elasticSearchUtils";
+import { PostResultType } from "@utils/elasticSearchUtils";
 
 type PostProps = {
   post: PostResultType;

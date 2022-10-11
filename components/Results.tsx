@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { PostResultType } from "../utils/elasticSearchUtils";
+import { PostResultType } from "@utils/elasticSearchUtils";
 import Pagination from "./Pagination";
 import PostResults from "./PostResult";
 

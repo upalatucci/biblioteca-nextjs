@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { FC, useCallback, useReducer } from "react";
-import { BOOKS, FIELDS, SEARCH_TYPE } from "../../utils/constants";
+import { BOOKS, FIELDS, SEARCH_TYPE } from "@utils/constants";
 import SearchInput from "../SearchInput";
 import Select from "../Select";
 import {

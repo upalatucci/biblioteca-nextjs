@@ -109,7 +109,7 @@ const Select: React.FC<SelectProps> = ({ value, onChange, name, options, classNa
 
   return (
     <div className={classNames(className, "select-wrapper")}>
-      <select className="hidden" value={value} name={name} aria-label={options[indexSelectedOption]?.label}></select>
+      <select className="hidden" defaultValue={value} name={name} aria-label={options[indexSelectedOption]?.label}></select>
       <div className="select-container">
         <button
           type="button"

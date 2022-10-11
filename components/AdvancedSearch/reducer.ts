@@ -1,5 +1,5 @@
 import { parse } from "querystring";
-import { BOOKS, FIELDS, SEARCH_TYPE } from "../../utils/constants";
+import { BOOKS, FIELDS, SEARCH_TYPE } from "@utils/constants";
 import { DATES } from "./constants";
 
 export enum ACTION_TYPES {

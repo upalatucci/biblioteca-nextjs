@@ -1,16 +1,12 @@
 import Link from "next/link";
-import * as React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import SearchInput from "./SearchInput";
 import Select from "./Select";
 import Pagination from "./Pagination";
 import Fuse from "fuse.js";
 
-type GoshoListProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  jsonData: any;
-};
 
-const generateRecipients = (jsonData) => {
+const generateRecipients = (jsonData: GoshoType[]) => {
   const recipientOptions = [{ value: 0, label: "Tutti" }];
   const allRecipients = new Set<string>(
     jsonData.map((post) => post.destinatario)
@@ -27,13 +23,34 @@ const generateRecipients = (jsonData) => {
   return recipientOptions;
 };
 
-const alphabeticOrderFunction = (a, b) =>
+const alphabeticOrderFunction = (a: GoshoType, b: GoshoType) =>
   a.title > b.title ? 1 : -1;
 
-const chronologicalOrder = (a, b) =>
+const chronologicalOrder = (a: GoshoType, b: GoshoType) =>
   a.data > b.data ? 1 : -1;
 
+export type GoshoType = {
+  title: string;
+  slug: string;
+  destinatario: string;
+  luogo: string;
+  data: string;
+}
+
+
+type GoshoListProps = {
+  jsonData: GoshoType[];
+};
+
 const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
+  const fuseRef = useRef<Fuse<GoshoType>>()
+
+  useEffect(() => {
+    fuseRef.current = new Fuse(jsonData, { keys: [
+      "title",
+    ]});
+  }, [jsonData])
+
   const recipientOptions = React.useMemo(
     () => generateRecipients(jsonData),
     [jsonData]
@@ -48,13 +65,9 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
 
   const goshoFilteredByTitle = React.useMemo(
     () => {
-      if (!titleFilter) return jsonData
+      if (!titleFilter || !fuseRef.current) return jsonData
 
-      const fuse = new Fuse(jsonData,  { keys: [
-        "title",
-      ]});
-
-      return fuse.search(titleFilter).map(result => result.item as any)
+      return fuseRef.current?.search(titleFilter).map(result => result.item)
     },
     [titleFilter, jsonData]
   );
@@ -66,15 +79,9 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
       )
     : goshoFilteredByTitle;
 
-  let goshoOrdered;
-
-  if (titleFilter && !alphabeticOrder) {
-    goshoOrdered = goshoFilteredByRecipient;
-  } else {
-    goshoOrdered = goshoFilteredByRecipient.sort(
-      alphabeticOrder ? alphabeticOrderFunction : chronologicalOrder
-    );
-  }
+  const goshoOrdered  = goshoFilteredByRecipient.sort(
+    alphabeticOrder ? alphabeticOrderFunction : chronologicalOrder
+  );
 
   return (
     <section className="bg-white" id="gosho-list">
@@ -82,7 +89,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
         <h2 className="text-4xl md:text-5xl text-secondary mb-8">Scritti</h2>
         <form className="border-b-2 border-secondary pb-2 flex items-center justify-between flex-wrap">
           <label className="mb-4">
-            <span className="mr-4">Titolo</span>
+            <span className="mr-4 font-bold">Titolo</span>
             <SearchInput
               value={titleFilter}
               onChange={(e) => setTitleFilter(e.target.value)}
@@ -96,6 +103,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
               value={recipient}
               name="destinatario"
               options={recipientOptions}
+              className='w-64'
             />
           </label>
           <label className="mb-4">
@@ -122,7 +130,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
               renderer={(post, index) => (
                 <li key={post.slug} className="py-3">
                 <Link href={`/posts/${post.slug}`}>
-                  <a className="flex">
+                  <a className="flex hover:text-primary">
                     <span className="mr-8 lg:mr-14">{index + 1}.</span>{" "}
                     <span>{post.title}</span>
                   </a>

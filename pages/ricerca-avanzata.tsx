@@ -1,15 +1,15 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
-import AdvancedSearch from "../components/AdvancedSearch/AdvancedSearch";
-import Footer from "../components/Footer";
-import ResultsLoading from "../components/ResultsLoading";
-import HomeNavbar from "../components/Navbar/HomeNavbar";
-import Results from "../components/Results";
+import AdvancedSearch from "@components/AdvancedSearch/AdvancedSearch";
+import Footer from "@components/Footer";
+import ResultsLoading from "@components/ResultsLoading";
+import HomeNavbar from "@components/Navbar/HomeNavbar";
+import Results from "@components/Results";
 import {
   mapElasticResultToPost,
   PostResultType
-} from "../utils/elasticSearchUtils";
+} from "@utils/elasticSearchUtils";
 
 export default function Ricerca() {
   const [loading, setLoading] = useState(false);

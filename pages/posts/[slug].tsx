@@ -1,9 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import Footer from "../../components/Footer";
-import HomeNavbar from "../../components/Navbar/HomeNavbar";
-import ParagraphWithNotes from "../../components/ParagraphWithNotes";
-import PostMenu from "../../components/PostMenu";
+import Footer from "@components/Footer";
+import HomeNavbar from "@components/Navbar/HomeNavbar";
+import ParagraphWithNotes from "@components/ParagraphWithNotes";
+import PostMenu from "@components/PostMenu";
 
 import { getPost, getSlugs } from "../../lib/wordpress";
 
@@ -13,7 +13,7 @@ const extractNotes = (notesHTML: string): string[] => {
   );
   const splitRegex = new RegExp("</div>");
   return notesHTML
-    .split(splitRegex)
+    ?.split(splitRegex)
     .filter((note) => note)
     .map((note) => note.replace(replaceRegex, ""));
 };
@@ -47,27 +47,27 @@ export default function PostPage({ post }) {
                 <ParagraphWithNotes content={p} notes={notesArray} key={p} />
               ))}
 
-              <div id="cenni-storici">
+              { post?.acf?.acf_cenni_storici && <div id="cenni-storici">
                 <h3 className="text-3xl md:text-4xl font-serif text-secondary font-bold mt-4 mb-6">
                   Cenni Storici
                 </h3>
                 <div
                   dangerouslySetInnerHTML={{
                     __html: post.acf.acf_cenni_storici
-                      .replace("CENNI STORICI – ", "")
+                      ?.replace("CENNI STORICI – ", "")
                       .replace(/\n/g, "<br>")
                   }}
                 ></div>
-              </div>
+              </div>}
 
-              <div id="note">
+              {post?.acf?.acf_notes && <div id="note">
                 <h3 className="text-3xl md:text-4xl font-serif text-secondary font-bold mt-4 mb-6">
                   Note
                 </h3>
                 <div
                   dangerouslySetInnerHTML={{ __html: post.acf.acf_notes }}
                 ></div>
-              </div>
+              </div>}
             </div>
             <PostMenu currentPostTitle={post.title.rendered} />
           </div>

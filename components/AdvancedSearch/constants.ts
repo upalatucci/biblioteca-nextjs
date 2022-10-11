@@ -1,4 +1,4 @@
-import { SEARCH_TYPE } from "../../utils/constants";
+import { SEARCH_TYPE } from "@utils/constants";
 import { OptionType } from "../Select";
 
 export const mapSearchType: Record<SEARCH_TYPE, string> = {

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { BOOKS } from "../../utils/constants";
-import { client, simpleSearchQuery } from "../../utils/searchQuery";
+import { BOOKS } from "@utils/constants";
+import { client, simpleSearchQuery } from "@utils/searchQuery";
 
 export default async function handler(
   req: NextApiRequest,

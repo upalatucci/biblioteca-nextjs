@@ -1,9 +1,9 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import ImageWithTextOverlay from "../components/ImageWithTextOverlay";
+import ImageWithTextOverlay from "@components/ImageWithTextOverlay";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import HomeNavbar from "../components/Navbar/HomeNavbar";
+import HomeNavbar from "@components/Navbar/HomeNavbar";
 
 import raccoltaVol1 from "../public/raccolta-nichiren-vol1.jpeg";
 import raccoltaVol2 from "../public/raccolta-nichiren-vol2.jpeg";
@@ -11,9 +11,9 @@ import sutraDelLoto from "../public/sutra-del-loto.jpeg";
 import sfogliaGlossario from "../public/sfoglia.jpeg";
 import ascolta from "../public/ascolta.jpeg";
 import Link from "next/link";
-import SearchInput from "../components/SearchInput";
+import SearchInput from "@components/SearchInput";
 import { useRouter } from "next/router";
-import Footer from "../components/Footer";
+import Footer from "@components/Footer";
 
 const responsive = {
   0: { items: 1.3 },

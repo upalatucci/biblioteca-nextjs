@@ -1,12 +1,12 @@
 import Head from "next/head";
-import HomeNavbar from "../components/Navbar/HomeNavbar";
+import HomeNavbar from "@components/Navbar/HomeNavbar";
 import { useEffect, useRef, useState } from "react";
-import SearchInput from "../components/SearchInput";
+import SearchInput from "@components/SearchInput";
 import classNames from "classnames";
-import Footer from "../components/Footer";
-import Pagination from "../components/Pagination";
+import Footer from "@components/Footer";
+import Pagination from "@components/Pagination";
 import Fuse from "fuse.js";
-import DictionarySkeleton from "../components/DictionarySkeleton";
+import DictionarySkeleton from "@components/DictionarySkeleton";
 
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
@@ -17,7 +17,6 @@ type RicercaGlossarioProps = {
 
 type DictionaryItem = {
   title: string;
-  slug: string;
   content: string;
 }
 
@@ -26,7 +25,7 @@ const RicercaGlossario: React.FC<RicercaGlossarioProps> = ({
   filterText
 }) => {
   const [glossario, setGlossario] = useState<DictionaryItem[]>()
-  const fuseRef = useRef<Fuse<{ title: string; slug: string; content: string; }>>()
+  const fuseRef = useRef<Fuse<DictionaryItem>>()
 
   useEffect(() => {
     import("../books/glossario.json").then(fetchedDictionary => {
