@@ -43,13 +43,13 @@ const ParagraphWithNotes: React.FC<ParagraphWithNotesProps> = ({
   const onNoteClick = (e) => {
     const idNote = Number(e.target.id.replace("ref-", ""));
 
-    if (idNote !== NaN && idNote > 0) {
-      const noteIndex = idNote - 1;
+    if (!Number.isNaN(idNote) && idNote > 0) {
+      const index = idNote - 1;
 
       e.preventDefault();
 
-      if (notesToShow.find((n) => n === noteIndex) === undefined) {
-        setNotesToShow([...notesToShow, noteIndex]);
+      if (notesToShow.find((n) => n === index) === undefined && notes?.[index]) {
+        setNotesToShow([...notesToShow, index]);
         notesRef.current?.focus();
       }
     }
