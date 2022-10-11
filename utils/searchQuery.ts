@@ -105,8 +105,6 @@ const searchQuery = (
 
   const querySources = mapElasticSearchSourcesSlug(sources);
 
-  console.log(queryFields, querySources, querySources.join(" OR "));
-
   const elasticQuery: SearchRequest = {
     min_score: 0.5,
     query: {
