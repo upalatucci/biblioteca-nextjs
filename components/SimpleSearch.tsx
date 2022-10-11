@@ -9,9 +9,12 @@ const SimpleSearch: FC = () => {
   const router = useRouter();
   const [searchText, setSearchText] = useState(router.query.q as string);
 
-  const initialSources: BOOKS[] = Array.isArray(router.query.sources)
-    ? (router.query.sources as BOOKS[])
-    : [(router.query.sources as BOOKS) || BOOKS.RSND];
+  const hasQuerySources = Boolean(router.query.sources)
+  const querySources = Array.isArray(router.query.sources)
+  ? (router.query.sources as BOOKS[])
+  : [(router.query.sources as BOOKS)]
+
+  const initialSources: BOOKS[] = hasQuerySources ? querySources : [BOOKS.RSND, BOOKS.SUTRA, BOOKS.GLOSSARIO];
 
   const [searchResouces, setSearchResouces] = useState(initialSources);
 

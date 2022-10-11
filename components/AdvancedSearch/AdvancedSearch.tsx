@@ -120,7 +120,7 @@ const AdvancedSearch: FC = () => {
           </h2>
 
           <div className="bg-defaultBg rounded-xl shadow-md mb-8 mx-auto py-8 px-0 sm:px-8 font-sans">
-            <div className="flex items-center justify-center w-full mb-8 px-4 sm:px-0">
+            <div className="flex flex-col md:flex-row items-center justify-center w-full mb-8 px-4 sm:px-0">
               <Select
                 onChange={onChangeSelect(ACTION_TYPES.CHANGE_SEARCH_TYPE)}
                 value={searchType}
@@ -129,7 +129,7 @@ const AdvancedSearch: FC = () => {
                   value: type,
                   label: mapSearchType[type]
                 }))}
-                className="w-80 mr-4"
+                className="w-80 mb-4 md:mb-0 md:mr-4"
               />
               <SearchInput value={searchText} onChange={onSearchTextChange} />
             </div>
@@ -229,6 +229,7 @@ const AdvancedSearch: FC = () => {
                       value={recipient || RECIPIENTS_OPTIONS[0].value}
                       name="destinatario"
                       options={RECIPIENTS_OPTIONS}
+                      className='w-64'
                     />
                   </label>
                 </span>
@@ -241,6 +242,7 @@ const AdvancedSearch: FC = () => {
                       value={place || PLACES_OPTIONS[0].value}
                       name="luogo"
                       options={PLACES_OPTIONS}
+                      className='w-64'
                     />
                   </label>
                 </span>
@@ -253,7 +255,7 @@ const AdvancedSearch: FC = () => {
                       value={from}
                       name="da"
                       options={DATES}
-                      className="mr-4"
+                      className="mr-4 w-16"
                     />
                     -
                     <Select
@@ -261,7 +263,7 @@ const AdvancedSearch: FC = () => {
                       value={to}
                       name="a"
                       options={DATES}
-                      className="ml-4"
+                      className="ml-4 w-16"
                     />
                   </label>
                 </span>

@@ -4,7 +4,7 @@ div.select-wrapper {
   position: relative;
 
   div.select-container {
-    width: 100px;
+    width: 100%;
   }
 
   button {
@@ -18,9 +18,9 @@ div.select-wrapper {
     text-align: left;
 
     &.expanded {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        border-bottom: 1px dashed var(--color-gray);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: 1px dashed var(--color-gray);
     }
   }
 
@@ -59,7 +59,7 @@ div.select-wrapper {
     padding: 6px 10px;
 
     &:not(:last-child) {
-        border-bottom: 1px dashed var(--color-gray);
+      border-bottom: 1px dashed var(--color-gray);
     }
   }
 
