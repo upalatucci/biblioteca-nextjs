@@ -18,7 +18,7 @@ export const client = new Client({
 const mapElasticSearchFields = {
   [FIELDS.CONTENT]: "post_content",
   [FIELDS.CENNI_STORICI]: "meta.acf_cenni_storici.value",
-  [FIELDS.NOTE]: "meta.acf_cenni_notes.value",
+  [FIELDS.NOTE]: "meta.acf_note.value",
 };
 
 const mapElasticSearchSourcesSlug = (sources: BOOKS[]) => {
@@ -105,6 +105,8 @@ const searchQuery = (
 
   const querySources = mapElasticSearchSourcesSlug(sources);
 
+  console.log(queryFields, querySources, querySources.join(" OR "));
+
   const elasticQuery: SearchRequest = {
     min_score: 0.5,
     query: {
@@ -142,13 +144,13 @@ const searchQuery = (
     });
   }
 
-  if (from && to) {
-    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
-      range: {
-        "meta.acf_data.value": { gte: from, lte: to },
-      },
-    });
-  }
+  // if (from && to) {
+  //   (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
+  //     range: {
+  //       "meta.acf_data.value": { gte: from, lte: to },
+  //     },
+  //   });
+  // }
 
   if (place) {
     (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({

@@ -17,16 +17,12 @@ export default async function handler(
       ? (req.query.sources as BOOKS[])
       : [(req.query.sources as BOOKS) || BOOKS.RSND];
 
-      
     const pageQuery = parseInt(
-      Array.isArray(req?.query?.page)
-        ? req?.query?.page[0]
-        : req?.query?.page
+      Array.isArray(req?.query?.page) ? req?.query?.page[0] : req?.query?.page
     );
 
     const page = pageQuery && !isNaN(pageQuery) ? pageQuery : 1;
 
-    
     const elasticQuery = searchQuery(
       searchText,
       searchType,
@@ -41,7 +37,7 @@ export default async function handler(
     console.log(
       "Search for",
       elasticQuery.query.bool.must,
-      elasticQuery.query.bool.filter[0].terms
+      elasticQuery.query.bool.filter[0]
     );
 
     const searchResult = await client.search({

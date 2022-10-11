@@ -2,7 +2,7 @@ const ResultsLoading: React.FC = () => {
   return (
     <div
       className="container mx-auto px-4 pt-8 xl:px-14 min-h-[50vh]"
-      id="search-results"
+      id="risultati"
     >
       <div className="rounded-md mb-4 w-full mx-auto">
         <div className="h-8 max-w-sm bg-slate-200 rounded my-4"></div>

@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { PostResultType } from "@utils/elasticSearchUtils";
 import Pagination from "./Pagination";
 import PostResults from "./PostResult";
@@ -8,21 +7,10 @@ type ResultsProps = {
   totalResults: number;
 };
 const Results: React.FC<ResultsProps> = ({ data, totalResults }) => {
-  const ref = useRef<HTMLDivElement>();
-  useEffect(() => {
-    if (ref.current && data.length > 0)
-      ref.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "start"
-      });
-  }, [ref]);
-
   return (
     <div
       className="container mx-auto px-4 pt-8 xl:px-14 min-h-[50vh]"
-      id="search-results"
-      ref={ref}
+      id="risultati"
     >
       {data.length === 0 && (
         <h2 className="text-3xl md:text-4xl px-4 font-bold">

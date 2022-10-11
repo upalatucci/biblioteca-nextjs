@@ -27,8 +27,8 @@ const extractParagraphs = (content: string): string[] => {
 };
 
 export default function PostPage({ post }) {
-  const notesArray = extractNotes(post?.acf?.acf_notes);
-  console.log(post)
+  const notesArray = extractNotes(post?.acf?.acf_note);
+  console.log(post);
   const paragraphs = extractParagraphs(post.content.rendered);
 
   return (
@@ -64,13 +64,13 @@ export default function PostPage({ post }) {
                   </div>
                 )}
 
-                {post?.acf?.acf_notes && (
+                {post?.acf?.acf_note && (
                   <div id="note">
                     <h3 className="text-3xl md:text-4xl font-serif text-secondary font-bold mt-4 mb-6">
                       Note
                     </h3>
                     <div
-                      dangerouslySetInnerHTML={{ __html: post.acf.acf_notes }}
+                      dangerouslySetInnerHTML={{ __html: post.acf.acf_note }}
                     ></div>
                   </div>
                 )}

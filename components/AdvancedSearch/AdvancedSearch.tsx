@@ -7,7 +7,7 @@ import {
   DATES,
   mapSearchType,
   PLACES_OPTIONS,
-  RECIPIENTS_OPTIONS
+  RECIPIENTS_OPTIONS,
 } from "./constants";
 import reducer, { ACTION_TYPES, initializeState } from "./reducer";
 
@@ -26,7 +26,7 @@ const AdvancedSearch: FC = () => {
     place,
     from,
     to,
-    searchType
+    searchType,
   } = state;
 
   const onSubmit = (event) => {
@@ -55,7 +55,7 @@ const AdvancedSearch: FC = () => {
     if (place && !sources.includes(BOOKS.GLOSSARIO)) router.query.place = place;
     else delete router.query.place;
 
-    router.push(router, null, { scroll: false });
+    router.push({ ...router, hash: "risultati" }, null, { scroll: false });
   };
 
   const onSourceChange = useCallback(
@@ -63,12 +63,12 @@ const AdvancedSearch: FC = () => {
       if (event.target.checked) {
         dispatch({
           type: ACTION_TYPES.ADD_SOURCE,
-          payload: event.target.value as BOOKS
+          payload: event.target.value as BOOKS,
         });
       } else {
         dispatch({
           type: ACTION_TYPES.REMOVE_SOURCE,
-          payload: event.target.value as BOOKS
+          payload: event.target.value as BOOKS,
         });
       }
     },
@@ -80,12 +80,12 @@ const AdvancedSearch: FC = () => {
       if (event.target.checked) {
         dispatch({
           type: ACTION_TYPES.ADD_FIELD,
-          payload: event.target.value as FIELDS
+          payload: event.target.value as FIELDS,
         });
       } else {
         dispatch({
           type: ACTION_TYPES.REMOVE_FIELD,
-          payload: event.target.value as FIELDS
+          payload: event.target.value as FIELDS,
         });
       }
     },
@@ -96,7 +96,7 @@ const AdvancedSearch: FC = () => {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       dispatch({
         type: ACTION_TYPES.CHANGE_SEARCH_TEXT,
-        payload: event.target.value
+        payload: event.target.value,
       });
     },
     []
@@ -106,7 +106,7 @@ const AdvancedSearch: FC = () => {
     return (newValue) => {
       dispatch({
         type,
-        payload: newValue === 0 ? null : newValue
+        payload: newValue === 0 ? null : newValue,
       });
     };
   };
@@ -127,7 +127,7 @@ const AdvancedSearch: FC = () => {
                 name="type"
                 options={Object.values(SEARCH_TYPE).map((type) => ({
                   value: type,
-                  label: mapSearchType[type]
+                  label: mapSearchType[type],
                 }))}
                 className="w-80 mb-4 md:mb-0 md:mr-4"
               />
@@ -229,7 +229,7 @@ const AdvancedSearch: FC = () => {
                       value={recipient || RECIPIENTS_OPTIONS[0].value}
                       name="destinatario"
                       options={RECIPIENTS_OPTIONS}
-                      className='w-64'
+                      className="w-64"
                     />
                   </label>
                 </span>
@@ -242,7 +242,7 @@ const AdvancedSearch: FC = () => {
                       value={place || PLACES_OPTIONS[0].value}
                       name="luogo"
                       options={PLACES_OPTIONS}
-                      className='w-64'
+                      className="w-64"
                     />
                   </label>
                 </span>
