@@ -30,6 +30,7 @@ getPosts().then((posts) => {
     recipient: post.acf.acf_destinatario,
     place: post.acf.acf_luogo,
     date: post.acf.acf_data,
+    number: Number(post.acf.acf_numero),
   }));
 
   console.log(posts[0]);

@@ -77,6 +77,25 @@ export const useFilters = (allGosho: GoshoType[]) => {
   };
 };
 
+type FIELDS = keyof GoshoType;
+
 export const useOrder = (allGosho: GoshoType[]) => {
-  const [sortField, setSortField] = useState("title_");
+  const [sortField, setSortField] = useState<FIELDS>("number");
+  const [sortAscend, setSortAscend] = useState(true);
+
+  const sortedGosho = allGosho.sort((a, b) =>
+    a[sortField] > b[sortField] ? 1 : -1
+  );
+
+  const onSortChange = useCallback((fieldToSort, ascendent) => {
+    setSortField(fieldToSort);
+    setSortAscend(ascendent);
+  }, []);
+
+  return {
+    sortedGosho: sortAscend ? sortedGosho : sortedGosho.reverse(),
+    sortField,
+    sortAscend,
+    onSortChange,
+  };
 };

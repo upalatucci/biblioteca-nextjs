@@ -1,9 +1,7 @@
 import React from "react";
 import SearchInput from "../SearchInput";
 import Select from "../Select";
-import Pagination from "../Pagination/Pagination";
 import GoshoListTable from "./GoshoListTable";
-import { usePagination } from "@components/Pagination";
 import { useFilters } from "./utils";
 
 export type GoshoType = {
@@ -12,17 +10,12 @@ export type GoshoType = {
   recipient: string;
   place: string;
   date: string;
+  number: number;
 };
 
 type GoshoListProps = {
   jsonData: GoshoType[];
 };
-
-const alphabeticOrderFunction = (a: GoshoType, b: GoshoType) =>
-  a.title > b.title ? 1 : -1;
-
-const chronologicalOrder = (a: GoshoType, b: GoshoType) =>
-  a.date > b.date ? 1 : -1;
 
 const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   const {
@@ -37,16 +30,6 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
     recipientOptions,
     clearFilters,
   } = useFilters(jsonData);
-
-  let goshoOrdered: GoshoType[];
-
-  if (titleFilter) {
-    goshoOrdered = filteredGosho;
-  } else {
-    goshoOrdered = filteredGosho.sort(chronologicalOrder);
-  }
-
-  const goshoToShow = usePagination(goshoOrdered);
 
   return (
     <section className="bg-white" id="gosho-list">
@@ -82,7 +65,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
             />
           </label>
         </form>
-        {goshoOrdered.length === 0 && (
+        {filteredGosho.length === 0 && (
           <div>
             <div className="mt-4 mb-2 text-3xl">
               Nessun risultato per questo tipo di ricerca
@@ -92,13 +75,9 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
             </button>
           </div>
         )}
-        {goshoOrdered.length > 0 && (
+        {filteredGosho.length > 0 && (
           <div className="overflow-auto pb-4">
-            <GoshoListTable items={goshoToShow} />
-            <Pagination
-              totalResults={goshoOrdered.length}
-              anchorHash="gosho-list"
-            />
+            <GoshoListTable items={filteredGosho} />
           </div>
         )}
       </div>
