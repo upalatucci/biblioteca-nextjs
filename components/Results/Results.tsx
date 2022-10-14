@@ -1,12 +1,25 @@
 import { PostResultType } from "@utils/elasticSearchUtils";
-import Pagination from "./Pagination/Pagination";
+import Pagination from "../Pagination/Pagination";
 import PostResult from "./PostResult";
+import ResultsLoading from "./ResultsLoading";
 
 type ResultsProps = {
   data: PostResultType[];
   totalResults: number;
+  loading: boolean;
 };
-const Results: React.FC<ResultsProps> = ({ data, totalResults }) => {
+const Results: React.FC<ResultsProps> = ({ data, totalResults, loading }) => {
+  if (loading || !data) {
+    return (
+      <div
+        className="container mx-auto px-4 pt-8 xl:px-14 min-h-[50vh]"
+        id="risultati"
+      >
+        <ResultsLoading />
+      </div>
+    );
+  }
+
   return (
     <div
       className="container mx-auto px-4 pt-8 xl:px-14 min-h-[50vh]"
@@ -28,7 +41,7 @@ const Results: React.FC<ResultsProps> = ({ data, totalResults }) => {
               <PostResult key={postResult.id} post={postResult} />
             ))}
           </ul>
-          <Pagination totalResults={totalResults} anchorHash="search-results" />
+          <Pagination totalResults={totalResults} anchorHash="risultati" />
         </>
       )}
     </div>

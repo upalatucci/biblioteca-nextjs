@@ -3,13 +3,12 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import Footer from "@components/Footer";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
-import Results from "@components/Results";
-import ResultsLoading from "@components/ResultsLoading";
 import SimpleSearch from "@components/SimpleSearch";
 import {
   mapElasticResultToPost,
   PostResultType,
 } from "@utils/elasticSearchUtils";
+import Results from "@components/Results";
 
 export default function Ricerca() {
   const [loading, setLoading] = useState(false);
@@ -72,10 +71,12 @@ export default function Ricerca() {
             </span>
           </div>
         )}
-        {loading && <ResultsLoading />}
-        {searchedPosts !== undefined && (
-          <Results data={searchedPosts} totalResults={totalResults} />
-        )}
+
+        <Results
+          data={searchedPosts}
+          totalResults={totalResults}
+          loading={loading}
+        />
       </main>
       <Footer />
     </>
