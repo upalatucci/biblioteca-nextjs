@@ -1,9 +1,10 @@
 import Link from "next/link";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import SearchInput from "./SearchInput";
 import Select from "./Select";
 import Pagination from "./Pagination";
 import Fuse from "fuse.js";
+import { createFuzzyIndex } from "@utils/fuzzySearch";
 
 const generateRecipients = (jsonData: GoshoType[]) => {
   const recipientOptions = [{ value: 0, label: "Tutti" }];
@@ -54,7 +55,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   );
 
   useEffect(() => {
-    fuseRef.current = new Fuse(jsonData, { keys: ["title"] });
+    fuseRef.current = createFuzzyIndex<GoshoType>(jsonData);
   }, [jsonData]);
 
   const clearFilters = useCallback(() => {

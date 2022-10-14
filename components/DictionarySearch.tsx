@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Pagination from "@components/Pagination";
 import Fuse from "fuse.js";
 import DictionarySkeleton from "@components/DictionarySkeleton";
+import { createFuzzyIndex } from "@utils/fuzzySearch";
 
 type DictionaryItem = {
   title: string;
@@ -22,9 +23,9 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
 
   useEffect(() => {
     import("../books/glossario.json").then((fetchedDictionary) => {
-      const fuse = new Fuse(fetchedDictionary.default, { keys: ["title"] });
-
-      fuseRef.current = fuse;
+      fuseRef.current = createFuzzyIndex<DictionaryItem>(
+        fetchedDictionary.default
+      );
       setGlossario(fetchedDictionary.default);
     });
   }, []);
