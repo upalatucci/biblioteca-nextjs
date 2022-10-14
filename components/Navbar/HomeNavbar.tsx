@@ -25,19 +25,20 @@ const HomeNavbar = () => {
 
   return (
     <>
-      <h1 className="hidden md:block text-center font-bold text-3xl md:text-5xl mb-8 mt-4">
+      <h1 className="hidden lg:block text-center font-bold text-3xl md:text-5xl mb-8 mt-4">
         NICHIREN Library
       </h1>
-      <nav className="container mx-auto px-4 md:px-0 flex items-center justify-between mb-4 relative mt-4 md:mt-0">
+      <nav className="container mx-auto px-4 lg:px-0 flex items-center justify-between mb-4 relative mt-4 lg:mt-0">
         <Link href="/" passHref>
-          <a>
+          <a className="flex w-12 h-12 md:w-14 md:h-14">
             <Image
               src={Logo}
               alt="logo istituto buddista italiano soka gakkai"
+              layout="fixed"
             />
           </a>
         </Link>
-        <h1 className="md:hidden text-center font-bold text-3xl md:text-5xl">
+        <h1 className="lg:hidden text-center font-bold text-3xl md:text-5xl">
           NICHIREN Library
         </h1>
         <button
