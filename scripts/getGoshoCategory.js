@@ -32,6 +32,7 @@ getPosts().then((posts) => {
     data: post.acf.acf_data,
   }));
 
+  console.log(posts[0]);
   fs.writeFile("./books/rsnd1.json", JSON.stringify(json), (err) =>
     console.error(err)
   );

@@ -1,6 +1,6 @@
 import { PostResultType } from "@utils/elasticSearchUtils";
-import Pagination from "./Pagination";
-import PostResults from "./PostResult";
+import Pagination from "./Pagination/Pagination";
+import PostResult from "./PostResult";
 
 type ResultsProps = {
   data: PostResultType[];
@@ -24,16 +24,11 @@ const Results: React.FC<ResultsProps> = ({ data, totalResults }) => {
           </h2>
           <hr className="border border-secondary" />
           <ul className="divide-y-2 divide-dashed pt-4 mb-10">
-            <Pagination
-              totalResults={totalResults}
-              anchorHash="search-results"
-              array={data}
-              arrayStatic={false}
-              renderer={(postResult) => (
-                <PostResults key={postResult.id} post={postResult} />
-              )}
-            />
+            {data.map((postResult) => (
+              <PostResult key={postResult.id} post={postResult} />
+            ))}
           </ul>
+          <Pagination totalResults={totalResults} anchorHash="search-results" />
         </>
       )}
     </div>

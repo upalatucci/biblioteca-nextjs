@@ -1,10 +1,10 @@
 import Head from "next/head";
 import BookDescription from "@components/BookDescription";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
-import GoshoList, { GoshoType } from "@components/GoshoList";
 import Footer from "@components/Footer";
 import { useEffect, useState } from "react";
-import GoshoListSkeleton from "@components/GoshoListSkeleton";
+import GoshoListSkeleton from "@components/GoshoList/GoshoListSkeleton";
+import GoshoList, { GoshoType } from "@components/GoshoList";
 
 export default function RSND1() {
   const [jsonData, setJSONData] = useState<GoshoType[]>([]);

@@ -1,10 +1,11 @@
-import Link from "next/link";
 import React, { useCallback, useEffect, useRef } from "react";
-import SearchInput from "./SearchInput";
-import Select from "./Select";
-import Pagination from "./Pagination";
+import SearchInput from "../SearchInput";
+import Select from "../Select";
+import Pagination from "../Pagination/Pagination";
 import Fuse from "fuse.js";
 import { createFuzzyIndex } from "@utils/fuzzySearch";
+import GoshoListTable from "./GoshoListTable";
+import { usePagination } from "@components/Pagination";
 
 const generateRecipients = (jsonData: GoshoType[]) => {
   const recipientOptions = [{ value: 0, label: "Tutti" }];
@@ -75,7 +76,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
       )
     : goshoFilteredByTitle;
 
-  let goshoOrdered;
+  let goshoOrdered: GoshoType[];
 
   if (titleFilter && !alphabeticOrder) {
     goshoOrdered = goshoFilteredByRecipient;
@@ -84,6 +85,8 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
       alphabeticOrder ? alphabeticOrderFunction : chronologicalOrder
     );
   }
+
+  const goshoToShow = usePagination(goshoOrdered);
 
   return (
     <section className="bg-white" id="gosho-list">
@@ -129,23 +132,13 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
           </div>
         )}
         {goshoOrdered.length > 0 && (
-          <ul className="mt-4 divide-y-2 divide-gray-300 divide-dashed text-xl">
+          <>
+            <GoshoListTable items={goshoToShow} />
             <Pagination
               totalResults={goshoOrdered.length}
-              array={goshoOrdered}
               anchorHash="gosho-list"
-              renderer={(post, index) => (
-                <li key={post.slug} className="py-3">
-                  <Link href={`/posts/${post.slug}`}>
-                    <a className="flex hover:text-primary">
-                      <span className="mr-8 lg:mr-14">{index + 1}.</span>{" "}
-                      <span>{post.title}</span>
-                    </a>
-                  </Link>
-                </li>
-              )}
             />
-          </ul>
+          </>
         )}
       </div>
     </section>

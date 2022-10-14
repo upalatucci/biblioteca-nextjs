@@ -19,7 +19,7 @@ export default function Glossario() {
 
       <HomeNavbar />
       <main>
-        <section className="bg-white">
+        <section className="bg-white" id="dictionary">
           <div className="container mx-auto py-8 px-4">
             <h2 className="text-4xl md:text-5xl px-4 font-bold mb-8">
               Glossario

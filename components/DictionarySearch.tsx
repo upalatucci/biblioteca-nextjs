@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import Pagination from "@components/Pagination";
 import Fuse from "fuse.js";
 import DictionarySkeleton from "@components/DictionarySkeleton";
 import { createFuzzyIndex } from "@utils/fuzzySearch";
+import Pagination, { usePagination } from "./Pagination";
 
 type DictionaryItem = {
   title: string;
@@ -30,30 +30,30 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
     });
   }, []);
 
-  if (!glossario) {
-    return <DictionarySkeleton />;
-  }
-
-  let glossarioFiltrato;
+  let glossarioFiltrato: DictionaryItem[];
 
   if (filterText) {
     glossarioFiltrato = fuseRef.current
-      .search(filterText)
+      ?.search(filterText)
       .map((result) => result.item);
   } else if (letter) {
-    glossarioFiltrato = glossario.filter((termine) =>
+    glossarioFiltrato = glossario?.filter((termine) =>
       termine?.title?.charAt(0).toUpperCase().startsWith(letter)
     );
   } else {
     glossarioFiltrato = glossario;
   }
 
+  const dictionaryToShow = usePagination(glossarioFiltrato);
+
+  if (!glossario) {
+    return <DictionarySkeleton />;
+  }
+
   return (
-    <ul className="divide-y-2 divide-gray-200 divide-dashed mt-4">
-      <Pagination
-        totalResults={glossarioFiltrato.length}
-        array={glossarioFiltrato}
-        renderer={(glossarioRicerca) => (
+    <>
+      <ul className="divide-y-2 divide-dashed pt-4 mb-10">
+        {dictionaryToShow.map((glossarioRicerca) => (
           <li className="py-4" key={glossarioRicerca.title}>
             <button className="text-left">
               <div
@@ -66,9 +66,13 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
               dangerouslySetInnerHTML={{ __html: glossarioRicerca.content }}
             ></div>
           </li>
-        )}
+        ))}
+      </ul>
+      <Pagination
+        totalResults={glossarioFiltrato.length}
+        anchorHash="dictionary"
       />
-    </ul>
+    </>
   );
 };
 
