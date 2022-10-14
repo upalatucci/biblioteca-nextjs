@@ -2,7 +2,7 @@ import Link from "next/link";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 
-const nLi = new Array(10).fill(0).map((_, index) => index)
+const nLi = new Array(10).fill(0).map((_, index) => index);
 
 const Skeleton = React.memo(() => (
   <>
@@ -15,15 +15,16 @@ const Skeleton = React.memo(() => (
         </div>
       </li>
     ))}
-  </>))
-Skeleton.displayName = 'Skeleton'
+  </>
+));
+Skeleton.displayName = "Skeleton";
 
 type GoshoData = {
   title: string;
   slug: string;
-  destinatario: string;
-  luogo: string;
-  data: string;
+  recipient: string;
+  place: string;
+  date: string;
 };
 
 type PostMenuProps = {
@@ -75,7 +76,7 @@ const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
           {jsonData?.length === 0 && <Skeleton />}
 
           {jsonData
-            .sort((a, b) => (a.data > b.data ? 1 : -1))
+            .sort((a, b) => (a.date > b.date ? 1 : -1))
             .map((post, index) => (
               <li
                 key={post.title}
@@ -83,7 +84,7 @@ const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
                   "text-primary": post.title === currentPostTitle,
                 })}
               >
-                <Link href={`/posts/${post.slug}`}>
+                <Link href={`/gosho/${post.slug}`}>
                   <a>
                     {index + 1}. {post.title}
                   </a>

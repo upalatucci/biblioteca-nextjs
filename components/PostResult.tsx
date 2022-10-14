@@ -9,7 +9,7 @@ type PostProps = {
 const humanizedField = {
   post_content: "CONTENUTO",
   "meta.acf_cenni_storici.value": "CENNI STORICI",
-  "meta.acf_note.value": "NOTE"
+  "meta.acf_note.value": "NOTE",
 };
 
 const humanizeCategory = (categories) => {
@@ -22,7 +22,7 @@ const humanizeCategory = (categories) => {
 const linkField = {
   post_content: "contenuto",
   "meta.acf_cenni_storici.value": "cenni_storici",
-  "meta.acf_note.value": "note"
+  "meta.acf_note.value": "note",
 };
 
 const PostResultContent: FC<PostProps> = ({ post }) => (
@@ -34,7 +34,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => (
     <div
       className="lg:mr-20"
       dangerouslySetInnerHTML={{
-        __html: `${post.content.rendered.substring(0, 400)}...`
+        __html: `${post.content.rendered.substring(0, 400)}...`,
       }}
     ></div>
     <p className="flex items-center mt-4">
@@ -43,7 +43,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => (
         .map((highlightField) => (
           <Link
             key={highlightField}
-            href={`/posts/${post.slug}#${linkField[highlightField]}`}
+            href={`/gosho/${post.slug}#${linkField[highlightField]}`}
             passHref
           >
             <span className="border border-primary rounded-xl px-4 mr-2 text-md">
@@ -72,7 +72,7 @@ const Post: FC<PostProps> = ({ post }) => {
 
   return (
     <li className="py-6">
-      <Link href={`/posts/${post.slug}`} passHref>
+      <Link href={`/gosho/${post.slug}`} passHref>
         <a>
           <PostResultContent post={post} />
         </a>

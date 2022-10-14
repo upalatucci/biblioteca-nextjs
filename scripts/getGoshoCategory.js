@@ -27,9 +27,9 @@ getPosts().then((posts) => {
   const json = posts.map((post) => ({
     title: post.title.rendered,
     slug: post.slug,
-    destinatario: post.acf.acf_destinatario,
-    luogo: post.acf.acf_luogo,
-    data: post.acf.acf_data,
+    recipient: post.acf.acf_destinatario,
+    place: post.acf.acf_luogo,
+    date: post.acf.acf_data,
   }));
 
   console.log(posts[0]);
