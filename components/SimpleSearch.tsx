@@ -3,8 +3,13 @@ import { useRouter } from "next/router";
 import React, { FC, useEffect, useState } from "react";
 import { BOOKS } from "@utils/constants";
 import SearchInput from "./SearchInput";
+import Loading from "./Loading";
 
-const SimpleSearch: FC = () => {
+type SimpleSearchType = {
+  loading: boolean;
+};
+
+const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState(router.query.q as string);
 
@@ -107,7 +112,10 @@ const SimpleSearch: FC = () => {
                 className="btn font-sans bg-primary hover:bg-primaryHover rounded-3xl w-36 h-10 text-white text-lg mx-4"
                 type="submit"
               >
-                Cerca
+                <div className="flex items-center justify-center">
+                  {loading && <Loading />}
+                  Cerca
+                </div>
               </button>
 
               <button

@@ -59,7 +59,6 @@ export default function PostPage({ post }) {
                   </div>
                 )}
               </div>
-              <PostMenu currentPostTitle={post.title.rendered} />
             </div>
           </div>
         </div>

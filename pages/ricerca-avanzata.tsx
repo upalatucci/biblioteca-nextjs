@@ -44,7 +44,7 @@ export default function Ricerca() {
 
       <HomeNavbar />
       <main className="search-page">
-        <AdvancedSearch />
+        <AdvancedSearch loading={loading} />
         <Results
           data={searchedPosts}
           totalResults={totalResults}

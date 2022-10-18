@@ -10,8 +10,13 @@ import {
   RECIPIENTS_OPTIONS,
 } from "./constants";
 import reducer, { ACTION_TYPES, initializeState } from "./reducer";
+import Loading from "@components/Loading";
 
-const AdvancedSearch: FC = () => {
+type AdvancedSearchType = {
+  loading: boolean;
+};
+
+const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
   const router = useRouter();
 
   const [state, dispatch] = useReducer(reducer, null, () =>
@@ -274,7 +279,9 @@ const AdvancedSearch: FC = () => {
                 className="btn bg-primary hover:bg-primaryHover rounded-3xl w-36 h-10 text-white text-lg mx-4"
                 type="submit"
               >
-                Cerca
+                <div className="flex items-center justify-center">
+                  {loading && <Loading />} Cerca
+                </div>
               </button>
 
               <button
