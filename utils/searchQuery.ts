@@ -28,7 +28,7 @@ const mapElasticSearchSourcesSlug = (sources: BOOKS[]) => {
         elasticSources.push("rsnd");
         break;
       case BOOKS.SUTRA:
-        elasticSources.push("sdl");
+        elasticSources.push("sdlpe");
         break;
       case BOOKS.GLOSSARIO:
         elasticSources.push("glossario");

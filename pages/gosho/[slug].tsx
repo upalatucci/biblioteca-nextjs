@@ -28,7 +28,6 @@ const extractParagraphs = (content: string): string[] => {
 
 export default function PostPage({ post }) {
   const notesArray = extractNotes(post?.acf?.acf_note);
-  console.log(post);
   const paragraphs = extractParagraphs(post.content.rendered);
 
   return (

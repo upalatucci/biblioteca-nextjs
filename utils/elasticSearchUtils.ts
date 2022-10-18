@@ -1,5 +1,22 @@
+export enum PostType {
+  RSND = "rsnd",
+  SDL = "sdlpe",
+  GLOSSARY = "glossario",
+}
+
+const typeToBaseUrl = (type: PostType) => {
+  switch (type) {
+    case "sdlpe":
+      return "sutra-del-loto";
+    case "rsnd":
+      return "gosho";
+    default:
+      undefined;
+  }
+};
+
 export type PostResultType = {
-  categories: {name: string, slug: string}[];
+  categories: string[];
   comment_status: string;
   content: {
     rendered: string;
@@ -17,8 +34,9 @@ export type PostResultType = {
   ping_status: string;
   slug: string;
   title: { rendered: string };
-  type: string;
+  type: PostType;
   highlight_fields: string[];
+  baseURL: string;
 };
 
 const removeUnclosedTags = (text: string): string => {
@@ -31,8 +49,7 @@ const removeUnclosedTags = (text: string): string => {
 
 export const mapElasticResultToPost = (result: any): PostResultType[] => {
   return result?.hits?.hits?.map(({ _source, highlight }) => ({
-    categories:
-      _source.terms?.category || [],
+    categories: _source.term_suggest || [],
     comment_status: _source.comment_status,
     content: {
       rendered:
@@ -54,5 +71,6 @@ export const mapElasticResultToPost = (result: any): PostResultType[] => {
     title: { rendered: highlight?.post_title || _source.post_title },
     type: _source.post_type,
     highlight_fields: highlight ? Object.keys(highlight) : [],
+    baseURL: typeToBaseUrl(_source.post_type),
   }));
 };

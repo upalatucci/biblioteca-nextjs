@@ -9,7 +9,7 @@ type ResultsProps = {
   loading: boolean;
 };
 const Results: React.FC<ResultsProps> = ({ data, totalResults, loading }) => {
-  if (loading || !data) {
+  if (loading) {
     return (
       <div
         className="container mx-auto px-4 pt-8 xl:px-14 min-h-[50vh]"
@@ -17,6 +17,15 @@ const Results: React.FC<ResultsProps> = ({ data, totalResults, loading }) => {
       >
         <ResultsLoading />
       </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div
+        className="container mx-auto px-4 pt-8 xl:px-14"
+        id="risultati"
+      ></div>
     );
   }
 
