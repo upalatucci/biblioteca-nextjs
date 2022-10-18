@@ -1,10 +1,7 @@
 import Link from "next/link";
-import { FC } from "react";
-import {
-  CategoryType,
-  PostResultType,
-  PostType,
-} from "@utils/elasticSearchUtils";
+import { FC, useCallback, useRef, useState } from "react";
+import { CSSTransition } from "react-transition-group";
+import { PostResultType, PostType } from "@utils/elasticSearchUtils";
 
 type PostProps = {
   post: PostResultType;
@@ -34,38 +31,58 @@ const linkField = {
   "meta.acf_note.value": "note",
 };
 
-const GlossarioResult: FC<PostProps> = ({ post }) => (
-  <li className="py-6">
-    <div className="font-sans">
-      <h5
-        className="font-bold pb-4 text-lg text-primary"
-        dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-      />
-      <div
-        className="lg:mr-20"
-        dangerouslySetInnerHTML={{
-          __html: `${post.content.rendered.substring(0, 400)}...`,
-        }}
-      ></div>
-      <p className="flex items-center mt-4">
-        {post.highlight_fields
-          .filter((field) => field !== "post_title")
-          .map((highlightField) => (
-            <span
-              className="border border-primary rounded-xl px-4 mr-2 text-md"
-              key={highlightField}
-            >
-              {humanizedField[highlightField]}
-            </span>
-          ))}
+const GlossarioResult: FC<PostProps> = ({ post }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const contentRef = useRef<HTMLDivElement>();
 
-        <span className="font-semibold">
-          {humanizeTypeCategory(post.type, post.categories)}
-        </span>
-      </p>
-    </div>
-  </li>
-);
+  const toggleOpen = useCallback(() => {
+    setIsOpen((open) => !open);
+  }, []);
+
+  const contentOpen = post.content.rendered;
+
+  const contentClose = `${(post?.highlight || post.content.rendered).substring(
+    0,
+    400
+  )}...`;
+
+  return (
+    <li className="py-6">
+      <button className="text-left" onClick={toggleOpen}>
+        <div className="font-sans">
+          <h5
+            className="font-bold pb-4 text-lg text-primary"
+            dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+          />
+          <div
+            ref={contentRef}
+            className="lg:mr-20"
+            dangerouslySetInnerHTML={{
+              __html: isOpen ? contentOpen : contentClose,
+            }}
+          ></div>
+
+          <p className="flex items-center mt-4">
+            {post.highlight_fields
+              .filter((field) => field !== "post_title")
+              .map((highlightField) => (
+                <span
+                  className="border border-primary rounded-xl px-4 mr-2 text-md"
+                  key={highlightField}
+                >
+                  {humanizedField[highlightField]}
+                </span>
+              ))}
+
+            <span className="font-semibold">
+              {humanizeTypeCategory(post.type, post.categories)}
+            </span>
+          </p>
+        </div>
+      </button>
+    </li>
+  );
+};
 
 const PostResultContent: FC<PostProps> = ({ post }) => (
   <li className="py-6">
@@ -79,7 +96,12 @@ const PostResultContent: FC<PostProps> = ({ post }) => (
           <div
             className="lg:mr-20"
             dangerouslySetInnerHTML={{
-              __html: `${post.content.rendered.substring(0, 400)}...`,
+              __html:
+                post.highlight ||
+                `${(post?.highlight || post.content.rendered).substring(
+                  0,
+                  400
+                )}...`,
             }}
           ></div>
         </a>

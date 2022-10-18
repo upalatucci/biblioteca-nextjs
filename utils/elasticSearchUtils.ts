@@ -36,6 +36,7 @@ export type PostResultType = {
   title: { rendered: string };
   type: PostType;
   highlight_fields: string[];
+  highlight: string;
   baseURL: string;
 };
 
@@ -47,15 +48,26 @@ const removeUnclosedTags = (text: string): string => {
   return div.innerHTML;
 };
 
+const buildHighlight = (highlight) => {
+  const contentHighlight = highlight?.post_content?.join(["..."]);
+  const noteHighlight = highlight?.["meta.acf_note.value"]?.join(["..."]);
+  const historyHighlight = highlight?.["meta.acf_cenni_storici.value"]?.join([
+    "...",
+  ]);
+
+  return [contentHighlight, noteHighlight, historyHighlight]
+    .filter((h) => h)
+    .join("[...]");
+};
+
 export const mapElasticResultToPost = (result: any): PostResultType[] => {
   return result?.hits?.hits?.map(({ _source, highlight }) => ({
     categories: _source.term_suggest || [],
     comment_status: _source.comment_status,
     content: {
-      rendered:
-        removeUnclosedTags(highlight?.post_content?.join("[...]")) ||
-        _source.post_content,
+      rendered: _source.post_content,
     },
+    highlight: removeUnclosedTags(buildHighlight(highlight)),
     date: _source.post_date,
     date_gmt: _source.post_date_gmt,
     excerpt: { rendered: _source.post_excerpt },
