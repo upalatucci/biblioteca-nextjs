@@ -85,7 +85,7 @@ export default function PostPage({ post }) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getSlugs("posts");
+  const paths = await getSlugs("rsnd");
 
   return {
     paths,
