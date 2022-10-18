@@ -30,11 +30,10 @@ const HomeNavbar = () => {
       </h1>
       <nav className="container mx-auto px-4 lg:px-0 flex items-center justify-between mb-4 relative mt-4 lg:mt-0">
         <Link href="/" passHref>
-          <a className="flex w-12 h-12 md:w-14 md:h-14">
+          <a className="flex w-12 h-12 md:w-20 md:h-20">
             <Image
               src={Logo}
               alt="logo istituto buddista italiano soka gakkai"
-              layout="fixed"
             />
           </a>
         </Link>
