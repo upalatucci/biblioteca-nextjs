@@ -3,14 +3,21 @@ import Link from "next/link";
 import * as React from "react";
 import { GoshoType } from "./GoshoList";
 import GoshoTableSortButton from "./GoshoTableSortButton";
-import { useOrder } from "./utils";
+import { UseOrderType } from "./utils";
 
 type GoshoListTableType = {
-  items: GoshoType[];
+  sortedGosho: UseOrderType["sortedGosho"];
+  sortField: UseOrderType["sortField"];
+  sortAscend: UseOrderType["sortAscend"];
+  onSortChange: UseOrderType["onSortChange"];
 };
 
-const GoshoListTable: React.FC<GoshoListTableType> = ({ items }) => {
-  const { sortedGosho, sortField, sortAscend, onSortChange } = useOrder(items);
+const GoshoListTable: React.FC<GoshoListTableType> = ({
+  sortedGosho,
+  sortField,
+  sortAscend,
+  onSortChange
+}) => {
   const goshoToShow = usePagination(sortedGosho);
 
   return (
@@ -73,7 +80,7 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({ items }) => {
         </tbody>
       </table>
 
-      <Pagination totalResults={items.length} anchorHash="gosho-list" />
+      <Pagination totalResults={sortedGosho.length} anchorHash="gosho-list" />
     </>
   );
 };

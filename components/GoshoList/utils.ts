@@ -79,18 +79,28 @@ export const useFilters = (allGosho: GoshoType[]) => {
 
 type FIELDS = keyof GoshoType;
 
-export const useOrder = (allGosho: GoshoType[]) => {
-  const [sortField, setSortField] = useState<FIELDS>("number");
+export type UseOrderType = {
+  sortedGosho: GoshoType[];
+  sortField: FIELDS;
+  sortAscend: boolean;
+  onSortChange: (fieldToSort: FIELDS, ascendent: boolean) => void;
+};
+
+export const useOrder = (allGosho: GoshoType[]): UseOrderType => {
+  const [sortField, setSortField] = useState<FIELDS | undefined>("number");
   const [sortAscend, setSortAscend] = useState(true);
 
-  const sortedGosho = allGosho.sort((a, b) =>
-    a[sortField] > b[sortField] ? 1 : -1
+  const onSortChange = useCallback(
+    (fieldToSort: FIELDS, ascendent: boolean) => {
+      setSortField(fieldToSort);
+      setSortAscend(ascendent);
+    },
+    []
   );
 
-  const onSortChange = useCallback((fieldToSort, ascendent) => {
-    setSortField(fieldToSort);
-    setSortAscend(ascendent);
-  }, []);
+  const sortedGosho = sortField
+    ? allGosho.sort((a, b) => (a[sortField] > b[sortField] ? 1 : -1))
+    : allGosho;
 
   return {
     sortedGosho: sortAscend ? sortedGosho : sortedGosho.reverse(),

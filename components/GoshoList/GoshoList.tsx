@@ -2,7 +2,7 @@ import React from "react";
 import SearchInput from "../SearchInput";
 import Select from "../Select";
 import GoshoListTable from "./GoshoListTable";
-import { useFilters } from "./utils";
+import { useFilters, useOrder } from "./utils";
 
 export type GoshoType = {
   title: string;
@@ -28,8 +28,15 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
     setPlace,
     placesOptions,
     recipientOptions,
-    clearFilters,
+    clearFilters
   } = useFilters(jsonData);
+  const { sortedGosho, sortField, sortAscend, onSortChange } =
+    useOrder(filteredGosho);
+
+  const onSearchInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setTitleFilter(e.target.value);
+    onSortChange(undefined, true);
+  };
 
   return (
     <section className="bg-white" id="gosho-list">
@@ -40,7 +47,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
             <span className="mr-4 font-bold">Titolo</span>
             <SearchInput
               value={titleFilter}
-              onChange={(e) => setTitleFilter(e.target.value)}
+              onChange={onSearchInput}
               placeholder="Inserisci il titolo del Gosho che stai cercando"
             />
           </label>
@@ -77,7 +84,12 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
         )}
         {filteredGosho.length > 0 && (
           <div className="overflow-auto pb-4">
-            <GoshoListTable items={filteredGosho} />
+            <GoshoListTable
+              sortedGosho={sortedGosho}
+              sortField={sortField}
+              sortAscend={sortAscend}
+              onSortChange={onSortChange}
+            />
           </div>
         )}
       </div>
