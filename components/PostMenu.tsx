@@ -1,6 +1,7 @@
 import Link from "next/link";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
+import { GoshoType } from "./GoshoList";
 
 const nLi = new Array(10).fill(0).map((_, index) => index);
 
@@ -19,20 +20,12 @@ const Skeleton = React.memo(() => (
 ));
 Skeleton.displayName = "Skeleton";
 
-type GoshoData = {
-  title: string;
-  slug: string;
-  recipient: string;
-  place: string;
-  date: string;
-};
-
 type PostMenuProps = {
   currentPostTitle: string;
 };
 
 const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
-  const [jsonData, setJSONData] = useState<GoshoData[]>([]);
+  const [jsonData, setJSONData] = useState<GoshoType[]>([]);
 
   useEffect(() => {
     import("@books/rsnd1.json").then((goshoData) => {
@@ -77,16 +70,16 @@ const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
 
           {jsonData
             .sort((a, b) => (a.date > b.date ? 1 : -1))
-            .map((post, index) => (
+            .map((post) => (
               <li
                 key={post.title}
                 className={classNames("font-semibold py-2", {
-                  "text-primary": post.title === currentPostTitle,
+                  "text-primary": post.title === currentPostTitle
                 })}
               >
                 <Link href={`/gosho/${post.slug}`}>
                   <a>
-                    {index + 1}. {post.title}
+                    {post.number}. {post.title}
                   </a>
                 </Link>
               </li>

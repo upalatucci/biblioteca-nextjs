@@ -16,3 +16,7 @@ export enum SEARCH_TYPE {
   OR = "OR",
   EXACT = "EXACT",
 }
+
+
+export const RSND_VOL_1_CATEGORY_ID = 16
+export const RSND_VOL_2_CATEGORY_ID = 17

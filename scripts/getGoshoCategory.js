@@ -1,6 +1,9 @@
 import fetch from "node-fetch";
 import fs from "fs";
 
+const RSND_VOL_2_CATEGORY_ID = 17;
+const RSND_VOL_1_CATEGORY_ID = 16;
+
 async function getPosts() {
   let page = 1;
   let totalPosts = [];
@@ -24,17 +27,37 @@ async function getPosts() {
 }
 
 getPosts().then((posts) => {
-  const json = posts.map((post) => ({
+  const gosho = posts.filter((post) => post.acf.acf_numero);
+  const rsnd1 = gosho.filter((post) =>
+    post.cat_rsnd.includes(RSND_VOL_1_CATEGORY_ID)
+  );
+  const rsnd2 = gosho.filter((post) =>
+    post.cat_rsnd.includes(RSND_VOL_2_CATEGORY_ID)
+  );
+
+  let json = rsnd1.map((post) => ({
     title: post.title.rendered,
     slug: post.slug,
-    recipient: post.acf.acf_destinatario,
-    place: post.acf.acf_luogo,
-    date: post.acf.acf_data,
+    recipient: post.acf.acf_destinatario || "",
+    place: post.acf.acf_luogo || "",
+    date: post.acf.acf_data || "",
     number: Number(post.acf.acf_numero),
   }));
 
-  console.log(posts[0]);
   fs.writeFile("./books/rsnd1.json", JSON.stringify(json), (err) =>
+    console.error(err)
+  );
+
+  json = rsnd2.map((post) => ({
+    title: post.title.rendered,
+    slug: post.slug,
+    recipient: post.acf.acf_destinatario || "",
+    place: post.acf.acf_luogo || "",
+    date: post.acf.acf_data || "",
+    number: Number(post.acf.acf_numero),
+  }));
+
+  fs.writeFile("./books/rsnd2.json", JSON.stringify(json), (err) =>
     console.error(err)
   );
 });

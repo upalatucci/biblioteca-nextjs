@@ -44,7 +44,7 @@ const HomeNavbar = () => {
           className={classNames(
             "mobileMenu block relative lg:hidden w-12 h-10",
             {
-              open: [SHOW, SHOWING].includes(mobileMenuOpen),
+              open: [SHOW, SHOWING].includes(mobileMenuOpen)
             }
           )}
           onClick={closeMobileMenu}
@@ -63,7 +63,7 @@ const HomeNavbar = () => {
               <a>Raccolta degli Scritti di Nichiren Daishonin VOLUME I</a>
             </Link>
 
-            <Link href="/rsnd-vol1" passHref>
+            <Link href="/rsnd-vol2" passHref>
               <a>Raccolta degli Scritti di Nichiren Daishonin VOLUME II</a>
             </Link>
 
@@ -89,7 +89,7 @@ const HomeNavbar = () => {
           />
 
           <NavbarItem
-            href="/"
+            href="/rsnd-vol2"
             upText="Raccolta degli Scritti di"
             title="NICHIREN DAISHONIN"
             downText="VOLUME II"
