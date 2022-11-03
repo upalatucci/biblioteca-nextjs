@@ -58,7 +58,7 @@ export const simpleSearchQuery = (
                 "meta.acf_cenni_notes.value",
               ],
               // preferibile mettere = 1
-              fuzziness: "AUTO",
+              fuzziness: 1,
               slop: 1,
               minimum_should_match: "75%",
             },
@@ -178,6 +178,7 @@ const searchQuery = (
         query: textQueryCopy,
         fields: queryFields,
         operator: searchType as QueryDslOperator,
+        fuzziness: 1,
       },
     });
 
@@ -199,7 +200,7 @@ const searchQuery = (
       multi_match: {
         query: textQuery,
         fields: queryFields,
-        fuzziness: "AUTO",
+        fuzziness: 1,
         slop: 1,
         minimum_should_match: "75%",
       },
