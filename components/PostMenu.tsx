@@ -69,7 +69,7 @@ const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
           {jsonData?.length === 0 && <Skeleton />}
 
           {jsonData
-            .sort((a, b) => (a.date > b.date ? 1 : -1))
+            .sort((a, b) => (a.number > b.number ? 1 : -1))
             .map((post) => (
               <li
                 key={post.title}
