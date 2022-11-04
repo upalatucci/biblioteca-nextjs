@@ -91,12 +91,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths,
     //this option below renders in the server (at request time) pages that were not rendered at build time
     //e.g when a new blogpost is added to the app
-    fallback: true,
+    fallback: "blocking",
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await getPost(params.slug);
+
+  if (!post) return { notFound: true };
   return {
     props: {
       post,
