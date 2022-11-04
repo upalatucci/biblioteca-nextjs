@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { FC, useCallback, useRef, useState } from "react";
-import { CSSTransition } from "react-transition-group";
 import { PostResultType, PostType } from "@utils/elasticSearchUtils";
 
 type PostProps = {

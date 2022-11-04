@@ -10,7 +10,6 @@ import raccoltaVol2 from "../public/raccolta-nichiren-vol2.jpeg";
 import sutraDelLoto from "../public/sutra-del-loto.jpeg";
 import sfogliaGlossario from "../public/sfoglia.jpeg";
 import ascolta from "../public/ascolta.jpeg";
-import Link from "next/link";
 import SearchInput from "@components/SearchInput";
 import { useRouter } from "next/router";
 import Footer from "@components/Footer";

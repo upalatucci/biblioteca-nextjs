@@ -92,7 +92,7 @@ const reducer = (state = initialState, { type, payload }: Action): State => {
     case ACTION_TYPES.ADD_SOURCE:
       return {
         ...state,
-        sources: [...state.sources, payload],
+        sources: [payload as BOOKS, ...(state.sources as BOOKS[])],
       };
     case ACTION_TYPES.REMOVE_SOURCE:
       const nextSources = state.sources.filter((source) => source !== payload);
@@ -106,7 +106,7 @@ const reducer = (state = initialState, { type, payload }: Action): State => {
     case ACTION_TYPES.ADD_FIELD:
       return {
         ...state,
-        fields: [...state.fields, payload],
+        fields: [...(state.fields as FIELDS[]), payload as FIELDS],
       };
 
     case ACTION_TYPES.REMOVE_FIELD:
@@ -146,17 +146,12 @@ const reducer = (state = initialState, { type, payload }: Action): State => {
     case ACTION_TYPES.CHANGE_SEARCH_TYPE:
       return {
         ...state,
-        searchType: payload,
+        searchType: payload as SEARCH_TYPE,
       };
     case ACTION_TYPES.RESET:
       return {
         ...state,
-        searchType: SEARCH_TYPE.BASE,
-        searchText: "",
-        recipient: null,
-        place: null,
-        fields: [FIELDS.CONTENT],
-        sources: [BOOKS.RSND],
+        ...initialState,
       };
     default:
       return state;
