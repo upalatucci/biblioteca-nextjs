@@ -7,6 +7,8 @@ import {
   SearchRequest,
 } from "@elastic/elasticsearch/lib/api/types";
 
+export const DEFAULT_PAGE_SIZE = 20;
+
 export const client = new Client({
   node: process.env.ELASTIC_SEARCH_URL,
   auth: {
@@ -57,8 +59,6 @@ export const simpleSearchQuery = (
                 "meta.acf_cenni_storici.value",
                 "meta.acf_cenni_notes.value",
               ],
-              // preferibile mettere = 1
-              fuzziness: 1,
               slop: 1,
               minimum_should_match: "75%",
             },
@@ -178,7 +178,6 @@ const searchQuery = (
         query: textQueryCopy,
         fields: queryFields,
         operator: searchType as QueryDslOperator,
-        fuzziness: 1,
       },
     });
 
@@ -200,7 +199,6 @@ const searchQuery = (
       multi_match: {
         query: textQuery,
         fields: queryFields,
-        fuzziness: 1,
         slop: 1,
         minimum_should_match: "75%",
       },

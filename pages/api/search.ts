@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { BOOKS, FIELDS, SEARCH_TYPE } from "@utils/constants";
-import searchQuery, { client } from "@utils/searchQuery";
+import searchQuery, { client, DEFAULT_PAGE_SIZE } from "@utils/searchQuery";
 
 export default async function handler(
   req: NextApiRequest,
@@ -42,8 +42,8 @@ export default async function handler(
 
     const searchResult = await client.search({
       ...elasticQuery,
-      size: 20,
-      from: (page - 1) * 20,
+      size: DEFAULT_PAGE_SIZE,
+      from: (page - 1) * DEFAULT_PAGE_SIZE,
       index: process.env.ELASTIC_SEARCH_INDEX,
     });
 

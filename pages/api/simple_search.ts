@@ -1,6 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { BOOKS } from "@utils/constants";
-import { client, simpleSearchQuery } from "@utils/searchQuery";
+import {
+  client,
+  DEFAULT_PAGE_SIZE,
+  simpleSearchQuery,
+} from "@utils/searchQuery";
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,19 +19,16 @@ export default async function handler(
 
     const elasticQuery = simpleSearchQuery(searchText, sources);
 
-    
     const pageQuery = parseInt(
-      Array.isArray(req?.query?.page)
-        ? req?.query?.page[0]
-        : req?.query?.page
+      Array.isArray(req?.query?.page) ? req?.query?.page[0] : req?.query?.page
     );
 
     const page = pageQuery && !isNaN(pageQuery) ? pageQuery : 1;
 
     const elasticResult = await client.search({
       ...elasticQuery,
-      size: 20,
-      from: (page - 1) * 20,
+      size: DEFAULT_PAGE_SIZE,
+      from: (page - 1) * DEFAULT_PAGE_SIZE,
       index: process.env.ELASTIC_SEARCH_INDEX,
     });
 
