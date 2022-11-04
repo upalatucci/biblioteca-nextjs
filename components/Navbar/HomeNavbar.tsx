@@ -44,7 +44,7 @@ const HomeNavbar = () => {
           className={classNames(
             "mobileMenu block relative lg:hidden w-12 h-10",
             {
-              open: [SHOW, SHOWING].includes(mobileMenuOpen)
+              open: [SHOW, SHOWING].includes(mobileMenuOpen),
             }
           )}
           onClick={closeMobileMenu}

@@ -23,7 +23,7 @@ const PageNotFound = () => (
               Ti sei perso?{" "}
               <Link href="/">
                 <a className="text-primary hover:text-primaryHover">
-                  Torna alla home e ricomincia
+                  Torna alla pagina iniziale!
                 </a>
               </Link>
             </p>
