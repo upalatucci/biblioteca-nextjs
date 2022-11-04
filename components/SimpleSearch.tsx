@@ -9,6 +9,8 @@ type SimpleSearchType = {
   loading: boolean;
 };
 
+const baseSources = [BOOKS.RSND, BOOKS.SUTRA, BOOKS.GLOSSARIO];
+
 const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState(router.query.q as string);
@@ -18,9 +20,7 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
     ? (router.query.sources as BOOKS[])
     : [router.query.sources as BOOKS];
 
-  const initialSources: BOOKS[] = hasQuerySources
-    ? querySources
-    : [BOOKS.RSND, BOOKS.SUTRA, BOOKS.GLOSSARIO];
+  const initialSources: BOOKS[] = hasQuerySources ? querySources : baseSources;
 
   const [searchResouces, setSearchResouces] = useState(initialSources);
 
@@ -54,6 +54,12 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
         resouces.concat([event.target.value as BOOKS])
       );
     }
+  };
+
+  const onReset = (event) => {
+    event.preventDefault();
+    setSearchText("");
+    setSearchResouces(baseSources);
   };
 
   return (
@@ -121,6 +127,7 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
               <button
                 className="btn rounded-3xl h-10 w-36 border border-secondary hover:text-white hover:bg-secondary"
                 type="button"
+                onClick={onReset}
               >
                 Reset
               </button>

@@ -12,7 +12,7 @@ const Results: React.FC<ResultsProps> = ({ data, totalResults, loading }) => {
   if (loading) {
     return (
       <div
-        className="container mx-auto px-4 pt-8 xl:px-14 min-h-[50vh]"
+        className="container mx-auto px-4 pt-8 xl:px-10 min-h-[50vh]"
         id="risultati"
       >
         <ResultsLoading />
@@ -22,16 +22,13 @@ const Results: React.FC<ResultsProps> = ({ data, totalResults, loading }) => {
 
   if (!data) {
     return (
-      <div
-        className="container mx-auto px-4 pt-8 xl:px-14"
-        id="risultati"
-      ></div>
+      <div className="container mx-auto px-4 xl:px-10" id="risultati"></div>
     );
   }
 
   return (
     <div
-      className="container mx-auto px-4 pt-8 xl:px-14 min-h-[50vh]"
+      className="container mx-auto px-4 pt-8 xl:px-10 min-h-[50vh]"
       id="risultati"
     >
       {data.length === 0 && (

@@ -13,6 +13,7 @@ export enum ACTION_TYPES {
   CHANGE_FROM,
   CHANGE_TO,
   CHANGE_SEARCH_TYPE,
+  RESET,
 }
 
 type Action =
@@ -28,14 +29,15 @@ type Action =
   | { type: ACTION_TYPES.CHANGE_PLACE; payload: string }
   | { type: ACTION_TYPES.CHANGE_FROM; payload: string }
   | { type: ACTION_TYPES.CHANGE_TO; payload: string }
-  | { type: ACTION_TYPES.CHANGE_SEARCH_TYPE; payload: string };
+  | { type: ACTION_TYPES.CHANGE_SEARCH_TYPE; payload: SEARCH_TYPE }
+  | { type: ACTION_TYPES.RESET; payload?: null };
 
 type State = {
   sources: BOOKS[];
   fields: FIELDS[];
   searchText: string;
-  recipient: string;
-  place: string;
+  recipient: string | null;
+  place: string | null;
   from: string | number;
   to: string | number;
   searchType: SEARCH_TYPE;
@@ -85,7 +87,7 @@ export const initializeState = (path: string): State => {
   return state;
 };
 
-const reducer = (state = initialState, { type, payload }: Action) => {
+const reducer = (state = initialState, { type, payload }: Action): State => {
   switch (type) {
     case ACTION_TYPES.ADD_SOURCE:
       return {
@@ -145,6 +147,16 @@ const reducer = (state = initialState, { type, payload }: Action) => {
       return {
         ...state,
         searchType: payload,
+      };
+    case ACTION_TYPES.RESET:
+      return {
+        ...state,
+        searchType: SEARCH_TYPE.BASE,
+        searchText: "",
+        recipient: null,
+        place: null,
+        fields: [FIELDS.CONTENT],
+        sources: [BOOKS.RSND],
       };
     default:
       return state;

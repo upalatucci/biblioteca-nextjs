@@ -116,6 +116,11 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
     };
   };
 
+  const onReset = (event) => {
+    event.preventDefault();
+    dispatch({ type: ACTION_TYPES.RESET });
+  };
+
   return (
     <form onSubmit={onSubmit}>
       <section className="bg-white">
@@ -286,7 +291,8 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
 
               <button
                 className="btn  rounded-3xl h-10 w-36 border border-secondary hover:text-white hover:bg-secondary"
-                type="button"
+                type="reset"
+                onClick={onReset}
               >
                 Reset
               </button>
