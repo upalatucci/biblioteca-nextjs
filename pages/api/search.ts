@@ -45,6 +45,7 @@ export default async function handler(
       size: DEFAULT_PAGE_SIZE,
       from: (page - 1) * DEFAULT_PAGE_SIZE,
       index: process.env.ELASTIC_SEARCH_INDEX,
+      min_score: 5,
     });
 
     res.status(200).json(searchResult);
