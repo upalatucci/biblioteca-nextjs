@@ -109,11 +109,11 @@ export default function PostPage({ post }) {
             <div className="container px-4 lg:px-10 mx-auto">
               <h2 className="text-4xl md:text-5xl text-secondary pb-6 border-b-2 border-secondary">
                 <div className="animate-pulse flex space-x-4">
-                  <div className="h-2 bg-slate-200 rounded"></div>
+                  <div className="h-8 bg-slate-200 rounded w-full lg:w-1/2"></div>
                 </div>
               </h2>
               <div className="py-4 flex flex-col-reverse lg:flex-row gap-10">
-                <div>
+                <div className="w-full">
                   <GoshoPageSkeleton />
                 </div>
                 <PostMenu />
@@ -195,12 +195,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = await getPost(params.slug);
+  try {
+    const post = await getPost(params.slug);
 
-  if (!post) return { notFound: true };
-  return {
-    props: {
-      post,
-    },
-  };
+    if (!post) return { notFound: true };
+
+    return {
+      props: {
+        post,
+      },
+    };
+  } catch (error) {
+    return { notFound: true };
+  }
 };
