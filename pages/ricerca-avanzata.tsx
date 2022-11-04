@@ -39,7 +39,7 @@ export default function Ricerca() {
   return (
     <>
       <Head>
-        <title>NICHIREN Library | Ricerca</title>
+        <title>Ricerca Avanzata | NICHIREN Library</title>
       </Head>
 
       <HomeNavbar />

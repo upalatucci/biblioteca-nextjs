@@ -14,7 +14,7 @@ export default function Glossario() {
   return (
     <>
       <Head>
-        <title>NICHIREN Library | Glossario</title>
+        <title>Glossario | NICHIREN Library</title>
       </Head>
 
       <HomeNavbar />

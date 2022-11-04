@@ -18,7 +18,7 @@ export default function RSND1() {
   return (
     <>
       <Head>
-        <title>NICHIREN Library | Ricerca</title>
+        <title>RSND Vol. 2 | NICHIREN Library</title>
       </Head>
 
       <HomeNavbar />
@@ -29,9 +29,12 @@ export default function RSND1() {
             "Prefazione",
             {
               title: "Introduzione",
-              paragraphs: ["Panorama storico", "Panorama culturale e religioso"]
+              paragraphs: [
+                "Panorama storico",
+                "Panorama culturale e religioso",
+              ],
             },
-            "Note dei traduttori"
+            "Note dei traduttori",
           ]}
           notes={{
             title: "Appendici",
@@ -47,8 +50,8 @@ export default function RSND1() {
               "I. Titoli dei capitoli del Sutra del Loro e loro forme abbreviate",
               "L. Nomi delle scuole buddiste",
               "M. Eventi nella vita di Nichiren Daishonin",
-              "N. Luoghi correlati a Nichiren Daishonin"
-            ]
+              "N. Luoghi correlati a Nichiren Daishonin",
+            ],
           }}
         />
         {jsonData.length > 0 ? (

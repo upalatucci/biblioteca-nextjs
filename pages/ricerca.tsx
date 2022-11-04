@@ -42,7 +42,7 @@ export default function Ricerca() {
   return (
     <>
       <Head>
-        <title>NICHIREN Library | Ricerca</title>
+        <title>Ricerca | NICHIREN Library</title>
       </Head>
 
       <HomeNavbar />
