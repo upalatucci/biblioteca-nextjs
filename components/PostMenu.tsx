@@ -21,7 +21,7 @@ const Skeleton = React.memo(() => (
 Skeleton.displayName = "Skeleton";
 
 type PostMenuProps = {
-  currentPostTitle: string;
+  currentPostTitle?: string;
 };
 
 const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
@@ -74,7 +74,7 @@ const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
               <li
                 key={post.title}
                 className={classNames("font-semibold py-2", {
-                  "text-primary": post.title === currentPostTitle
+                  "text-primary": post.title === currentPostTitle,
                 })}
               >
                 <Link href={`/gosho/${post.slug}`}>

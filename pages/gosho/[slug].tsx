@@ -6,6 +6,7 @@ import ParagraphWithNotes from "@components/ParagraphWithNotes";
 import PostMenu from "@components/PostMenu";
 
 import { getPost, getSlugs } from "../../lib/wordpress";
+import { useRouter } from "next/router";
 
 const extractNotes = (notesHTML: string): string[] => {
   const replaceRegex = new RegExp(
@@ -26,7 +27,105 @@ const extractParagraphs = (content: string): string[] => {
   return c;
 };
 
+const GoshoPageSkeleton = () => (
+  <ul>
+    <li className="py-6 animate-pulse">
+      <div className="animate-pulse flex space-x-4">
+        <div className="flex-1 space-y-6 py-1">
+          <div className="h-2 max-w-sm bg-slate-200 rounded"></div>
+          <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="h-2 bg-slate-200 rounded col-span-2"></div>
+              <div className="h-2 bg-slate-200 rounded col-span-1"></div>
+            </div>
+            <div className="h-2 bg-slate-200 rounded"></div>
+          </div>
+          <div className="h-2 max-w-sm bg-slate-200 rounded"></div>
+        </div>
+      </div>
+    </li>
+
+    <li className="py-6 animate-pulse">
+      <div className="animate-pulse flex space-x-4">
+        <div className="flex-1 space-y-6 py-1">
+          <div className="h-2 max-w-sm bg-slate-200 rounded"></div>
+          <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="h-2 bg-slate-200 rounded col-span-2"></div>
+              <div className="h-2 bg-slate-200 rounded col-span-1"></div>
+            </div>
+            <div className="h-2 bg-slate-200 rounded"></div>
+          </div>
+          <div className="h-2 max-w-sm bg-slate-200 rounded"></div>
+        </div>
+      </div>
+    </li>
+
+    <li className="py-6 animate-pulse">
+      <div className="animate-pulse flex space-x-4">
+        <div className="flex-1 space-y-6 py-1">
+          <div className="h-2 max-w-sm bg-slate-200 rounded"></div>
+          <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="h-2 bg-slate-200 rounded col-span-2"></div>
+              <div className="h-2 bg-slate-200 rounded col-span-1"></div>
+            </div>
+            <div className="h-2 bg-slate-200 rounded"></div>
+          </div>
+          <div className="h-2 max-w-sm bg-slate-200 rounded"></div>
+        </div>
+      </div>
+    </li>
+
+    <li className="py-6 animate-pulse">
+      <div className="animate-pulse flex space-x-4">
+        <div className="flex-1 space-y-6 py-1">
+          <div className="h-2 max-w-sm bg-slate-200 rounded"></div>
+          <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="h-2 bg-slate-200 rounded col-span-2"></div>
+              <div className="h-2 bg-slate-200 rounded col-span-1"></div>
+            </div>
+            <div className="h-2 bg-slate-200 rounded"></div>
+          </div>
+          <div className="h-2 max-w-sm bg-slate-200 rounded"></div>
+        </div>
+      </div>
+    </li>
+  </ul>
+);
+
 export default function PostPage({ post }) {
+  const router = useRouter();
+  if (router.isFallback) {
+    return (
+      <>
+        <Head>
+          <title>Loading | NICHIREN Library</title>
+        </Head>
+        <HomeNavbar />
+        <main>
+          <div className="bg-white px-2 py-8 lg:p-8">
+            <div className="container px-4 lg:px-10 mx-auto">
+              <h2 className="text-4xl md:text-5xl text-secondary pb-6 border-b-2 border-secondary">
+                <div className="animate-pulse flex space-x-4">
+                  <div className="h-2 bg-slate-200 rounded"></div>
+                </div>
+              </h2>
+              <div className="py-4 flex flex-col-reverse lg:flex-row gap-10">
+                <div>
+                  <GoshoPageSkeleton />
+                </div>
+                <PostMenu />
+              </div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
+
   const notesArray = extractNotes(post?.acf?.acf_note);
   const paragraphs = extractParagraphs(post.content.rendered);
 
@@ -91,7 +190,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths,
     //this option below renders in the server (at request time) pages that were not rendered at build time
     //e.g when a new blogpost is added to the app
-    fallback: "blocking",
+    fallback: true,
   };
 };
 
