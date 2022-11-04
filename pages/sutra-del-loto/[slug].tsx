@@ -6,27 +6,16 @@ import ParagraphWithNotes from "@components/ParagraphWithNotes";
 import PostMenu from "@components/PostMenu";
 
 import { getPost, getSlugs } from "../../lib/wordpress";
-
-const extractNotes = (notesHTML: string): string[] => {
-  const replaceRegex = new RegExp(
-    '<div id="nota-\\d+">\\d+. <a href="#ref-\\d+">↑</a>\t'
-  );
-  const splitRegex = new RegExp("</div>");
-  return notesHTML
-    ?.split(splitRegex)
-    .filter((note) => note)
-    .map((note) => note.replace(replaceRegex, ""));
-};
-
-const extractParagraphs = (content: string): string[] => {
-  const a = content.split("</p>\n");
-  const b = a.filter((p) => p);
-  const c = b.map((p) => p.replace(/^<p>/g, ""));
-
-  return c;
-};
+import ArticleLoading from "@components/ArticleLoading";
+import { useRouter } from "next/router";
+import { extractNotes, extractParagraphs } from "@utils/articleUtils";
 
 export default function PostPage({ post }) {
+  const router = useRouter();
+  if (router.isFallback) {
+    return <ArticleLoading />;
+  }
+
   const notesArray = extractNotes(post?.acf?.acf_note);
   const paragraphs = extractParagraphs(post.content.rendered);
 
