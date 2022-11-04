@@ -8,7 +8,11 @@ import PostMenu from "@components/PostMenu";
 import { getPost, getSlugs } from "../../lib/wordpress";
 import { useRouter } from "next/router";
 import ArticleLoading from "@components/ArticleLoading";
-import { extractNotes, extractParagraphs } from "@utils/articleUtils";
+import {
+  DEFAULT_REVALIDATE,
+  extractNotes,
+  extractParagraphs,
+} from "@utils/articleUtils";
 
 export default function PostPage({ post }) {
   const router = useRouter();
@@ -88,7 +92,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const post = await getPost(params.slug);
 
-    if (!post) return { notFound: true };
+    if (!post) return { notFound: true, revalidate: DEFAULT_REVALIDATE };
 
     return {
       props: {
@@ -97,6 +101,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   } catch (error) {
     console.log("Error fetching static props for", params.slug, error);
-    return { notFound: true };
+    return { notFound: true, revalidate: DEFAULT_REVALIDATE };
   }
 };

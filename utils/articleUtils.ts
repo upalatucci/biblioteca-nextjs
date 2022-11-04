@@ -16,3 +16,5 @@ export const extractParagraphs = (content: string): string[] => {
 
   return c;
 };
+
+export const DEFAULT_REVALIDATE = 7 * 24 * 60 * 60;
