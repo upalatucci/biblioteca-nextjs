@@ -64,15 +64,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths,
     //this option below renders in the server (at request time) pages that were not rendered at build time
     //e.g when a new blogpost is added to the app
-    fallback: "blocking",
+    fallback: true,
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = await getPost(params.slug, "sdlpe");
-  return {
-    props: {
-      post,
-    },
-  };
+  try {
+    const post = await getPost(params.slug, "sdlpe");
+
+    if (!post) return { notFound: true };
+
+    return {
+      props: {
+        post,
+      },
+    };
+  } catch (error) {
+    console.log("Error fetching static props for", params.slug, error);
+    return { notFound: true };
+  }
 };
