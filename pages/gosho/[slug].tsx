@@ -91,7 +91,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths,
     //this option below renders in the server (at request time) pages that were not rendered at build time
     //e.g when a new blogpost is added to the app
-    fallback: "blocking",
+    fallback: true,
   };
 };
 
