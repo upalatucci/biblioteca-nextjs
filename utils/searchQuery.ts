@@ -60,7 +60,7 @@ export const simpleSearchQuery = (
                 "meta.acf_cenni_notes.value",
               ],
               slop: 1,
-              minimum_should_match: "75%",
+              minimum_should_match: "100%",
             },
           },
         ],
@@ -200,7 +200,7 @@ const searchQuery = (
         query: textQuery,
         fields: queryFields,
         slop: 1,
-        minimum_should_match: "75%",
+        minimum_should_match: "100%",
       },
     });
   }
