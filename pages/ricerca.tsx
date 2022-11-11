@@ -1,43 +1,13 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
 import Footer from "@components/Footer";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
 import SimpleSearch from "@components/SimpleSearch";
-import {
-  mapElasticResultToPost,
-  PostResultType,
-} from "@utils/elasticSearchUtils";
 import Results from "@components/Results";
+import useSearch from "@hooks/useSearch";
 
 export default function Ricerca() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [searchedPosts, setSearchedPosts] = useState<PostResultType[]>();
-  const [totalResults, setTotalResults] = useState<number>();
-  const router = useRouter();
-
-  const onSearch = useCallback(async () => {
-    setSearchedPosts(undefined);
-    setLoading(true);
-
-    try {
-      const response = await fetch(`/api/simple_search${location.search}`);
-
-      const jsonResponse = await response.json();
-
-      setSearchedPosts(mapElasticResultToPost(jsonResponse));
-      setTotalResults(jsonResponse?.hits?.total?.value);
-    } catch (apiError) {
-      setError("Si e' verificato un errore durante la ricerca");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (router.query.q) onSearch();
-  }, [onSearch, router.query]);
+  const [searchedPosts, totalResults, isLoading, error, setIgnoringError] =
+    useSearch("simple_search");
 
   return (
     <>
@@ -47,7 +17,7 @@ export default function Ricerca() {
 
       <HomeNavbar />
       <main>
-        <SimpleSearch loading={loading} />
+        <SimpleSearch loading={isLoading} />
         {error && (
           <div
             className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative container mx-auto my-4"
@@ -61,7 +31,7 @@ export default function Ricerca() {
               <svg
                 className="fill-current h-6 w-6 text-red-500"
                 role="button"
-                onClick={() => setError(null)}
+                onClick={() => setIgnoringError(true)}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
               >
@@ -75,7 +45,7 @@ export default function Ricerca() {
         <Results
           data={searchedPosts}
           totalResults={totalResults}
-          loading={loading}
+          loading={isLoading}
         />
       </main>
       <Footer />
