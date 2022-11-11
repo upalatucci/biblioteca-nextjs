@@ -13,42 +13,51 @@ import {
   extractNotes,
   extractParagraphs,
 } from "@utils/articleUtils";
+import useHighlightedPost from "@hooks/useHighlightedPost";
+import { removeHTMLTags } from "@utils/utils";
 
 export default function PostPage({ post }) {
   const router = useRouter();
-  if (router.isFallback) {
+
+  const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
+  if (router.isFallback || isLoadingHighligh) {
     return <ArticleLoading />;
   }
 
-  const notesArray = extractNotes(post?.acf?.acf_note);
-  const paragraphs = extractParagraphs(post.content.rendered);
+  const notesArray = extractNotes(highlightedPost?.acf?.acf_note);
+  const paragraphs = extractParagraphs(highlightedPost.content.rendered);
 
   return (
     <>
       <Head>
-        <title>{post.title.rendered} | NICHIREN Library</title>
+        <title>
+          {removeHTMLTags(highlightedPost.title.rendered)} | NICHIREN Library
+        </title>
       </Head>
       <HomeNavbar />
       <main>
         <div className="bg-white px-2 py-8 lg:p-8">
           <div className="container px-4 lg:px-10 mx-auto">
-            <h2 className="text-4xl md:text-5xl text-secondary pb-6 border-b-2 border-secondary">
-              {post.title.rendered}
-            </h2>
+            <h2
+              className="text-4xl md:text-5xl text-secondary pb-6 border-b-2 border-secondary"
+              dangerouslySetInnerHTML={{
+                __html: highlightedPost.title.rendered,
+              }}
+            ></h2>
             <div className="py-4 flex flex-col-reverse lg:flex-row gap-10">
               <div>
                 {paragraphs.map((p) => (
                   <ParagraphWithNotes content={p} notes={notesArray} key={p} />
                 ))}
 
-                {post?.acf?.acf_cenni_storici && (
+                {highlightedPost?.acf?.acf_cenni_storici && (
                   <div id="cenni-storici">
                     <h3 className="text-3xl md:text-4xl font-serif text-secondary font-bold mt-4 mb-6">
                       Cenni Storici
                     </h3>
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: post.acf.acf_cenni_storici
+                        __html: highlightedPost.acf.acf_cenni_storici
                           ?.replace("CENNI STORICI – ", "")
                           .replace(/\n/g, "<br>"),
                       }}
@@ -56,13 +65,15 @@ export default function PostPage({ post }) {
                   </div>
                 )}
 
-                {post?.acf?.acf_note && (
+                {highlightedPost?.acf?.acf_note && (
                   <div id="note">
                     <h3 className="text-3xl md:text-4xl font-serif text-secondary font-bold mt-4 mb-6">
                       Note
                     </h3>
                     <div
-                      dangerouslySetInnerHTML={{ __html: post.acf.acf_note }}
+                      dangerouslySetInnerHTML={{
+                        __html: highlightedPost.acf.acf_note,
+                      }}
                     ></div>
                   </div>
                 )}

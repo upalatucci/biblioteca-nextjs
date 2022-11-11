@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { FC, useCallback, useRef, useState } from "react";
 import { PostResultType, PostType } from "@utils/elasticSearchUtils";
+import { useRouter } from "next/router";
+import { FIELDS } from "@utils/constants";
+import { getQueryParamAsArray } from "@utils/utils";
 
 type PostProps = {
   post: PostResultType;
@@ -83,52 +86,64 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
   );
 };
 
-const PostResultContent: FC<PostProps> = ({ post }) => (
-  <li className="py-6">
-    <div className="font-sans">
-      <Link href={`/${post.baseURL}/${post.slug}`} passHref>
-        <a>
-          <h5
-            className="font-bold pb-4 text-lg text-primary"
-            dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-          />
-          <div
-            className="lg:mr-20"
-            dangerouslySetInnerHTML={{
-              __html:
-                post.highlight ||
-                `${(post?.highlight || post.content.rendered).substring(
-                  0,
-                  400
-                )}...`,
-            }}
-          ></div>
-        </a>
-      </Link>
-      <p className="flex items-center mt-4">
-        {post.highlight_fields
-          .filter((field) => field !== "post_title")
-          .map((highlightField) => (
-            <Link
-              key={highlightField}
-              href={`/${post.baseURL}/${post.slug}#${linkField[highlightField]}`}
-              passHref
-            >
-              <a>
-                <span className="border border-primary rounded-xl px-4 mr-2 text-md">
-                  {humanizedField[highlightField]}
-                </span>
-              </a>
-            </Link>
-          ))}
+const PostResultContent: FC<PostProps> = ({ post }) => {
+  const router = useRouter();
+  const fields = getQueryParamAsArray<FIELDS>(
+    router.query.fields || Object.values(FIELDS)
+  );
+  const textSearch = router.query.q;
 
-        <span className="font-semibold">
-          {humanizeTypeCategory(post.type, post.categories)}
-        </span>
-      </p>
-    </div>
-  </li>
-);
+  const postQueryParams = `?q=${textSearch}${fields
+    ?.map((field) => `&fields=${field}`)
+    .join("")}`;
+
+  return (
+    <li className="py-6">
+      <div className="font-sans">
+        <Link href={`/${post.baseURL}/${post.slug}${postQueryParams}`} passHref>
+          <a>
+            <h5
+              className="font-bold pb-4 text-lg text-primary"
+              dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+            />
+            <div
+              className="lg:mr-20"
+              dangerouslySetInnerHTML={{
+                __html:
+                  post.highlight ||
+                  `${(post?.highlight || post.content.rendered).substring(
+                    0,
+                    400
+                  )}...`,
+              }}
+            ></div>
+          </a>
+        </Link>
+        <p className="flex items-center mt-4">
+          {post.highlight_fields
+            .filter((field) => field !== "post_title")
+            .map((highlightField) => (
+              <Link
+                key={highlightField}
+                href={`/${post.baseURL}/${post.slug}#${linkField[highlightField]}${postQueryParams}`}
+                passHref
+              >
+                <a>
+                  <span className="border border-primary rounded-xl px-4 mr-2 text-md">
+                    {humanizedField[highlightField]}
+                  </span>
+                </a>
+              </Link>
+            ))}
+
+          <span className="font-semibold">
+            {humanizeTypeCategory(post.type, post.categories)}
+          </span>
+        </p>
+      </div>
+    </li>
+  );
+};
 
 const Post: FC<PostProps> = ({ post }) => {
   if (post?.type === "glossario") {

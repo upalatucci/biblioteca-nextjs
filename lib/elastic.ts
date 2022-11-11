@@ -1,4 +1,4 @@
-import { BOOKS, FIELDS, SEARCH_TYPE } from "./constants";
+import { BOOKS, FIELDS, SEARCH_TYPE } from "../utils/constants";
 
 import { Client } from "@elastic/elasticsearch";
 import {
@@ -40,6 +40,47 @@ const mapElasticSearchSourcesSlug = (sources: BOOKS[]) => {
   }, [] as string[]);
 };
 
+export const highlighPost = (
+  postId: number,
+  textQuery: string,
+  fields: FIELDS[]
+) => {
+  const queryFields = ["post_title^5"].concat(
+    fields.map((field) => mapElasticSearchFields[field])
+  );
+
+  return client.search({
+    query: {
+      bool: {
+        should: [
+          {
+            multi_match: {
+              query: textQuery,
+              fields: queryFields,
+              slop: 1,
+              minimum_should_match: "100%",
+            },
+          },
+        ],
+        filter: [{ term: { ID: postId } }],
+      },
+    },
+
+    highlight: {
+      pre_tags: ["<mark>"],
+      post_tags: ["</mark>"],
+      number_of_fragments: 0,
+      fields: {
+        post_content: {},
+        post_title: {},
+        "meta.acf_note.value": {},
+        "meta.acf_cenni_storici.value": {},
+      },
+    },
+    index: process.env.ELASTIC_SEARCH_INDEX,
+  });
+};
+
 export const simpleSearchQuery = (
   textQuery: string,
   sources: BOOKS[] = [BOOKS.RSND]
@@ -57,7 +98,7 @@ export const simpleSearchQuery = (
                 "post_title^5",
                 "post_content^3",
                 "meta.acf_cenni_storici.value",
-                "meta.acf_cenni_notes.value",
+                "meta.acf_note.value",
               ],
               slop: 1,
               minimum_should_match: "100%",
@@ -80,7 +121,7 @@ export const simpleSearchQuery = (
       fields: {
         post_content: {},
         post_title: {},
-        "meta.acf_cenni_notes.value": {},
+        "meta.acf_note.value": {},
         "meta.acf_cenni_storici.value": {},
       },
     },
@@ -127,7 +168,7 @@ const searchQuery = (
       fields: {
         post_content: {},
         post_title: {},
-        "meta.acf_cenni_notes.value": {},
+        "meta.acf_note.value": {},
         "meta.acf_cenni_storici.value": {},
       },
     },

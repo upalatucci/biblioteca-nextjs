@@ -48,7 +48,10 @@ const ParagraphWithNotes: React.FC<ParagraphWithNotesProps> = ({
 
       e.preventDefault();
 
-      if (notesToShow.find((n) => n === index) === undefined && notes?.[index]) {
+      if (
+        notesToShow.find((n) => n === index) === undefined &&
+        notes?.[index]
+      ) {
         setNotesToShow([...notesToShow, index]);
         notesRef.current?.focus();
       }
