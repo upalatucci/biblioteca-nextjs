@@ -25,7 +25,7 @@ const ImageWithTextOverlay: React.FC<BookType> = ({
   <div className={classnames("flex-initial w-86 md:w-96 mx-4", className)}>
     {path ? (
       <Link href={path}>
-        <a className="pointer-events-none">
+        <a>
           <div className="image">
             <Image
               src={image}
@@ -37,7 +37,7 @@ const ImageWithTextOverlay: React.FC<BookType> = ({
               className="pointer-events-none rounded-xl"
             />
           </div>
-          <div className='relative bg-white rounded-xl shadow-md flex flex-col justify-evenly bottom-32 h-44 m-6 px-4 py-8 text-center'>
+          <div className="relative bg-white rounded-xl shadow-md flex flex-col justify-evenly bottom-32 h-44 m-6 px-4 py-8 text-center">
             <h3 className="lg:text-lg font-bold">{title}</h3>
             <span>{description}</span>
           </div>
@@ -56,7 +56,7 @@ const ImageWithTextOverlay: React.FC<BookType> = ({
             className="pointer-events-none rounded-xl"
           />
         </div>
-        <div className='relative bg-white rounded-xl shadow-md flex flex-col justify-evenly bottom-32 h-44 m-6 px-4 text-center'>
+        <div className="relative bg-white rounded-xl shadow-md flex flex-col justify-evenly bottom-32 h-44 m-6 px-4 text-center">
           <h3 className="lg:text-lg font-bold">{title}</h3>
           <span>{description}</span>
         </div>

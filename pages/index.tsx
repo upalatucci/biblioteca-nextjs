@@ -32,7 +32,7 @@ const books = [
 
   <ImageWithTextOverlay
     image={raccoltaVol2}
-    path="rsnd-vol1"
+    path="rsnd-vol2"
     title="Raccolta degli Scritti di Nichiren Daishonin"
     description="Le lettere che il Daishonin inviava ai suoi discepoli"
     width={475}
@@ -150,6 +150,7 @@ export default function Home() {
               <SearchInput
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
+                required
               />
               <button
                 className="btn bg-primary hover:bg-primaryHover rounded-3xl w-36 h-10 mt-10 text-white text-lg"

@@ -75,6 +75,7 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
               <SearchInput
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
+                required
               />
 
               <div className="flex items-center">

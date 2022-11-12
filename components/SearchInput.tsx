@@ -6,6 +6,7 @@ type SearchInputProps = {
   onChange: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
   className?: string;
+  required?: boolean;
 };
 
 const SearchInput: FC<SearchInputProps> = ({
@@ -23,6 +24,7 @@ const SearchInput: FC<SearchInputProps> = ({
     placeholder={placeholder || "Inserisci la parola o frase..."}
     value={value || ""}
     onChange={onChange}
+    required
   />
 );
 

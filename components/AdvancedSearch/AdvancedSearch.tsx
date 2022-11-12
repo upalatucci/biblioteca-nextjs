@@ -124,7 +124,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
   return (
     <form onSubmit={onSubmit}>
       <section className="bg-white">
-        <div className="container py-8 mx-auto">
+        <div className="container py-8 mx-auto md:px-10">
           <h2 className="text-4xl md:text-5xl font-bold mt-8 mb-14 px-4 sm:px-0">
             Fai la tua ricerca:
           </h2>
@@ -141,7 +141,11 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                 }))}
                 className="w-80 mb-4 md:mb-0 md:mr-4"
               />
-              <SearchInput value={searchText} onChange={onSearchTextChange} />
+              <SearchInput
+                value={searchText}
+                onChange={onSearchTextChange}
+                required
+              />
             </div>
 
             <div className="bg-white border rounded-xl px-8 pt-4 pb-8">
