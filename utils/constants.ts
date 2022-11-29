@@ -11,12 +11,10 @@ export enum FIELDS {
 }
 
 export enum SEARCH_TYPE {
-  BASE = "BASE",
   AND = "AND",
   OR = "OR",
   EXACT = "EXACT",
 }
 
-
-export const RSND_VOL_1_CATEGORY_ID = 16
-export const RSND_VOL_2_CATEGORY_ID = 17
+export const RSND_VOL_1_CATEGORY_ID = 16;
+export const RSND_VOL_2_CATEGORY_ID = 17;

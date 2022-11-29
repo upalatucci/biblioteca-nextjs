@@ -4,7 +4,6 @@ import { OptionType } from "../Select";
 export const mapSearchType: Record<SEARCH_TYPE, string> = {
   [SEARCH_TYPE.OR]: "Almeno una di queste parole",
   [SEARCH_TYPE.AND]: "Tutte queste parole",
-  [SEARCH_TYPE.BASE]: "Le parole o la frase",
   [SEARCH_TYPE.EXACT]: "Questa esatta parola o frase",
 };
 

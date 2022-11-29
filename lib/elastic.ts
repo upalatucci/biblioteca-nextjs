@@ -88,6 +88,7 @@ export const simpleSearchQuery = (
   const querySources = mapElasticSearchSourcesSlug(sources);
 
   return {
+    min_score: 0.1,
     query: {
       bool: {
         should: [
@@ -147,7 +148,14 @@ const searchQuery = (
   const querySources = mapElasticSearchSourcesSlug(sources);
 
   const elasticQuery: SearchRequest = {
-    min_score: 0.5,
+    min_score: 0.1,
+    aggs: {
+      book: {
+        terms: {
+          field: "post_type.raw",
+        },
+      },
+    },
     query: {
       bool: {
         must: [],
@@ -213,8 +221,20 @@ const searchQuery = (
   //   });
   // });
 
-  if (textQueryCopy && [SEARCH_TYPE.OR, SEARCH_TYPE.AND].includes(searchType))
-    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
+  if (textQueryCopy && searchType === SEARCH_TYPE.AND)
+    (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
+      multi_match: {
+        query: textQueryCopy,
+        fields: queryFields,
+        operator: searchType as QueryDslOperator,
+        fuzziness: 1,
+        max_expansions: 10,
+        slop: 1,
+      },
+    });
+
+  if (textQueryCopy && searchType === SEARCH_TYPE.OR)
+    (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
       multi_match: {
         query: textQueryCopy,
         fields: queryFields,
@@ -223,25 +243,13 @@ const searchQuery = (
     });
 
   if (textQueryCopy && searchType === SEARCH_TYPE.EXACT) {
-    queryFields.forEach((field) => {
-      (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
-        match_phrase: {
-          [field.split("^")[0]]: {
-            query: textQueryCopy,
-            slop: 1,
-          },
-        },
-      });
-    });
-  }
-
-  if (textQueryCopy && searchType === SEARCH_TYPE.BASE) {
-    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
+    (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
       multi_match: {
-        query: textQuery,
+        query: textQueryCopy,
         fields: queryFields,
+        type: "phrase",
+        operator: "or",
         slop: 1,
-        minimum_should_match: "100%",
       },
     });
   }

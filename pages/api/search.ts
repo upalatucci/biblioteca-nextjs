@@ -37,7 +37,8 @@ export default async function handler(
 
     console.log(
       "Search for",
-      elasticQuery.query.bool.must,
+      searchType,
+      elasticQuery.query.bool.should,
       elasticQuery.query.bool.filter[0]
     );
 

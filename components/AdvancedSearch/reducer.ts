@@ -82,7 +82,7 @@ export const initializeState = (path: string): State => {
   }
 
   if (query.searchType) state.searchType = query.searchType as SEARCH_TYPE;
-  else state.searchType = SEARCH_TYPE.BASE;
+  else state.searchType = SEARCH_TYPE.EXACT;
 
   return state;
 };
