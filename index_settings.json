@@ -1,0 +1,819 @@
+{
+    "mappings" : {
+      "_meta" : {
+        "mapping_version" : "7-0.php"
+      },
+      "dynamic_templates" : [
+        {
+          "template_meta" : {
+            "path_match" : "post_meta.*",
+            "mapping" : {
+              "fields" : {
+                "{name}" : {
+                  "type" : "text"
+                },
+                "raw" : {
+                  "ignore_above" : 10922,
+                  "type" : "keyword"
+                }
+              },
+              "type" : "text"
+            }
+          }
+        },
+        {
+          "template_meta_types" : {
+            "path_match" : "meta.*",
+            "mapping" : {
+              "properties" : {
+                "date" : {
+                  "format" : "yyyy-MM-dd",
+                  "type" : "date"
+                },
+                "datetime" : {
+                  "format" : "yyyy-MM-dd HH:mm:ss",
+                  "type" : "date"
+                },
+                "boolean" : {
+                  "type" : "boolean"
+                },
+                "double" : {
+                  "type" : "double"
+                },
+                "raw" : {
+                  "ignore_above" : 10922,
+                  "type" : "keyword"
+                },
+                "time" : {
+                  "format" : "HH:mm:ss",
+                  "type" : "date"
+                },
+                "value" : {
+                  "type" : "text",
+                  "fields" : {
+                    "raw" : {
+                      "ignore_above" : 10922,
+                      "type" : "keyword"
+                    },
+                    "sortable" : {
+                      "normalizer" : "lowerasciinormalizer",
+                      "ignore_above" : 10922,
+                      "type" : "keyword"
+                    }
+                  }
+                },
+                "long" : {
+                  "type" : "long"
+                }
+              },
+              "type" : "object"
+            }
+          }
+        },
+        {
+          "template_terms" : {
+            "path_match" : "terms.*",
+            "mapping" : {
+              "properties" : {
+                "parent" : {
+                  "type" : "long"
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "raw" : {
+                      "type" : "keyword"
+                    },
+                    "sortable" : {
+                      "normalizer" : "lowerasciinormalizer",
+                      "type" : "keyword"
+                    }
+                  }
+                },
+                "term_taxonomy_id" : {
+                  "type" : "long"
+                },
+                "term_order" : {
+                  "type" : "long"
+                },
+                "term_id" : {
+                  "type" : "long"
+                },
+                "facet" : {
+                  "type" : "keyword"
+                },
+                "slug" : {
+                  "type" : "keyword"
+                }
+              },
+              "type" : "object"
+            }
+          }
+        },
+        {
+          "term_suggest" : {
+            "path_match" : "term_suggest_*",
+            "mapping" : {
+              "analyzer" : "default",
+              "type" : "completion"
+            }
+          }
+        }
+      ],
+      "date_detection" : false,
+      "properties" : {
+        "ID" : {
+          "type" : "long"
+        },
+        "comment_count" : {
+          "type" : "long"
+        },
+        "comment_status" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "date_terms" : {
+          "properties" : {
+            "day" : {
+              "type" : "integer"
+            },
+            "dayofweek" : {
+              "type" : "integer"
+            },
+            "dayofweek_iso" : {
+              "type" : "integer"
+            },
+            "dayofyear" : {
+              "type" : "integer"
+            },
+            "hour" : {
+              "type" : "integer"
+            },
+            "m" : {
+              "type" : "integer"
+            },
+            "minute" : {
+              "type" : "integer"
+            },
+            "month" : {
+              "type" : "integer"
+            },
+            "second" : {
+              "type" : "integer"
+            },
+            "week" : {
+              "type" : "integer"
+            },
+            "year" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "guid" : {
+          "type" : "keyword"
+        },
+        "menu_order" : {
+          "type" : "long"
+        },
+        "meta" : {
+          "properties" : {
+            "acf_cenni_storici" : {
+              "properties" : {
+                "boolean" : {
+                  "type" : "boolean"
+                },
+                "date" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd"
+                },
+                "datetime" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd HH:mm:ss"
+                },
+                "double" : {
+                  "type" : "double"
+                },
+                "long" : {
+                  "type" : "long"
+                },
+                "raw" : {
+                  "type" : "keyword",
+                  "ignore_above" : 10922
+                },
+                "time" : {
+                  "type" : "date",
+                  "format" : "HH:mm:ss"
+                },
+                "value" : {
+                  "type" : "text",
+                  "fields" : {
+                    "raw" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922
+                    },
+                    "sortable" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922,
+                      "normalizer" : "lowerasciinormalizer"
+                    }
+                  }
+                }
+              }
+            },
+            "acf_data" : {
+              "properties" : {
+                "boolean" : {
+                  "type" : "boolean"
+                },
+                "date" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd"
+                },
+                "datetime" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd HH:mm:ss"
+                },
+                "double" : {
+                  "type" : "double"
+                },
+                "long" : {
+                  "type" : "long"
+                },
+                "raw" : {
+                  "type" : "keyword",
+                  "ignore_above" : 10922
+                },
+                "time" : {
+                  "type" : "date",
+                  "format" : "HH:mm:ss"
+                },
+                "value" : {
+                  "type" : "text",
+                  "fields" : {
+                    "raw" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922
+                    },
+                    "sortable" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922,
+                      "normalizer" : "lowerasciinormalizer"
+                    }
+                  }
+                }
+              }
+            },
+            "acf_destinatario" : {
+              "properties" : {
+                "boolean" : {
+                  "type" : "boolean"
+                },
+                "date" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd"
+                },
+                "datetime" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd HH:mm:ss"
+                },
+                "double" : {
+                  "type" : "double"
+                },
+                "long" : {
+                  "type" : "long"
+                },
+                "raw" : {
+                  "type" : "keyword",
+                  "ignore_above" : 10922
+                },
+                "time" : {
+                  "type" : "date",
+                  "format" : "HH:mm:ss"
+                },
+                "value" : {
+                  "type" : "text",
+                  "fields" : {
+                    "raw" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922
+                    },
+                    "sortable" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922,
+                      "normalizer" : "lowerasciinormalizer"
+                    }
+                  }
+                }
+              }
+            },
+            "acf_luogo" : {
+              "properties" : {
+                "boolean" : {
+                  "type" : "boolean"
+                },
+                "date" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd"
+                },
+                "datetime" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd HH:mm:ss"
+                },
+                "double" : {
+                  "type" : "double"
+                },
+                "long" : {
+                  "type" : "long"
+                },
+                "raw" : {
+                  "type" : "keyword",
+                  "ignore_above" : 10922
+                },
+                "time" : {
+                  "type" : "date",
+                  "format" : "HH:mm:ss"
+                },
+                "value" : {
+                  "type" : "text",
+                  "fields" : {
+                    "raw" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922
+                    },
+                    "sortable" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922,
+                      "normalizer" : "lowerasciinormalizer"
+                    }
+                  }
+                }
+              }
+            },
+            "acf_note" : {
+              "properties" : {
+                "boolean" : {
+                  "type" : "boolean"
+                },
+                "date" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd"
+                },
+                "datetime" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd HH:mm:ss"
+                },
+                "double" : {
+                  "type" : "double"
+                },
+                "long" : {
+                  "type" : "long"
+                },
+                "raw" : {
+                  "type" : "keyword",
+                  "ignore_above" : 10922
+                },
+                "time" : {
+                  "type" : "date",
+                  "format" : "HH:mm:ss"
+                },
+                "value" : {
+                  "type" : "text",
+                  "fields" : {
+                    "raw" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922
+                    },
+                    "sortable" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922,
+                      "normalizer" : "lowerasciinormalizer"
+                    }
+                  }
+                }
+              }
+            },
+            "acf_numero" : {
+              "properties" : {
+                "boolean" : {
+                  "type" : "boolean"
+                },
+                "date" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd"
+                },
+                "datetime" : {
+                  "type" : "date",
+                  "format" : "yyyy-MM-dd HH:mm:ss"
+                },
+                "double" : {
+                  "type" : "double"
+                },
+                "long" : {
+                  "type" : "long"
+                },
+                "raw" : {
+                  "type" : "keyword",
+                  "ignore_above" : 10922
+                },
+                "time" : {
+                  "type" : "date",
+                  "format" : "HH:mm:ss"
+                },
+                "value" : {
+                  "type" : "text",
+                  "fields" : {
+                    "raw" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922
+                    },
+                    "sortable" : {
+                      "type" : "keyword",
+                      "ignore_above" : 10922,
+                      "normalizer" : "lowerasciinormalizer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "permalink" : {
+          "type" : "keyword"
+        },
+        "ping_status" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "post_author" : {
+          "properties" : {
+            "display_name" : {
+              "type" : "text",
+              "fields" : {
+                "raw" : {
+                  "type" : "keyword"
+                },
+                "sortable" : {
+                  "type" : "keyword",
+                  "normalizer" : "lowerasciinormalizer"
+                }
+              }
+            },
+            "id" : {
+              "type" : "long"
+            },
+            "login" : {
+              "type" : "text",
+              "fields" : {
+                "raw" : {
+                  "type" : "keyword"
+                },
+                "sortable" : {
+                  "type" : "keyword",
+                  "normalizer" : "lowerasciinormalizer"
+                }
+              }
+            },
+            "raw" : {
+              "type" : "keyword"
+            }
+          }
+        },
+        "post_content" : {
+          "type" : "text"
+        },
+        "post_content_filtered" : {
+          "type" : "text"
+        },
+        "post_date" : {
+          "type" : "date",
+          "format" : "yyyy-MM-dd HH:mm:ss"
+        },
+        "post_date_gmt" : {
+          "type" : "date",
+          "format" : "yyyy-MM-dd HH:mm:ss"
+        },
+        "post_excerpt" : {
+          "type" : "text"
+        },
+        "post_id" : {
+          "type" : "long"
+        },
+        "post_meta" : {
+          "type" : "object"
+        },
+        "post_mime_type" : {
+          "type" : "keyword"
+        },
+        "post_modified" : {
+          "type" : "date",
+          "format" : "yyyy-MM-dd HH:mm:ss"
+        },
+        "post_modified_gmt" : {
+          "type" : "date",
+          "format" : "yyyy-MM-dd HH:mm:ss"
+        },
+        "post_name" : {
+          "type" : "text",
+          "fields" : {
+            "post_name" : {
+              "type" : "text"
+            },
+            "raw" : {
+              "type" : "keyword",
+              "ignore_above" : 10922
+            }
+          }
+        },
+        "post_parent" : {
+          "type" : "long"
+        },
+        "post_password" : {
+          "type" : "text"
+        },
+        "post_status" : {
+          "type" : "keyword"
+        },
+        "post_title" : {
+          "type" : "text",
+          "fields" : {
+            "post_title" : {
+              "type" : "text",
+              "analyzer" : "standard"
+            },
+            "raw" : {
+              "type" : "keyword",
+              "ignore_above" : 10922
+            },
+            "sortable" : {
+              "type" : "keyword",
+              "ignore_above" : 10922,
+              "normalizer" : "lowerasciinormalizer"
+            },
+            "suggest" : {
+              "type" : "text",
+              "analyzer" : "edge_ngram_analyzer",
+              "search_analyzer" : "standard"
+            }
+          }
+        },
+        "post_type" : {
+          "type" : "text",
+          "fields" : {
+            "post_type" : {
+              "type" : "text"
+            },
+            "raw" : {
+              "type" : "keyword"
+            }
+          }
+        },
+        "term_suggest" : {
+          "type" : "text",
+          "analyzer" : "edge_ngram_analyzer",
+          "search_analyzer" : "standard"
+        },
+        "terms" : {
+          "properties" : {
+            "cat_glossary" : {
+              "properties" : {
+                "facet" : {
+                  "type" : "keyword"
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "raw" : {
+                      "type" : "keyword"
+                    },
+                    "sortable" : {
+                      "type" : "keyword",
+                      "normalizer" : "lowerasciinormalizer"
+                    }
+                  }
+                },
+                "parent" : {
+                  "type" : "long"
+                },
+                "slug" : {
+                  "type" : "keyword"
+                },
+                "term_id" : {
+                  "type" : "long"
+                },
+                "term_order" : {
+                  "type" : "long"
+                },
+                "term_taxonomy_id" : {
+                  "type" : "long"
+                }
+              }
+            },
+            "cat_rsnd" : {
+              "properties" : {
+                "facet" : {
+                  "type" : "keyword"
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "raw" : {
+                      "type" : "keyword"
+                    },
+                    "sortable" : {
+                      "type" : "keyword",
+                      "normalizer" : "lowerasciinormalizer"
+                    }
+                  }
+                },
+                "parent" : {
+                  "type" : "long"
+                },
+                "slug" : {
+                  "type" : "keyword"
+                },
+                "term_id" : {
+                  "type" : "long"
+                },
+                "term_order" : {
+                  "type" : "long"
+                },
+                "term_taxonomy_id" : {
+                  "type" : "long"
+                }
+              }
+            },
+            "cat_sdlpe" : {
+              "properties" : {
+                "facet" : {
+                  "type" : "keyword"
+                },
+                "name" : {
+                  "type" : "text",
+                  "fields" : {
+                    "raw" : {
+                      "type" : "keyword"
+                    },
+                    "sortable" : {
+                      "type" : "keyword",
+                      "normalizer" : "lowerasciinormalizer"
+                    }
+                  }
+                },
+                "parent" : {
+                  "type" : "long"
+                },
+                "slug" : {
+                  "type" : "keyword"
+                },
+                "term_id" : {
+                  "type" : "long"
+                },
+                "term_order" : {
+                  "type" : "long"
+                },
+                "term_taxonomy_id" : {
+                  "type" : "long"
+                }
+              }
+            }
+          }
+        },
+        "thumbnail" : {
+          "properties" : {
+            "ID" : {
+              "type" : "long"
+            },
+            "alt" : {
+              "type" : "text"
+            },
+            "height" : {
+              "type" : "integer"
+            },
+            "src" : {
+              "type" : "text"
+            },
+            "width" : {
+              "type" : "integer"
+            }
+          }
+        }
+      }
+    },
+    "settings" : {
+      "index" : {
+        "routing" : {
+          "allocation" : {
+            "include" : {
+              "_tier_preference" : "data_content"
+            }
+          }
+        },
+        "mapping" : {
+          "total_fields" : {
+            "limit" : "5000"
+          },
+          "ignore_malformed" : "true"
+        },
+        "number_of_shards" : "5",
+        "max_shingle_diff" : "8",
+        "max_result_window" : "1000000",
+        "analysis" : {
+          "filter" : {
+              "italian_stop_filter": {
+                  "type": "stop",
+                  "stopwords": "_italian_"
+              },
+            "shingle_filter" : {
+              "max_shingle_size" : "5",
+              "min_shingle_size" : "2",
+              "type" : "shingle"
+            },
+            "ep_synonyms_filter" : {
+              "type" : "synonym_graph",
+              "lenient" : "true",
+              "synonyms" : [
+                "sneakers, tennis shoes, trainers, runners",
+                "buddha, budda, Buddha, Budda",
+                "shoes => sneaker, sandal, boots, high heels",
+                "dèi => dei, dèi",
+                "buddha => budda"
+              ]
+            },
+            "edge_ngram" : {
+              "min_gram" : "3",
+              "side" : "front",
+              "type" : "edge_ngram",
+              "max_gram" : "10"
+            },
+            "ewp_word_delimiter" : {
+              "type" : "word_delimiter_graph",
+              "preserve_original" : "true"
+            },
+            "ewp_snowball" : {
+              "type" : "snowball",
+              "language" : "Italian"
+            }
+          },
+          "normalizer" : {
+            "lowerasciinormalizer" : {
+              "filter" : [
+                "lowercase",
+                "asciifolding"
+              ],
+              "type" : "custom"
+            }
+          },
+          "analyzer" : {
+            "ewp_lowercase" : {
+              "filter" : [
+                "lowercase"
+              ],
+              "type" : "custom",
+              "tokenizer" : "keyword"
+            },
+            "default" : {
+              "filter" : [
+                "ep_synonyms_filter",
+                "ewp_word_delimiter",
+                "lowercase",
+                "italian_stop_filter",
+                "ewp_snowball"
+              ],
+              "stopwords": "_italian_",
+              "char_filter" : [
+                "html_strip"
+              ],
+              "language" : "italian",
+              "tokenizer" : "standard"
+            },
+            "edge_ngram_analyzer" : {
+              "filter" : [
+                "lowercase",
+                "edge_ngram"
+              ],
+              "type" : "custom",
+              "tokenizer" : "standard"
+            },
+            "shingle_analyzer" : {
+              "filter" : [
+                "lowercase",
+                "shingle_filter"
+              ],
+              "type" : "custom",
+              "tokenizer" : "standard"
+            }
+          }
+        }
+      }
+    }
+}
