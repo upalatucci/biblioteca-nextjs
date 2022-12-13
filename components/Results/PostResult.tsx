@@ -11,8 +11,11 @@ type PostProps = {
 
 const humanizedField = {
   post_content: "CONTENUTO",
+  "post_content.exact": "CONTENUTO",
   "meta.acf_cenni_storici.value": "CENNI STORICI",
+  "meta.acf_cenni_storici.value.exact": "CENNI STORICI",
   "meta.acf_note.value": "NOTE",
+  "meta.acf_note.value.exact": "NOTE",
 };
 
 const humanizeTypeCategory = (type: PostType, categories: string[]) => {
@@ -29,8 +32,11 @@ const humanizeTypeCategory = (type: PostType, categories: string[]) => {
 
 const linkField = {
   post_content: "contenuto",
+  "post_content.exact": "contenuto",
   "meta.acf_cenni_storici.value": "cenni_storici",
+  "meta.acf_cenni_storici.value.exact": "cenni_storici",
   "meta.acf_note.value": "note",
+  "meta.acf_note.value.exact": "note",
 };
 
 const GlossarioResult: FC<PostProps> = ({ post }) => {
@@ -64,12 +70,14 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
             }}
           ></div>
 
-          <p className="flex items-center mt-4">
+          <p className="flex items-center mt-4 flex-wrap">
             {post.highlight_fields
-              .filter((field) => field !== "post_title")
+              .filter(
+                (field) => !["post_title", "post_title.exact"].includes(field)
+              )
               .map((highlightField) => (
                 <span
-                  className="border border-primary rounded-xl px-4 mr-2 text-md"
+                  className="border border-primary rounded-xl px-4 mr-2 text-md break-keep"
                   key={highlightField}
                 >
                   {humanizedField[highlightField]}
@@ -119,9 +127,11 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
             ></div>
           </a>
         </Link>
-        <p className="flex items-center mt-4">
+        <p className="flex items-center mt-4  flex-wrap">
           {post.highlight_fields
-            .filter((field) => field !== "post_title")
+            .filter(
+              (field) => !["post_title", "post_title.exact"].includes(field)
+            )
             .map((highlightField) => (
               <Link
                 key={highlightField}
@@ -129,7 +139,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
                 passHref
               >
                 <a>
-                  <span className="border border-primary rounded-xl px-4 mr-2 text-md">
+                  <span className="border border-primary rounded-xl px-4 mr-2 text-md  break-keep">
                     {humanizedField[highlightField]}
                   </span>
                 </a>

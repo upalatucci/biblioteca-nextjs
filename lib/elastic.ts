@@ -18,9 +18,19 @@ export const client = new Client({
 });
 
 const mapElasticSearchFields = {
-  [FIELDS.CONTENT]: "post_content^3",
+  [FIELDS.CONTENT]: "post_content",
   [FIELDS.CENNI_STORICI]: "meta.acf_cenni_storici.value",
   [FIELDS.NOTE]: "meta.acf_note.value",
+};
+
+const addWeights = (fields: string[]): string[] => {
+  return fields.map((field) => {
+    if (field.startsWith("post_title")) return field + "^5";
+
+    if (field.startsWith("post_content")) return field + "^3";
+
+    return field;
+  });
 };
 
 const mapElasticSearchSourcesSlug = (sources: BOOKS[]) => {
@@ -33,7 +43,7 @@ const mapElasticSearchSourcesSlug = (sources: BOOKS[]) => {
         elasticSources.push("sdlpe");
         break;
       case BOOKS.GLOSSARIO:
-        elasticSources.push("glossario");
+        elasticSources.push("glossary");
         break;
     }
     return elasticSources;
@@ -45,7 +55,7 @@ export const highlighPost = (
   textQuery: string,
   fields: FIELDS[]
 ) => {
-  const queryFields = ["post_title^5"].concat(
+  const queryFields = ["post_title"].concat(
     fields.map((field) => mapElasticSearchFields[field])
   );
 
@@ -56,7 +66,7 @@ export const highlighPost = (
           {
             multi_match: {
               query: textQuery,
-              fields: queryFields,
+              fields: addWeights(queryFields),
               slop: 1,
               minimum_should_match: "100%",
             },
@@ -141,7 +151,7 @@ const searchQuery = (
 ): SearchRequest => {
   const textQueryCopy = textQuery.concat();
 
-  const queryFields = ["post_title^5"].concat(
+  const queryFields = ["post_title"].concat(
     fields.map((field) => mapElasticSearchFields[field])
   );
 
@@ -160,14 +170,12 @@ const searchQuery = (
       bool: {
         must: [],
         should: [],
-        filter: [
-          {
-            query_string: {
-              default_field: "post_type",
-              query: querySources.join(" OR "),
-            },
-          },
-        ],
+        filter: [],
+      },
+    },
+    post_filter: {
+      terms: {
+        "post_type.raw": querySources,
       },
     },
     highlight: {
@@ -176,8 +184,12 @@ const searchQuery = (
       fields: {
         post_content: {},
         post_title: {},
+        "post_content.exact": {},
+        "post_title.exact": {},
         "meta.acf_note.value": {},
+        "meta.acf_note.value.exact": {},
         "meta.acf_cenni_storici.value": {},
+        "meta.acf_cenni_storici.value.exact": {},
       },
     },
   };
@@ -225,7 +237,7 @@ const searchQuery = (
     (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
       multi_match: {
         query: textQueryCopy,
-        fields: queryFields,
+        fields: addWeights(queryFields),
         operator: searchType as QueryDslOperator,
         fuzziness: 1,
         max_expansions: 10,
@@ -237,21 +249,28 @@ const searchQuery = (
     (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
       multi_match: {
         query: textQueryCopy,
-        fields: queryFields,
+        fields: addWeights(queryFields),
         operator: searchType as QueryDslOperator,
       },
     });
 
   if (textQueryCopy && searchType === SEARCH_TYPE.EXACT) {
     (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
-      multi_match: {
-        query: textQueryCopy,
-        fields: queryFields,
-        type: "phrase",
-        operator: "or",
-        slop: 1,
+      query_string: {
+        query: `"${textQuery}"`,
+        fields: addWeights(queryFields.map((field) => field + ".exact")),
       },
     });
+    // (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
+    //   multi_match: {
+    //     query: textQueryCopy,
+    //     fields: queryFields,
+    //     type: "phrase",
+    //     operator: "or",
+    //     slop: 1,
+    //     analyzer: "italian",
+    //   },
+    // });
   }
 
   return elasticQuery;

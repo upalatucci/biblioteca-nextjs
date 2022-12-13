@@ -1,6 +1,4 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useCallback, useEffect, useMemo, useState } from "react";
 import AdvancedSearch from "@components/AdvancedSearch/AdvancedSearch";
 import Footer from "@components/Footer";
 import HomeNavbar from "@components/Navbar/HomeNavbar";

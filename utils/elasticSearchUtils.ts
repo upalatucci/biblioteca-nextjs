@@ -50,12 +50,28 @@ const removeUnclosedTags = (text: string): string => {
 
 const buildHighlight = (highlight) => {
   const contentHighlight = highlight?.post_content?.join(["..."]);
+  const contentExactHighlight = highlight?.["post_content.exact"]?.join([
+    "...",
+  ]);
   const noteHighlight = highlight?.["meta.acf_note.value"]?.join(["..."]);
+  const noteExactHighlight = highlight?.["meta.acf_note.value.exact"]?.join([
+    "...",
+  ]);
   const historyHighlight = highlight?.["meta.acf_cenni_storici.value"]?.join([
     "...",
   ]);
+  const historyExactHighlight = highlight?.[
+    "meta.acf_cenni_storici.value.exact"
+  ]?.join(["..."]);
 
-  return [contentHighlight, noteHighlight, historyHighlight]
+  return [
+    contentHighlight,
+    contentExactHighlight,
+    noteHighlight,
+    noteExactHighlight,
+    historyHighlight,
+    historyExactHighlight,
+  ]
     .filter((h) => h)
     .join("[...]");
 };
@@ -80,7 +96,12 @@ export const mapElasticResultToPost = (result: any): PostResultType[] => {
     modified: _source.post_modified,
     ping_status: "open",
     slug: _source.post_name,
-    title: { rendered: highlight?.post_title || _source.post_title },
+    title: {
+      rendered:
+        highlight?.post_title ||
+        highlight?.["post_title.exact"] ||
+        _source.post_title,
+    },
     type: _source.post_type,
     highlight_fields: highlight ? Object.keys(highlight) : [],
     baseURL: typeToBaseUrl(_source.post_type),
