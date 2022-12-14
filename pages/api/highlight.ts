@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { FIELDS } from "@utils/constants";
+import { FIELDS, SEARCH_TYPE } from "@utils/constants";
 import { highlighPost } from "lib/elastic";
 import { getQueryParamAsArray } from "@utils/utils";
 
@@ -16,7 +16,14 @@ export default async function handler(
       FIELDS.CONTENT
     );
 
-    const elasticResult = await highlighPost(postId, searchText, fields);
+    const searchType = req.query.searchType;
+
+    const elasticResult = await highlighPost(
+      postId,
+      searchText,
+      fields,
+      searchType as SEARCH_TYPE
+    );
 
     res.status(200).json(elasticResult);
   } catch (error) {

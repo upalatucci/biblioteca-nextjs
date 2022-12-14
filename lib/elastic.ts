@@ -37,29 +37,20 @@ const addWeights = (fields: string[]): string[] => {
 export const highlighPost = (
   postId: number,
   textQuery: string,
-  fields: FIELDS[]
+  fields: FIELDS[],
+  searchType: SEARCH_TYPE
 ) => {
   const queryFields = ["post_title"].concat(
     fields.map((field) => mapElasticSearchFields[field])
   );
 
-  return client.search({
+  const elasticQuery = {
     query: {
       bool: {
-        should: [
-          {
-            multi_match: {
-              query: textQuery,
-              fields: addWeights(queryFields),
-              slop: 1,
-              minimum_should_match: "100%",
-            },
-          },
-        ],
+        should: [],
         filter: [{ term: { ID: postId } }],
       },
     },
-
     highlight: {
       pre_tags: ["<mark>"],
       post_tags: ["</mark>"],
@@ -67,12 +58,60 @@ export const highlighPost = (
       fields: {
         post_content: {},
         post_title: {},
+        "post_content.exact": {},
+        "post_title.exact": {},
         "meta.acf_note.value": {},
+        "meta.acf_note.value.exact": {},
         "meta.acf_cenni_storici.value": {},
+        "meta.acf_cenni_storici.value.exact": {},
       },
     },
     index: process.env.ELASTIC_SEARCH_INDEX,
-  });
+  };
+
+  if (textQuery && !searchType)
+    (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
+      multi_match: {
+        query: textQuery,
+        fields: addWeights(queryFields),
+        slop: 1,
+        minimum_should_match: "100%",
+      },
+    });
+
+  if (textQuery && searchType === SEARCH_TYPE.AND)
+    (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
+      multi_match: {
+        query: textQuery,
+        fields: addWeights(queryFields),
+        operator: searchType as QueryDslOperator,
+        fuzziness: 1,
+        max_expansions: 10,
+        slop: 1,
+      },
+    });
+
+  if (textQuery && searchType === SEARCH_TYPE.OR)
+    (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
+      multi_match: {
+        query: textQuery,
+        fields: addWeights(queryFields),
+        operator: searchType as QueryDslOperator,
+      },
+    });
+
+  if (textQuery && searchType === SEARCH_TYPE.EXACT) {
+    (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
+      query_string: {
+        query: `"${textQuery}"`,
+        fields: addWeights(queryFields.map((field) => field + ".exact")),
+      },
+    });
+  }
+
+  console.log(elasticQuery?.query?.bool?.should);
+
+  return client.search(elasticQuery);
 };
 
 export const simpleSearchQuery = (

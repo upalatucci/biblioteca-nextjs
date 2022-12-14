@@ -15,11 +15,18 @@ import {
 } from "@utils/articleUtils";
 import useHighlightedPost from "@hooks/useHighlightedPost";
 import { removeHTMLTags } from "@utils/utils";
+import { useEffect } from "react";
 
 export default function PostPage({ post }) {
   const router = useRouter();
 
   const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
+
+  useEffect(() => {
+    if (router.asPath.indexOf("#") === -1)
+      document.querySelector("mark")?.scrollIntoView();
+  }, [highlightedPost]);
+
   if (router.isFallback || isLoadingHighligh) {
     return <ArticleLoading />;
   }

@@ -101,9 +101,13 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
   );
   const textSearch = router.query.q;
 
-  const postQueryParams = `?q=${textSearch}${fields
+  let postQueryParams = `?q=${textSearch}${fields
     ?.map((field) => `&fields=${field}`)
     .join("")}`;
+
+  if (router.query.searchType) {
+    postQueryParams += `&searchType=${router.query.searchType}`;
+  }
 
   return (
     <li className="py-6">
