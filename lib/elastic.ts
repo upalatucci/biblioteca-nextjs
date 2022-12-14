@@ -6,6 +6,7 @@ import {
   QueryDslQueryContainer,
   SearchRequest,
 } from "@elastic/elasticsearch/lib/api/types";
+import { PostType } from "@utils/elasticSearchUtils";
 
 export const DEFAULT_PAGE_SIZE = 20;
 
@@ -31,23 +32,6 @@ const addWeights = (fields: string[]): string[] => {
 
     return field;
   });
-};
-
-const mapElasticSearchSourcesSlug = (sources: BOOKS[]) => {
-  return sources.reduce((elasticSources, source) => {
-    switch (source) {
-      case BOOKS.RSND:
-        elasticSources.push("rsnd");
-        break;
-      case BOOKS.SUTRA:
-        elasticSources.push("sdlpe");
-        break;
-      case BOOKS.GLOSSARIO:
-        elasticSources.push("glossary");
-        break;
-    }
-    return elasticSources;
-  }, [] as string[]);
 };
 
 export const highlighPost = (
@@ -93,12 +77,17 @@ export const highlighPost = (
 
 export const simpleSearchQuery = (
   textQuery: string,
-  sources: BOOKS[] = [BOOKS.RSND]
+  sources: PostType[]
 ): SearchRequest => {
-  const querySources = mapElasticSearchSourcesSlug(sources);
-
-  return {
+  const query: SearchRequest = {
     min_score: 0.1,
+    aggs: {
+      book: {
+        terms: {
+          field: "post_type.raw",
+        },
+      },
+    },
     query: {
       bool: {
         should: [
@@ -116,14 +105,6 @@ export const simpleSearchQuery = (
             },
           },
         ],
-        filter: [
-          {
-            query_string: {
-              default_field: "post_type",
-              query: querySources.join(" OR "),
-            },
-          },
-        ],
       },
     },
     highlight: {
@@ -137,13 +118,23 @@ export const simpleSearchQuery = (
       },
     },
   };
+
+  if (sources) {
+    query.post_filter = {
+      terms: {
+        "post_type.raw": sources,
+      },
+    };
+  }
+
+  return query;
 };
 
 const searchQuery = (
   textQuery: string,
   searchType: SEARCH_TYPE,
   fields: FIELDS[] = [FIELDS.CONTENT],
-  sources: BOOKS[] = [BOOKS.RSND],
+  sources: PostType[],
   recipient: string = null,
   place: string = null,
   from: string = null,
@@ -154,8 +145,6 @@ const searchQuery = (
   const queryFields = ["post_title"].concat(
     fields.map((field) => mapElasticSearchFields[field])
   );
-
-  const querySources = mapElasticSearchSourcesSlug(sources);
 
   const elasticQuery: SearchRequest = {
     min_score: 0.1,
@@ -171,11 +160,6 @@ const searchQuery = (
         must: [],
         should: [],
         filter: [],
-      },
-    },
-    post_filter: {
-      terms: {
-        "post_type.raw": querySources,
       },
     },
     highlight: {
@@ -261,16 +245,14 @@ const searchQuery = (
         fields: addWeights(queryFields.map((field) => field + ".exact")),
       },
     });
-    // (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
-    //   multi_match: {
-    //     query: textQueryCopy,
-    //     fields: queryFields,
-    //     type: "phrase",
-    //     operator: "or",
-    //     slop: 1,
-    //     analyzer: "italian",
-    //   },
-    // });
+  }
+
+  if (sources) {
+    elasticQuery.post_filter = {
+      terms: {
+        "post_type.raw": sources,
+      },
+    };
   }
 
   return elasticQuery;

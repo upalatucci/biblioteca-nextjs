@@ -11,6 +11,7 @@ import {
 } from "./constants";
 import reducer, { ACTION_TYPES, initializeState } from "./reducer";
 import Loading from "@components/Loading";
+import { MAP_POST_TYPE_TO_BOOK_URL, PostType } from "@utils/elasticSearchUtils";
 
 type AdvancedSearchType = {
   loading: boolean;
@@ -23,29 +24,21 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
     initializeState(router.asPath)
   );
 
-  const {
-    sources,
-    fields,
-    searchText,
-    recipient,
-    place,
-    from,
-    to,
-    searchType,
-  } = state;
+  const { fields, searchText, recipient, place, from, to, searchType } = state;
 
   const onSubmit = (event) => {
     event.preventDefault();
+    const book = router.query.book;
+    const isGlossary = book === MAP_POST_TYPE_TO_BOOK_URL[PostType.GLOSSARY];
 
     if (!searchText) return;
 
     router.query.q = searchText;
-    router.query.sources = sources;
     router.query.fields = fields;
 
     router.query.searchType = searchType;
 
-    if (!sources.includes(BOOKS.GLOSSARIO)) {
+    if (!isGlossary) {
       router.query.from = from.toString();
       router.query.to = to.toString();
     } else {
@@ -53,32 +46,14 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
       delete router.query.to;
     }
 
-    if (recipient && !sources.includes(BOOKS.GLOSSARIO))
-      router.query.recipient = recipient;
+    if (recipient && !isGlossary) router.query.recipient = recipient;
     else delete router.query.recipient;
 
-    if (place && !sources.includes(BOOKS.GLOSSARIO)) router.query.place = place;
+    if (place && !isGlossary) router.query.place = place;
     else delete router.query.place;
 
     router.push({ ...router, hash: "risultati" }, null, { scroll: false });
   };
-
-  const onSourceChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (event.target.checked) {
-        dispatch({
-          type: ACTION_TYPES.ADD_SOURCE,
-          payload: event.target.value as BOOKS,
-        });
-      } else {
-        dispatch({
-          type: ACTION_TYPES.REMOVE_SOURCE,
-          payload: event.target.value as BOOKS,
-        });
-      }
-    },
-    []
-  );
 
   const onFieldsChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -153,44 +128,6 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                 Cerca in:
               </h3>
               <div className="bg-defaultBg shadow-md rounded-xl px-8 py-8 mb-10">
-                <div className="flex items-center justify-start flex-wrap mb-4">
-                  <span className="w-32 lg:w-40">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        value={BOOKS.RSND}
-                        checked={sources.includes(BOOKS.RSND)}
-                        onChange={onSourceChange}
-                        className="mr-4"
-                      />
-                      <strong>RSND</strong>
-                    </label>
-                  </span>
-                  <span className="w-32 lg:w-40">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        value={BOOKS.SUTRA}
-                        checked={sources.includes(BOOKS.SUTRA)}
-                        onChange={onSourceChange}
-                        className="mr-4"
-                      />
-                      <strong>Il Sutra del Loto</strong>
-                    </label>
-                  </span>
-                  <span className="w-32 lg:w-40">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        value={BOOKS.GLOSSARIO}
-                        checked={sources.includes(BOOKS.GLOSSARIO)}
-                        onChange={onSourceChange}
-                        className="mr-4"
-                      />
-                      <strong>Glossario</strong>
-                    </label>
-                  </span>
-                </div>
                 <div className="flex items-center justify-start flex-wrap">
                   <span className="w-32 lg:w-40">
                     <label className="flex items-center">

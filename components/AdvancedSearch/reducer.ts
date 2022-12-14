@@ -69,12 +69,6 @@ export const initializeState = (path: string): State => {
     state.searchText = query.q as string;
   }
 
-  if (query.sources) {
-    state.sources = Array.isArray(query.sources)
-      ? (query.sources as BOOKS[])
-      : [query.sources as BOOKS];
-  }
-
   if (query.fields) {
     state.fields = Array.isArray(query.fields)
       ? (query.fields as FIELDS[])

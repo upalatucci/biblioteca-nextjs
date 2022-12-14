@@ -1,8 +1,20 @@
 export enum PostType {
   RSND = "rsnd",
   SDL = "sdlpe",
-  GLOSSARY = "glossario",
+  GLOSSARY = "glossary",
 }
+
+export const MAP_BOOK_URL_KEY_TO_POST_TYPE = {
+  glossario: PostType.GLOSSARY,
+  sdl: PostType.SDL,
+  rsnd: PostType.RSND,
+};
+
+export const MAP_POST_TYPE_TO_BOOK_URL = {
+  [PostType.GLOSSARY]: "glossario",
+  [PostType.RSND]: "rsnd",
+  [PostType.SDL]: "sdl",
+};
 
 const typeToBaseUrl = (type: PostType) => {
   switch (type) {
@@ -49,20 +61,26 @@ const removeUnclosedTags = (text: string): string => {
 };
 
 const buildHighlight = (highlight) => {
-  const contentHighlight = highlight?.post_content?.join(["..."]);
-  const contentExactHighlight = highlight?.["post_content.exact"]?.join([
-    "...",
-  ]);
-  const noteHighlight = highlight?.["meta.acf_note.value"]?.join(["..."]);
-  const noteExactHighlight = highlight?.["meta.acf_note.value.exact"]?.join([
-    "...",
-  ]);
-  const historyHighlight = highlight?.["meta.acf_cenni_storici.value"]?.join([
-    "...",
-  ]);
+  const contentHighlight = highlight?.post_content
+    ?.map((h) => removeUnclosedTags(h))
+    ?.join(["..."]);
+  const contentExactHighlight = highlight?.["post_content.exact"]
+    ?.map((h) => removeUnclosedTags(h))
+    ?.join(["..."]);
+  const noteHighlight = highlight?.["meta.acf_note.value"]
+    ?.map((h) => removeUnclosedTags(h))
+    ?.join(["..."]);
+  const noteExactHighlight = highlight?.["meta.acf_note.value.exact"]
+    ?.map((h) => removeUnclosedTags(h))
+    ?.join(["..."]);
+  const historyHighlight = highlight?.["meta.acf_cenni_storici.value"]
+    ?.map((h) => removeUnclosedTags(h))
+    ?.join(["..."]);
   const historyExactHighlight = highlight?.[
     "meta.acf_cenni_storici.value.exact"
-  ]?.join(["..."]);
+  ]
+    ?.map((h) => removeUnclosedTags(h))
+    ?.join(["..."]);
 
   return [
     contentHighlight,

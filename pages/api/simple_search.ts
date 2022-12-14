@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { BOOKS } from "@utils/constants";
 import { client, DEFAULT_PAGE_SIZE, simpleSearchQuery } from "lib/elastic";
 import { getQueryParamAsArray } from "@utils/utils";
+import { PostType } from "@utils/elasticSearchUtils";
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,7 +10,7 @@ export default async function handler(
   try {
     const searchText = req.query.q as string;
 
-    const sources = getQueryParamAsArray<BOOKS>(req.query.sources, BOOKS.RSND);
+    const sources = getQueryParamAsArray<PostType>(req.query.sources);
 
     const elasticQuery = simpleSearchQuery(searchText, sources);
 

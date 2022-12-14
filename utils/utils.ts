@@ -10,6 +10,7 @@ export const getQueryParamAsArray = <T>(
   queryParam: unknown | unknown[],
   defaultValue?: T
 ) => {
+  if (!queryParam && !defaultValue) return;
   return Array.isArray(queryParam) ? queryParam : [queryParam || defaultValue];
 };
 

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { FC, useEffect, useState } from "react";
-import { BOOKS } from "@utils/constants";
+import { FC, useEffect, useState } from "react";
 import SearchInput from "./SearchInput";
 import Loading from "./Loading";
 
@@ -9,20 +8,9 @@ type SimpleSearchType = {
   loading: boolean;
 };
 
-const baseSources = [BOOKS.RSND, BOOKS.SUTRA, BOOKS.GLOSSARIO];
-
 const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState(router.query.q as string);
-
-  const hasQuerySources = Boolean(router.query.sources);
-  const querySources = Array.isArray(router.query.sources)
-    ? (router.query.sources as BOOKS[])
-    : [router.query.sources as BOOKS];
-
-  const initialSources: BOOKS[] = hasQuerySources ? querySources : baseSources;
-
-  const [searchResouces, setSearchResouces] = useState(initialSources);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -30,7 +18,6 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
     if (!searchText) return;
 
     router.query.q = searchText;
-    router.query.sources = searchResouces as string[];
     router.push({ ...router, hash: "risultati" });
   };
 
@@ -41,25 +28,9 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
     }
   }, [router.query.q]);
 
-  const onResouceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (searchResouces.includes(event.target.value as BOOKS)) {
-      let filterResouces = searchResouces.filter(
-        (resouce) => resouce !== event.target.value
-      );
-
-      if (filterResouces.length === 0) filterResouces = [BOOKS.RSND];
-      setSearchResouces(filterResouces);
-    } else {
-      setSearchResouces((resouces) =>
-        resouces.concat([event.target.value as BOOKS])
-      );
-    }
-  };
-
   const onReset = (event) => {
     event.preventDefault();
     setSearchText("");
-    setSearchResouces(baseSources);
   };
 
   return (
@@ -77,42 +48,6 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
                 onChange={(e) => setSearchText(e.target.value)}
                 required
               />
-
-              <div className="flex items-center">
-                <span className="mx-4">
-                  <label className="flex">
-                    <input
-                      type="checkbox"
-                      value={BOOKS.RSND}
-                      checked={searchResouces.includes(BOOKS.RSND)}
-                      onChange={onResouceChange}
-                    />
-                    <strong className="ml-2">RSND</strong>
-                  </label>
-                </span>
-                <span className="mx-4">
-                  <label className="flex">
-                    <input
-                      type="checkbox"
-                      value={BOOKS.SUTRA}
-                      checked={searchResouces.includes(BOOKS.SUTRA)}
-                      onChange={onResouceChange}
-                    />
-                    <strong className="ml-2">Il Sutra del Loto</strong>
-                  </label>
-                </span>
-                <span className="mx-4">
-                  <label className="flex">
-                    <input
-                      type="checkbox"
-                      value={BOOKS.GLOSSARIO}
-                      checked={searchResouces.includes(BOOKS.GLOSSARIO)}
-                      onChange={onResouceChange}
-                    />
-                    <strong className="ml-2">Glossario</strong>
-                  </label>
-                </span>
-              </div>
             </div>
             <div className="px-4 flex items-center justify-center mb-12">
               <button

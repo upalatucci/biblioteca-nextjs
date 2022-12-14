@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { BOOKS, FIELDS, SEARCH_TYPE } from "@utils/constants";
+import { FIELDS, SEARCH_TYPE } from "@utils/constants";
 import searchQuery, { client, DEFAULT_PAGE_SIZE } from "lib/elastic";
 import { getQueryParamAsArray } from "@utils/utils";
+import { PostType } from "@utils/elasticSearchUtils";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,7 +17,7 @@ export default async function handler(
       FIELDS.CONTENT
     );
 
-    const sources = getQueryParamAsArray<BOOKS>(req.query.sources, BOOKS.RSND);
+    const sources = getQueryParamAsArray<PostType>(req.query.sources);
 
     const pageQuery = parseInt(
       Array.isArray(req?.query?.page) ? req?.query?.page[0] : req?.query?.page
@@ -38,8 +39,9 @@ export default async function handler(
     console.log(
       "Search for",
       searchType,
+      sources,
       elasticQuery.query.bool.should,
-      elasticQuery.query.bool.filter[0]
+      elasticQuery.post_filter
     );
 
     const searchResult = await client.search({

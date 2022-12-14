@@ -19,7 +19,7 @@ const humanizedField = {
 };
 
 const humanizeTypeCategory = (type: PostType, categories: string[]) => {
-  if (type === "glossario") return "Glossario";
+  if (type === "glossary") return "Glossario";
 
   if (type === "rsnd") {
     if (categories.length > 1)
@@ -156,7 +156,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
 };
 
 const Post: FC<PostProps> = ({ post }) => {
-  if (post?.type === "glossario") {
+  if (post?.type === "glossary") {
     return <GlossarioResult post={post} />;
   }
 
