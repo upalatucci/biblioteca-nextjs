@@ -16,6 +16,12 @@ export const MAP_POST_TYPE_TO_BOOK_URL = {
   [PostType.SDL]: "sdl",
 };
 
+export const MAP_BOOK_TO_HUMAN_READABLE = {
+  glossario: "Glossario",
+  sdl: "Il Sutra del Loto",
+  rsnd: "RSND",
+};
+
 const typeToBaseUrl = (type: PostType) => {
   switch (type) {
     case "sdlpe":

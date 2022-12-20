@@ -22,27 +22,16 @@ LoadingElement.displayName = "LoadingElement";
 
 const ResultsLoading: React.FC = () => {
   return (
-    <div
-      className="container mx-auto px-4 pt-8 xl:px-14 min-h-[50vh]"
-      id="risultati"
-    >
-      <div className="rounded-md mb-4 w-full mx-auto">
-        <div className="h-8 max-w-sm bg-slate-200 rounded my-4"></div>
-
-        <hr className="border border-secondary" />
-      </div>
-
-      <ul className="divide-y-2 divide-dashed pt-4 mb-10">
-        <LoadingElement />
-        <LoadingElement />
-        <LoadingElement />
-        <LoadingElement />
-        <LoadingElement />
-        <LoadingElement />
-        <LoadingElement />
-        <LoadingElement />
-      </ul>
-    </div>
+    <ul className="divide-y-2 divide-dashed pt-4 mb-10">
+      <LoadingElement />
+      <LoadingElement />
+      <LoadingElement />
+      <LoadingElement />
+      <LoadingElement />
+      <LoadingElement />
+      <LoadingElement />
+      <LoadingElement />
+    </ul>
   );
 };
 

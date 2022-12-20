@@ -121,12 +121,10 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
             <div
               className="lg:mr-20"
               dangerouslySetInnerHTML={{
-                __html:
-                  post.highlight ||
-                  `${(post?.highlight || post.content.rendered).substring(
-                    0,
-                    400
-                  )}...`,
+                __html: `${(post?.highlight || post.content.rendered).substring(
+                  0,
+                  400
+                )}...`,
               }}
             ></div>
           </a>
@@ -139,7 +137,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
             .map((highlightField) => (
               <Link
                 key={highlightField}
-                href={`/${post.baseURL}/${post.slug}#${linkField[highlightField]}${postQueryParams}`}
+                href={`/${post.baseURL}/${post.slug}${postQueryParams}#${linkField[highlightField]}`}
                 passHref
               >
                 <a>

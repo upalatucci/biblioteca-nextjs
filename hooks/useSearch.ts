@@ -23,6 +23,7 @@ const useSearch = (searchURL = "simple_search") => {
         );
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => setIgnoringError(false), [error]);

@@ -1,16 +1,15 @@
 import {
   mapElasticResultToPost,
-  MAP_POST_TYPE_TO_BOOK_URL,
-  PostType,
+  MAP_BOOK_TO_HUMAN_READABLE,
 } from "@utils/elasticSearchUtils";
-import classNames from "classnames";
-import Link from "next/link";
-import { NextRouter, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useMemo } from "react";
 import Pagination from "../Pagination/Pagination";
 import PostResult from "./PostResult";
 import ResultsLoading from "./ResultsLoading";
-import ResultTab from "./ResultTab";
+import Link from "next/link";
+import ResultsHeader from "./ResultsHeader";
+import ResultsContainer from "./ResultsContainer";
 
 type ResultsProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,32 +19,9 @@ type ResultsProps = {
 };
 
 const Results: React.FC<ResultsProps> = ({ data, totalResults, loading }) => {
-  const aggregationData = data?.aggregations?.book?.buckets;
-  const searchedPosts = useMemo(() => mapElasticResultToPost(data), [data]);
   const router = useRouter();
 
-  const rsndCount =
-    aggregationData?.find((agg) => agg.key === PostType.RSND)?.doc_count || 0;
-  const sdlCount =
-    aggregationData?.find((agg) => agg.key === PostType.SDL)?.doc_count || 0;
-  const glossaryCount =
-    aggregationData?.find((agg) => agg.key === PostType.GLOSSARY)?.doc_count ||
-    0;
-
-  const totalCount = rsndCount + sdlCount + glossaryCount;
-
-  if (loading) {
-    return (
-      <div
-        className="container mx-auto px-4 pt-8 xl:px-10 min-h-[50vh]"
-        id="risultati"
-      >
-        <ResultsLoading />
-      </div>
-    );
-  }
-
-  if (!data || !searchedPosts) {
+  if (!router.query.q) {
     return (
       <div className="container mx-auto px-4 xl:px-10" id="risultati"></div>
     );
@@ -56,62 +32,71 @@ const Results: React.FC<ResultsProps> = ({ data, totalResults, loading }) => {
       className="container mx-auto px-4 pt-8 xl:px-10 min-h-[50vh]"
       id="risultati"
     >
-      {totalCount === 0 && (
-        <h2 className="text-3xl md:text-4xl px-4 font-bold">
-          Spiacenti nessun risultato trovato
-        </h2>
-      )}
-      {totalCount !== 0 && (
-        <>
-          <h2 className="text-4xl md:text-5xl py-4 font-bold">
+      <ResultsHeader data={data} loading={loading} />
+
+      <ResultsContainer
+        data={data}
+        totalResults={totalResults}
+        loading={loading}
+      />
+
+      {/* <h2 className="text-4xl md:text-5xl py-4 font-bold">
             Abbiamo trovato
           </h2>
-          <hr className="border border-secondary" />
+          <hr className="border border-secondary" /> */}
 
-          <ul className="flex flex-wrap text-sm font-medium text-center font-sans text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
-            <ResultTab
-              count={totalCount}
-              title="Tutti"
-              active={!router.query.book}
-            />
+      {/* <h3 className="text-lg font-serif md:text-xl text-primary font-bold mt-4 mb-6">
+                Filtra i risultati:
+              </h3>
 
-            <ResultTab
-              count={rsndCount}
-              title="RSND"
-              tabKey={MAP_POST_TYPE_TO_BOOK_URL[PostType.RSND]}
-              active={
-                router.query.book === MAP_POST_TYPE_TO_BOOK_URL[PostType.RSND]
-              }
-            />
+              <div className="flex items-center justify-between flex-wrap">
+                <span className="mb-4 mr-4">
+                  <label className="flex items-center">
+                    <span className="mr-4">Destinatario</span>
+                    <Select
+                      onChange={onChangeSelect(ACTION_TYPES.CHANGE_RECIPIENT)}
+                      value={recipient || RECIPIENTS_OPTIONS[0].value}
+                      name="destinatario"
+                      options={RECIPIENTS_OPTIONS}
+                      className="w-64"
+                    />
+                  </label>
+                </span>
 
-            <ResultTab
-              count={sdlCount}
-              title="Il Sutra del Loto"
-              tabKey={MAP_POST_TYPE_TO_BOOK_URL[PostType.SDL]}
-              active={
-                router.query.book === MAP_POST_TYPE_TO_BOOK_URL[PostType.SDL]
-              }
-            />
+                <span className="mb-4">
+                  <label className="flex items-center">
+                    <span className="mr-4">Scritto a</span>
+                    <Select
+                      onChange={onChangeSelect(ACTION_TYPES.CHANGE_PLACE)}
+                      value={place || PLACES_OPTIONS[0].value}
+                      name="luogo"
+                      options={PLACES_OPTIONS}
+                      className="w-64"
+                    />
+                  </label>
+                </span>
 
-            <ResultTab
-              count={glossaryCount}
-              title="Glossario"
-              tabKey={MAP_POST_TYPE_TO_BOOK_URL[PostType.GLOSSARY]}
-              active={
-                router.query.book ===
-                MAP_POST_TYPE_TO_BOOK_URL[PostType.GLOSSARY]
-              }
-            />
-          </ul>
-
-          <ul className="divide-y-2 divide-dashed pt-4 mb-10">
-            {searchedPosts.map((postResult) => (
-              <PostResult key={postResult.id} post={postResult} />
-            ))}
-          </ul>
-          <Pagination totalResults={totalResults} anchorHash="risultati" />
-        </>
-      )}
+                <span className="mb-4">
+                  <label className="flex items-center">
+                    <span className="mr-4">Scritto nel</span>
+                    <Select
+                      onChange={onChangeSelect(ACTION_TYPES.CHANGE_FROM)}
+                      value={from}
+                      name="da"
+                      options={DATES}
+                      className="mr-4 w-16"
+                    />
+                    -
+                    <Select
+                      onChange={onChangeSelect(ACTION_TYPES.CHANGE_TO)}
+                      value={to}
+                      name="a"
+                      options={DATES}
+                      className="ml-4 w-16"
+                    />
+                  </label>
+                </span>
+              </div> */}
     </div>
   );
 };

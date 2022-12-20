@@ -15,19 +15,13 @@ import {
 } from "@utils/articleUtils";
 import useHighlightedPost from "@hooks/useHighlightedPost";
 import { removeHTMLTags } from "@utils/utils";
-import { useEffect } from "react";
 
 export default function PostPage({ post }) {
   const router = useRouter();
 
   const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
 
-  useEffect(() => {
-    if (router.asPath.indexOf("#") === -1)
-      document.querySelector("mark")?.scrollIntoView();
-  }, [highlightedPost]);
-
-  if (router.isFallback || isLoadingHighligh) {
+  if (router.isFallback || isLoadingHighligh || !router.isReady) {
     return <ArticleLoading />;
   }
 
@@ -58,7 +52,7 @@ export default function PostPage({ post }) {
                 ))}
 
                 {highlightedPost?.acf?.acf_cenni_storici && (
-                  <div id="cenni-storici">
+                  <div id="cenni_storici">
                     <h3 className="text-3xl md:text-4xl font-serif text-secondary font-bold mt-4 mb-6">
                       Cenni Storici
                     </h3>

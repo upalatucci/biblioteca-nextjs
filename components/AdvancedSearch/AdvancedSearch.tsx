@@ -1,14 +1,9 @@
 import { useRouter } from "next/router";
 import React, { FC, useCallback, useReducer } from "react";
-import { BOOKS, FIELDS, SEARCH_TYPE } from "@utils/constants";
+import { FIELDS, SEARCH_TYPE } from "@utils/constants";
 import SearchInput from "../SearchInput";
 import Select from "../Select";
-import {
-  DATES,
-  mapSearchType,
-  PLACES_OPTIONS,
-  RECIPIENTS_OPTIONS,
-} from "./constants";
+import { mapSearchType } from "./constants";
 import reducer, { ACTION_TYPES, initializeState } from "./reducer";
 import Loading from "@components/Loading";
 import { MAP_POST_TYPE_TO_BOOK_URL, PostType } from "@utils/elasticSearchUtils";
@@ -166,58 +161,6 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                     </label>
                   </span>
                 </div>
-              </div>
-              <h3 className="text-lg font-serif md:text-xl text-primary font-bold mt-4 mb-6">
-                Filtra i risultati:
-              </h3>
-
-              <div className="flex items-center justify-between flex-wrap">
-                <span className="mb-4 mr-4">
-                  <label className="flex items-center">
-                    <span className="mr-4">Destinatario</span>
-                    <Select
-                      onChange={onChangeSelect(ACTION_TYPES.CHANGE_RECIPIENT)}
-                      value={recipient || RECIPIENTS_OPTIONS[0].value}
-                      name="destinatario"
-                      options={RECIPIENTS_OPTIONS}
-                      className="w-64"
-                    />
-                  </label>
-                </span>
-
-                <span className="mb-4">
-                  <label className="flex items-center">
-                    <span className="mr-4">Scritto a</span>
-                    <Select
-                      onChange={onChangeSelect(ACTION_TYPES.CHANGE_PLACE)}
-                      value={place || PLACES_OPTIONS[0].value}
-                      name="luogo"
-                      options={PLACES_OPTIONS}
-                      className="w-64"
-                    />
-                  </label>
-                </span>
-
-                <span className="mb-4">
-                  <label className="flex items-center">
-                    <span className="mr-4">Scritto nel</span>
-                    <Select
-                      onChange={onChangeSelect(ACTION_TYPES.CHANGE_FROM)}
-                      value={from}
-                      name="da"
-                      options={DATES}
-                      className="mr-4 w-16"
-                    />
-                    -
-                    <Select
-                      onChange={onChangeSelect(ACTION_TYPES.CHANGE_TO)}
-                      value={to}
-                      name="a"
-                      options={DATES}
-                      className="ml-4 w-16"
-                    />
-                  </label>
-                </span>
               </div>
             </div>
             <div className="px-4 flex items-center justify-center mt-8">

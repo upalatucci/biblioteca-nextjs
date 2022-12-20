@@ -2,9 +2,10 @@ import { SearchResponse } from "@elastic/elasticsearch/lib/api/types";
 import { FIELDS } from "@utils/constants";
 import { getQueryParamAsArray } from "@utils/utils";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 
-const useHighlightedPost = (originalPost) => {
+const useHighlightedPost = (originalPost): any => {
   const router = useRouter();
   const searchText = router.query.q;
   const fields = getQueryParamAsArray<FIELDS>(router.query.fields || []);
@@ -34,7 +35,25 @@ const useHighlightedPost = (originalPost) => {
           );
       }
     },
+    refetchOnWindowFocus: false,
   });
+
+  useEffect(() => {
+    if (
+      router.isReady &&
+      router.asPath.indexOf("#") !== -1 &&
+      data &&
+      !isLoading &&
+      router.query.q
+    )
+      setTimeout(
+        () =>
+          document
+            .querySelector("#" + router.asPath?.split("#")?.[1])
+            ?.scrollIntoView(),
+        500
+      );
+  }, [data]);
 
   return [
     {

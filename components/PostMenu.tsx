@@ -47,7 +47,7 @@ const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
       <div className="px-6 py-4 hidden lg:block w-full text-md mb-4 rounded-2xl shadow-md bg-secondary text-white">
         <ul className="divide-y-2 divide-dashed divide-white">
           <li className="py-1">
-            <a href="#cenni-storici">Vai ai cenni storici</a>
+            <a href="#cenni_storici">Vai ai cenni storici</a>
           </li>
           <li className="py-1">
             <a href="#note">Vai alle note</a>

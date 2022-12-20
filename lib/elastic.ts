@@ -1,4 +1,4 @@
-import { BOOKS, FIELDS, SEARCH_TYPE } from "../utils/constants";
+import { FIELDS, SEARCH_TYPE } from "../utils/constants";
 
 import { Client } from "@elastic/elasticsearch";
 import {
