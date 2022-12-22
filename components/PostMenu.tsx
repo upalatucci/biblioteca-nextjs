@@ -1,6 +1,6 @@
 import Link from "next/link";
 import classNames from "classnames";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { GoshoType } from "./GoshoList";
 
 const nLi = new Array(10).fill(0).map((_, index) => index);
@@ -26,12 +26,25 @@ type PostMenuProps = {
 
 const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
   const [jsonData, setJSONData] = useState<GoshoType[]>([]);
+  const activeLiRef = useRef<HTMLLIElement>();
 
   useEffect(() => {
-    import("@books/rsnd1.json").then((goshoData) => {
-      setJSONData(goshoData.default);
+    Promise.all([
+      import("@books/rsnd1.json"),
+      import("@books/rsnd2.json"),
+    ]).then(([rsnd1Data, rsnd2Data]) => {
+      setJSONData([...rsnd1Data.default, ...rsnd2Data.default]);
     });
   }, []);
+
+  useLayoutEffect(() => {
+    if (activeLiRef.current) {
+      activeLiRef.current.parentElement.scrollTop =
+        activeLiRef.current.offsetTop -
+        activeLiRef.current.parentElement.offsetTop -
+        80;
+    }
+  });
 
   return (
     <div className="post-menu w-full lg:w-[300px] lg:min-w-[300px] xl:w-[400px] xl:min-w-[400px]">
@@ -72,15 +85,18 @@ const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
             .sort((a, b) => (a.number > b.number ? 1 : -1))
             .map((post) => (
               <li
-                key={post.title}
+                key={post.slug}
                 className={classNames("font-semibold py-2", {
                   "text-primary": post.title === currentPostTitle,
                 })}
+                ref={post.title === currentPostTitle ? activeLiRef : null}
               >
                 <Link href={`/gosho/${post.slug}`}>
-                  <a>
-                    {post.number}. {post.title}
-                  </a>
+                  <a
+                    dangerouslySetInnerHTML={{
+                      __html: `${post.number}. ${post.title}`,
+                    }}
+                  />
                 </Link>
               </li>
             ))}
