@@ -28,7 +28,7 @@ const HomeNavbar = () => {
       <h1 className="hidden lg:block text-center font-bold text-3xl md:text-5xl mb-8 mt-4">
         NICHIREN Library
       </h1>
-      <nav className="container mx-auto px-4 lg:px-0 flex items-center justify-between mb-4 relative mt-4 lg:mt-0">
+      <nav className="container mx-auto px-8 lg:px-8 flex items-center justify-between mb-4 relative mt-4 lg:mt-0">
         <Link href="/" passHref>
           <a className="flex w-12 h-12 md:w-20 md:h-20">
             <Image

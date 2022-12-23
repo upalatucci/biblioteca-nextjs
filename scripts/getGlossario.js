@@ -7,11 +7,10 @@ async function getGlossario() {
 
   while (true) {
     const postsResponse = await fetch(
-      `https://biblioteca.sgi-italia.org/wp-json/wp/v2/glossario?per_page=100&page=${page}`
+      `https://biblioteca.sgi-italia.org/wp-json/wp/v2/glossary?per_page=100&page=${page}`
     );
     const posts = await postsResponse.json();
 
-    console.log(posts);
     totalPosts = [...totalPosts, ...posts];
 
     const totalPages = postsResponse.headers.get("x-wp-totalpages");
