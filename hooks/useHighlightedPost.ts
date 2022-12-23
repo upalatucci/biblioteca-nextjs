@@ -66,8 +66,8 @@ const useHighlightedPost = (originalPost): any => {
       },
       content: {
         rendered:
-          data?.post_content?.[0] ||
-          data?.["post_content.exact"]?.[0] ||
+          data?.post_content_filtered?.[0] ||
+          data?.["post_content_filtered.exact"]?.[0] ||
           originalPost?.content?.rendered,
       },
       acf: {

@@ -10,8 +10,8 @@ type PostProps = {
 };
 
 const humanizedField = {
-  post_content: "CONTENUTO",
-  "post_content.exact": "CONTENUTO",
+  post_content_filtered: "CONTENUTO",
+  "post_content_filtered.exact": "CONTENUTO",
   "meta.acf_cenni_storici.value": "CENNI STORICI",
   "meta.acf_cenni_storici.value.exact": "CENNI STORICI",
   "meta.acf_note.value": "NOTE",
@@ -31,8 +31,8 @@ const humanizeTypeCategory = (type: PostType, categories: string[]) => {
 };
 
 const linkField = {
-  post_content: "contenuto",
-  "post_content.exact": "contenuto",
+  post_content_filtered: "contenuto",
+  "post_content_filtered.exact": "contenuto",
   "meta.acf_cenni_storici.value": "cenni_storici",
   "meta.acf_cenni_storici.value.exact": "cenni_storici",
   "meta.acf_note.value": "note",

@@ -67,10 +67,10 @@ const removeUnclosedTags = (text: string): string => {
 };
 
 const buildHighlight = (highlight) => {
-  const contentHighlight = highlight?.post_content
+  const contentHighlight = highlight?.post_content_filtered
     ?.map((h) => removeUnclosedTags(h))
     ?.join(["..."]);
-  const contentExactHighlight = highlight?.["post_content.exact"]
+  const contentExactHighlight = highlight?.["post_content_filtered.exact"]
     ?.map((h) => removeUnclosedTags(h))
     ?.join(["..."]);
   const noteHighlight = highlight?.["meta.acf_note.value"]
@@ -105,7 +105,7 @@ export const mapElasticResultToPost = (result: any): PostResultType[] => {
     categories: _source.term_suggest || [],
     comment_status: _source.comment_status,
     content: {
-      rendered: _source.post_content,
+      rendered: _source.post_content_filtered,
     },
     highlight: removeUnclosedTags(buildHighlight(highlight)),
     date: _source.post_date,

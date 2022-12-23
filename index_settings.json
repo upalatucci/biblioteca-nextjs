@@ -1,4 +1,5 @@
 {
+  "aliases": {},
   "mappings": {
     "_meta": {
       "mapping_version": "7-0.php"
@@ -212,6 +213,10 @@
               "value": {
                 "type": "text",
                 "fields": {
+                  "exact": {
+                    "type": "text",
+                    "analyzer": "with_stopwords"
+                  },
                   "raw": {
                     "type": "keyword",
                     "ignore_above": 10922
@@ -220,10 +225,6 @@
                     "type": "keyword",
                     "ignore_above": 10922,
                     "normalizer": "lowerasciinormalizer"
-                  },
-                  "exact": {
-                    "type": "text",
-                    "analyzer": "with_stopwords"
                   }
                 }
               }
@@ -388,6 +389,10 @@
               "value": {
                 "type": "text",
                 "fields": {
+                  "exact": {
+                    "type": "text",
+                    "analyzer": "with_stopwords"
+                  },
                   "raw": {
                     "type": "keyword",
                     "ignore_above": 10922
@@ -396,10 +401,6 @@
                     "type": "keyword",
                     "ignore_above": 10922,
                     "normalizer": "lowerasciinormalizer"
-                  },
-                  "exact": {
-                    "type": "text",
-                    "analyzer": "with_stopwords"
                   }
                 }
               }
@@ -566,6 +567,10 @@
       "post_title": {
         "type": "text",
         "fields": {
+          "exact": {
+            "type": "text",
+            "analyzer": "with_stopwords"
+          },
           "post_title": {
             "type": "text",
             "analyzer": "standard"
@@ -583,10 +588,6 @@
             "type": "text",
             "analyzer": "edge_ngram_analyzer",
             "search_analyzer": "standard"
-          },
-          "exact": {
-            "type": "text",
-            "analyzer": "with_stopwords"
           }
         }
       },
@@ -753,10 +754,6 @@
       "max_result_window": "1000000",
       "analysis": {
         "filter": {
-          "italian_stop_filter": {
-            "type": "stop",
-            "stopwords": "_italian_"
-          },
           "shingle_filter": {
             "max_shingle_size": "5",
             "min_shingle_size": "2",
@@ -769,8 +766,9 @@
               "sneakers, tennis shoes, trainers, runners",
               "buddha, budda, Buddha, Budda",
               "shoes => sneaker, sandal, boots, high heels",
-              "dèi => dei, dèi",
-              "buddha => budda"
+              "buddha => budda",
+              "dèi => dèi, dei",
+              "dei => dèi"
             ]
           },
           "edge_ngram": {
@@ -786,6 +784,10 @@
           "ewp_snowball": {
             "type": "snowball",
             "language": "Italian"
+          },
+          "italian_stop_filter": {
+            "type": "stop",
+            "stopwords": "_italian_"
           }
         },
         "normalizer": {
@@ -800,12 +802,6 @@
             "type": "custom",
             "tokenizer": "keyword"
           },
-          "with_stopwords": {
-            "filter": ["ep_synonyms_filter", "lowercase"],
-            "char_filter": ["html_strip"],
-            "language": "italian",
-            "tokenizer": "standard"
-          },
           "default": {
             "filter": [
               "ep_synonyms_filter",
@@ -814,9 +810,9 @@
               "italian_stop_filter",
               "ewp_snowball"
             ],
-            "stopwords": "_italian_",
             "char_filter": ["html_strip"],
             "language": "italian",
+            "stopwords": "_italian_",
             "tokenizer": "standard"
           },
           "edge_ngram_analyzer": {
@@ -827,6 +823,12 @@
           "shingle_analyzer": {
             "filter": ["lowercase", "shingle_filter"],
             "type": "custom",
+            "tokenizer": "standard"
+          },
+          "with_stopwords": {
+            "filter": ["ep_synonyms_filter", "lowercase"],
+            "char_filter": ["html_strip"],
+            "language": "italian",
             "tokenizer": "standard"
           }
         }
