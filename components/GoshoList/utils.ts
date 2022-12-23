@@ -3,28 +3,19 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GoshoType } from "./GoshoList";
 import Fuse from "fuse.js";
 
+export const ALL_LABEL = "Tutti";
+
 const generateUniqueOptions = (jsonData: GoshoType[], key) => {
-  const options = [{ value: 0, label: "Tutti" }];
-  const uniqueValues = new Set<string>(
-    jsonData.reduce((acc, post) => {
-      if (Array.isArray(post[key])) {
-        return acc.concat(post[key]);
-      }
+  const uniqueValues = new Set<string>();
 
-      acc.push(post[key]);
-      return acc;
-    }, [])
-  );
-
-  uniqueValues.forEach((value) => {
-    if (value)
-      options.push({
-        value: options.length,
-        label: value,
-      });
+  jsonData.forEach((post) => {
+    if (Array.isArray(post[key])) {
+      post[key].forEach((value) => uniqueValues.add(value));
+    }
+    uniqueValues.add(post[key]);
   });
 
-  return options;
+  return Array.from(uniqueValues);
 };
 
 export const useFilters = (allGosho: GoshoType[]) => {
@@ -32,16 +23,15 @@ export const useFilters = (allGosho: GoshoType[]) => {
     () => generateUniqueOptions(allGosho, "recipient"),
     [allGosho]
   );
+
   const placesOptions = useMemo(
     () => generateUniqueOptions(allGosho, "place"),
     [allGosho]
   );
 
   const [titleFilter, setTitleFilter] = useState("");
-  const [recipient, setRecipient] = useState<string | number>(
-    recipientOptions[0].value
-  );
-  const [place, setPlace] = useState<string | number>(placesOptions[0].value);
+  const [recipient, setRecipient] = useState<string>(ALL_LABEL);
+  const [place, setPlace] = useState<string>(ALL_LABEL);
 
   const fuseRef = useRef<Fuse<GoshoType>>();
 
@@ -51,8 +41,8 @@ export const useFilters = (allGosho: GoshoType[]) => {
 
   const clearFilters = useCallback(() => {
     setTitleFilter("");
-    setRecipient(recipientOptions[0].value);
-    setPlace(placesOptions[0].value);
+    setRecipient(ALL_LABEL);
+    setPlace(ALL_LABEL);
   }, []);
 
   const goshoFilteredByTitle =

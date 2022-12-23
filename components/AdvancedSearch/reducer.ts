@@ -1,4 +1,4 @@
-import { parse } from "querystring";
+import { ParsedUrlQuery, parse } from "querystring";
 import { BOOKS, FIELDS, SEARCH_TYPE } from "@utils/constants";
 import { DATES } from "./constants";
 
@@ -49,21 +49,13 @@ export const initialState: State = {
   searchText: "",
   recipient: null,
   place: null,
-  from: DATES[0].value,
-  to: DATES[1].value,
+  from: DATES[0],
+  to: DATES[1],
   searchType: SEARCH_TYPE.OR,
 };
 
-const getSearchString = (path: string) => {
-  const pathSplit = path.split("?");
-
-  return pathSplit.length > 1 ? pathSplit[1] : "";
-};
-
-export const initializeState = (path: string): State => {
+export const initializeState = (query: ParsedUrlQuery): State => {
   const state = { ...initialState };
-
-  const query = parse(getSearchString(path));
 
   if (query.q) {
     state.searchText = query.q as string;
@@ -75,8 +67,7 @@ export const initializeState = (path: string): State => {
       : [query.fields as FIELDS];
   }
 
-  if (query.searchType) state.searchType = query.searchType as SEARCH_TYPE;
-  else state.searchType = SEARCH_TYPE.EXACT;
+  state.searchType = (query.searchType as SEARCH_TYPE) || SEARCH_TYPE.EXACT;
 
   return state;
 };

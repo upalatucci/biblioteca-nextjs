@@ -15,6 +15,12 @@ const NoResults = () => (
   </h2>
 );
 
+const removeParams = (routerPath: string, book: string) => {
+  return routerPath
+    .replace(/(recipient|from|to|place)=.+?&?/g, "")
+    .replace(book, "");
+};
+
 const NoResultsForThatBook = ({ router }) => (
   <div className="my-4">
     <h3 className="text-lg px-4 font-bold">
@@ -22,7 +28,7 @@ const NoResultsForThatBook = ({ router }) => (
       {MAP_BOOK_TO_HUMAN_READABLE[router?.query?.book as string] ||
         router?.query?.book}
     </h3>
-    <Link href={router.asPath.replace(router?.query?.book as string, "")}>
+    <Link href={removeParams(router.asPath, router?.query?.book as string)}>
       <a className=" px-4">Prova a cercare su tutte le fonti</a>
     </Link>
   </div>

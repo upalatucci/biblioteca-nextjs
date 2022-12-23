@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
-import React, { FC, useCallback, useReducer } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { FIELDS, SEARCH_TYPE } from "@utils/constants";
 import SearchInput from "../SearchInput";
 import Select from "../Select";
-import { mapSearchType } from "./constants";
-import reducer, { ACTION_TYPES, initializeState } from "./reducer";
+import { SELECTABLE_TYPES, mapSearchType, mapSelectToType } from "./constants";
 import Loading from "@components/Loading";
-import { MAP_POST_TYPE_TO_BOOK_URL, PostType } from "@utils/elasticSearchUtils";
+import { getQueryParamAsArray } from "@utils/utils";
 
 type AdvancedSearchType = {
   loading: boolean;
@@ -14,18 +13,26 @@ type AdvancedSearchType = {
 
 const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
   const router = useRouter();
+  const [searchText, setSearchText] = useState("");
+  const [searchType, setSearchType] = useState<SEARCH_TYPE>(SEARCH_TYPE.EXACT);
+  const [fields, setFields] = useState([FIELDS.CONTENT]);
 
-  const [state, dispatch] = useReducer(reducer, null, () =>
-    initializeState(router.asPath)
-  );
+  useEffect(() => {
+    if (router.query.q) setSearchText(router.query.q as string);
+  }, [router.query.q]);
 
-  const { fields, searchText, recipient, place, from, to, searchType } = state;
+  useEffect(() => {
+    if (router.query.searchType)
+      setSearchType(router.query.searchType as SEARCH_TYPE);
+  }, [router.query.searchType]);
+
+  useEffect(() => {
+    if (router.query.fields)
+      setFields(getQueryParamAsArray(router.query.fields));
+  }, [router.query.fields]);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const book = router.query.book;
-    const isGlossary = book === MAP_POST_TYPE_TO_BOOK_URL[PostType.GLOSSARY];
-
     if (!searchText) return;
 
     router.query.q = searchText;
@@ -33,62 +40,26 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
 
     router.query.searchType = searchType;
 
-    if (!isGlossary) {
-      router.query.from = from.toString();
-      router.query.to = to.toString();
-    } else {
-      delete router.query.from;
-      delete router.query.to;
-    }
-
-    if (recipient && !isGlossary) router.query.recipient = recipient;
-    else delete router.query.recipient;
-
-    if (place && !isGlossary) router.query.place = place;
-    else delete router.query.place;
-
     router.push({ ...router, hash: "risultati" }, null, { scroll: false });
   };
 
   const onFieldsChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.checked) {
-        dispatch({
-          type: ACTION_TYPES.ADD_FIELD,
-          payload: event.target.value as FIELDS,
-        });
+        setFields((f) => f.concat([event.target.value as FIELDS]));
       } else {
-        dispatch({
-          type: ACTION_TYPES.REMOVE_FIELD,
-          payload: event.target.value as FIELDS,
-        });
+        setFields((array) => array.filter((f) => f !== event.target.value));
       }
     },
     []
   );
 
-  const onSearchTextChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch({
-        type: ACTION_TYPES.CHANGE_SEARCH_TEXT,
-        payload: event.target.value,
-      });
-    },
-    []
-  );
-
-  const onChangeSelect = (type) => {
-    return (newValue) => {
-      dispatch({
-        type,
-        payload: newValue === 0 ? null : newValue,
-      });
-    };
-  };
-
   const onReset = (event) => {
     event.preventDefault();
-    dispatch({ type: ACTION_TYPES.RESET });
+    router.push("/ricerca-avanzata");
+    setSearchType(SEARCH_TYPE.EXACT);
+    setFields([FIELDS.CONTENT]);
+    setSearchText("");
   };
 
   return (
@@ -102,18 +73,17 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
           <div className="bg-defaultBg rounded-xl shadow-md mb-8 mx-auto py-8 px-0 sm:px-8 font-sans">
             <div className="flex flex-col md:flex-row items-center justify-center w-full mb-8 px-4 sm:px-0">
               <Select
-                onChange={onChangeSelect(ACTION_TYPES.CHANGE_SEARCH_TYPE)}
-                value={searchType}
+                onChange={(newVal) =>
+                  setSearchType(mapSelectToType[newVal.toString()])
+                }
+                value={mapSearchType[searchType]}
                 name="type"
-                options={Object.values(SEARCH_TYPE).map((type) => ({
-                  value: type,
-                  label: mapSearchType[type],
-                }))}
+                options={SELECTABLE_TYPES}
                 className="w-80 mb-4 md:mb-0 md:mr-4"
               />
               <SearchInput
                 value={searchText}
-                onChange={onSearchTextChange}
+                onChange={(e) => setSearchText(e.target.value)}
                 required
               />
             </div>

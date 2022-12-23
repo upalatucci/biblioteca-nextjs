@@ -11,7 +11,7 @@ export default function RSND1() {
 
   useEffect(() => {
     import("@books/rsnd1.json").then((goshoData) => {
-      setJSONData(goshoData.default);
+      return setJSONData(goshoData.default);
     });
   }, []);
 

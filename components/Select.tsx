@@ -1,23 +1,19 @@
 import classNames from "classnames";
 import React from "react";
 
-export type OptionType = { value: string | number; label: string };
-
 type SelectProps = {
-  value: OptionType["value"];
-  onChange: (newValue: OptionType["value"]) => void;
+  value: string;
+  onChange: (newValue: string) => void;
   name?: string;
-  options?: OptionType[];
+  options?: string[];
   className?: string;
 };
 
 export type OptionProps = {
-  option: OptionType;
-  onOptionClick: (onOptionChange: OptionType) => void;
-  handleKeyDown: (
-    value: OptionType["value"]
-  ) => (event: React.KeyboardEvent) => void;
-  selected: OptionType["value"];
+  option: string;
+  onOptionClick: (onOptionChange: string) => void;
+  handleKeyDown: (value: string) => (event: React.KeyboardEvent) => void;
+  selected: string;
 };
 
 const Option: React.FC<OptionProps> = ({
@@ -36,14 +32,14 @@ const Option: React.FC<OptionProps> = ({
 
   return (
     <li
-      id={option.value.toString()}
+      id={option}
       role="option"
-      aria-selected={selected == option.value}
+      aria-selected={selected === option}
       tabIndex={0}
-      onKeyDown={handleKeyDown(option.value)}
+      onKeyDown={handleKeyDown(option)}
       onClick={_onOptionClick}
     >
-      {option.label}
+      {option}
     </li>
   );
 };
@@ -58,12 +54,12 @@ const Select: React.FC<SelectProps> = ({
   const [isOpen, setOpen] = React.useState(false);
 
   const indexSelectedOption = React.useMemo(
-    () => options.findIndex((option) => option.value === value),
+    () => options.findIndex((option) => option === value),
     [value, options]
   );
 
   const onOptionChange = (option) => {
-    onChange(option.value);
+    onChange(option);
     setOpen(false);
   };
   const toggleOptions = () => {
@@ -96,7 +92,10 @@ const Select: React.FC<SelectProps> = ({
           e.preventDefault();
           const prevOption = options?.[indexSelectedOption - 1];
 
-          if (prevOption) onOptionChange(prevOption.value);
+          if (prevOption)
+            onOptionChange(
+              typeof prevOption === "string" ? prevOption : prevOption
+            );
           break;
         case "ArrowDown":
           e.preventDefault();
@@ -111,15 +110,18 @@ const Select: React.FC<SelectProps> = ({
     [indexSelectedOption]
   );
 
-  const otherOptions = options.filter((option) => option.value !== value);
+  const otherOptions = options.filter((option) => option !== value);
 
   return (
     <div className={classNames("select-wrapper", className)}>
+      {isOpen && (
+        <div className="select-background" onClick={() => setOpen(false)}></div>
+      )}
       <select
         className="hidden"
         defaultValue={value}
         name={name}
-        aria-label={options[indexSelectedOption]?.label}
+        aria-label={options[indexSelectedOption]}
       ></select>
       <div className="select-container">
         <button
@@ -130,10 +132,12 @@ const Select: React.FC<SelectProps> = ({
           onClick={toggleOptions}
           onKeyDown={handleListKeyDown}
         >
-          {options[indexSelectedOption]?.label}
+          {options[indexSelectedOption]}
         </button>
         <ul
-          className={`options ${isOpen ? "show" : ""}`}
+          className={`options max-h-64 overflow-y-scroll ${
+            isOpen ? "show" : ""
+          }`}
           role="listbox"
           tabIndex={-1}
           onKeyDown={handleListKeyDown}
@@ -141,7 +145,7 @@ const Select: React.FC<SelectProps> = ({
           {otherOptions.map((option) => (
             <Option
               option={option}
-              key={option.value}
+              key={option}
               handleKeyDown={handleKeyDown}
               selected={value}
               onOptionClick={onOptionChange}

@@ -7,7 +7,7 @@ import { useFilters, useOrder } from "./utils";
 export type GoshoType = {
   title: string;
   slug: string;
-  recipient: string;
+  recipient: string[];
   place: string;
   date: string;
   number: number;
@@ -28,7 +28,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
     setPlace,
     placesOptions,
     recipientOptions,
-    clearFilters
+    clearFilters,
   } = useFilters(jsonData);
   const { sortedGosho, sortField, sortAscend, onSortChange } =
     useOrder(filteredGosho);

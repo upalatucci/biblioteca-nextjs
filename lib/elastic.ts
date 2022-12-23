@@ -226,13 +226,13 @@ const searchQuery = (
     });
   }
 
-  // if (from && to) {
-  //   (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
-  //     range: {
-  //       "meta.acf_data.value": { gte: from, lte: to },
-  //     },
-  //   });
-  // }
+  if (from && to) {
+    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
+      range: {
+        "meta.acf_data.value": { gte: from, lte: to },
+      },
+    });
+  }
 
   if (place) {
     (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
@@ -257,7 +257,7 @@ const searchQuery = (
   // });
 
   if (textQueryCopy && searchType === SEARCH_TYPE.AND)
-    (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
+    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
       multi_match: {
         query: textQueryCopy,
         fields: addWeights(queryFields),
@@ -269,7 +269,7 @@ const searchQuery = (
     });
 
   if (textQueryCopy && searchType === SEARCH_TYPE.OR)
-    (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
+    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
       multi_match: {
         query: textQueryCopy,
         fields: addWeights(queryFields),
@@ -278,7 +278,7 @@ const searchQuery = (
     });
 
   if (textQueryCopy && searchType === SEARCH_TYPE.EXACT) {
-    (elasticQuery.query.bool.should as QueryDslQueryContainer[]).push({
+    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
       query_string: {
         query: `"${textQuery}"`,
         fields: addWeights(queryFields.map((field) => field + ".exact")),

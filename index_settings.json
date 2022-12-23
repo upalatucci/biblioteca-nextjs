@@ -506,7 +506,13 @@
         }
       },
       "post_content_filtered": {
-        "type": "text"
+        "type": "text",
+        "fields": {
+          "exact": {
+            "type": "text",
+            "analyzer": "with_stopwords"
+          }
+        }
       },
       "post_date": {
         "type": "date",

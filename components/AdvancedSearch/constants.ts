@@ -1,5 +1,16 @@
 import { SEARCH_TYPE } from "@utils/constants";
-import { OptionType } from "../Select";
+
+export const SELECTABLE_TYPES = [
+  "Almeno una di queste parole",
+  "Tutte queste parole",
+  "Questa esatta parola o frase",
+];
+
+export const mapSelectToType: { [x: string]: SEARCH_TYPE } = {
+  [SELECTABLE_TYPES[0]]: SEARCH_TYPE.OR,
+  [SELECTABLE_TYPES[1]]: SEARCH_TYPE.AND,
+  [SELECTABLE_TYPES[2]]: SEARCH_TYPE.EXACT,
+};
 
 export const mapSearchType: Record<SEARCH_TYPE, string> = {
   [SEARCH_TYPE.OR]: "Almeno una di queste parole",
@@ -7,17 +18,6 @@ export const mapSearchType: Record<SEARCH_TYPE, string> = {
   [SEARCH_TYPE.EXACT]: "Questa esatta parola o frase",
 };
 
-export const RECIPIENTS_OPTIONS: OptionType[] = [
-  { value: 0, label: "Tutti" },
-  { value: "Takahashi Rokuro Hyoe", label: "Takahashi Rokuro Hyoe" },
-];
-
-export const PLACES_OPTIONS: OptionType[] = [
-  { value: 0, label: "Tutti" },
-  { value: "Kamakura", label: "Kamakura" },
-];
-
-export const DATES: OptionType[] = [
-  { value: 1200, label: "1200" },
-  { value: 1270, label: "1270" },
-];
+export const DATES: string[] = new Array(25)
+  .fill(0)
+  .map((_, i) => (i + 1257).toString());

@@ -7,6 +7,15 @@ div.select-wrapper {
     width: 100%;
   }
 
+  .select-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
   button {
     border: 0;
     border-radius: var(--border-radius-sm);
@@ -49,6 +58,24 @@ div.select-wrapper {
     background-color: white;
     width: 100%;
     z-index: 30;
+    scrollbar-width: thin;
+  }
+
+  ::-webkit-scrollbar {
+    background: #fff;
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #ddd;
+    overflow-x: auto;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
   }
 
   ul.show {

@@ -2,21 +2,10 @@ import { MAP_POST_TYPE_TO_BOOK_URL, PostType } from "@utils/elasticSearchUtils";
 import React from "react";
 import ResultTab from "./ResultTab";
 import { useRouter } from "next/router";
-import {
-  mapElasticResultToPost,
-  MAP_BOOK_TO_HUMAN_READABLE,
-} from "@utils/elasticSearchUtils";
-import { useMemo } from "react";
-import Pagination from "../Pagination/Pagination";
-import PostResult from "./PostResult";
-import ResultsLoading from "./ResultsLoading";
-import Link from "next/link";
 import Select from "@components/Select";
-import {
-  DATES,
-  PLACES_OPTIONS,
-  RECIPIENTS_OPTIONS,
-} from "@components/AdvancedSearch/constants";
+import { DATES } from "@components/AdvancedSearch/constants";
+import { RECIPIENTS_OPTIONS } from "@components/AdvancedSearch/recipients";
+import { PLACES_OPTIONS } from "@components/AdvancedSearch/places";
 
 type ResultsHeaderProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,8 +27,6 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data }) => {
     0;
 
   const totalCount = rsndCount + sdlCount + glossaryCount;
-
-  if (totalCount === 0) return null;
 
   return (
     <>
@@ -90,10 +77,14 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data }) => {
                   onChange={(newRecipient) =>
                     router.push({
                       ...router,
-                      query: { ...router.query, recipient: newRecipient },
+                      query: {
+                        ...router.query,
+                        recipient: newRecipient,
+                      },
+                      hash: "risultati",
                     })
                   }
-                  value={(recipient as string) || RECIPIENTS_OPTIONS[0].value}
+                  value={(recipient as string) || RECIPIENTS_OPTIONS[0]}
                   name="destinatario"
                   options={RECIPIENTS_OPTIONS}
                   className="w-64"
@@ -108,10 +99,14 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data }) => {
                   onChange={(newPlace) =>
                     router.push({
                       ...router,
-                      query: { ...router.query, place: newPlace },
+                      query: {
+                        ...router.query,
+                        place: newPlace,
+                      },
+                      hash: "risultati",
                     })
                   }
-                  value={(place as string) || PLACES_OPTIONS[0].value}
+                  value={(place as string) || PLACES_OPTIONS[0]}
                   name="luogo"
                   options={PLACES_OPTIONS}
                   className="w-64"
@@ -127,9 +122,10 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data }) => {
                     router.push({
                       ...router,
                       query: { ...router.query, from: newFrom },
+                      hash: "risultati",
                     })
                   }
-                  value={from as string}
+                  value={(from as string) || DATES[0]}
                   name="da"
                   options={DATES}
                   className="mr-4 w-16"
@@ -140,9 +136,10 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data }) => {
                     router.push({
                       ...router,
                       query: { ...router.query, to: newTo },
+                      hash: "risultati",
                     })
                   }
-                  value={to as string}
+                  value={(to as string) || DATES.at(-1)}
                   name="a"
                   options={DATES}
                   className="ml-4 w-16"

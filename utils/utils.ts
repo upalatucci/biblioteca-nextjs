@@ -11,7 +11,9 @@ export const getQueryParamAsArray = <T>(
   defaultValue?: T
 ) => {
   if (!queryParam && !defaultValue) return;
-  return Array.isArray(queryParam) ? queryParam : [queryParam || defaultValue];
+  return Array.isArray(queryParam)
+    ? (queryParam as T[])
+    : [(queryParam as T) || defaultValue];
 };
 
 export const removeHTMLTags = (htmlString: string) =>
