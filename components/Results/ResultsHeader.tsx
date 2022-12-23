@@ -6,11 +6,18 @@ import Select from "@components/Select";
 import { DATES } from "@components/AdvancedSearch/constants";
 import { RECIPIENTS_OPTIONS } from "@components/AdvancedSearch/recipients";
 import { PLACES_OPTIONS } from "@components/AdvancedSearch/places";
+import { ALL_LABEL } from "@components/GoshoList/utils";
 
 type ResultsHeaderProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
   loading: boolean;
+};
+
+const removeKey = (obj: object, key) => {
+  delete obj[key];
+
+  return obj;
 };
 
 const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data, loading }) => {
@@ -27,6 +34,32 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data, loading }) => {
     0;
 
   const totalCount = rsndCount + sdlCount + glossaryCount;
+
+  const onChangeRecipient = (newRecipient) => {
+    const routerQuery = router.query;
+
+    if (newRecipient === ALL_LABEL) delete routerQuery.recipient;
+    else routerQuery.recipient = newRecipient;
+
+    router.push({
+      ...router,
+      query: routerQuery,
+      hash: "risultati",
+    });
+  };
+
+  const onChangePlace = (newPlace) => {
+    const routerQuery = router.query;
+
+    if (newPlace === ALL_LABEL) delete routerQuery.place;
+    else routerQuery.place = newPlace;
+
+    router.push({
+      ...router,
+      query: routerQuery,
+      hash: "risultati",
+    });
+  };
 
   return (
     <>
@@ -67,92 +100,75 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data, loading }) => {
         />
       </ul>
 
-      {router.query.book === MAP_POST_TYPE_TO_BOOK_URL[PostType.RSND] && (
-        <>
-          <h3 className="text-lg font-serif md:text-xl text-primary font-bold mt-4 mb-6">
-            Filtra i risultati:
-          </h3>
+      {router.query.book === MAP_POST_TYPE_TO_BOOK_URL[PostType.RSND] &&
+        /ricerca-avanzata/.test(router.asPath) && (
+          <>
+            <h3 className="text-lg font-serif md:text-xl text-primary font-bold mt-4 mb-6">
+              Filtra i risultati:
+            </h3>
 
-          <div className="flex items-center justify-between flex-wrap">
-            <span className="mb-4 mr-4">
-              <label className="flex items-center">
-                <span className="mr-4">Destinatario</span>
-                <Select
-                  onChange={(newRecipient) =>
-                    router.push({
-                      ...router,
-                      query: {
-                        ...router.query,
-                        recipient: newRecipient,
-                      },
-                      hash: "risultati",
-                    })
-                  }
-                  value={(recipient as string) || RECIPIENTS_OPTIONS[0]}
-                  name="destinatario"
-                  options={RECIPIENTS_OPTIONS}
-                  className="w-64"
-                />
-              </label>
-            </span>
+            <div className="flex items-center justify-between flex-wrap">
+              <span className="mb-4 mr-4">
+                <label className="flex items-center">
+                  <span className="mr-4">Destinatario</span>
+                  <Select
+                    onChange={onChangeRecipient}
+                    value={(recipient as string) || RECIPIENTS_OPTIONS[0]}
+                    name="destinatario"
+                    options={RECIPIENTS_OPTIONS}
+                    className="w-64"
+                  />
+                </label>
+              </span>
 
-            <span className="mb-4">
-              <label className="flex items-center">
-                <span className="mr-4">Scritto a</span>
-                <Select
-                  onChange={(newPlace) =>
-                    router.push({
-                      ...router,
-                      query: {
-                        ...router.query,
-                        place: newPlace,
-                      },
-                      hash: "risultati",
-                    })
-                  }
-                  value={(place as string) || PLACES_OPTIONS[0]}
-                  name="luogo"
-                  options={PLACES_OPTIONS}
-                  className="w-64"
-                />
-              </label>
-            </span>
+              <span className="mb-4">
+                <label className="flex items-center">
+                  <span className="mr-4">Scritto a</span>
+                  <Select
+                    onChange={onChangePlace}
+                    value={(place as string) || PLACES_OPTIONS[0]}
+                    name="luogo"
+                    options={PLACES_OPTIONS}
+                    className="w-64"
+                  />
+                </label>
+              </span>
 
-            <span className="mb-4">
-              <label className="flex items-center">
-                <span className="mr-4">Scritto nel</span>
-                <Select
-                  onChange={(newFrom) =>
-                    router.push({
-                      ...router,
-                      query: { ...router.query, from: newFrom },
-                      hash: "risultati",
-                    })
-                  }
-                  value={(from as string) || DATES[0]}
-                  name="da"
-                  options={DATES}
-                  className="mr-4 w-16"
-                />
-                -
-                <Select
-                  onChange={(newTo) =>
-                    router.push({
-                      ...router,
-                      query: { ...router.query, to: newTo },
-                      hash: "risultati",
-                    })
-                  }
-                  value={(to as string) || DATES.at(-1)}
-                  name="a"
-                  options={DATES}
-                  className="ml-4 w-16"
-                />
-              </label>
-            </span>
-          </div>
-        </>
-      )}
+              <span className="mb-4">
+                <label className="flex items-center">
+                  <span className="mr-4">Scritto nel</span>
+                  <Select
+                    onChange={(newFrom) =>
+                      router.push({
+                        ...router,
+                        query: { ...router.query, from: newFrom },
+                        hash: "risultati",
+                      })
+                    }
+                    value={(from as string) || DATES[0]}
+                    name="da"
+                    options={DATES}
+                    className="mr-4 w-16"
+                  />
+                  -
+                  <Select
+                    onChange={(newTo) =>
+                      router.push({
+                        ...router,
+                        query: { ...router.query, to: newTo },
+                        hash: "risultati",
+                      })
+                    }
+                    value={(to as string) || DATES.at(-1)}
+                    name="a"
+                    options={DATES}
+                    className="ml-4 w-16"
+                  />
+                </label>
+              </span>
+            </div>
+          </>
+        )}
     </>
   );
 };
