@@ -5,7 +5,16 @@ import Fuse from "fuse.js";
 
 const generateUniqueOptions = (jsonData: GoshoType[], key) => {
   const options = [{ value: 0, label: "Tutti" }];
-  const uniqueValues = new Set<string>(jsonData.map((post) => post[key]));
+  const uniqueValues = new Set<string>(
+    jsonData.reduce((acc, post) => {
+      if (Array.isArray(post[key])) {
+        return acc.concat(post[key]);
+      }
+
+      acc.push(post[key]);
+      return acc;
+    }, [])
+  );
 
   uniqueValues.forEach((value) => {
     if (value)
@@ -52,7 +61,10 @@ export const useFilters = (allGosho: GoshoType[]) => {
       : fuseRef.current?.search(titleFilter).map((result) => result.item);
 
   const filteredGosho = goshoFilteredByTitle.filter((gosho) => {
-    if (recipient && gosho.recipient !== recipientOptions[recipient].label) {
+    if (
+      recipient &&
+      !gosho.recipient.includes(recipientOptions[recipient].label)
+    ) {
       return false;
     }
 
