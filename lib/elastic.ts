@@ -217,31 +217,6 @@ const searchQuery = (
     },
   };
 
-  if (recipient) {
-    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
-      query_string: {
-        query: recipient,
-        fields: ["meta.acf_destinatario.value"],
-      },
-    });
-  }
-
-  if (from && to) {
-    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
-      range: {
-        "meta.acf_data.value": { gte: from, lte: to },
-      },
-    });
-  }
-
-  if (place) {
-    (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
-      term: {
-        "meta.acf_luogo.value.raw": place,
-      },
-    });
-  }
-
   // const exactMatch = textQueryCopy?.match(/".*"!~/);
 
   // exactMatch?.forEach((match) => {
@@ -288,10 +263,41 @@ const searchQuery = (
 
   if (sources) {
     elasticQuery.post_filter = {
-      terms: {
-        "post_type.raw": sources,
+      bool: {
+        must: [
+          {
+            terms: {
+              "post_type.raw": sources,
+            },
+          },
+        ],
       },
     };
+  }
+
+  if (recipient) {
+    (elasticQuery.post_filter.bool.must as QueryDslQueryContainer[]).push({
+      query_string: {
+        query: recipient,
+        fields: ["meta.acf_destinatario.value"],
+      },
+    });
+  }
+
+  if (from && to) {
+    (elasticQuery.post_filter.bool.must as QueryDslQueryContainer[]).push({
+      range: {
+        "meta.acf_data.value": { gte: from, lte: to },
+      },
+    });
+  }
+
+  if (place) {
+    (elasticQuery.post_filter.bool.must as QueryDslQueryContainer[]).push({
+      term: {
+        "meta.acf_luogo.value.raw": place,
+      },
+    });
   }
 
   return elasticQuery;

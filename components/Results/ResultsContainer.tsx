@@ -8,6 +8,7 @@ import Pagination from "@components/Pagination";
 import { useRouter } from "next/router";
 import ResultsLoading from "./ResultsLoading";
 import Link from "next/link";
+import { removeBook, removeRSNDParams } from "./utils";
 
 const NoResults = () => (
   <h2 className="text-3xl md:text-4xl px-4 font-bold">
@@ -16,9 +17,7 @@ const NoResults = () => (
 );
 
 const removeParams = (routerPath: string, book: string) => {
-  return routerPath
-    .replace(/(recipient|from|to|place)=.+?&?/g, "")
-    .replace(book, "");
+  return removeRSNDParams(removeBook(routerPath, book));
 };
 
 const NoResultsForThatBook = ({ router }) => (

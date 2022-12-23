@@ -13,7 +13,7 @@ type ResultsHeaderProps = {
   loading: boolean;
 };
 
-const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data }) => {
+const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data, loading }) => {
   const router = useRouter();
   const { from, to, recipient, place } = router.query;
   const aggregationData = data?.aggregations?.book?.buckets;
@@ -32,12 +32,14 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data }) => {
     <>
       <ul className="flex flex-wrap text-sm font-medium text-center font-sans text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
         <ResultTab
+          loading={loading}
           count={totalCount}
           title="Tutti"
           active={!router.query.book}
         />
 
         <ResultTab
+          loading={loading}
           count={rsndCount}
           title="RSND"
           tabKey={MAP_POST_TYPE_TO_BOOK_URL[PostType.RSND]}
@@ -47,6 +49,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data }) => {
         />
 
         <ResultTab
+          loading={loading}
           count={sdlCount}
           title="Il Sutra del Loto"
           tabKey={MAP_POST_TYPE_TO_BOOK_URL[PostType.SDL]}
@@ -54,6 +57,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data }) => {
         />
 
         <ResultTab
+          loading={loading}
           count={glossaryCount}
           title={"Glossario"}
           tabKey={MAP_POST_TYPE_TO_BOOK_URL[PostType.GLOSSARY]}
