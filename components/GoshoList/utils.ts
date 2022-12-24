@@ -6,12 +6,15 @@ import Fuse from "fuse.js";
 export const ALL_LABEL = "Tutti";
 
 const generateUniqueOptions = (jsonData: GoshoType[], key) => {
-  const uniqueValues = new Set<string>();
+  const uniqueValues = new Set<string>([ALL_LABEL]);
 
   jsonData.forEach((post) => {
+
     if (Array.isArray(post[key])) {
       post[key].forEach((value) => uniqueValues.add(value));
+      return
     }
+
     uniqueValues.add(post[key]);
   });
 
@@ -53,12 +56,13 @@ export const useFilters = (allGosho: GoshoType[]) => {
   const filteredGosho = goshoFilteredByTitle.filter((gosho) => {
     if (
       recipient &&
-      !gosho.recipient.includes(recipientOptions[recipient].label)
+      recipient !== ALL_LABEL && 
+      !gosho.recipient.includes(recipient)
     ) {
       return false;
     }
 
-    if (place && gosho.place !== placesOptions[place].label) {
+    if (place && place !== ALL_LABEL && gosho.place !== place) {
       return false;
     }
 
