@@ -64,7 +64,7 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
                 <span className="mr-8 lg:mr-14">{post.number}.</span>{" "}
               </td>
               <td width="50%">
-                <Link href={`/gosho/${post.slug}`}>
+                <Link href={`/rsnd/${post.slug}`}>
                   <a className="flex hover:text-primary py-3">
                     <span
                       dangerouslySetInnerHTML={{ __html: post.title }}

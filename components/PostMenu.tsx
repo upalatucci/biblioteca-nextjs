@@ -31,7 +31,7 @@ const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
   useEffect(() => {
     Promise.all([
       import("@books/rsnd1.json"),
-      import("@books/rsnd2.json"),
+      import("@books/rsnd2.json")
     ]).then(([rsnd1Data, rsnd2Data]) => {
       setJSONData([...rsnd1Data.default, ...rsnd2Data.default]);
     });
@@ -87,14 +87,14 @@ const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
               <li
                 key={post.slug}
                 className={classNames("font-semibold py-2", {
-                  "text-primary": post.title === currentPostTitle,
+                  "text-primary": post.title === currentPostTitle
                 })}
                 ref={post.title === currentPostTitle ? activeLiRef : null}
               >
-                <Link href={`/gosho/${post.slug}`}>
+                <Link href={`/rsnd/${post.slug}`}>
                   <a
                     dangerouslySetInnerHTML={{
-                      __html: `${post.number}. ${post.title}`,
+                      __html: `${post.number}. ${post.title}`
                     }}
                   />
                 </Link>
