@@ -5,12 +5,21 @@ import SearchInput from "@components/SearchInput";
 import classNames from "classnames";
 import Footer from "@components/Footer";
 import DictionarySearch from "@components/DictionarySearch";
+import { GLOSSARY_RSND_CAT_ID, GLOSSARY_SDL_CAT_ID } from "@utils/constants";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 
 export default function Glossario() {
   const [selectedLetter, setSelectedLetter] = useState("");
   const [searchText, setSearchText] = useState("");
+  const [catToFilter, setCatToFilter] = useState<string>(
+    GLOSSARY_RSND_CAT_ID.toString()
+  );
+
+  const handleRadioButtons = (event) => {
+    if (event.currentTarget.checked) setCatToFilter(event.currentTarget.value);
+  };
+
   return (
     <>
       <Head>
@@ -33,11 +42,27 @@ export default function Glossario() {
 
                   <div className="flex flex-col md:flex-row items-start md:items-center justify-start ml-4 md:ml-0 ">
                     <label className="md:ml-6">
-                      <input type="checkbox" className="mr-4" />
+                      <input
+                        type="radio"
+                        className="mr-4"
+                        name="cat"
+                        value={GLOSSARY_RSND_CAT_ID.toString()}
+                        checked={
+                          catToFilter === GLOSSARY_RSND_CAT_ID.toString()
+                        }
+                        onClick={handleRadioButtons}
+                      />
                       <span>RSND vol. I/II</span>
                     </label>
                     <label className="md:ml-6">
-                      <input type="checkbox" className="mr-4" />
+                      <input
+                        type="radio"
+                        className="mr-4"
+                        name="cat"
+                        value={GLOSSARY_SDL_CAT_ID.toString()}
+                        checked={catToFilter === GLOSSARY_SDL_CAT_ID.toString()}
+                        onClick={handleRadioButtons}
+                      />
                       <span>Il Sutra del Loto</span>
                     </label>
                   </div>
@@ -64,7 +89,7 @@ export default function Glossario() {
                     className={classNames(
                       "h-10 w-10 rounded-2xl border-secondary border",
                       {
-                        "bg-secondary text-white": selectedLetter === lettera,
+                        "bg-secondary text-white": selectedLetter === lettera
                       }
                     )}
                     onClick={() =>
@@ -80,7 +105,11 @@ export default function Glossario() {
             </form>
 
             <hr className="border border-secondary mt-6" />
-            <DictionarySearch letter={selectedLetter} filterText={searchText} />
+            <DictionarySearch
+              letter={selectedLetter}
+              filterText={searchText}
+              filterCategory={parseInt(catToFilter)}
+            />
           </div>
         </section>
       </main>

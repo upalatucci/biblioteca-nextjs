@@ -130,6 +130,30 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                       Note
                     </label>
                   </span>
+                  <span className="w-32 lg:w-40">
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        value={FIELDS.INTRODUZIONE}
+                        onChange={onFieldsChange}
+                        checked={fields.includes(FIELDS.INTRODUZIONE)}
+                        className="mr-4"
+                      />
+                      Introduzione
+                    </label>
+                  </span>
+                  <span className="w-32 lg:w-40">
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        value={FIELDS.APPENDICI}
+                        onChange={onFieldsChange}
+                        checked={fields.includes(FIELDS.APPENDICI)}
+                        className="mr-4"
+                      />
+                      Appendici
+                    </label>
+                  </span>
                 </div>
               </div>
             </div>

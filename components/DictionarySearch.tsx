@@ -7,16 +7,19 @@ import Pagination, { usePagination } from "./Pagination";
 type DictionaryItem = {
   title: string;
   content: string;
+  cat: number[];
 };
 
 type DictionarySearchProps = {
   filterText: string;
   letter: string;
+  filterCategory?: number;
 };
 
 const DictionarySearch: React.FC<DictionarySearchProps> = ({
   letter,
   filterText,
+  filterCategory
 }) => {
   const [glossario, setGlossario] = useState<DictionaryItem[]>();
   const fuseRef = useRef<Fuse<DictionaryItem>>();
@@ -44,7 +47,15 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
     glossarioFiltrato = glossario;
   }
 
-  const dictionaryToShow = usePagination(glossarioFiltrato);
+  console.log(filterCategory);
+  const glossarioFilteredByCategory =
+    filterCategory || !isNaN(filterCategory)
+      ? (glossarioFiltrato || []).filter((item) =>
+          item.cat.includes(filterCategory)
+        )
+      : glossarioFiltrato;
+
+  const dictionaryToShow = usePagination(glossarioFilteredByCategory);
 
   if (!glossario) {
     return <DictionarySkeleton />;
