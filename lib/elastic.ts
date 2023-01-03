@@ -1,4 +1,4 @@
-import { FIELDS, SEARCH_TYPE } from "../utils/constants";
+import { EXTRA_CATEGORIES, FIELDS, SEARCH_TYPE } from "../utils/constants";
 
 import { Client } from "@elastic/elasticsearch";
 import {
@@ -32,6 +32,33 @@ const addWeights = (fields: string[]): string[] => {
 
     return field;
   });
+};
+
+const buildCategoriesToExclude = (
+  extraCategories: EXTRA_CATEGORIES[]
+): QueryDslQueryContainer[] => {
+  const withIntro = extraCategories.includes(EXTRA_CATEGORIES.INTRO);
+  const withApprendix = extraCategories.includes(EXTRA_CATEGORIES.APPENDICI);
+
+  const rsndIntros = withIntro ? [] : ["intro-1", "intro-2"];
+  const sdlpeIntro = withIntro ? [] : ["materiale-introduttivo"];
+
+  console.log(extraCategories);
+
+  const rsndApprendix = withApprendix ? [] : ["appendici"];
+
+  return [
+    {
+      terms: {
+        "terms.cat_rsnd.slug": rsndIntros.concat(rsndApprendix),
+      },
+    },
+    {
+      terms: {
+        "terms.cat_sdlpe.slug": sdlpeIntro,
+      },
+    },
+  ];
 };
 
 export const highlighPost = (
@@ -176,6 +203,7 @@ const searchQuery = (
   sources: PostType[],
   recipient: string = null,
   place: string = null,
+  extraCategories: EXTRA_CATEGORIES[] = [],
   from: string = null,
   to: string = null
 ): SearchRequest => {
@@ -199,6 +227,16 @@ const searchQuery = (
         must: [],
         should: [],
         filter: [],
+        must_not: [
+          ...buildCategoriesToExclude(extraCategories),
+          {
+            term: {
+              "post_type.raw": {
+                value: "page",
+              },
+            },
+          },
+        ],
       },
     },
     highlight: {
@@ -230,6 +268,11 @@ const searchQuery = (
   //     },
   //   });
   // });
+
+  console.log(
+    elasticQuery.query.bool.must_not?.[0]?.terms?.["terms.cat_rsnd.slug"],
+    elasticQuery.query.bool.must_not?.[1]?.terms?.["terms.cat_sdlpe.slug"]
+  );
 
   if (textQueryCopy && searchType === SEARCH_TYPE.AND)
     (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({

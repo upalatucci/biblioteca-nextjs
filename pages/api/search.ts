@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { FIELDS, SEARCH_TYPE } from "@utils/constants";
+import { EXTRA_CATEGORIES, FIELDS, SEARCH_TYPE } from "@utils/constants";
 import searchQuery, { client, DEFAULT_PAGE_SIZE } from "lib/elastic";
 import { getQueryParamAsArray } from "@utils/utils";
 import { PostType } from "@utils/elasticSearchUtils";
@@ -17,6 +17,10 @@ export default async function handler(
       FIELDS.CONTENT
     );
 
+    const extraCategories = getQueryParamAsArray<EXTRA_CATEGORIES>(
+      req.query.extraCategory
+    );
+
     const sources = getQueryParamAsArray<PostType>(req.query.sources);
 
     const pageQuery = parseInt(
@@ -32,6 +36,7 @@ export default async function handler(
       sources,
       req.query.recipient as string,
       req.query.place as string,
+      extraCategories,
       req.query.from as string,
       req.query.to as string
     );

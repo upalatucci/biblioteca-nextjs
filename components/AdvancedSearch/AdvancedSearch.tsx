@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { FC, useCallback, useEffect, useState } from "react";
-import { FIELDS, SEARCH_TYPE } from "@utils/constants";
+import { EXTRA_CATEGORIES, FIELDS, SEARCH_TYPE } from "@utils/constants";
 import SearchInput from "../SearchInput";
 import Select from "../Select";
 import { SELECTABLE_TYPES, mapSearchType, mapSelectToType } from "./constants";
@@ -16,6 +16,9 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
   const [searchText, setSearchText] = useState("");
   const [searchType, setSearchType] = useState<SEARCH_TYPE>(SEARCH_TYPE.EXACT);
   const [fields, setFields] = useState([FIELDS.CONTENT]);
+  const [extraCategories, setExtraCategories] = useState<EXTRA_CATEGORIES[]>(
+    []
+  );
 
   useEffect(() => {
     if (router.query.q) setSearchText(router.query.q as string);
@@ -31,6 +34,11 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
       setFields(getQueryParamAsArray(router.query.fields));
   }, [router.query.fields]);
 
+  useEffect(() => {
+    if (router.query.extraCategory)
+      setExtraCategories(getQueryParamAsArray(router.query.extraCategory));
+  }, [router.query.extraCategory]);
+
   const onSubmit = (event) => {
     event.preventDefault();
     if (!searchText) return;
@@ -39,6 +47,8 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
     router.query.fields = fields;
 
     router.query.searchType = searchType;
+
+    router.query.extraCategory = extraCategories;
 
     router.push({ ...router, hash: "risultati" }, null, { scroll: false });
   };
@@ -53,12 +63,27 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
     },
     []
   );
+  const onCategoriesChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.checked) {
+        setExtraCategories((f) =>
+          f.concat([event.target.value as EXTRA_CATEGORIES])
+        );
+      } else {
+        setExtraCategories((array) =>
+          array.filter((f) => f !== event.target.value)
+        );
+      }
+    },
+    []
+  );
 
   const onReset = (event) => {
     event.preventDefault();
     router.push("/ricerca-avanzata");
     setSearchType(SEARCH_TYPE.EXACT);
     setFields([FIELDS.CONTENT]);
+    setExtraCategories([]);
     setSearchText("");
   };
 
@@ -134,9 +159,11 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                     <label className="flex items-center">
                       <input
                         type="checkbox"
-                        value={FIELDS.INTRODUZIONE}
-                        onChange={onFieldsChange}
-                        checked={fields.includes(FIELDS.INTRODUZIONE)}
+                        value={EXTRA_CATEGORIES.INTRO}
+                        onChange={onCategoriesChange}
+                        checked={extraCategories.includes(
+                          EXTRA_CATEGORIES.INTRO
+                        )}
                         className="mr-4"
                       />
                       Introduzione
@@ -146,9 +173,11 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                     <label className="flex items-center">
                       <input
                         type="checkbox"
-                        value={FIELDS.APPENDICI}
-                        onChange={onFieldsChange}
-                        checked={fields.includes(FIELDS.APPENDICI)}
+                        value={EXTRA_CATEGORIES.APPENDICI}
+                        onChange={onCategoriesChange}
+                        checked={extraCategories.includes(
+                          EXTRA_CATEGORIES.APPENDICI
+                        )}
                         className="mr-4"
                       />
                       Appendici
