@@ -27,7 +27,7 @@ const typeToBaseUrl = (type: PostType) => {
     case "sdlpe":
       return "sutra-del-loto";
     case "rsnd":
-      return "gosho";
+      return "rsnd";
     default:
       undefined;
   }
