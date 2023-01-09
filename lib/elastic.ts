@@ -43,8 +43,6 @@ const buildCategoriesToExclude = (
   const rsndIntros = withIntro ? [] : ["intro-1", "intro-2"];
   const sdlpeIntro = withIntro ? [] : ["materiale-introduttivo"];
 
-  console.log(extraCategories);
-
   const rsndApprendix = withApprendix ? [] : ["appendici"];
 
   return [
@@ -135,8 +133,6 @@ export const highlighPost = (
       },
     });
   }
-
-  console.log(elasticQuery?.query?.bool?.should);
 
   return client.search(elasticQuery);
 };
@@ -268,11 +264,6 @@ const searchQuery = (
   //     },
   //   });
   // });
-
-  console.log(
-    elasticQuery.query.bool.must_not?.[0]?.terms?.["terms.cat_rsnd.slug"],
-    elasticQuery.query.bool.must_not?.[1]?.terms?.["terms.cat_sdlpe.slug"]
-  );
 
   if (textQueryCopy && searchType === SEARCH_TYPE.AND)
     (elasticQuery.query.bool.must as QueryDslQueryContainer[]).push({
