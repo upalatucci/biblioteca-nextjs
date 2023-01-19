@@ -37,7 +37,7 @@ const HomeNavbar = () => {
             />
           </a>
         </Link>
-        <h1 className="lg:hidden text-center font-bold text-3xl md:text-5xl">
+        <h1 className="lg:hidden text-center font-bold text-3xl md:text-5xl mx-4">
           NICHIREN Library
         </h1>
         <button
