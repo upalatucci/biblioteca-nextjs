@@ -15,9 +15,22 @@ import {
 } from "@utils/articleUtils";
 import useHighlightedPost from "@hooks/useHighlightedPost";
 import { removeHTMLTags } from "@utils/utils";
+import { useEffect, useState } from "react";
+import { GoshoType } from "@components/GoshoList";
 
 export default function PostPage({ post }) {
+  const [jsonData, setJSONData] = useState<GoshoType[]>([]);
+
   const router = useRouter();
+
+  useEffect(() => {
+    Promise.all([
+      import("@books/rsnd1.json"),
+      import("@books/rsnd2.json"),
+    ]).then(([rsnd1Data, rsnd2Data]) => {
+      setJSONData([...rsnd1Data.default, ...rsnd2Data.default]);
+    });
+  }, []);
 
   const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
 
@@ -79,7 +92,12 @@ export default function PostPage({ post }) {
                   </div>
                 )}
               </div>
-              <PostMenu currentPostTitle={post.title.rendered} />
+              <PostMenu
+                currentPostTitle={post.title.rendered}
+                withBackgrounds={!!highlightedPost?.acf?.acf_cenni_storici}
+                withNotes={!!highlightedPost?.acf?.acf_note}
+                jsonData={jsonData}
+              />
             </div>
           </div>
         </div>

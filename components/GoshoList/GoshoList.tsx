@@ -7,10 +7,10 @@ import { useFilters, useOrder } from "./utils";
 export type GoshoType = {
   title: string;
   slug: string;
-  recipient: string[];
-  place: string;
-  date: string;
-  number: number;
+  recipient?: string[];
+  place?: string;
+  date?: string;
+  number?: number;
 };
 
 type GoshoListProps = {

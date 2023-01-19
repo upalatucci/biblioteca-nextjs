@@ -23,14 +23,32 @@ async function getPosts() {
   }
 }
 
-getPosts().then((posts) => {
-  const json = posts.map((post) => ({
-    title: post.title.rendered,
-    slug: post.slug,
-  }));
+const INTRO_CAT_ID = 18;
 
+getPosts().then((posts) => {
   console.log(posts[0]);
+
+  const json = posts
+    .filter((post) => !post.cat_sdlpe.includes(INTRO_CAT_ID))
+    .map((post) => ({
+      title: post.title.rendered,
+      slug: post.slug,
+      category: post.cat_sdlpe,
+    }));
+
   fs.writeFile("./books/sdl.json", JSON.stringify(json), (err) =>
+    console.error(err)
+  );
+
+  const jsonIntro = posts
+    .filter((post) => post.cat_sdlpe.includes(INTRO_CAT_ID))
+    .map((post) => ({
+      title: post.title.rendered,
+      slug: post.slug,
+      category: post.cat_sdlpe,
+    }));
+
+  fs.writeFile("./books/intro_sdl.json", JSON.stringify(jsonIntro), (err) =>
     console.error(err)
   );
 });

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { useRef } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
@@ -60,8 +61,15 @@ const ParagraphWithNotes: React.FC<ParagraphWithNotesProps> = ({
 
   return (
     <>
-      <p dangerouslySetInnerHTML={{ __html: content }} onClick={onNoteClick} />
-      <div className="font-sans my-4" ref={notesRef}>
+      <p
+        dangerouslySetInnerHTML={{ __html: content }}
+        onClick={onNoteClick}
+        className="my-4"
+      />
+      <div
+        className={classNames("font-sans", { "my-4": notesToShow.length })}
+        ref={notesRef}
+      >
         <TransitionGroup component="ul">
           {notesToShow.sort().map((noteIndex) => (
             <CSSTransition

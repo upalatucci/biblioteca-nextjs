@@ -22,20 +22,18 @@ Skeleton.displayName = "Skeleton";
 
 type PostMenuProps = {
   currentPostTitle?: string;
+  withBackgrounds?: boolean;
+  withNotes?: boolean;
+  jsonData: GoshoType[];
 };
 
-const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
-  const [jsonData, setJSONData] = useState<GoshoType[]>([]);
+const PostMenu: React.FC<PostMenuProps> = ({
+  jsonData,
+  currentPostTitle,
+  withNotes = false,
+  withBackgrounds = false,
+}) => {
   const activeLiRef = useRef<HTMLLIElement>();
-
-  useEffect(() => {
-    Promise.all([
-      import("@books/rsnd1.json"),
-      import("@books/rsnd2.json")
-    ]).then(([rsnd1Data, rsnd2Data]) => {
-      setJSONData([...rsnd1Data.default, ...rsnd2Data.default]);
-    });
-  }, []);
 
   useLayoutEffect(() => {
     if (activeLiRef.current) {
@@ -47,26 +45,41 @@ const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
   });
 
   return (
-    <div className="post-menu w-full lg:w-[300px] lg:min-w-[300px] xl:w-[400px] xl:min-w-[400px]">
+    <div className="post-menu w-full lg:w-[300px] lg:min-w-[300px] xl:w-[400px] xl:min-w-[400px] print:hidden">
       <div className="px-6 py-4 w-full text-md mb-4 rounded-2xl shadow-md bg-defaultBg">
         <ul className="flex items-center justify-evenly flex-wrap lg:block lg:divide-y-2 divide-dashed divide-gray-300">
-          <li className="mx-2 lg:mx-0 py-1">Condividi</li>
-          <li className="mx-2 lg:mx-0 py-1">Sava in pdf</li>
-          <li className="mx-2 lg:mx-0 py-1">Stampa</li>
-          <li className="mx-2 lg:mx-0 py-1">Ascolta l&apos;audio</li>
-          <li className="mx-2 lg:mx-0 py-1">Dimensione del testo</li>
-        </ul>
-      </div>
-      <div className="px-6 py-4 hidden lg:block w-full text-md mb-4 rounded-2xl shadow-md bg-secondary text-white">
-        <ul className="divide-y-2 divide-dashed divide-white">
-          <li className="py-1">
-            <a href="#cenni_storici">Vai ai cenni storici</a>
+          <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
+            <button>Condividi</button>
           </li>
-          <li className="py-1">
-            <a href="#note">Vai alle note</a>
+          <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
+            <button>Sava in pdf</button>
+          </li>
+          <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
+            <button onClick={() => print()}>Stampa</button>
+          </li>
+          {/* <li className="mx-2 lg:mx-0 py-1">Ascolta l&apos;audio</li> */}
+          <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
+            <button>Dimensione del testo</button>
           </li>
         </ul>
       </div>
+      {withBackgrounds ||
+        (withNotes && (
+          <div className="px-6 py-4 hidden lg:block w-full text-md mb-4 rounded-2xl shadow-md bg-secondary text-white">
+            <ul className="divide-y-2 divide-dashed divide-white">
+              {withBackgrounds && (
+                <li className="py-1">
+                  <a href="#cenni_storici">Vai ai cenni storici</a>
+                </li>
+              )}
+              {withNotes && (
+                <li className="py-1">
+                  <a href="#note">Vai alle note</a>
+                </li>
+              )}
+            </ul>
+          </div>
+        ))}
 
       <div className="px-6 py-4 hidden lg:block w-full text-md mb-4 rounded-2xl shadow-md  bg-defaultBg">
         <Link href="/glossario">
@@ -83,18 +96,18 @@ const PostMenu: React.FC<PostMenuProps> = ({ currentPostTitle }) => {
 
           {jsonData
             .sort((a, b) => (a.number > b.number ? 1 : -1))
-            .map((post) => (
+            .map((post, index) => (
               <li
                 key={post.slug}
                 className={classNames("font-semibold py-2", {
-                  "text-primary": post.title === currentPostTitle
+                  "text-primary": post.title === currentPostTitle,
                 })}
                 ref={post.title === currentPostTitle ? activeLiRef : null}
               >
                 <Link href={`/rsnd/${post.slug}`}>
                   <a
                     dangerouslySetInnerHTML={{
-                      __html: `${post.number}. ${post.title}`
+                      __html: `${post?.number || index + 1}. ${post.title}`,
                     }}
                   />
                 </Link>

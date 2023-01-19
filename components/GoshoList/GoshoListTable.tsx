@@ -16,7 +16,7 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
   sortedGosho,
   sortField,
   sortAscend,
-  onSortChange
+  onSortChange,
 }) => {
   const goshoToShow = usePagination(sortedGosho);
 
@@ -72,7 +72,7 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
                   </a>
                 </Link>
               </td>
-              <td>{post.recipient}</td>
+              <td>{post.recipient.join(", ")}</td>
               <td>{post.place}</td>
               <td>{post.date}</td>
             </tr>
