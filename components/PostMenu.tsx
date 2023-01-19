@@ -1,7 +1,14 @@
 import Link from "next/link";
 import classNames from "classnames";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { GoshoType } from "./GoshoList";
+import ShareModal from "./ShareModal";
 
 const nLi = new Array(10).fill(0).map((_, index) => index);
 
@@ -33,6 +40,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
   withNotes = false,
   withBackgrounds = false,
 }) => {
+  const [openShareModal, setOpenShareModal] = useState(false);
   const activeLiRef = useRef<HTMLLIElement>();
 
   useLayoutEffect(() => {
@@ -44,12 +52,32 @@ const PostMenu: React.FC<PostMenuProps> = ({
     }
   });
 
+  const share = useCallback(() => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: currentPostTitle,
+          url: window.location.href,
+        })
+        .then(() => console.log("Successful share"))
+        .catch((error) => console.log("Error sharing", error));
+    } else {
+      setOpenShareModal(true);
+    }
+  }, [currentPostTitle]);
+
   return (
     <div className="post-menu w-full lg:w-[300px] lg:min-w-[300px] xl:w-[400px] xl:min-w-[400px] print:hidden">
+      {openShareModal && (
+        <ShareModal
+          title={currentPostTitle}
+          onClose={() => setOpenShareModal(false)}
+        />
+      )}
       <div className="px-6 py-4 w-full text-md mb-4 rounded-2xl shadow-md bg-defaultBg">
         <ul className="flex items-center justify-evenly flex-wrap lg:block lg:divide-y-2 divide-dashed divide-gray-300">
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
-            <button>Condividi</button>
+            <button onClick={share}>Condividi</button>
           </li>
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
             <button>Sava in pdf</button>
