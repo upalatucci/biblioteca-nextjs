@@ -21,7 +21,7 @@ const NavbarItem: React.FC<NavbarItemProps> = ({
           {upText && <div className="text-sm">{upText}</div>}
           {title}
         </span>
-        {downText && <span className="text-sm text-gray">{downText}</span>}
+        {downText && <span className="text-sm text-gray-400">{downText}</span>}
       </span>
     </a>
   </Link>

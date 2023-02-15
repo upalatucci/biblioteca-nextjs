@@ -1,4 +1,5 @@
 import Pagination, { usePagination } from "@components/Pagination";
+import classNames from "classnames";
 import Link from "next/link";
 import * as React from "react";
 import { GoshoType } from "./GoshoList";
@@ -16,15 +17,15 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
   sortedGosho,
   sortField,
   sortAscend,
-  onSortChange,
+  onSortChange
 }) => {
   const goshoToShow = usePagination(sortedGosho);
 
   return (
     <>
-      <table className="mt-4 text-xl w-full table-auto">
+      <table className="mt-4 text-xl w-full table-auto bg-white rounded-xl font-serif border-collapse">
         <thead className="text-left">
-          <tr>
+          <tr className="border-b-2 border-primary">
             <GoshoTableSortButton
               title="N"
               field="number"
@@ -57,13 +58,18 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
             />
           </tr>
         </thead>
-        <tbody className="divide-y-2 divide-gray-300 divide-dashed">
-          {goshoToShow.map((post: GoshoType) => (
-            <tr key={post.slug}>
-              <td width="5">
+        <tbody>
+          {goshoToShow.map((post: GoshoType, postIndex: number) => (
+            <tr
+              key={post.slug}
+              className={classNames("bg-white", {
+                "bg-defaultBg": postIndex % 2
+              })}
+            >
+              <td width="5" className="px-4 py-2">
                 <span className="mr-8 lg:mr-14">{post.number}.</span>{" "}
               </td>
-              <td width="50%">
+              <td width="50%" className="px-4 py-2">
                 <Link href={`/rsnd/${post.slug}`}>
                   <a className="flex hover:text-primary py-3">
                     <span
@@ -72,9 +78,9 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
                   </a>
                 </Link>
               </td>
-              <td>{post.recipient.join(", ")}</td>
-              <td>{post.place}</td>
-              <td>{post.date}</td>
+              <td className="px-4 py-2">{post.recipient.join(", ")}</td>
+              <td className="px-4 py-2">{post.place}</td>
+              <td className="px-4 py-2">{post.date}</td>
             </tr>
           ))}
         </tbody>

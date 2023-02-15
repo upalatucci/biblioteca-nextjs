@@ -28,7 +28,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
     setPlace,
     placesOptions,
     recipientOptions,
-    clearFilters,
+    clearFilters
   } = useFilters(jsonData);
   const { sortedGosho, sortField, sortAscend, onSortChange } =
     useOrder(filteredGosho);
@@ -39,38 +39,37 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   };
 
   return (
-    <section className="bg-white" id="gosho-list">
+    <section className="bg-defaultBg" id="gosho-list">
       <div className="container mx-auto px-4 py-8 min-h-[50vh]">
-        <h2 className="text-4xl md:text-5xl text-secondary mb-8">Scritti</h2>
-        <form className="border-b-2 border-secondary flex items-stretch flex-col lg:flex-row lg:items-center justify-between flex-wrap gap-4 pb-4">
-          <label className="flex-1 flex lg:flex-col items-center lg:items-start">
-            <span className="mr-4 font-bold">Titolo</span>
-            <SearchInput
-              value={titleFilter}
-              onChange={onSearchInput}
-              placeholder="Inserisci il titolo del Gosho che stai cercando"
-            />
-          </label>
-          <label className="flex lg:flex-col items-center lg:items-start">
-            <span className="mr-4">Destinatario</span>
-            <Select
-              onChange={setRecipient}
-              value={recipient}
-              name="destinatario"
-              options={recipientOptions}
-              className="w-64"
-            />
-          </label>
-          <label className="flex lg:flex-col items-center lg:items-start">
-            <span className="mr-4">Luogo</span>
-            <Select
-              onChange={setPlace}
-              value={place}
-              name="destinatario"
-              options={placesOptions}
-              className="w-64"
-            />
-          </label>
+        <h2 className="text-4xl md:text-3xl text-primary font-bold mb-8 font-serif ">
+          Scritti
+        </h2>
+        <form className="flex items-stretch flex-col lg:flex-row lg:items-center justify-between flex-wrap gap-4 pb-4">
+          <SearchInput
+            value={titleFilter}
+            onChange={onSearchInput}
+            placeholder="Inserisci il titolo del Gosho che stai cercando"
+            aria-label="Titolo"
+            className="bg-white  border-primary "
+          />
+          <Select
+            onChange={setRecipient}
+            value={recipient}
+            name="destinatario"
+            options={recipientOptions}
+            className="w-64 border rounded-xl border-primary"
+            aria-label="Destinatario"
+            placeholder="Seleziona destinatario"
+          />
+          <Select
+            onChange={setPlace}
+            value={place}
+            name="destinatario"
+            options={placesOptions}
+            className="w-64 border rounded-xl border-primary"
+            aria-label="Luogo"
+            placeholder="Seleziona il luogo"
+          />
         </form>
         {filteredGosho.length === 0 && (
           <div>

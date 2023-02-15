@@ -1,11 +1,12 @@
 import * as React from "react";
 
-
 const GoshoListSkeleton: React.FC = () => (
-  <section className="bg-white" id="gosho-list">
+  <section className="bg-defaultBg" id="gosho-list">
     <div className="container mx-auto px-4 py-8 min-h-[50vh]">
-      <h2 className="text-4xl md:text-5xl text-secondary mb-8">Scritti</h2>
-      <div className="border-b-2 border-secondary pb-2 flex items-center justify-between flex-wrap">
+      <h2 className="text-4xl md:text-3xl text-primary font-bold mb-8 font-serif ">
+        Scritti
+      </h2>
+      <div className="pb-2 flex items-center justify-between flex-wrap">
         <div className="mb-4 w-full animate-pulse">
           <div className="grid grid-cols-5 gap-4">
             <div className="h-5 bg-slate-200 rounded col-span-1"></div>

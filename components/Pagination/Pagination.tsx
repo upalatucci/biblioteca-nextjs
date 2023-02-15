@@ -12,13 +12,13 @@ type PaginationProps = {
 };
 
 const pageClassName =
-  "border font-sans border-secondary rounded-xl mx-1 px-3 text-sm";
-const pageNumerDisabledClassName = "text-gray-300 border-gray-300";
+  "border font-sans border-primary rounded-xl mx-1 px-3 text-sm";
+const pageNumerDisabledClassName = "text-gray-300 !border-gray-300";
 
 const Pagination: FC<PaginationProps> = ({
   totalResults = 1,
   itemsPerPage = DEFAULT_ITEMS_PER_PAGE,
-  anchorHash,
+  anchorHash
 }) => {
   const page = usePage();
   const router = useRouter();
@@ -45,9 +45,9 @@ const Pagination: FC<PaginationProps> = ({
         pathname: router.pathname,
         query: {
           ...otherQuery,
-          page: pageNumber.toString(),
+          page: pageNumber.toString()
         },
-        hash: anchorHash,
+        hash: anchorHash
       };
     },
     [router.query, router.pathname]
@@ -59,7 +59,7 @@ const Pagination: FC<PaginationProps> = ({
         <a
           aria-label="Pagina precedente"
           className={classNames(pageClassName, {
-            [pageNumerDisabledClassName]: page === 1,
+            [pageNumerDisabledClassName]: page === 1
           })}
         >
           {"<"}
@@ -84,10 +84,9 @@ const Pagination: FC<PaginationProps> = ({
         <Link key={nextPage} href={generateHref(nextPage)} passHref>
           <a
             aria-label={`Pagina ${prevPrevPage}`}
-            className={classNames(
-              { [pageNumerDisabledClassName]: nextPage === page },
-              pageClassName
-            )}
+            className={classNames(pageClassName, {
+              [pageNumerDisabledClassName]: nextPage === page
+            })}
           >
             {nextPage}
           </a>
@@ -96,10 +95,9 @@ const Pagination: FC<PaginationProps> = ({
       <Link href={generateHref(totalPage === page ? page : page + 1)} passHref>
         <a
           aria-label="Pagina successiva"
-          className={classNames(
-            { [pageNumerDisabledClassName]: totalPage === page },
-            pageClassName
-          )}
+          className={classNames(pageClassName, {
+            [pageNumerDisabledClassName]: totalPage === page
+          })}
         >
           {">"}
         </a>

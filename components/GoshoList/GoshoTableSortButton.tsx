@@ -50,7 +50,7 @@ const GoshoTableSortButton: React.FC<GoshoTableSortButtonProps> = ({
   field,
   ascendent,
   onClick,
-  title,
+  title
 }) => {
   let icon = unOrderedIcon;
 
@@ -60,7 +60,7 @@ const GoshoTableSortButton: React.FC<GoshoTableSortButtonProps> = ({
   }
 
   return (
-    <th>
+    <th className="p-4 pt-6">
       <button
         onClick={() => onClick(field, !ascendent)}
         className="flex items-center"

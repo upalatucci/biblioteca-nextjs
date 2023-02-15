@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React from "react";
+import { ALL_LABEL } from "./GoshoList/utils";
 
 type SelectProps = {
   value: string;
@@ -7,6 +8,7 @@ type SelectProps = {
   name?: string;
   options?: string[];
   className?: string;
+  placeholder?: string;
 };
 
 export type OptionProps = {
@@ -20,7 +22,7 @@ const Option: React.FC<OptionProps> = ({
   option,
   onOptionClick,
   handleKeyDown,
-  selected,
+  selected
 }) => {
   const _onOptionClick = React.useCallback(
     (e) => {
@@ -50,6 +52,7 @@ const Select: React.FC<SelectProps> = ({
   name,
   options,
   className,
+  placeholder
 }) => {
   const [isOpen, setOpen] = React.useState(false);
 
@@ -113,7 +116,7 @@ const Select: React.FC<SelectProps> = ({
   const otherOptions = options.filter((option) => option !== value);
 
   return (
-    <div className={classNames("select-wrapper", className)}>
+    <div className={classNames("select-wrapper font-serif", className)}>
       {isOpen && (
         <div className="select-background" onClick={() => setOpen(false)}></div>
       )}
@@ -132,7 +135,9 @@ const Select: React.FC<SelectProps> = ({
           onClick={toggleOptions}
           onKeyDown={handleListKeyDown}
         >
-          {options[indexSelectedOption]}
+          {options[indexSelectedOption] === ALL_LABEL
+            ? placeholder || ALL_LABEL
+            : options[indexSelectedOption]}
         </button>
         <ul
           className={`options max-h-64 overflow-y-scroll ${

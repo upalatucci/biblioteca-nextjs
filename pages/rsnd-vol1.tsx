@@ -26,7 +26,12 @@ export default function RSND1() {
       <HomeNavbar />
       <main>
         {IntroData && (
-          <BookDescription index={IntroData} notes={AppendiceData} />
+          <BookDescription
+            index={IntroData}
+            notes={AppendiceData}
+            title="Raccolta degli Scritti di Nichiren Daishonin"
+            subtitle="VOLUME I"
+          />
         )}
         {jsonData.length > 0 ? (
           <GoshoList jsonData={jsonData} />
