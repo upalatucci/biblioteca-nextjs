@@ -15,18 +15,10 @@ import {
 import useHighlightedPost from "@hooks/useHighlightedPost";
 import { removeHTMLTags } from "@utils/utils";
 import PostMenu from "@components/PostMenu";
-import { useEffect, useState } from "react";
-import { GoshoType } from "@components/GoshoList";
+import sutraDelLoto from "@public/sutra-del-loto.jpeg";
 
 export default function PostPage({ post }) {
-  const [jsonData, setJSONData] = useState<GoshoType[]>([]);
   const router = useRouter();
-
-  useEffect(() => {
-    import("@books/sdl.json").then((sdlData) => {
-      setJSONData(sdlData.default);
-    });
-  }, []);
 
   const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
 
@@ -46,23 +38,52 @@ export default function PostPage({ post }) {
       </Head>
       <HomeNavbar />
       <main>
-        <div className="bg-white px-2 py-8 lg:p-8">
-          <div className="container px-4 lg:px-10 mx-auto">
-            <h2
-              className="text-4xl md:text-5xl text-secondary pb-6 border-b-2 border-secondary"
-              dangerouslySetInnerHTML={{
-                __html: highlightedPost.title.rendered,
-              }}
-            ></h2>
-            <div className="py-4 flex flex-col-reverse lg:flex-row gap-10">
-              <div>
-                {paragraphs.map((p) => (
-                  <ParagraphWithNotes content={p} notes={notesArray} key={p} />
-                ))}
+        <div className="bg-defaultBg">
+          <div className="">
+            <div className="bg-white rounded-xl shadow-sm">
+              <div className="py-20 px-8 md:px-20 container mx-auto max-w-[1400px]">
+                <h2
+                  className="text-2xl md:text-3xl container text-secondary font-serif font-bold"
+                  dangerouslySetInnerHTML={{
+                    __html: `${highlightedPost?.acf?.acf_numero} ${highlightedPost.title.rendered}`,
+                  }}
+                ></h2>
+                <p className="text-gray-400 pb-6">Sutra del Loto</p>
+
+                <PostMenu
+                  currentPostTitle={post.title.rendered}
+                  withBackgrounds={!!highlightedPost?.acf?.acf_cenni_storici}
+                  withNotes={!!highlightedPost?.acf?.acf_note}
+                  image={sutraDelLoto}
+                />
+              </div>
+            </div>
+            <div className="p-20 container mx-auto max-w-[1000px]">
+              {paragraphs.map((p) => (
+                <ParagraphWithNotes content={p} notes={notesArray} key={p} />
+              ))}
+            </div>
+
+            <section className="bg-white">
+              <div className="container mx-auto max-w-[1000px] p-20">
+                {highlightedPost?.acf?.acf_cenni_storici && (
+                  <div id="cenni_storici">
+                    <h3 className="font-serif text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
+                      Cenni Storici
+                    </h3>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: highlightedPost.acf.acf_cenni_storici
+                          ?.replace("CENNI STORICI – ", "")
+                          .replace(/\n/g, "<br>"),
+                      }}
+                    ></div>
+                  </div>
+                )}
 
                 {highlightedPost?.acf?.acf_note && (
                   <div id="note">
-                    <h3 className="text-3xl md:text-4xl font-serif text-secondary font-bold mt-4 mb-6">
+                    <h3 className="font-serift text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
                       Note
                     </h3>
                     <div
@@ -73,13 +94,7 @@ export default function PostPage({ post }) {
                   </div>
                 )}
               </div>
-              <PostMenu
-                currentPostTitle={post.title.rendered}
-                withBackgrounds={!!highlightedPost?.acf?.acf_cenni_storici}
-                withNotes={!!highlightedPost?.acf?.acf_note}
-                jsonData={jsonData}
-              />
-            </div>
+            </section>
           </div>
         </div>
       </main>

@@ -1,14 +1,6 @@
-import Link from "next/link";
-import classNames from "classnames";
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
-import { GoshoType } from "./GoshoList";
+import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import ShareModal from "./ShareModal";
+import Image from "next/image";
 
 const nLi = new Array(10).fill(0).map((_, index) => index);
 
@@ -31,14 +23,14 @@ type PostMenuProps = {
   currentPostTitle?: string;
   withBackgrounds?: boolean;
   withNotes?: boolean;
-  jsonData: GoshoType[];
+  image?: StaticImageData;
 };
 
 const PostMenu: React.FC<PostMenuProps> = ({
-  jsonData,
   currentPostTitle,
   withNotes = false,
   withBackgrounds = false,
+  image,
 }) => {
   const [openShareModal, setOpenShareModal] = useState(false);
   const activeLiRef = useRef<HTMLLIElement>();
@@ -67,20 +59,20 @@ const PostMenu: React.FC<PostMenuProps> = ({
   }, [currentPostTitle]);
 
   return (
-    <div className="post-menu w-full lg:w-[300px] lg:min-w-[300px] xl:w-[400px] xl:min-w-[400px] print:hidden">
+    <div className="post-menu w-full print:hidden font-serif">
       {openShareModal && (
         <ShareModal
           title={currentPostTitle}
           onClose={() => setOpenShareModal(false)}
         />
       )}
-      <div className="px-6 py-4 w-full text-md mb-4 rounded-2xl shadow-md bg-defaultBg">
-        <ul className="flex items-center justify-evenly flex-wrap lg:block lg:divide-y-2 divide-dashed divide-gray-300">
+      <div className="px-6 py-4 w-full text-md mb-4 rounded-2xl shadow-md bg-defaultBg flex items-center justify-start">
+        <div>
+          <Image src={image} alt="image" width={100} height={140} />
+        </div>
+        <ul className="flex items-center justify-evenly flex-wrap w-full">
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
             <button onClick={share}>Condividi</button>
-          </li>
-          <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
-            <button>Sava in pdf</button>
           </li>
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
             <button onClick={() => print()}>Stampa</button>
@@ -89,58 +81,19 @@ const PostMenu: React.FC<PostMenuProps> = ({
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
             <button>Dimensione del testo</button>
           </li>
-        </ul>
-      </div>
-      {withBackgrounds ||
-        (withNotes && (
-          <div className="px-6 py-4 hidden lg:block w-full text-md mb-4 rounded-2xl shadow-md bg-secondary text-white">
-            <ul className="divide-y-2 divide-dashed divide-white">
-              {withBackgrounds && (
-                <li className="py-1">
-                  <a href="#cenni_storici">Vai ai cenni storici</a>
-                </li>
-              )}
-              {withNotes && (
-                <li className="py-1">
-                  <a href="#note">Vai alle note</a>
-                </li>
-              )}
-            </ul>
-          </div>
-        ))}
 
-      <div className="px-6 py-4 hidden lg:block w-full text-md mb-4 rounded-2xl shadow-md  bg-defaultBg">
-        <Link href="/glossario">
-          <a className="hover:text-primary">
-            <h3 className="text-3xl">Glossario</h3>
-          </a>
-        </Link>
-      </div>
+          <span className="border-l-2 border-gray-300 h-4 w-2"></span>
 
-      <div className="px-6 py-4 hidden lg:flex flex-col w-full text-md mb-4 rounded-2xl shadow-md bg-defaultBg min-h-[500px] h-screen max-h-max">
-        <h3 className="text-3xl border-b-2 border-secondary pb-4">Scritti</h3>
-        <ul className="divide-y-2 divide-dashed divide-gray-300 overflow-y-scroll">
-          {jsonData?.length === 0 && <Skeleton />}
-
-          {jsonData
-            .sort((a, b) => (a.number > b.number ? 1 : -1))
-            .map((post, index) => (
-              <li
-                key={post.slug}
-                className={classNames("font-semibold py-2", {
-                  "text-primary": post.title === currentPostTitle,
-                })}
-                ref={post.title === currentPostTitle ? activeLiRef : null}
-              >
-                <Link href={`/rsnd/${post.slug}`}>
-                  <a
-                    dangerouslySetInnerHTML={{
-                      __html: `${post?.number || index + 1}. ${post.title}`,
-                    }}
-                  />
-                </Link>
-              </li>
-            ))}
+          {withBackgrounds && (
+            <li className="py-1">
+              <a href="#cenni_storici">Vai ai cenni storici</a>
+            </li>
+          )}
+          {withNotes && (
+            <li className="py-1">
+              <a href="#note">Vai alle note</a>
+            </li>
+          )}
         </ul>
       </div>
     </div>

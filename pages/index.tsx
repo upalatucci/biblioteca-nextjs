@@ -19,7 +19,7 @@ import Link from "next/link";
 const responsive = {
   0: { items: 1.1 },
   450: { items: 1.3 },
-  700: { items: 2.3 }
+  700: { items: 2.3 },
 };
 
 const books = [
@@ -50,7 +50,7 @@ const books = [
     width={475}
     height={530}
     key={3}
-  />
+  />,
 ];
 
 export default function Home() {
@@ -64,7 +64,7 @@ export default function Home() {
 
     router.push({
       pathname: "/ricerca",
-      query
+      query,
     });
   };
 
@@ -136,7 +136,7 @@ export default function Home() {
         </section>
 
         <section className="bg-white flex flex-col items-center lg:items-stretch md:flex-row md:justify-evenly gap-10 shadow-md rounded-3xl m-0 py-20 px-8">
-          <div className="flex-initial relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[600px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
+          <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[600px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
             <div className="z-0 bg-defaultBg rounded-xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
             <Link href="/">
               <a>
@@ -168,7 +168,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="flex-initial relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[600px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
+          <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[600px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
             <div className="z-0 bg-defaultBg rounded-xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
             <Link href="/">
               <a>

@@ -17,7 +17,7 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
   sortedGosho,
   sortField,
   sortAscend,
-  onSortChange
+  onSortChange,
 }) => {
   const goshoToShow = usePagination(sortedGosho);
 
@@ -62,8 +62,8 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
           {goshoToShow.map((post: GoshoType, postIndex: number) => (
             <tr
               key={post.slug}
-              className={classNames("bg-white", {
-                "bg-defaultBg": postIndex % 2
+              className={classNames("bg-defaultBg", {
+                "!bg-white": postIndex % 2,
               })}
             >
               <td width="5" className="px-4 py-2">

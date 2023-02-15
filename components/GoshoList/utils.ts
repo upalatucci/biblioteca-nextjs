@@ -2,6 +2,7 @@ import { createFuzzyIndex } from "@utils/fuzzySearch";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GoshoType } from "./GoshoList";
 import Fuse from "fuse.js";
+import { useRouter } from "next/router";
 
 export const ALL_LABEL = "Tutti";
 
@@ -9,10 +10,9 @@ const generateUniqueOptions = (jsonData: GoshoType[], key) => {
   const uniqueValues = new Set<string>([ALL_LABEL]);
 
   jsonData.forEach((post) => {
-
     if (Array.isArray(post[key])) {
       post[key].forEach((value) => uniqueValues.add(value));
-      return
+      return;
     }
 
     uniqueValues.add(post[key]);
@@ -22,6 +22,7 @@ const generateUniqueOptions = (jsonData: GoshoType[], key) => {
 };
 
 export const useFilters = (allGosho: GoshoType[]) => {
+  const router = useRouter();
   const recipientOptions = useMemo(
     () => generateUniqueOptions(allGosho, "recipient"),
     [allGosho]
@@ -56,7 +57,7 @@ export const useFilters = (allGosho: GoshoType[]) => {
   const filteredGosho = goshoFilteredByTitle.filter((gosho) => {
     if (
       recipient &&
-      recipient !== ALL_LABEL && 
+      recipient !== ALL_LABEL &&
       !gosho.recipient.includes(recipient)
     ) {
       return false;
@@ -68,6 +69,25 @@ export const useFilters = (allGosho: GoshoType[]) => {
 
     return true;
   });
+
+  useEffect(() => {
+    if (router.query.page) {
+      const newQuery = { ...router.query };
+
+      delete newQuery.page;
+      router.push(
+        {
+          ...router,
+          query: {
+            ...newQuery,
+          },
+          hash: "gosho-list",
+        },
+        undefined,
+        { scroll: false }
+      );
+    }
+  }, [place, recipient, titleFilter]);
 
   return {
     titleFilter,

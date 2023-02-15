@@ -15,23 +15,13 @@ import {
 } from "@utils/articleUtils";
 import useHighlightedPost from "@hooks/useHighlightedPost";
 import { removeHTMLTags } from "@utils/utils";
-import { useEffect, useState } from "react";
-import { GoshoType } from "@components/GoshoList";
+import { RSND_VOL_1_CATEGORY_ID } from "@utils/constants";
+
+import raccoltaVol1 from "@public/raccolta-nichiren-vol1.jpeg";
+import raccoltaVol2 from "@public/raccolta-nichiren-vol2.jpeg";
 
 export default function PostPage({ post }) {
-  const [jsonData, setJSONData] = useState<GoshoType[]>([]);
-
   const router = useRouter();
-
-  useEffect(() => {
-    Promise.all([
-      import("@books/rsnd1.json"),
-      import("@books/rsnd2.json"),
-    ]).then(([rsnd1Data, rsnd2Data]) => {
-      setJSONData([...rsnd1Data.default, ...rsnd2Data.default]);
-    });
-  }, []);
-
   const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
 
   if (router.isFallback || isLoadingHighligh || !router.isReady) {
@@ -40,6 +30,10 @@ export default function PostPage({ post }) {
 
   const notesArray = extractNotes(highlightedPost?.acf?.acf_note);
   const paragraphs = extractParagraphs(highlightedPost.content.rendered);
+
+  const isFirstVolume = highlightedPost?.cat_rsnd.includes(
+    RSND_VOL_1_CATEGORY_ID
+  );
 
   return (
     <>
@@ -50,23 +44,45 @@ export default function PostPage({ post }) {
       </Head>
       <HomeNavbar />
       <main>
-        <div className="bg-white px-2 py-8 lg:p-8">
-          <div className="container px-4 lg:px-10 mx-auto">
-            <h2
-              className="text-4xl md:text-5xl text-secondary pb-6 border-b-2 border-secondary"
-              dangerouslySetInnerHTML={{
-                __html: highlightedPost.title.rendered,
-              }}
-            ></h2>
-            <div className="py-4 flex flex-col-reverse lg:flex-row gap-10">
-              <div>
-                {paragraphs.map((p) => (
-                  <ParagraphWithNotes content={p} notes={notesArray} key={p} />
-                ))}
+        <div className="bg-defaultBg">
+          <div className="">
+            <div className="bg-white rounded-xl shadow-sm print:rounded-none print:shadow-none">
+              <div className="p-20 container mx-auto max-w-[1400px] print:py-0">
+                <h2
+                  className="text-2xl md:text-3xl container text-secondary font-serif font-bold"
+                  dangerouslySetInnerHTML={{
+                    __html: `${highlightedPost?.acf?.acf_numero} ${highlightedPost.title.rendered}`,
+                  }}
+                ></h2>
+                <p className="text-gray-400  pb-6">
+                  RSND, VOLUME {isFirstVolume ? "I" : "II"}
+                </p>
 
+                <PostMenu
+                  currentPostTitle={post.title.rendered}
+                  withBackgrounds={!!highlightedPost?.acf?.acf_cenni_storici}
+                  withNotes={!!highlightedPost?.acf?.acf_note}
+                  image={isFirstVolume ? raccoltaVol1 : raccoltaVol2}
+                />
+              </div>
+            </div>
+
+            <div className="p-20 container mx-auto max-w-[1000px] print:py-0">
+              <p className="text-primary">
+                {highlightedPost?.acf?.acf_luogo},{" "}
+                {highlightedPost?.acf?.acf_data}. Indirizzata a{" "}
+                {highlightedPost?.acf?.acf_destinatario.join(", ")}.
+              </p>
+              {paragraphs.map((p) => (
+                <ParagraphWithNotes content={p} notes={notesArray} key={p} />
+              ))}
+            </div>
+
+            <section className="bg-white">
+              <div className="container mx-auto max-w-[1000px] p-20">
                 {highlightedPost?.acf?.acf_cenni_storici && (
                   <div id="cenni_storici">
-                    <h3 className="text-3xl md:text-4xl font-serif text-secondary font-bold mt-4 mb-6">
+                    <h3 className="font-serif text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
                       Cenni Storici
                     </h3>
                     <div
@@ -81,7 +97,7 @@ export default function PostPage({ post }) {
 
                 {highlightedPost?.acf?.acf_note && (
                   <div id="note">
-                    <h3 className="text-3xl md:text-4xl font-serif text-secondary font-bold mt-4 mb-6">
+                    <h3 className="font-serift text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
                       Note
                     </h3>
                     <div
@@ -92,13 +108,7 @@ export default function PostPage({ post }) {
                   </div>
                 )}
               </div>
-              <PostMenu
-                currentPostTitle={post.title.rendered}
-                withBackgrounds={!!highlightedPost?.acf?.acf_cenni_storici}
-                withNotes={!!highlightedPost?.acf?.acf_note}
-                jsonData={jsonData}
-              />
-            </div>
+            </section>
           </div>
         </div>
       </main>

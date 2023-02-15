@@ -6,12 +6,12 @@ module.exports = {
   important: true,
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}"
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     fontFamily: {
       serif: "Bitter",
-      sans: "Bitter"
+      sans: "Roboto",
     },
     colors: {
       ...colors,
@@ -21,9 +21,9 @@ module.exports = {
       defaultBg: "#f8f8f8",
       customGray: "#dadada",
       customYellow: "#E5BD55",
-      customYellowHover: "#d1ad53"
+      customYellowHover: "#d1ad53",
     },
-    extend: {}
+    extend: {},
   },
-  plugins: []
+  plugins: [],
 };

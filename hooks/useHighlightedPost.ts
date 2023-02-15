@@ -71,6 +71,7 @@ const useHighlightedPost = (originalPost): any => {
           originalPost?.content?.rendered,
       },
       acf: {
+        ...originalPost?.acf,
         acf_cenni_storici:
           data?.["meta.acf_cenni_storici.value"]?.[0] ||
           data?.["meta.acf_cenni_storici.value.exact"]?.[0] ||
