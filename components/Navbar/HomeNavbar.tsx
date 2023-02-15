@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import NavbarItem from "./NavbarItem";
-import Logo from "../../public/istituto-buddista-soka-gakkai.svg";
-import Image from "next/image";
 import classNames from "classnames";
 
 const CLOSE = "close";
@@ -25,26 +23,27 @@ const HomeNavbar = () => {
 
   return (
     <>
-      <h1 className="hidden lg:block text-center font-bold text-3xl md:text-5xl mb-8 mt-4">
-        NICHIREN Library
-      </h1>
-      <nav className="container mx-auto px-8 lg:px-8 flex items-center justify-between mb-4 relative mt-4 lg:mt-0">
+      <Link href="/" passHref>
+        <a>
+          <h1 className="hidden lg:block text-center font-bold text-3xl md:text-5xl mb-8 mt-14">
+            NICHIREN Library
+          </h1>
+        </a>
+      </Link>
+      <nav className="container max-w-[1200px] mx-auto px-8 lg:px-8 flex items-center justify-between my-14 relative">
+        <span className="lg:hidden"></span>
         <Link href="/" passHref>
-          <a className="flex w-12 h-12 md:w-20 md:h-20">
-            <Image
-              src={Logo}
-              alt="logo istituto buddista italiano soka gakkai"
-            />
+          <a>
+            <h1 className="lg:hidden text-center font-bold text-3xl md:text-5xl mx-4 self-center">
+              NICHIREN Library
+            </h1>
           </a>
         </Link>
-        <h1 className="lg:hidden text-center font-bold text-3xl md:text-5xl mx-4">
-          NICHIREN Library
-        </h1>
         <button
           className={classNames(
             "mobileMenu block relative lg:hidden w-12 h-10",
             {
-              open: [SHOW, SHOWING].includes(mobileMenuOpen),
+              open: [SHOW, SHOWING].includes(mobileMenuOpen)
             }
           )}
           onClick={closeMobileMenu}
@@ -80,7 +79,7 @@ const HomeNavbar = () => {
           </div>
         )}
 
-        <div className="hidden lg:flex items-center justify-evenly w-full">
+        <div className="hidden lg:flex items-center justify-start gap-10 xl:gap-20 w-full">
           <NavbarItem
             href="/rsnd-vol1"
             upText="Raccolta degli Scritti di"
@@ -96,14 +95,18 @@ const HomeNavbar = () => {
           />
 
           <NavbarItem href="/" title="SUTRA DEL LOTO" />
-
-          <NavbarItem href="/glossario" title="GLOSSARIO" />
         </div>
-        <span className="hidden lg:block">
+        <span className="hidden lg:flex gap-10">
+          <Link href="/glossario" passHref>
+            <a className="btn bg-customYellow hover:bg-customYellowHover text-white px-8 h-10 block border rounded-3xl font-bold font-sans flex items-center">
+              <span>Glossario</span>
+            </a>
+          </Link>
+
           <Link href="/ricerca" passHref>
-            <button className="btn bg-primary hover:bg-primaryHover text-white px-8 h-10 border rounded-3xl font-bold font-sans ">
-              RICERCA
-            </button>
+            <a className="btn bg-primary hover:bg-primaryHover text-white px-8 h-10 block border rounded-3xl font-bold font-sans flex items-center">
+              <span>RICERCA</span>
+            </a>
           </Link>
         </span>
       </nav>

@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import ImageWithTextOverlay from "@components/ImageWithTextOverlay";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
@@ -13,61 +12,45 @@ import ascolta from "../public/ascolta.jpeg";
 import SearchInput from "@components/SearchInput";
 import { useRouter } from "next/router";
 import Footer from "@components/Footer";
+import ImageWithText from "@components/ImageWithText";
+import Image from "next/image";
+import Link from "next/link";
 
 const responsive = {
-  0: { items: 1.3 },
-  700: { items: 2.3 },
+  0: { items: 1.1 },
+  450: { items: 1.3 },
+  700: { items: 2.3 }
 };
 
 const books = [
-  <ImageWithTextOverlay
+  <ImageWithText
     image={raccoltaVol1}
     path="rsnd-vol1"
     title="Raccolta degli Scritti di Nichiren Daishonin"
-    description="Le lettere che il Daishonin inviava ai suoi discepoli"
+    description="VOLUME I"
     width={475}
     height={530}
     key={1}
   />,
 
-  <ImageWithTextOverlay
+  <ImageWithText
     image={raccoltaVol2}
     path="rsnd-vol2"
     title="Raccolta degli Scritti di Nichiren Daishonin"
-    description="Le lettere che il Daishonin inviava ai suoi discepoli"
+    description="VOLUME II"
     width={475}
     height={530}
     key={2}
   />,
 
-  <ImageWithTextOverlay
+  <ImageWithText
     image={sutraDelLoto}
     path="rsnd-vol1"
     title="Sutra del Loto"
-    description="Comprensivo di Prologo ed Epilogo"
     width={475}
     height={530}
     key={3}
-  />,
-];
-
-const presentationItems = [
-  <ImageWithTextOverlay
-    image={sfogliaGlossario}
-    title="Sfoglia il glossario"
-    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu ipsum urna."
-    width={800}
-    height={700}
-    key={4}
-  />,
-  <ImageWithTextOverlay
-    width={800}
-    height={700}
-    image={ascolta}
-    title="Ascolta la Raccolta degli Scritti di Nichiren Daishonin"
-    description="Nam eu ipsum urna. Aenean odio nulla, "
-    key={5}
-  />,
+  />
 ];
 
 export default function Home() {
@@ -81,7 +64,7 @@ export default function Home() {
 
     router.push({
       pathname: "/ricerca",
-      query,
+      query
     });
   };
 
@@ -106,39 +89,23 @@ export default function Home() {
       <HomeNavbar />
 
       <main>
-        {isMobile ? (
-          <AliceCarousel
-            mouseTracking
-            items={books}
-            responsive={responsive}
-            paddingLeft={30}
-            paddingRight={30}
-            disableButtonsControls
-            disableDotsControls
-          />
-        ) : (
-          <section className="w-full flex items-center justify-evenly m-0 p-0 lg:mb-4 xl:mb-8">
-            {books}
-          </section>
-        )}
+        <section className="w-full flex justify-evenly bg-white shadow-md rounded-3xl pt-20 pb-10">
+          {isMobile ? (
+            <AliceCarousel
+              mouseTracking
+              items={books}
+              responsive={responsive}
+              paddingLeft={30}
+              paddingRight={30}
+              disableButtonsControls
+              disableDotsControls
+            />
+          ) : (
+            <>{books}</>
+          )}
+        </section>
 
-        {isMobile ? (
-          <AliceCarousel
-            mouseTracking
-            items={presentationItems}
-            responsive={responsive}
-            paddingLeft={30}
-            paddingRight={30}
-            disableButtonsControls
-            disableDotsControls
-          />
-        ) : (
-          <section className="w-full flex items-center justify-evenly m-0 p-0">
-            {presentationItems}
-          </section>
-        )}
-
-        <section className="bg-white px-4 flex flex-col py-14 items-center justify-center">
+        <section className="font-sans px-4 flex flex-col py-20 items-center justify-center">
           <h2 className="mt-4 mb-8 font-bold text-2xl sm:text-3xl md:text-4xl text-center">
             Cosa vuoi approfondire oggi?
           </h2>
@@ -168,8 +135,73 @@ export default function Home() {
           </Link> */}
         </section>
 
+        <section className="bg-white flex flex-col items-center lg:items-stretch md:flex-row md:justify-evenly gap-10 shadow-md rounded-3xl m-0 py-20 px-8">
+          <div className="flex-initial relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[600px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
+            <div className="z-0 bg-defaultBg rounded-xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
+            <Link href="/">
+              <a>
+                <div className="z-10">
+                  <div className="">
+                    <Image
+                      src={sfogliaGlossario}
+                      alt="Sfoglia il glossario"
+                      layout="responsive"
+                      width={800}
+                      height={700}
+                      objectFit="cover"
+                      className="pointer-events-none rounded-xl"
+                    />
+                  </div>
+                  <div>
+                    <div className="font-sans flex flex-col justify-end text-left pt-6 pb-8 ">
+                      <h3 className="z-10 lg:text-lg font-bold">
+                        Sfoglia il glossario
+                      </h3>
+                      <span className="z-10">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Nam eu ipsum urna
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </Link>
+          </div>
+
+          <div className="flex-initial relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[600px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
+            <div className="z-0 bg-defaultBg rounded-xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
+            <Link href="/">
+              <a>
+                <div className="z-10">
+                  <div className="">
+                    <Image
+                      src={ascolta}
+                      alt="Ascolta la Raccolta degli Scritti di Nichiren Daishonin"
+                      layout="responsive"
+                      width={800}
+                      height={700}
+                      objectFit="cover"
+                      className="pointer-events-none rounded-xl"
+                    />
+                  </div>
+                  <div>
+                    <div className="font-sans flex flex-col justify-end text-left pt-6 pb-8 ">
+                      <h3 className="z-10 lg:text-lg font-bold">
+                        Ascolta la Raccolta degli Scritti di Nichiren Daishonin
+                      </h3>
+                      <span className="z-10">
+                        Nam eu ipsum urna. Aenean odio nulla,
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </Link>
+          </div>
+        </section>
+
         <section className="py-14">
-          <div className="container px-4 mx-auto flex flex-col items-center justify-center my-16">
+          <div className="font-sans container px-4 mx-auto flex flex-col items-center justify-center my-16">
             <h2 className="font-bold my-8  text-3xl md:text-4xl text-center">
               Che cos&apos;è la Nichiren Library
             </h2>

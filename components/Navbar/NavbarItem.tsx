@@ -12,14 +12,16 @@ const NavbarItem: React.FC<NavbarItemProps> = ({
   upText,
   title,
   downText,
-  href,
+  href
 }) => (
   <Link href={href} passHref>
     <a>
-      <span className="flex flex-col">
-        {upText && <span className="font-sm">{upText}</span>}
-        <span className="font-lg font-bold font-sans hover:text-primary">{title}</span>
-        {downText && <span className="font-sm font-sans text-primary">{downText}</span>}
+      <span className="flex flex-col font-sans">
+        <span className="font-lg font-bold hover:text-primary">
+          {upText && <div className="text-sm">{upText}</div>}
+          {title}
+        </span>
+        {downText && <span className="text-sm text-gray">{downText}</span>}
       </span>
     </a>
   </Link>
