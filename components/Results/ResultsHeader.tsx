@@ -1,5 +1,5 @@
 import { MAP_POST_TYPE_TO_BOOK_URL, PostType } from "@utils/elasticSearchUtils";
-import React from "react";
+import React, { useEffect } from "react";
 import ResultTab from "./ResultTab";
 import { useRouter } from "next/router";
 import Select from "@components/Select";
@@ -7,6 +7,7 @@ import { DATES } from "@components/AdvancedSearch/constants";
 import { RECIPIENTS_OPTIONS } from "@components/AdvancedSearch/recipients";
 import { PLACES_OPTIONS } from "@components/AdvancedSearch/places";
 import { ALL_LABEL } from "@components/GoshoList/utils";
+import { retainAggregationData, useLoadingTab } from "./utils";
 
 type ResultsHeaderProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -14,16 +15,15 @@ type ResultsHeaderProps = {
   loading: boolean;
 };
 
-const removeKey = (obj: object, key) => {
-  delete obj[key];
-
-  return obj;
-};
-
 const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data, loading }) => {
   const router = useRouter();
   const { from, to, recipient, place } = router.query;
-  const aggregationData = data?.aggregations?.book?.buckets;
+
+  const loadingTab = useLoadingTab(loading);
+
+  const aggregationData = retainAggregationData(
+    data?.aggregations?.book?.buckets
+  );
 
   const rsndCount =
     aggregationData?.find((agg) => agg.key === PostType.RSND)?.doc_count || 0;
@@ -65,14 +65,14 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data, loading }) => {
     <>
       <ul className="flex flex-wrap text-sm font-medium text-center font-sans text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
         <ResultTab
-          loading={loading}
+          loading={loadingTab}
           count={totalCount}
           title="Tutti"
           active={!router.query.book}
         />
 
         <ResultTab
-          loading={loading}
+          loading={loadingTab}
           count={rsndCount}
           title="RSND"
           tabKey={MAP_POST_TYPE_TO_BOOK_URL[PostType.RSND]}
@@ -82,7 +82,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data, loading }) => {
         />
 
         <ResultTab
-          loading={loading}
+          loading={loadingTab}
           count={sdlCount}
           title="Il Sutra del Loto"
           tabKey={MAP_POST_TYPE_TO_BOOK_URL[PostType.SDL]}
@@ -90,7 +90,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data, loading }) => {
         />
 
         <ResultTab
-          loading={loading}
+          loading={loadingTab}
           count={glossaryCount}
           title={"Glossario"}
           tabKey={MAP_POST_TYPE_TO_BOOK_URL[PostType.GLOSSARY]}
