@@ -28,7 +28,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
     setPlace,
     placesOptions,
     recipientOptions,
-    clearFilters
+    clearFilters,
   } = useFilters(jsonData);
   const { sortedGosho, sortField, sortAscend, onSortChange } =
     useOrder(filteredGosho);
@@ -50,7 +50,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
             onChange={onSearchInput}
             placeholder="Inserisci il titolo del Gosho che stai cercando"
             aria-label="Titolo"
-            className="bg-white  border-primary "
+            className="!bg-white border-primary"
           />
           <Select
             onChange={setRecipient}

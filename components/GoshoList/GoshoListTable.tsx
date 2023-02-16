@@ -58,7 +58,7 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
             />
           </tr>
         </thead>
-        <tbody>
+        <tbody className="rounded-full">
           {goshoToShow.map((post: GoshoType, postIndex: number) => (
             <tr
               key={post.slug}
