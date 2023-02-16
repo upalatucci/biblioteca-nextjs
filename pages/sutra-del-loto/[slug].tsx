@@ -43,7 +43,7 @@ export default function PostPage({ post }) {
             <div className="bg-white rounded-xl shadow-md">
               <div className="py-20 px-8 md:px-20 container mx-auto max-w-[1400px]">
                 <h2
-                  className="text-2xl md:text-3xl container text-secondary font-serif font-bold"
+                  className="text-2xl md:text-3xl container text-secondary font-bold"
                   dangerouslySetInnerHTML={{
                     __html: `${highlightedPost?.acf?.acf_numero} ${highlightedPost.title.rendered}`,
                   }}
@@ -66,37 +66,37 @@ export default function PostPage({ post }) {
 
             {(highlightedPost?.acf?.acf_cenni_storici ||
               highlightedPost?.acf?.acf_note) && (
-            <section className="bg-white">
-              <div className="container mx-auto max-w-[1000px] p-20">
-                {highlightedPost?.acf?.acf_cenni_storici && (
-                  <div id="cenni_storici">
-                    <h3 className="font-serif text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
-                      Cenni Storici
-                    </h3>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: highlightedPost.acf.acf_cenni_storici
-                          ?.replace("CENNI STORICI – ", "")
-                          .replace(/\n/g, "<br>"),
-                      }}
-                    ></div>
-                  </div>
-                )}
+              <section className="bg-white">
+                <div className="container mx-auto max-w-[1000px] p-20">
+                  {highlightedPost?.acf?.acf_cenni_storici && (
+                    <div id="cenni_storici">
+                      <h3 className="text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
+                        Cenni Storici
+                      </h3>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: highlightedPost.acf.acf_cenni_storici
+                            ?.replace("CENNI STORICI – ", "")
+                            .replace(/\n/g, "<br>"),
+                        }}
+                      ></div>
+                    </div>
+                  )}
 
-                {highlightedPost?.acf?.acf_note && (
-                  <div id="note">
-                    <h3 className="font-serift text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
-                      Note
-                    </h3>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: highlightedPost.acf.acf_note,
-                      }}
-                    ></div>
-                  </div>
-                )}
-              </div>
-            </section>
+                  {highlightedPost?.acf?.acf_note && (
+                    <div id="note">
+                      <h3 className="text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
+                        Note
+                      </h3>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: highlightedPost.acf.acf_note,
+                        }}
+                      ></div>
+                    </div>
+                  )}
+                </div>
+              </section>
             )}
           </div>
         </div>

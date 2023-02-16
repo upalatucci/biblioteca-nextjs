@@ -59,7 +59,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
   }, [currentPostTitle]);
 
   return (
-    <div className="post-menu w-full print:hidden font-serif">
+    <div className="post-menu w-full print:hidden">
       {openShareModal && (
         <ShareModal
           title={currentPostTitle}
@@ -83,7 +83,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
           </li>
 
           {(withBackgrounds || withNotes) && (
-          <span className="border-l-2 border-gray-300 h-4 w-2"></span>
+            <span className="border-l-2 border-gray-300 h-4 w-2"></span>
           )}
 
           {withBackgrounds && (

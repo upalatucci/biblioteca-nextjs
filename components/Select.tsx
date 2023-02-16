@@ -22,7 +22,7 @@ const Option: React.FC<OptionProps> = ({
   option,
   onOptionClick,
   handleKeyDown,
-  selected
+  selected,
 }) => {
   const _onOptionClick = React.useCallback(
     (e) => {
@@ -52,7 +52,7 @@ const Select: React.FC<SelectProps> = ({
   name,
   options,
   className,
-  placeholder
+  placeholder,
 }) => {
   const [isOpen, setOpen] = React.useState(false);
 
@@ -116,7 +116,7 @@ const Select: React.FC<SelectProps> = ({
   const otherOptions = options.filter((option) => option !== value);
 
   return (
-    <div className={classNames("select-wrapper font-serif", className)}>
+    <div className={classNames("select-wrapper", className)}>
       {isOpen && (
         <div className="select-background" onClick={() => setOpen(false)}></div>
       )}

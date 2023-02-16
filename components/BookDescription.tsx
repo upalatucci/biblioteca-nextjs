@@ -20,7 +20,7 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
   title,
   subtitle,
 }) => (
-  <section className="w-full font-serif bg-white rounded-xl shadow-md p-20 mb-20">
+  <section className="w-full bg-white rounded-xl shadow-md p-10 md:p-20 mb-20">
     <div className="mx-auto max-w-6xl pb-10">
       <h2 className="text-3xl font-bold">{title}</h2>
       <p className="text-gray-400">{subtitle}</p>

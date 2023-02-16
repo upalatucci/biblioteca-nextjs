@@ -103,7 +103,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data, loading }) => {
       {router.query.book === MAP_POST_TYPE_TO_BOOK_URL[PostType.RSND] &&
         /ricerca-avanzata/.test(router.asPath) && (
           <>
-            <h3 className="text-lg font-serif md:text-xl text-primary font-bold mt-4 mb-6">
+            <h3 className="text-lg md:text-xl text-primary font-bold mt-4 mb-6">
               Filtra i risultati:
             </h3>
 

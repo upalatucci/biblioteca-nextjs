@@ -114,7 +114,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
             </div>
 
             <div className="bg-white border rounded-xl px-8 pt-4 pb-8">
-              <h3 className="text-lg md:text-xl font-serif text-primary font-bold mt-4 mb-6">
+              <h3 className="text-lg md:text-xl text-primary font-bold mt-4 mb-6">
                 Cerca in:
               </h3>
               <div className="bg-defaultBg shadow-md rounded-xl px-8 py-8 mb-10">

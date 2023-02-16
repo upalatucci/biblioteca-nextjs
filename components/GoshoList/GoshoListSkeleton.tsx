@@ -3,7 +3,7 @@ import * as React from "react";
 const GoshoListSkeleton: React.FC = () => (
   <section className="bg-defaultBg" id="gosho-list">
     <div className="container mx-auto px-4 py-8 min-h-[50vh]">
-      <h2 className="text-4xl md:text-3xl text-primary font-bold mb-8 font-serif ">
+      <h2 className="text-4xl md:text-3xl text-primary font-bold mb-8">
         Scritti
       </h2>
       <div className="pb-2 flex items-center justify-between flex-wrap">
