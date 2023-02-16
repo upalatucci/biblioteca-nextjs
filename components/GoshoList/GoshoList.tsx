@@ -39,8 +39,8 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   };
 
   return (
-    <section className="bg-defaultBg" id="gosho-list">
-      <div className="container mx-auto px-4 py-8 min-h-[50vh]">
+    <section className="pb-10 p-10 md:p-20" id="gosho-list">
+      <div className="container py-8 min-h-[50vh] mx-auto max-w-6xl">
         <h2 className="text-4xl md:text-3xl text-primary font-bold mb-8 font-serif ">
           Scritti
         </h2>

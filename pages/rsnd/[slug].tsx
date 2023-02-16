@@ -78,6 +78,8 @@ export default function PostPage({ post }) {
               ))}
             </div>
 
+            {(highlightedPost?.acf?.acf_cenni_storici ||
+              highlightedPost?.acf?.acf_note) && (
             <section className="bg-white">
               <div className="container mx-auto max-w-[1000px] p-20">
                 {highlightedPost?.acf?.acf_cenni_storici && (
@@ -109,6 +111,7 @@ export default function PostPage({ post }) {
                 )}
               </div>
             </section>
+            )}
           </div>
         </div>
       </main>

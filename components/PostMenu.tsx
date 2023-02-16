@@ -82,7 +82,9 @@ const PostMenu: React.FC<PostMenuProps> = ({
             <button>Dimensione del testo</button>
           </li>
 
+          {(withBackgrounds || withNotes) && (
           <span className="border-l-2 border-gray-300 h-4 w-2"></span>
+          )}
 
           {withBackgrounds && (
             <li className="py-1">
