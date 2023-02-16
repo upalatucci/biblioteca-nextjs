@@ -29,6 +29,9 @@ const CountLoading = ({ loading, count }) =>
     <span>({count})</span>
   );
 
+const selectedTabClass =
+  "font-bold text-black !bg-white border border-gray-200 rounded-t-xl border-b-0 relative top-[0.5px] rounded-t-lg";
+
 const ResultTab: React.FC<ResultTabProps> = ({
   count,
   title,
@@ -40,12 +43,10 @@ const ResultTab: React.FC<ResultTabProps> = ({
 
   if (count === 0) {
     return (
-      <li className="mr-2">
+      <li className="mr-4">
         <a
           aria-current="page"
-          className={classNames(
-            "inline-block p-4  bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500 text-gray-400 cursor-not-allowed"
-          )}
+          className={classNames("inline-block p-4 cursor-not-allowed")}
         >
           {title} <CountLoading loading={loading} count={count} />
         </a>
@@ -54,14 +55,13 @@ const ResultTab: React.FC<ResultTabProps> = ({
   }
 
   return (
-    <li className="mr-2">
+    <li className="mr-4">
       <Link href={createTabURL(router, tabKey)}>
         <a
           aria-current="page"
-          className={classNames(
-            "inline-block p-4  bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500",
-            { "text-blue-600": active }
-          )}
+          className={classNames("inline-block p-4", {
+            [selectedTabClass]: active,
+          })}
         >
           {title} <CountLoading loading={loading} count={count} />
         </a>

@@ -92,32 +92,26 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
         Abbiamo trovato
       </h3>
       <ul className="flex items-stretch text-sm font-medium text-center font-sans text-gray-500  dark:text-gray-400 mx-auto px-8 md:px-20 xl:px-0 md:max-w-6xl w-full">
-        <li className="mr-2">
+        <li className="mr-4">
           <Link href="/glossario#risultati">
             <a
               aria-current="page"
-              className={classNames(
-                "inline-block p-4  bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500 h-full",
-                {
-                  [selectedTabClass]: !filterCategory,
-                }
-              )}
+              className={classNames("inline-block p-4 h-full", {
+                [selectedTabClass]: !filterCategory,
+              })}
             >
               Tutti ({totalResults})
             </a>
           </Link>
         </li>
 
-        <li className="mr-2">
+        <li className="mr-4">
           <Link href="/glossario/rsnd#risultati">
             <a
               aria-current="page"
-              className={classNames(
-                "inline-block p-4  bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500 h-full",
-                {
-                  [selectedTabClass]: filterCategory === GLOSSARY_RSND_CAT_ID,
-                }
-              )}
+              className={classNames("inline-block p-4 h-full", {
+                [selectedTabClass]: filterCategory === GLOSSARY_RSND_CAT_ID,
+              })}
             >
               <span className="hidden md:inline">
                 Raccolta degli Scritti di Nichiren Daishonin
@@ -128,16 +122,13 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
           </Link>
         </li>
 
-        <li className="mr-2">
+        <li className="mr-4">
           <Link href="/glossario/sdl#risultati">
             <a
               aria-current="page"
-              className={classNames(
-                "inline-block p-4  bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500 h-full",
-                {
-                  [selectedTabClass]: filterCategory === GLOSSARY_SDL_CAT_ID,
-                }
-              )}
+              className={classNames("inline-block p-4 h-full", {
+                [selectedTabClass]: filterCategory === GLOSSARY_SDL_CAT_ID,
+              })}
             >
               <span className="hidden md:inline">Il Sutra del Loto</span>
               <span className="md:hidden">SDL</span>

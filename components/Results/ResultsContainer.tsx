@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import ResultsLoading from "./ResultsLoading";
 import Link from "next/link";
 import { removeBook, removeRSNDParams } from "./utils";
+import TabFilters from "./TabFilters";
 
 const NoResults = () => (
   <h2 className="text-3xl md:text-4xl px-4 font-bold">
@@ -61,14 +62,17 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({
   }
 
   return (
-    <>
-      <ul className="divide-y-2 divide-dashed pt-4 mb-10">
-        {searchedPosts?.map((postResult) => (
-          <PostResult key={postResult.id} post={postResult} />
-        ))}
-      </ul>
-      <Pagination totalResults={totalResults} anchorHash="risultati" />
-    </>
+    <div className="bg-white shadow-md rounded-xl">
+      <div className="px-8 md:px-20 xl:px-0 md:max-w-6xl mx-auto pt-20">
+        <TabFilters />
+        <ul className="divide-y-2 divide-dashed mb-10 mx-auto bg-defaultBg  rounded-xl shadow-md  px-4 md:px-10 py-8">
+          {searchedPosts?.map((postResult) => (
+            <PostResult key={postResult.id} post={postResult} />
+          ))}
+        </ul>
+        <Pagination totalResults={totalResults} anchorHash="risultati" />
+      </div>
+    </div>
   );
 };
 
