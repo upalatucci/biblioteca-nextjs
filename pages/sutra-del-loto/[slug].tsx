@@ -23,7 +23,7 @@ export default function PostPage({ post }) {
   const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
 
   if (router.isFallback || isLoadingHighligh) {
-    return <ArticleLoading />;
+    return <ArticleLoading originalPost={post} />;
   }
 
   const notesArray = extractNotes(highlightedPost?.acf?.acf_note);

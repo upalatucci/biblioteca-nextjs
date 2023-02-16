@@ -2,6 +2,7 @@ import Head from "next/head";
 import { memo } from "react";
 import Footer from "./Footer";
 import HomeNavbar from "./Navbar/HomeNavbar";
+import { removeHTMLTags } from "@utils/utils";
 
 const GoshoPageSkeleton = memo(() => (
   <ul>
@@ -30,24 +31,64 @@ const GoshoPageSkeleton = memo(() => (
 
 GoshoPageSkeleton.displayName = "GoshoPageSkeleton";
 
-const ArticleLoading = () => (
+type ArticleLoadingType = {
+  originalPost: any;
+};
+
+const ArticleLoading: React.FC<ArticleLoadingType> = ({ originalPost }) => (
   <>
     <Head>
-      <title>Loading | NICHIREN Library</title>
+      <title>
+        {removeHTMLTags(originalPost.title.rendered)} | NICHIREN Library
+      </title>
     </Head>
     <HomeNavbar />
+
     <main>
-      <div className="bg-white px-2 py-8 lg:p-8">
-        <div className="container px-4 lg:px-10 mx-auto">
-          <h2 className="text-4xl md:text-5xl text-secondary pb-6 border-b-2 border-secondary">
-            <div className="animate-pulse flex space-x-4">
-              <div className="h-8 bg-slate-200 rounded w-full lg:w-1/2"></div>
+      <div className="bg-defaultBg">
+        <div className="">
+          <div className="bg-white rounded-xl shadow-md">
+            <div className="py-20 px-8 md:px-20 container mx-auto max-w-[1400px]">
+              <h2 className="text-4xl md:text-5xl text-secondary pb-6">
+                <div className="animate-pulse flex space-x-4">
+                  <div className="h-8 bg-slate-200 rounded w-full lg:w-1/2"></div>
+                </div>
+              </h2>
+              <p className="text-gray-400 pb-6">
+                <div className="animate-pulse flex space-x-2">
+                  <div className="h-2 bg-slate-200 rounded w-1/2 lg:w-1/4"></div>
+                </div>
+              </p>
+
+              <div className="px-6 py-4 w-full text-md mb-4 h-32 rounded-2xl shadow-md bg-defaultBg flex items-center justify-start">
+                <div className="animate-pulse flex space-x-4 w-32">
+                  <div className="h-20 bg-slate-200 rounded w-full lg:w-1/2"></div>
+                </div>
+
+                <div className="animate-pulse flex space-x-4 w-32">
+                  <div className="h-8 bg-slate-200 rounded w-full lg:w-1/2"></div>
+                </div>
+
+                <div className="animate-pulse flex space-x-4 w-32">
+                  <div className="h-8 bg-slate-200 rounded w-full lg:w-1/2"></div>
+                </div>
+
+                <div className="animate-pulse flex space-x-4 w-32">
+                  <div className="h-8 bg-slate-200 rounded w-full lg:w-1/2"></div>
+                </div>
+
+                <div className="animate-pulse flex space-x-4 w-32">
+                  <div className="h-8 bg-slate-200 rounded w-full lg:w-1/2"></div>
+                </div>
+
+                <div className="animate-pulse flex space-x-4 w-32">
+                  <div className="h-8 bg-slate-200 rounded w-full lg:w-1/2"></div>
+                </div>
+              </div>
             </div>
-          </h2>
-          <div className="py-4 flex flex-col-reverse lg:flex-row gap-10">
-            <div className="w-full">
-              <GoshoPageSkeleton />
-            </div>
+          </div>
+          <div className="p-20 container mx-auto max-w-[1000px]">
+            <GoshoPageSkeleton />
           </div>
         </div>
       </div>

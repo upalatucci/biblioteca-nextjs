@@ -1,12 +1,7 @@
 import { MAP_POST_TYPE_TO_BOOK_URL, PostType } from "@utils/elasticSearchUtils";
-import React, { useEffect } from "react";
+import React from "react";
 import ResultTab from "./ResultTab";
 import { useRouter } from "next/router";
-import Select from "@components/Select";
-import { DATES } from "@components/AdvancedSearch/constants";
-import { RECIPIENTS_OPTIONS } from "@components/AdvancedSearch/recipients";
-import { PLACES_OPTIONS } from "@components/AdvancedSearch/places";
-import { ALL_LABEL } from "@components/GoshoList/utils";
 import { retainAggregationData, useLoadingTab } from "./utils";
 
 type ResultsHeaderProps = {
