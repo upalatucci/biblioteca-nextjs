@@ -40,7 +40,7 @@ export default function PostPage({ post }) {
       <main>
         <div className="bg-defaultBg">
           <div className="">
-            <div className="bg-white rounded-xl shadow-sm">
+            <div className="bg-white rounded-xl shadow-md">
               <div className="py-20 px-8 md:px-20 container mx-auto max-w-[1400px]">
                 <h2
                   className="text-2xl md:text-3xl container text-secondary font-serif font-bold"

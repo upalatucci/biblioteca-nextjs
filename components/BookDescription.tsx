@@ -18,14 +18,14 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
   index,
   notes,
   title,
-  subtitle
+  subtitle,
 }) => (
   <section className="w-full font-serif bg-white rounded-xl shadow-md p-20 mb-20">
-    <div className="mx-auto max-w-5xl pb-10">
+    <div className="mx-auto max-w-6xl pb-10">
       <h2 className="text-3xl font-bold">{title}</h2>
       <p className="text-gray-400">{subtitle}</p>
     </div>
-    <div className="mx-auto max-w-5xl bg-defaultBg rounded-xl shadow-md flex flex-col md:flex-row gap-4 justify-between p-10 mb-10">
+    <div className="mx-auto max-w-6xl bg-defaultBg rounded-xl shadow-md flex flex-col md:flex-row gap-4 justify-between p-10 mb-10">
       <div className="index">
         <h3 className="text-2xl font-bold mb-4 text-primary">
           Materiale introduttivo

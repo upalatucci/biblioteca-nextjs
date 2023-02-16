@@ -15,12 +15,12 @@ const SearchInput: FC<SearchInputProps> = ({
   onChange,
   placeholder,
   className,
-  "aria-label": ariaLabel
+  "aria-label": ariaLabel,
 }) => (
   <input
     type="search"
     className={classNames(
-      "border border-secondary font-serif w-full max-w-lg px-4 py-1 rounded-2xl bg-defaultBg placeholder:text-secondary placeholder:font-sans",
+      "border border-secondary font-serif w-full max-w-lg px-4 py-1 rounded-2xl placeholder:text-secondary placeholder:font-sans",
       className
     )}
     placeholder={placeholder || "Inserisci la parola o frase..."}

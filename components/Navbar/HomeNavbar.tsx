@@ -43,7 +43,7 @@ const HomeNavbar = () => {
           className={classNames(
             "mobileMenu block relative lg:hidden w-12 h-10",
             {
-              open: [SHOW, SHOWING].includes(mobileMenuOpen)
+              open: [SHOW, SHOWING].includes(mobileMenuOpen),
             }
           )}
           onClick={closeMobileMenu}
@@ -55,7 +55,7 @@ const HomeNavbar = () => {
 
         {mobileMenuOpen !== CLOSE && (
           <div
-            className={`p-2 z-40 shadow-sm absolute top-28 h-80 bg-white left-4 md:left-0 right-4 md:right-0 flex flex-col items-center justify-evenly
+            className={`p-2 z-40 shadow-md absolute top-28 h-80 bg-white left-4 md:left-0 right-4 md:right-0 flex flex-col items-center justify-evenly
          border rounded-md transition-all mobile-nav-items ${mobileMenuOpen}`}
           >
             <Link href="/rsnd-vol1" passHref>
