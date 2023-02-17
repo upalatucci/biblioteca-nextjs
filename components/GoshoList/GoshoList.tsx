@@ -50,14 +50,13 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
             onChange={onSearchInput}
             placeholder="Inserisci il titolo del Gosho che stai cercando"
             aria-label="Titolo"
-            className="!bg-white border-primary"
           />
           <Select
             onChange={setRecipient}
             value={recipient}
             name="destinatario"
             options={recipientOptions}
-            className="w-64 border rounded-xl border-primary"
+            className="w-64"
             aria-label="Destinatario"
             placeholder="Seleziona destinatario"
           />
@@ -66,7 +65,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
             value={place}
             name="destinatario"
             options={placesOptions}
-            className="w-64 border rounded-xl border-primary"
+            className="w-64"
             aria-label="Luogo"
             placeholder="Seleziona il luogo"
           />
