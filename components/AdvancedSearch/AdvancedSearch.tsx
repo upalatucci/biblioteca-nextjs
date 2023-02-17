@@ -96,7 +96,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
               Cosa vuoi approfondire oggi?
             </h2>
 
-            <div className="rounded-2xl bg-defaultBg p-8 my-14 shadow-md flex flex-col items-center justify-evenly h-80">
+            <div className="rounded-2xl bg-defaultBg p-8 my-14 shadow-md flex flex-col items-center justify-evenly">
               <div className="w-full flex flex-col md:flex-row items-center justify-start gap-4 mb-8">
                 <span className="font-bold mr-10">Cerca:</span>
                 <Select
@@ -188,9 +188,9 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                 </div>
               </div>
 
-              <div className="px-4 flex items-center justify-center">
+              <div className="px-4 flex flex-wrap gap-4 items-center justify-center">
                 <button
-                  className="btn bg-primary hover:bg-primaryHover rounded-3xl w-36 h-10 text-white text-lg mx-4"
+                  className="btn bg-primary hover:bg-primaryHover rounded-3xl w-36 h-10 text-white text-lg"
                   type="submit"
                 >
                   <div className="flex items-center justify-center">

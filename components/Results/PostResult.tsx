@@ -77,7 +77,7 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
               )
               .map((highlightField) => (
                 <span
-                  className="border border-primary rounded-xl px-4 mr-2 text-md break-keep"
+                  className="border border-gray-400 rounded-xl px-4 py-1 mr-2 text-sm bg-gray-50 text-gray-500 break-keep"
                   key={highlightField}
                 >
                   {humanizedField[highlightField]}
