@@ -83,16 +83,16 @@ const PostMenu: React.FC<PostMenuProps> = ({
           </li>
 
           {(withBackgrounds || withNotes) && (
-            <span className="border-l-2 border-gray-300 h-4 w-2"></span>
+            <span className="hidden md:inline border-l-2 border-gray-300 h-4 w-2"></span>
           )}
 
           {withBackgrounds && (
-            <li className="py-1">
+            <li className="py-1 hover:text-primary">
               <a href="#cenni_storici">Vai ai cenni storici</a>
             </li>
           )}
           {withNotes && (
-            <li className="py-1">
+            <li className="py-1 hover:text-primary">
               <a href="#note">Vai alle note</a>
             </li>
           )}

@@ -47,7 +47,7 @@ export default function PostPage({ post }) {
         <div className="bg-defaultBg">
           <div className="">
             <div className="bg-white rounded-xl shadow-md print:rounded-none print:shadow-none">
-              <div className="p-20 container mx-auto max-w-[1400px] print:py-0">
+              <div className="py-20 px-10 md:px-20 container mx-auto max-w-[1400px] print:py-0">
                 <h2
                   className="text-2xl md:text-3xl container text-secondary font-bold"
                   dangerouslySetInnerHTML={{
@@ -67,7 +67,7 @@ export default function PostPage({ post }) {
               </div>
             </div>
 
-            <div className="p-20 container mx-auto max-w-[1000px] print:py-0">
+            <div className="py-20 px-10 md:px-20 container mx-auto max-w-[1000px] print:py-0">
               {(highlightedPost?.acf?.acf_luogo ||
                 highlightedPost?.acf?.acf_data ||
                 highlightedPost?.acf?.acf_destinatario.length !== 0) && (

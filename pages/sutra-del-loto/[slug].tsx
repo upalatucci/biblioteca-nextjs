@@ -41,7 +41,7 @@ export default function PostPage({ post }) {
         <div className="bg-defaultBg">
           <div className="">
             <div className="bg-white rounded-xl shadow-md">
-              <div className="py-20 px-8 md:px-20 container mx-auto max-w-[1400px]">
+              <div className="py-20 px-10 md:px-20 container mx-auto max-w-[1400px]">
                 <h2
                   className="text-2xl md:text-3xl container text-secondary font-bold"
                   dangerouslySetInnerHTML={{
@@ -58,7 +58,7 @@ export default function PostPage({ post }) {
                 />
               </div>
             </div>
-            <div className="p-20 container mx-auto max-w-[1000px]">
+            <div className="py-20 px-10 md:px-20 container mx-auto max-w-[1000px]">
               {paragraphs.map((p) => (
                 <ParagraphWithNotes content={p} notes={notesArray} key={p} />
               ))}
