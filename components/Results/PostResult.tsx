@@ -59,7 +59,7 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
       <button className="text-left" onClick={toggleOpen}>
         <div className="font-sans">
           <h5
-            className="font-bold pb-4 text-lg text-primary"
+            className="font-bold pb-4"
             dangerouslySetInnerHTML={{ __html: post.title.rendered }}
           />
           <div
@@ -115,7 +115,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
         <Link href={`/${post.baseURL}/${post.slug}${postQueryParams}`} passHref>
           <a>
             <h5
-              className="font-bold pb-4 text-lg text-primary"
+              className="font-bold pb-4"
               dangerouslySetInnerHTML={{ __html: post.title.rendered }}
             />
             <div
@@ -141,14 +141,14 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
                 passHref
               >
                 <a>
-                  <span className="border border-primary rounded-xl px-4 mr-2 text-md  break-keep">
+                  <span className="border border-gray-400 rounded-xl px-4 py-1 mr-2 text-sm bg-gray-50 text-gray-500 break-keep">
                     {humanizedField[highlightField]}
                   </span>
                 </a>
               </Link>
             ))}
 
-          <span className="font-semibold">
+          <span className="text-primary">
             {humanizeTypeCategory(post.type, post.categories)}
           </span>
         </p>
