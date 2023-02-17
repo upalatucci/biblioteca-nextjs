@@ -30,7 +30,7 @@ const ResultsHeader: React.FC<ResultsHeaderProps> = ({ data, loading }) => {
   const totalCount = rsndCount + sdlCount + glossaryCount;
 
   return (
-    <ul className="flex flex-wrap text-sm font-medium text-center font-sans text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 mx-auto px-8 md:px-20 xl:px-0 md:max-w-6xl">
+    <ul className="flex overflow-x-auto overflow-y-hidden text-sm font-medium text-center font-sans text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 mx-auto px-8 md:px-20 xl:px-0 md:max-w-6xl">
       <ResultTab
         loading={loadingTab}
         count={totalCount}

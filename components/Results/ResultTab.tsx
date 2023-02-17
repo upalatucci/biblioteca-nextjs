@@ -55,7 +55,7 @@ const ResultTab: React.FC<ResultTabProps> = ({
   }
 
   return (
-    <li className="mr-4">
+    <li className="mr-4 min-w-60 whitespace-pre">
       <Link href={createTabURL(router, tabKey)}>
         <a
           aria-current="page"
