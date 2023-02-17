@@ -17,4 +17,4 @@ export const getQueryParamAsArray = <T>(
 };
 
 export const removeHTMLTags = (htmlString: string) =>
-  htmlString.replace(/<[^>]*>?/gm, "");
+  htmlString?.replace(/<[^>]*>?/gm, "");

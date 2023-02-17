@@ -39,7 +39,7 @@ const ArticleLoading: React.FC<ArticleLoadingType> = ({ originalPost }) => (
   <>
     <Head>
       <title>
-        {removeHTMLTags(originalPost.title.rendered)} | NICHIREN Library
+        {removeHTMLTags(originalPost?.title?.rendered)} | NICHIREN Library
       </title>
     </Head>
     <HomeNavbar />
