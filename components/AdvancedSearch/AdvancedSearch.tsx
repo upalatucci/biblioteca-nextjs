@@ -88,126 +88,129 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <section className="bg-white">
-        <div className="container py-8 mx-auto md:px-10">
-          <h2 className="text-4xl md:text-5xl font-bold mt-8 mb-14 px-4 sm:px-0">
-            Fai la tua ricerca:
-          </h2>
+    <div className="bg-white py-14 rounded-xl shadow-md mb-20">
+      <form onSubmit={onSubmit} className="mx-auto max-w-6xl pb-10 mb-10">
+        <section className="font-sans">
+          <div className="container mx-auto">
+            <h2 className="text-3xl px-4 md:px-0 font-bold">
+              Cosa vuoi approfondire oggi?
+            </h2>
 
-          <div className="bg-defaultBg rounded-xl shadow-md mb-8 mx-auto py-8 px-0 sm:px-8 font-sans">
-            <div className="flex flex-col md:flex-row items-center justify-center w-full mb-8 px-4 sm:px-0">
-              <Select
-                onChange={(newVal) =>
-                  setSearchType(mapSelectToType[newVal.toString()])
-                }
-                value={mapSearchType[searchType]}
-                name="type"
-                options={SELECTABLE_TYPES}
-                className="w-80 mb-4 md:mb-0 md:mr-4"
-              />
-              <SearchInput
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                required
-              />
-            </div>
+            <div className="rounded-2xl bg-defaultBg p-8 my-14 shadow-md flex flex-col items-center justify-evenly h-80">
+              <div className="w-full flex flex-col md:flex-row items-center justify-start gap-4 mb-8">
+                <span className="font-bold mr-10">Cerca:</span>
+                <Select
+                  onChange={(newVal) =>
+                    setSearchType(mapSelectToType[newVal.toString()])
+                  }
+                  value={mapSearchType[searchType]}
+                  name="type"
+                  options={SELECTABLE_TYPES}
+                  className="mb-4 md:mb-0 md:mr-4 w-full md:w-96"
+                />
+                <SearchInput
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  required
+                  aria-label="Cerca parole o frase"
+                />
+              </div>
 
-            <div className="bg-white border rounded-xl px-8 pt-4 pb-8">
-              <h3 className="text-lg md:text-xl text-primary font-bold mt-4 mb-6">
-                Cerca in:
-              </h3>
-              <div className="bg-defaultBg shadow-md rounded-xl px-8 py-8 mb-10">
-                <div className="flex items-center justify-start flex-wrap">
-                  <span className="w-32 lg:w-40">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        value={FIELDS.CONTENT}
-                        onChange={onFieldsChange}
-                        checked={fields.includes(FIELDS.CONTENT)}
-                        className="mr-4"
-                      />
-                      Contenuto
-                    </label>
-                  </span>
-                  <span className="w-32 lg:w-40">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        value={FIELDS.CENNI_STORICI}
-                        onChange={onFieldsChange}
-                        checked={fields.includes(FIELDS.CENNI_STORICI)}
-                        className="mr-4"
-                      />
-                      Cenni storici
-                    </label>
-                  </span>
-                  <span className="w-32 lg:w-40">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        value={FIELDS.NOTE}
-                        onChange={onFieldsChange}
-                        checked={fields.includes(FIELDS.NOTE)}
-                        className="mr-4"
-                      />
-                      Note
-                    </label>
-                  </span>
-                  <span className="w-32 lg:w-40">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        value={EXTRA_CATEGORIES.INTRO}
-                        onChange={onCategoriesChange}
-                        checked={extraCategories.includes(
-                          EXTRA_CATEGORIES.INTRO
-                        )}
-                        className="mr-4"
-                      />
-                      Introduzione
-                    </label>
-                  </span>
-                  <span className="w-32 lg:w-40">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        value={EXTRA_CATEGORIES.APPENDICI}
-                        onChange={onCategoriesChange}
-                        checked={extraCategories.includes(
-                          EXTRA_CATEGORIES.APPENDICI
-                        )}
-                        className="mr-4"
-                      />
-                      Appendici
-                    </label>
-                  </span>
+              <div className="pt-4 pb-8 flex w-full justify-start">
+                <span className="font-bold mb-6 mr-10">in:</span>
+                <div className="">
+                  <div className="flex items-center justify-start flex-wrap">
+                    <span className="w-32 lg:w-40">
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          value={FIELDS.CONTENT}
+                          onChange={onFieldsChange}
+                          checked={fields.includes(FIELDS.CONTENT)}
+                          className="mr-4"
+                        />
+                        Contenuto
+                      </label>
+                    </span>
+                    <span className="w-32 lg:w-40">
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          value={FIELDS.CENNI_STORICI}
+                          onChange={onFieldsChange}
+                          checked={fields.includes(FIELDS.CENNI_STORICI)}
+                          className="mr-4"
+                        />
+                        Cenni storici
+                      </label>
+                    </span>
+                    <span className="w-32 lg:w-40">
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          value={FIELDS.NOTE}
+                          onChange={onFieldsChange}
+                          checked={fields.includes(FIELDS.NOTE)}
+                          className="mr-4"
+                        />
+                        Note
+                      </label>
+                    </span>
+                    <span className="w-32 lg:w-40">
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          value={EXTRA_CATEGORIES.INTRO}
+                          onChange={onCategoriesChange}
+                          checked={extraCategories.includes(
+                            EXTRA_CATEGORIES.INTRO
+                          )}
+                          className="mr-4"
+                        />
+                        Introduzione
+                      </label>
+                    </span>
+                    <span className="w-32 lg:w-40">
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          value={EXTRA_CATEGORIES.APPENDICI}
+                          onChange={onCategoriesChange}
+                          checked={extraCategories.includes(
+                            EXTRA_CATEGORIES.APPENDICI
+                          )}
+                          className="mr-4"
+                        />
+                        Appendici
+                      </label>
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="px-4 flex items-center justify-center mt-8">
-              <button
-                className="btn bg-primary hover:bg-primaryHover rounded-3xl w-36 h-10 text-white text-lg mx-4"
-                type="submit"
-              >
-                <div className="flex items-center justify-center">
-                  {loading && <Loading />} Cerca
-                </div>
-              </button>
 
-              <button
-                className="btn  rounded-3xl h-10 w-36 border border-secondary hover:text-white hover:bg-secondary"
-                type="reset"
-                onClick={onReset}
-              >
-                Reset
-              </button>
+              <div className="px-4 flex items-center justify-center">
+                <button
+                  className="btn bg-primary hover:bg-primaryHover rounded-3xl w-36 h-10 text-white text-lg mx-4"
+                  type="submit"
+                >
+                  <div className="flex items-center justify-center">
+                    {loading && <Loading />} Cerca
+                  </div>
+                </button>
+
+                <button
+                  className="btn  rounded-3xl h-10 w-36 border border-secondary hover:text-white hover:bg-secondary"
+                  type="reset"
+                  onClick={onReset}
+                >
+                  Reset
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </form>
+        </section>
+      </form>
+    </div>
   );
 };
 

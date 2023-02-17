@@ -17,6 +17,7 @@ const TabFilters: React.FC = () => {
     if (newRecipient === ALL_LABEL) delete routerQuery.recipient;
     else routerQuery.recipient = newRecipient;
 
+    delete routerQuery.page;
     router.push({
       ...router,
       query: routerQuery,
@@ -30,11 +31,16 @@ const TabFilters: React.FC = () => {
     if (newPlace === ALL_LABEL) delete routerQuery.place;
     else routerQuery.place = newPlace;
 
-    router.push({
-      ...router,
-      query: routerQuery,
-      hash: "risultati",
-    });
+    delete routerQuery.page;
+    router.push(
+      {
+        ...router,
+        query: routerQuery,
+        hash: "risultati",
+      },
+      undefined,
+      { scroll: false }
+    );
   };
 
   if (
@@ -44,39 +50,28 @@ const TabFilters: React.FC = () => {
     return null;
 
   return (
-    <div className="mb-10">
-      <h3 className="text-lg md:text-xl text-primary font-bold mb-6">
-        Filtra i risultati:
-      </h3>
+    <div className="mb-10 flex items-center gap-8">
+      <span className="font-bold text-gray-500">Filtra i risultati:</span>
 
-      <div className="flex items-center justify-between flex-wrap">
-        <span className="mb-4 mr-4">
-          <label className="flex items-center">
-            <span className="mr-4">Destinatario</span>
-            <Select
-              onChange={onChangeRecipient}
-              value={(recipient as string) || RECIPIENTS_OPTIONS[0]}
-              name="destinatario"
-              options={RECIPIENTS_OPTIONS}
-              className="w-64"
-            />
-          </label>
-        </span>
+      <Select
+        onChange={onChangeRecipient}
+        value={(recipient as string) || RECIPIENTS_OPTIONS[0]}
+        name="destinatario"
+        options={RECIPIENTS_OPTIONS}
+        className="w-64 border-primary"
+        aria-label="Destinatario"
+      />
 
-        <span className="mb-4">
-          <label className="flex items-center">
-            <span className="mr-4">Scritto a</span>
-            <Select
-              onChange={onChangePlace}
-              value={(place as string) || PLACES_OPTIONS[0]}
-              name="luogo"
-              options={PLACES_OPTIONS}
-              className="w-64"
-            />
-          </label>
-        </span>
+      <Select
+        onChange={onChangePlace}
+        value={(place as string) || PLACES_OPTIONS[0]}
+        name="luogo"
+        options={PLACES_OPTIONS}
+        className="w-64"
+        aria-label="Scritto a"
+      />
 
-        <span className="mb-4">
+      {/* <span className="mb-4">
           <label className="flex items-center">
             <span className="mr-4">Scritto nel</span>
             <Select
@@ -107,8 +102,7 @@ const TabFilters: React.FC = () => {
               className="ml-4 w-16"
             />
           </label>
-        </span>
-      </div>
+        </span> */}
     </div>
   );
 };

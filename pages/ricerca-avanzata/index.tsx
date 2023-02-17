@@ -19,6 +19,11 @@ export default function Ricerca() {
       <main className="search-page">
         <AdvancedSearch loading={isLoading} />
 
+        {searchedPosts && (
+          <h3 className="text-2xl font-bold text-primary mx-auto px-8 md:px-20 xl:px-0 md:max-w-6xl mb-10">
+            Abbiamo trovato
+          </h3>
+        )}
         {error && (
           <div
             className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative container mx-auto my-4"

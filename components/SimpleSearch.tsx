@@ -42,8 +42,9 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
                 required
+                aria-label="Cerca parole o frase"
               />
-              <div>
+              <div className="flex flex-wrap gap-4 items-center justify-center">
                 <button
                   className="btn font-sans bg-primary hover:bg-primaryHover rounded-3xl w-44 h-10 text-white text-lg mx-4"
                   type="submit"
@@ -55,7 +56,7 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
                 </button>
 
                 <Link href="/ricerca-avanzata" passHref>
-                  <a className="btn border-customYellow border-2 text-customYellow hover:bg-customYellow hover:text-white font-bold rounded-3xl text-center font-sans py-2 px-8 w-44">
+                  <a className="btn border-customYellow border-2 text-customYellow hover:bg-customYellow hover:text-white font-bold rounded-3xl text-center font-sans py-2 px-8 w-44 whitespace-pre">
                     Ricerca avanzata
                   </a>
                 </Link>

@@ -68,11 +68,15 @@ export default function PostPage({ post }) {
             </div>
 
             <div className="p-20 container mx-auto max-w-[1000px] print:py-0">
-              <p className="text-primary">
-                {highlightedPost?.acf?.acf_luogo},{" "}
-                {highlightedPost?.acf?.acf_data}. Indirizzata a{" "}
-                {highlightedPost?.acf?.acf_destinatario.join(", ")}.
-              </p>
+              {(highlightedPost?.acf?.acf_luogo ||
+                highlightedPost?.acf?.acf_data ||
+                highlightedPost?.acf?.acf_destinatario.length !== 0) && (
+                <p className="text-primary">
+                  {highlightedPost?.acf?.acf_luogo},{" "}
+                  {highlightedPost?.acf?.acf_data}. Indirizzata a{" "}
+                  {highlightedPost?.acf?.acf_destinatario.join(", ")}.
+                </p>
+              )}
               {paragraphs.map((p) => (
                 <ParagraphWithNotes content={p} notes={notesArray} key={p} />
               ))}
