@@ -17,36 +17,40 @@ const Footer: React.FC = () => {
           <ul className="mt-4">
             <li>
               <a
-                href="#"
-                title=""
+                href="https://ilnuovorinascimento.org"
+                target="_blank"
                 className="flex items-center opacity-75 hover:opacity-100"
+                rel="noreferrer"
               >
                 ilnuovorinascimento.org
               </a>
             </li>
             <li className="mt-4">
               <a
-                href="#"
-                title=""
+                href="https://buddismoesocieta.org"
+                target="_blank"
                 className="flex items-center opacity-75 hover:opacity-100"
+                rel="noreferrer"
               >
                 buddismoesocieta.org
               </a>
             </li>
             <li className="mt-4">
               <a
-                href="#"
-                title=""
+                href="https://ilvolocontinuo.it"
+                target="_blank"
                 className="flex items-center opacity-75 hover:opacity-100"
+                rel="noreferrer"
               >
                 ilvolocontinuo.it
               </a>
             </li>
             <li className="mt-4">
               <a
-                href="#"
-                title=""
+                href="https://senzatomica.it"
+                target="_blank"
                 className="flex items-center opacity-75 hover:opacity-100"
+                rel="noreferrer"
               >
                 senzatomica.it
               </a>
