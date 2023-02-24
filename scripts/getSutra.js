@@ -34,6 +34,8 @@ getPosts().then((posts) => {
       title: post.title.rendered,
       slug: post.slug,
       category: post.cat_sdlpe,
+      number: post.menu_order,
+      number: Number(post.acf.acf_numero)
     }));
 
   fs.writeFile("./books/sdl.json", JSON.stringify(json), (err) =>
@@ -46,6 +48,7 @@ getPosts().then((posts) => {
       title: post.title.rendered,
       slug: post.slug,
       category: post.cat_sdlpe,
+      number: Number(post.acf.acf_numero)
     }));
 
   fs.writeFile("./books/intro_sdl.json", JSON.stringify(jsonIntro), (err) =>

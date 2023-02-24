@@ -12,7 +12,7 @@ import GoshoTableSortButton from "@components/GoshoList/GoshoTableSortButton";
 export default function RSND1() {
   const [jsonData, setJSONData] = useState<any[]>([]);
 
-  const [sortField, setSortField] = useState();
+  const [sortField, setSortField] = useState("number");
   const [sortAscend, setSortAscend] = useState(true);
 
   useEffect(() => {

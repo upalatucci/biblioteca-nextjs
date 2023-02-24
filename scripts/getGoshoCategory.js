@@ -72,7 +72,8 @@ getPosts().then((posts) => {
 
   json = appendice_vol_1.map((post) => ({
     title: post.title.rendered,
-    slug: post.slug
+    slug: post.slug,
+    number: Number(post.acf.acf_numero)
   }));
 
   fs.writeFile("./books/appendice_1.json", JSON.stringify(json), (err) =>
@@ -87,7 +88,8 @@ getPosts().then((posts) => {
 
   json = appendice_vol_2.map((post) => ({
     title: post.title.rendered,
-    slug: post.slug
+    slug: post.slug,
+    number: Number(post.acf.acf_numero)
   }));
 
   fs.writeFile("./books/appendice_2.json", JSON.stringify(json), (err) =>
@@ -100,7 +102,8 @@ getPosts().then((posts) => {
 
   json = intro_1.map((post) => ({
     title: post.title.rendered,
-    slug: post.slug
+    slug: post.slug,
+    number: Number(post.acf.acf_numero)
   }));
 
   fs.writeFile("./books/intro_1.json", JSON.stringify(json), (err) =>
@@ -113,7 +116,8 @@ getPosts().then((posts) => {
 
   json = intro_2.map((post) => ({
     title: post.title.rendered,
-    slug: post.slug
+    slug: post.slug,
+    number: Number(post.acf.acf_numero)
   }));
 
   fs.writeFile("./books/intro_2.json", JSON.stringify(json), (err) =>

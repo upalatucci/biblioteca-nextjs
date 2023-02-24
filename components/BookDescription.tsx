@@ -36,29 +36,31 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
           Materiale introduttivo
         </h3>
         <ul className="divide-y-2 divide-gray-200 divide-dashed">
-          {index.map((item) => {
-            if (typeof item === "string")
-              return (
-                <li className="font-bold py-2" key={item}>
-                  {item}
-                </li>
-              );
-            else {
-              if (item.title) {
+          {index
+            .sort((a, b) => (a.number > b.number ? 1 : -1))
+            .map((item) => {
+              if (typeof item === "string")
                 return (
-                  <li key={item.title}>
-                    <Link href={`/${baseSlug}/${item.slug}`}>
-                      <a>
-                        <span className="font-semibold text-sm">
-                          {item.title}
-                        </span>
-                      </a>
-                    </Link>
+                  <li className="font-bold py-2" key={item}>
+                    {item}
                   </li>
                 );
+              else {
+                if (item.title) {
+                  return (
+                    <li key={item.title}>
+                      <Link href={`/${baseSlug}/${item.slug}`}>
+                        <a>
+                          <span className="font-semibold text-sm">
+                            {item.title}
+                          </span>
+                        </a>
+                      </Link>
+                    </li>
+                  );
+                }
               }
-            }
-          })}
+            })}
         </ul>
       </div>
       {notes && (
