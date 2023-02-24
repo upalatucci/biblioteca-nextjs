@@ -18,3 +18,12 @@ export const getQueryParamAsArray = <T>(
 
 export const removeHTMLTags = (htmlString: string) =>
   htmlString?.replace(/<[^>]*>?/gm, "");
+
+export function debounce(fn, delay) {
+  let debounceId = null;
+
+  return function (...args) {
+    clearTimeout(debounceId);
+    debounceId = setTimeout(() => fn(...args), delay);
+  };
+}

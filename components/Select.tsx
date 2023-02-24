@@ -1,5 +1,6 @@
+import { debounce } from "@utils/utils";
 import classNames from "classnames";
-import React from "react";
+import React, { KeyboardEventHandler, useEffect, useMemo, useRef } from "react";
 import { ALL_LABEL } from "./GoshoList/utils";
 
 type SelectProps = {
@@ -13,23 +14,48 @@ type SelectProps = {
 
 export type OptionProps = {
   option: string;
-  onOptionClick: (onOptionChange: string) => void;
-  handleKeyDown: (value: string) => (event: React.KeyboardEvent) => void;
+  onOptionChange: (value: string) => void;
   selected: string;
+};
+
+const updateScroll = (list, selectedOption) => {
+  if (selectedOption && list.scrollHeight > list.clientHeight) {
+    const scrollBottom = list.clientHeight + list.scrollTop;
+    const elementBottom =
+      selectedOption.offsetTop + selectedOption.offsetHeight;
+    if (elementBottom > scrollBottom) {
+      list.scrollTop = elementBottom - list.clientHeight;
+    } else if (selectedOption.offsetTop < list.scrollTop) {
+      list.scrollTop = selectedOption.offsetTop;
+    }
+  }
 };
 
 const Option: React.FC<OptionProps> = ({
   option,
-  onOptionClick,
-  handleKeyDown,
-  selected,
+  onOptionChange,
+  selected
 }) => {
-  const _onOptionClick = React.useCallback(
+  const handleKeyDown: KeyboardEventHandler<HTMLLIElement> = (e) => {
+    e.preventDefault();
+    switch (e.key) {
+      case " ":
+      case "SpaceBar":
+      case "Enter":
+        onOptionChange(option);
+        e.currentTarget.focus();
+        break;
+      default:
+        break;
+    }
+  };
+
+  const onOptionClick = React.useCallback(
     (e) => {
       e.preventDefault();
-      onOptionClick(option);
+      onOptionChange(option);
     },
-    [onOptionClick, option]
+    [onOptionChange, option]
   );
 
   return (
@@ -37,9 +63,9 @@ const Option: React.FC<OptionProps> = ({
       id={option}
       role="option"
       aria-selected={selected === option}
-      tabIndex={0}
-      onKeyDown={handleKeyDown(option)}
-      onClick={_onOptionClick}
+      onKeyDown={handleKeyDown}
+      onClick={onOptionClick}
+      className={classNames({ focus: selected === option })}
     >
       {option}
     </li>
@@ -52,80 +78,84 @@ const Select: React.FC<SelectProps> = ({
   name,
   options,
   className,
-  placeholder,
+  placeholder
 }) => {
   const [isOpen, setOpen] = React.useState(false);
+  const [searchText, setSearchText] = React.useState("");
+  const listRef = useRef();
 
   const indexSelectedOption = React.useMemo(
     () => options.findIndex((option) => option === value),
     [value, options]
   );
 
-  const onOptionChange = (option) => {
-    onChange(option);
-    setOpen(false);
-  };
   const toggleOptions = () => {
     setOpen(!isOpen);
   };
 
-  const handleKeyDown = (value) => (e) => {
-    e.preventDefault();
-    switch (e.key) {
-      case " ":
-      case "SpaceBar":
-      case "Enter":
-        e.preventDefault();
-        onOptionChange(value);
-        break;
-      default:
-        break;
-    }
-  };
+  const resetSearchDebounce = useMemo(
+    () =>
+      debounce(() => {
+        setSearchText("");
+      }, 1000),
+    []
+  );
 
   const handleListKeyDown = React.useCallback(
     (e) => {
       e.preventDefault();
       switch (e.key) {
         case "Escape":
-          e.preventDefault();
           setOpen(false);
           break;
+        case "Enter":
+          setOpen(!isOpen);
+          break;
         case "ArrowUp":
-          e.preventDefault();
           const prevOption = options?.[indexSelectedOption - 1];
 
           if (prevOption)
-            onOptionChange(
-              typeof prevOption === "string" ? prevOption : prevOption
-            );
+            onChange(typeof prevOption === "string" ? prevOption : prevOption);
           break;
         case "ArrowDown":
-          e.preventDefault();
           const nextOption = options?.[indexSelectedOption + 1];
-
-          if (nextOption) onOptionChange(nextOption);
+          if (nextOption) onChange(nextOption);
           break;
         default:
           break;
       }
+
+      if (/^[A-z]$/.test(e.key)) {
+        setSearchText((text) => text.concat(e.key));
+      }
     },
-    [indexSelectedOption]
+    [indexSelectedOption, isOpen]
   );
 
-  const otherOptions = options.filter((option) => option !== value);
+  useEffect(() => {
+    if (!searchText) return;
+
+    const findOption = options?.find((option) => option.startsWith(searchText));
+
+    if (findOption) onChange(findOption);
+
+    resetSearchDebounce();
+  }, [searchText, options]);
+
+  useEffect(() => {
+    if (isOpen && value) {
+      updateScroll(
+        listRef.current,
+        document.getElementById(options[indexSelectedOption])
+      );
+    }
+  }, [isOpen, value, options]);
 
   return (
     <div className={classNames("select-wrapper", className)}>
       {isOpen && (
         <div className="select-background" onClick={() => setOpen(false)}></div>
       )}
-      <select
-        className="hidden"
-        defaultValue={value}
-        name={name}
-        aria-label={options[indexSelectedOption]}
-      ></select>
       <div className="select-container">
         <button
           type="button"
@@ -134,26 +164,26 @@ const Select: React.FC<SelectProps> = ({
           className={isOpen ? "expanded" : ""}
           onClick={toggleOptions}
           onKeyDown={handleListKeyDown}
+          aria-label={`${placeholder} ${options[indexSelectedOption]}`}
         >
           {options[indexSelectedOption] === ALL_LABEL
             ? placeholder || ALL_LABEL
             : options[indexSelectedOption]}
         </button>
         <ul
-          className={`options max-h-64 overflow-y-scroll ${
-            isOpen ? "show" : ""
-          }`}
+          className={`options max-h-64 overflow-y-auto ${isOpen ? "show" : ""}`}
           role="listbox"
           tabIndex={-1}
           onKeyDown={handleListKeyDown}
+          aria-activedescendant={options[indexSelectedOption]}
+          ref={listRef}
         >
-          {otherOptions.map((option) => (
+          {options.map((option) => (
             <Option
               option={option}
               key={option}
-              handleKeyDown={handleKeyDown}
               selected={value}
-              onOptionClick={onOptionChange}
+              onOptionChange={onChange}
             />
           ))}
         </ul>

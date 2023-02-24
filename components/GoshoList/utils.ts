@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 export const ALL_LABEL = "Tutti";
 
 const generateUniqueOptions = (jsonData: GoshoType[], key) => {
-  const uniqueValues = new Set<string>([ALL_LABEL]);
+  const uniqueValues = new Set<string>();
 
   jsonData.forEach((post) => {
     if (Array.isArray(post[key])) {
@@ -17,19 +17,19 @@ const generateUniqueOptions = (jsonData: GoshoType[], key) => {
 
     uniqueValues.add(post[key]);
   });
-
+  
   return Array.from(uniqueValues);
 };
 
 export const useFilters = (allGosho: GoshoType[]) => {
   const router = useRouter();
   const recipientOptions = useMemo(
-    () => generateUniqueOptions(allGosho, "recipient"),
+    () => [ALL_LABEL].concat(generateUniqueOptions(allGosho, "recipient").sort()),
     [allGosho]
   );
 
   const placesOptions = useMemo(
-    () => generateUniqueOptions(allGosho, "place"),
+    () => [ALL_LABEL].concat(generateUniqueOptions(allGosho, "place").sort()),
     [allGosho]
   );
 
