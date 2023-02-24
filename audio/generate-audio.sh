@@ -1,0 +1,1 @@
+aws polly synthesize-speech  --output-format mp3 --language-code it-IT --voice-id Bianca --engine neural --text file://prova.html --text-type ssml prova.mp3
