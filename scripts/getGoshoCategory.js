@@ -31,11 +31,17 @@ async function getPosts() {
 
 getPosts().then((posts) => {
   const gosho = posts.filter((post) => post.acf.acf_numero);
-  const rsnd1 = gosho.filter((post) =>
-    post.cat_rsnd.includes(RSND_VOL_1_CATEGORY_ID)
+  const rsnd1 = gosho.filter(
+    (post) =>
+      post.cat_rsnd.includes(RSND_VOL_1_CATEGORY_ID) &&
+      !post.cat_rsnd.includes(RSND_APPENDICE_CAT_ID) &&
+      !post.cat_rsnd.includes(RSND_INTRO_1_CAT_ID)
   );
-  const rsnd2 = gosho.filter((post) =>
-    post.cat_rsnd.includes(RSND_VOL_2_CATEGORY_ID)
+  const rsnd2 = gosho.filter(
+    (post) =>
+      post.cat_rsnd.includes(RSND_VOL_2_CATEGORY_ID) &&
+      !post.cat_rsnd.includes(RSND_APPENDICE_CAT_ID) &&
+      !post.cat_rsnd.includes(RSND_INTRO_2_CAT_ID)
   );
 
   let json = rsnd1.map((post) => ({

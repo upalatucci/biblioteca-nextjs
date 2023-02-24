@@ -36,7 +36,7 @@ export default function PostPage({ post }) {
     RSND_VOL_1_CATEGORY_ID
   );
 
-  const rsndLink = `/rsnd-vol-${isFirstVolume ? "1" : "2"}`;
+  const rsndLink = `/rsnd-vol${isFirstVolume ? "1" : "2"}`;
 
   return (
     <>
