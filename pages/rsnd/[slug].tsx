@@ -11,7 +11,7 @@ import ArticleLoading from "@components/ArticleLoading";
 import {
   DEFAULT_REVALIDATE,
   extractNotes,
-  extractParagraphs,
+  extractParagraphs
 } from "@utils/articleUtils";
 import useHighlightedPost from "@hooks/useHighlightedPost";
 import { removeHTMLTags } from "@utils/utils";
@@ -19,6 +19,7 @@ import { RSND_VOL_1_CATEGORY_ID } from "@utils/constants";
 
 import raccoltaVol1 from "@public/raccolta-nichiren-vol1.jpeg";
 import raccoltaVol2 from "@public/raccolta-nichiren-vol2.jpeg";
+import Link from "next/link";
 
 export default function PostPage({ post }) {
   const router = useRouter();
@@ -34,6 +35,8 @@ export default function PostPage({ post }) {
   const isFirstVolume = highlightedPost?.cat_rsnd.includes(
     RSND_VOL_1_CATEGORY_ID
   );
+
+  const rsndLink = `/rsnd-vol-${isFirstVolume ? "1" : "2"}`;
 
   return (
     <>
@@ -51,11 +54,15 @@ export default function PostPage({ post }) {
                 <h2
                   className="text-2xl md:text-3xl container text-secondary font-bold"
                   dangerouslySetInnerHTML={{
-                    __html: `${highlightedPost?.acf?.acf_numero} ${highlightedPost.title.rendered}`,
+                    __html: `${highlightedPost?.acf?.acf_numero} ${highlightedPost.title.rendered}`
                   }}
                 ></h2>
                 <p className="text-gray-400  pb-6">
-                  RSND, VOLUME {isFirstVolume ? "I" : "II"}
+                  <Link href={rsndLink}>
+                    <a className="hover:text-primary">
+                      RSND, VOLUME {isFirstVolume ? "I" : "II"}
+                    </a>
+                  </Link>
                 </p>
 
                 <PostMenu
@@ -63,6 +70,7 @@ export default function PostPage({ post }) {
                   withBackgrounds={!!highlightedPost?.acf?.acf_cenni_storici}
                   withNotes={!!highlightedPost?.acf?.acf_note}
                   image={isFirstVolume ? raccoltaVol1 : raccoltaVol2}
+                  imageLink={rsndLink}
                 />
               </div>
             </div>
@@ -95,7 +103,7 @@ export default function PostPage({ post }) {
                         dangerouslySetInnerHTML={{
                           __html: highlightedPost.acf.acf_cenni_storici
                             ?.replace("CENNI STORICI – ", "")
-                            .replace(/\n/g, "<br>"),
+                            .replace(/\n/g, "<br>")
                         }}
                       ></div>
                     </div>
@@ -108,7 +116,7 @@ export default function PostPage({ post }) {
                       </h3>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: highlightedPost.acf.acf_note,
+                          __html: highlightedPost.acf.acf_note
                         }}
                       ></div>
                     </div>
@@ -131,7 +139,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths,
     //this option below renders in the server (at request time) pages that were not rendered at build time
     //e.g when a new blogpost is added to the app
-    fallback: true,
+    fallback: true
   };
 };
 
@@ -143,8 +151,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return {
       props: {
-        post,
-      },
+        post
+      }
     };
   } catch (error) {
     console.log("Error fetching static props for", params.slug, error);

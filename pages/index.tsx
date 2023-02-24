@@ -19,7 +19,7 @@ import Link from "next/link";
 const responsive = {
   0: { items: 1.1 },
   450: { items: 1.3 },
-  700: { items: 2.3 },
+  700: { items: 2.3 }
 };
 
 const books = [
@@ -45,12 +45,12 @@ const books = [
 
   <ImageWithText
     image={sutraDelLoto}
-    path="rsnd-vol1"
+    path="sutra-del-loto"
     title="Sutra del Loto"
     width={475}
     height={530}
     key={3}
-  />,
+  />
 ];
 
 export default function Home() {
@@ -64,7 +64,7 @@ export default function Home() {
 
     router.push({
       pathname: "/ricerca",
-      query,
+      query
     });
   };
 

@@ -43,7 +43,7 @@ const HomeNavbar = () => {
           className={classNames(
             "mobileMenu block relative lg:hidden w-12 h-10",
             {
-              open: [SHOW, SHOWING].includes(mobileMenuOpen),
+              open: [SHOW, SHOWING].includes(mobileMenuOpen)
             }
           )}
           onClick={closeMobileMenu}
@@ -66,7 +66,7 @@ const HomeNavbar = () => {
               <a>Raccolta degli Scritti di Nichiren Daishonin VOLUME II</a>
             </Link>
 
-            <Link href="/rsnd-vol1" passHref>
+            <Link href="/sutra-del-loto" passHref>
               <a>Sutra del Loto</a>
             </Link>
 
@@ -94,7 +94,7 @@ const HomeNavbar = () => {
             downText="VOLUME II"
           />
 
-          <NavbarItem href="/" title="SUTRA DEL LOTO" />
+          <NavbarItem href="/sutra-del-loto" title="SUTRA DEL LOTO" />
         </div>
         <span className="hidden lg:flex gap-10">
           <Link href="/glossario" passHref>

@@ -36,9 +36,9 @@ const Navbar = () => {
           downText="VOLUME II"
         />
 
-        <NavbarItem href="/" title="SUTRA DEL LOTO" />
+        <NavbarItem href="/sutra-del-loto" title="SUTRA DEL LOTO" />
 
-        <NavbarItem href="/" title="GLOSSARIO" />
+        <NavbarItem href="/glossario" title="GLOSSARIO" />
       </div>
       <button className="primary">RICERCA</button>
     </nav>

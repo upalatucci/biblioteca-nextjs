@@ -1,6 +1,7 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import ShareModal from "./ShareModal";
 import Image from "next/image";
+import Link from "next/link";
 
 const nLi = new Array(10).fill(0).map((_, index) => index);
 
@@ -24,6 +25,7 @@ type PostMenuProps = {
   withBackgrounds?: boolean;
   withNotes?: boolean;
   image?: StaticImageData;
+  imageLink?: string;
 };
 
 const PostMenu: React.FC<PostMenuProps> = ({
@@ -31,6 +33,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
   withNotes = false,
   withBackgrounds = false,
   image,
+  imageLink
 }) => {
   const [openShareModal, setOpenShareModal] = useState(false);
   const activeLiRef = useRef<HTMLLIElement>();
@@ -49,7 +52,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
       navigator
         .share({
           title: currentPostTitle,
-          url: window.location.href,
+          url: window.location.href
         })
         .then(() => console.log("Successful share"))
         .catch((error) => console.log("Error sharing", error));
@@ -67,9 +70,15 @@ const PostMenu: React.FC<PostMenuProps> = ({
         />
       )}
       <div className="px-6 py-4 w-full text-md mb-4 rounded-2xl shadow-md bg-defaultBg flex items-center justify-start">
-        <div>
-          <Image src={image} alt="image" width={100} height={140} />
-        </div>
+        {image && (
+          <div>
+            <Link href={imageLink ?? "#"}>
+              <a>
+                <Image src={image} alt="image" width={100} height={140} />
+              </a>
+            </Link>
+          </div>
+        )}
         <ul className="flex items-center justify-evenly flex-wrap w-full">
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
             <button onClick={share}>Condividi</button>

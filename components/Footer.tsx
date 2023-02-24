@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
           <ul className="mt-4">
             <li>
               <a
-                href="#"
+                href="/rsnd-vol-1"
                 title=""
                 className="flex items-center opacity-75 hover:opacity-100"
               >
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
             </li>
             <li className="mt-4">
               <a
-                href="#"
+                href="/rsnd-vol-2"
                 title=""
                 className="flex items-center opacity-75 hover:opacity-100"
               >
@@ -76,7 +76,7 @@ const Footer: React.FC = () => {
             </li>
             <li className="mt-4">
               <a
-                href="#"
+                href="/"
                 title=""
                 className="flex items-center opacity-75 hover:opacity-100"
               >
@@ -85,7 +85,7 @@ const Footer: React.FC = () => {
             </li>
             <li className="mt-4">
               <a
-                href="#"
+                href="/glossario"
                 title=""
                 className="flex items-center opacity-75 hover:opacity-100"
               >
@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
             </li>
             <li className="mt-4">
               <a
-                href="#"
+                href="/ricerca-avanzata"
                 title=""
                 className="flex items-center opacity-75 hover:opacity-100"
               >
