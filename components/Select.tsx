@@ -1,6 +1,12 @@
 import { debounce } from "@utils/utils";
 import classNames from "classnames";
-import React, { KeyboardEventHandler, useEffect, useMemo, useRef } from "react";
+import React, {
+  KeyboardEventHandler,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
 import { ALL_LABEL } from "./GoshoList/utils";
 
 type SelectProps = {
@@ -34,7 +40,7 @@ const updateScroll = (list, selectedOption) => {
 const Option: React.FC<OptionProps> = ({
   option,
   onOptionChange,
-  selected
+  selected,
 }) => {
   const handleKeyDown: KeyboardEventHandler<HTMLLIElement> = (e) => {
     e.preventDefault();
@@ -78,11 +84,16 @@ const Select: React.FC<SelectProps> = ({
   name,
   options,
   className,
-  placeholder
+  placeholder,
 }) => {
   const [isOpen, setOpen] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const listRef = useRef();
+
+  const onOptionChange = useCallback((newValue) => {
+    onChange(newValue);
+    setOpen(false);
+  }, []);
 
   const indexSelectedOption = React.useMemo(
     () => options.findIndex((option) => option === value),
@@ -152,7 +163,10 @@ const Select: React.FC<SelectProps> = ({
   }, [isOpen, value, options]);
 
   return (
-    <div className={classNames("select-wrapper", className)}>
+    <div
+      className={classNames("select-wrapper", className)}
+      id={`${name}-select`}
+    >
       {isOpen && (
         <div className="select-background" onClick={() => setOpen(false)}></div>
       )}
@@ -183,7 +197,7 @@ const Select: React.FC<SelectProps> = ({
               option={option}
               key={option}
               selected={value}
-              onOptionChange={onChange}
+              onOptionChange={onOptionChange}
             />
           ))}
         </ul>

@@ -4,9 +4,9 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
 
-import raccoltaVol1 from "../public/raccolta-nichiren-vol1.jpeg";
-import raccoltaVol2 from "../public/raccolta-nichiren-vol2.jpeg";
-import sutraDelLoto from "../public/sutra-del-loto.jpeg";
+import raccoltaVol1 from "../public/rsnd-I.svg";
+import raccoltaVol2 from "../public/rsnd-II.svg";
+import sutraDelLoto from "../public/sutra-del-loto.jpg";
 import sfogliaGlossario from "../public/sfoglia.jpeg";
 import ascolta from "../public/ascolta.jpeg";
 import SearchInput from "@components/SearchInput";
@@ -19,7 +19,7 @@ import Link from "next/link";
 const responsive = {
   0: { items: 1.1 },
   450: { items: 1.3 },
-  700: { items: 2.3 }
+  700: { items: 2.3 },
 };
 
 const books = [
@@ -28,8 +28,8 @@ const books = [
     path="rsnd-vol1"
     title="Raccolta degli Scritti di Nichiren Daishonin"
     description="VOLUME I"
-    width={475}
-    height={530}
+    width={400}
+    height={600}
     key={1}
   />,
 
@@ -38,8 +38,8 @@ const books = [
     path="rsnd-vol2"
     title="Raccolta degli Scritti di Nichiren Daishonin"
     description="VOLUME II"
-    width={475}
-    height={530}
+    width={400}
+    height={600}
     key={2}
   />,
 
@@ -47,10 +47,10 @@ const books = [
     image={sutraDelLoto}
     path="sutra-del-loto"
     title="Sutra del Loto"
-    width={475}
-    height={530}
+    width={400}
+    height={600}
     key={3}
-  />
+  />,
 ];
 
 export default function Home() {
@@ -64,7 +64,7 @@ export default function Home() {
 
     router.push({
       pathname: "/ricerca",
-      query
+      query,
     });
   };
 

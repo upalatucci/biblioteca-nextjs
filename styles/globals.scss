@@ -51,11 +51,17 @@ hr {
   border-color: var(--primary-color);
 }
 
-input.search {
-  height: 50px;
-  font-size: 18px;
-  width: 100%;
-  padding: 0 10px;
+.input-container {
+  position: relative;
+
+  .input-search-icon {
+    position: absolute;
+    right: 12px;
+    top: 7px;
+    content: url("/icons/ico-search.svg");
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .title {

@@ -16,19 +16,20 @@ const SearchInput: FC<SearchInputProps> = ({
   placeholder,
   className,
   "aria-label": ariaLabel,
+  required = false,
 }) => (
-  <input
-    type="search"
-    className={classNames(
-      "border border-primary w-full max-w-lg px-4 py-1 rounded-2xl bg-white placeholder:text-secondary placeholder:font-sans",
-      className
-    )}
-    placeholder={placeholder || "Inserisci la parola o frase..."}
-    value={value || ""}
-    onChange={onChange}
-    required
-    aria-label={ariaLabel}
-  />
+  <div className={classNames("w-full max-w-lg input-container", className)}>
+    <input
+      type="search"
+      className="border border-primary w-full max-w-lg pl-4 pr-8 py-1 rounded-2xl bg-white placeholder:text-secondary placeholder:font-sans"
+      placeholder={placeholder || "Inserisci la parola o frase..."}
+      value={value || ""}
+      onChange={onChange}
+      required={required}
+      aria-label={ariaLabel}
+    />
+    <span className="input-search-icon"></span>
+  </div>
 );
 
 export default SearchInput;

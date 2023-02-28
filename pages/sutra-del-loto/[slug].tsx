@@ -15,7 +15,7 @@ import {
 import useHighlightedPost from "@hooks/useHighlightedPost";
 import { removeHTMLTags } from "@utils/utils";
 import PostMenu from "@components/PostMenu";
-import sutraDelLoto from "@public/sutra-del-loto.jpeg";
+import sutraDelLoto from "@public/sutra-del-loto.jpg";
 import Link from "next/link";
 
 export default function PostPage({ post }) {

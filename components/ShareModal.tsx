@@ -37,7 +37,7 @@ const ShareModal: React.FC<ShareModalProps> = ({ title, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
+    <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="absolute inset-0 bg-gray-500 opacity-75 z-10"></div>
       <div className="bg-white rounded-lg shadow-lg p-4 z-30 w-96">
         <div className="flex items-center justify-between">

@@ -2,6 +2,11 @@ import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import ShareModal from "./ShareModal";
 import Image from "next/image";
 import Link from "next/link";
+import textSizeIcon from "@public/icons/ico-text-size.svg";
+import shareIcon from "@public/icons/ico-share.svg";
+import printIcon from "@public/icons/ico-print.svg";
+import notesIcon from "@public/icons/ico-notes.svg";
+import backgroundIcon from "@public/icons/ico-background.svg";
 
 const nLi = new Array(10).fill(0).map((_, index) => index);
 
@@ -81,10 +86,19 @@ const PostMenu: React.FC<PostMenuProps> = ({
         )}
         <ul className="flex items-center justify-evenly flex-wrap w-full">
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
-            <button onClick={share}>Condividi</button>
+              <button onClick={share} className="flex items-center gap-2">
+                <Image src={shareIcon} alt="condividi" width={15} height={15} />{" "}
+                Condividi
+              </button>
           </li>
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
-            <button onClick={() => print()}>Stampa</button>
+              <button
+                onClick={() => print()}
+                className="flex items-center gap-2"
+              >
+                <Image src={printIcon} alt="stampa" width={15} height={15} />{" "}
+                Stampa
+              </button>
           </li>
           {/* <li className="mx-2 lg:mx-0 py-1">Ascolta l&apos;audio</li> */}
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
@@ -97,12 +111,23 @@ const PostMenu: React.FC<PostMenuProps> = ({
 
           {withBackgrounds && (
             <li className="py-1 hover:text-primary">
-              <a href="#cenni_storici">Vai ai cenni storici</a>
+                <a href="#cenni_storici" className="flex items-center gap-2">
+                  <Image
+                    src={backgroundIcon}
+                    alt="cenni storici"
+                    width={15}
+                    height={15}
+                  />{" "}
+                  Vai ai cenni storici
+                </a>
             </li>
           )}
           {withNotes && (
-            <li className="py-1 hover:text-primary">
-              <a href="#note">Vai alle note</a>
+              <li className="py-1 hover:text-primary flex items-center gap-2">
+                <a href="#note">
+                  <Image src={notesIcon} alt="note" width={15} height={15} />{" "}
+                  Vai alle note
+                </a>
             </li>
           )}
         </ul>

@@ -17,8 +17,8 @@ import useHighlightedPost from "@hooks/useHighlightedPost";
 import { removeHTMLTags } from "@utils/utils";
 import { RSND_VOL_1_CATEGORY_ID } from "@utils/constants";
 
-import raccoltaVol1 from "@public/raccolta-nichiren-vol1.jpeg";
-import raccoltaVol2 from "@public/raccolta-nichiren-vol2.jpeg";
+import raccoltaVol1 from "@public/rsnd-I.svg";
+import raccoltaVol2 from "@public/rsnd-II.svg";
 import Link from "next/link";
 
 export default function PostPage({ post }) {
