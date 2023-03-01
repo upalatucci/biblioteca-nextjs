@@ -41,17 +41,17 @@ export default function PostPage({ post }) {
       <main>
         <div className="bg-defaultBg">
           <div className="">
-            <div className="bg-white rounded-xl shadow-md">
-              <div className="py-20 px-10 md:px-20 container mx-auto max-w-[1400px]">
+            <div className="bg-white py-20 lg:py-32 px-8 rounded-xl shadow-md print:rounded-none print:shadow-none">
+              <div className="container mx-auto max-w-[1400px] print:py-0">
                 <h2
-                  className="text-2xl md:text-3xl container text-secondary font-bold"
+                  className="text-4xl md:text-3xl container text-secondary font-bold"
                   dangerouslySetInnerHTML={{
                     __html: `${highlightedPost?.acf?.acf_numero} ${highlightedPost.title.rendered}`
                   }}
                 ></h2>
-                <p className="text-gray-400 pb-6">
+                <p className="text-gray-400 pb-14">
                   <Link href="/sutra-del-loto">
-                    <a className="hover:text-primary">Sutra del Loto</a>
+                    <a className="font-sans font-medium text-xl text-gray-500 hover:text-primary">Sutra del Loto</a>
                   </Link>
                 </p>
 
@@ -64,7 +64,7 @@ export default function PostPage({ post }) {
                 />
               </div>
             </div>
-            <div className="py-20 px-10 md:px-20 container mx-auto max-w-[1000px]">
+            <div className="py-20 lg:py-32 px-8 container mx-auto max-w-[1000px] print:py-0">
               {paragraphs.map((p) => (
                 <ParagraphWithNotes content={p} notes={notesArray} key={p} />
               ))}
@@ -73,7 +73,7 @@ export default function PostPage({ post }) {
             {(highlightedPost?.acf?.acf_cenni_storici ||
               highlightedPost?.acf?.acf_note) && (
               <section className="bg-white">
-                <div className="container mx-auto max-w-[1000px] p-20">
+                <div className="container mx-auto max-w-[1000px] py-20 lg:py-32 px-8 ">
                   {highlightedPost?.acf?.acf_cenni_storici && (
                     <div id="cenni_storici">
                       <h3 className="text-xl md:text-3xl text-primary font-bold mt-4 mb-6">

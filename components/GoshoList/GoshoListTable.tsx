@@ -23,7 +23,7 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
 
   return (
     <>
-      <table className="mt-4 text-xl w-full table-auto bg-white rounded-xl border-collapse">
+      <table className="mt-4 text-lg w-full table-auto bg-white rounded-xl border-collapse">
         <thead className="text-left">
           <tr className="border-b-2 border-primary">
             <GoshoTableSortButton
@@ -67,20 +67,20 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
               })}
             >
               <td width="5" className="px-4 py-2">
-                <span className="mr-8 lg:mr-14">{post.number}.</span>{" "}
+                <span className="mr-8 lg:mr-14 font-medium">{post.number}.</span>{" "}
               </td>
               <td width="50%" className="px-4 py-2">
                 <Link href={`/rsnd/${post.slug}`}>
-                  <a className="flex hover:text-primary py-3">
+                  <a className="flex hover:text-primary py-3 font-medium">
                     <span
                       dangerouslySetInnerHTML={{ __html: post.title }}
                     ></span>
                   </a>
                 </Link>
               </td>
-              <td className="px-4 py-2">{post.recipient.join(", ")}</td>
-              <td className="px-4 py-2">{post.place}</td>
-              <td className="px-4 py-2">{post.date}</td>
+              <td className="px-4 py-2 font-medium">{post.recipient.join(", ")}</td>
+              <td className="px-4 py-2 font-medium">{post.place}</td>
+              <td className="px-4 py-2 font-medium">{post.date}</td>
             </tr>
           ))}
         </tbody>

@@ -12,17 +12,17 @@ const Note: React.FC<NoteProps> = ({ onClose, note, noteIndex }) => {
   return (
     <li
       id={`note-text-${noteIndex + 1}`}
-      className="relative rounded-2xl text-secondary bg-defaultBg pl-4 pr-8 py-4 mb-4"
+      className="relative rounded-3xl text-secondary bg-white pl-4 pr-12 py-4 mb-4 shadow-md"
     >
       <button
-        className="text-primary text-sm p-1 py-0 shadow-md rounded-xl bg-white absolute right-4 font-sans"
+        className="text-primary border border-grey-500 bg-defaultBg text-xs p-1 w-7 h-7 shadow rounded-xl absolute right-4 font-sans hover:shadow-inner"
         onClick={onClose}
       >
         X
       </button>
       <span
         dangerouslySetInnerHTML={{
-          __html: `${noteIndex + 1} ${note}`,
+          __html: `<span class="n-nota">${noteIndex + 1}</span>. ${note}`,
         }}
       />
     </li>

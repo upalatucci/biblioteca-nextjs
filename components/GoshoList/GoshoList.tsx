@@ -79,7 +79,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
         </form>
         {filteredGosho.length === 0 && (
           <div>
-            <div className="mt-4 mb-2 text-3xl">
+            <div className="mt-4 mb-2 text-xl">
               Nessun risultato per questo tipo di ricerca
             </div>
             <button className="font-sans text-primary" onClick={clearFilters}>

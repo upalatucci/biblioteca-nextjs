@@ -49,17 +49,17 @@ export default function PostPage({ post }) {
       <main>
         <div className="bg-defaultBg">
           <div className="">
-            <div className="bg-white rounded-xl shadow-md print:rounded-none print:shadow-none">
-              <div className="py-20 px-10 md:px-20 container mx-auto max-w-[1400px] print:py-0">
+            <div className="bg-white py-20 lg:py-32 px-8 rounded-xl shadow-md print:rounded-none print:shadow-none">
+              <div className="container mx-auto max-w-[1400px] print:py-0">
                 <h2
-                  className="text-2xl md:text-3xl container text-secondary font-bold"
+                  className="text-4xl md:text-3xl container text-secondary font-bold"
                   dangerouslySetInnerHTML={{
-                    __html: `${highlightedPost?.acf?.acf_numero} ${highlightedPost.title.rendered}`
+                    __html: `${highlightedPost?.acf?.acf_numero}. ${highlightedPost.title.rendered}`
                   }}
                 ></h2>
-                <p className="text-gray-400  pb-6">
+                <p className="text-gray-400 pb-14">
                   <Link href={rsndLink}>
-                    <a className="hover:text-primary">
+                    <a className="font-sans font-medium text-xl text-gray-500 hover:text-primary">
                       RSND, VOLUME {isFirstVolume ? "I" : "II"}
                     </a>
                   </Link>
@@ -75,11 +75,11 @@ export default function PostPage({ post }) {
               </div>
             </div>
 
-            <div className="py-20 px-10 md:px-20 container mx-auto max-w-[1000px] print:py-0">
+            <div className="py-20 lg:py-32 px-8 container mx-auto max-w-[1000px] print:py-0">
               {(highlightedPost?.acf?.acf_luogo ||
                 highlightedPost?.acf?.acf_data ||
                 highlightedPost?.acf?.acf_destinatario.length !== 0) && (
-                <p className="text-primary">
+                <p className="text-primary font-sans">
                   {highlightedPost?.acf?.acf_luogo},{" "}
                   {highlightedPost?.acf?.acf_data}. Indirizzata a{" "}
                   {highlightedPost?.acf?.acf_destinatario.join(", ")}.
@@ -93,7 +93,7 @@ export default function PostPage({ post }) {
             {(highlightedPost?.acf?.acf_cenni_storici ||
               highlightedPost?.acf?.acf_note) && (
               <section className="bg-white">
-                <div className="container mx-auto max-w-[1000px] p-20">
+                <div className="container mx-auto max-w-[1000px] py-20 lg:py-32 px-8">
                   {highlightedPost?.acf?.acf_cenni_storici && (
                     <div id="cenni_storici">
                       <h3 className="text-xl md:text-3xl text-primary font-bold mt-4 mb-6">

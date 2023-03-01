@@ -107,9 +107,9 @@ export default function RSND1() {
                         })}
                       >
                         <td width="5" className="px-4 py-2">
-                          <span className="mr-8 lg:mr-14">{post.number}</span>{" "}
+                          <span className="mr-8 lg:mr-14  font-medium">{post.number}</span>{" "}
                         </td>
-                        <td className="px-4 py-2">
+                        <td className="px-4 py-2  font-medium">
                           <Link href={`/sutra-del-loto/${post.slug}`}>
                             <a className="flex hover:text-primary py-3">
                               <span
