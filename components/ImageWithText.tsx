@@ -23,7 +23,7 @@ const ImageWithText: React.FC<BookType> = ({
   <div className="flex flex-1 justify-center mx-4 relative">
     <Link href={path}>
       <a>
-        <div className="image w-60 md:w-44 lg:w-60 xl:w-96 mx-auto z-10">
+        <div className="shadow-lg image w-60 md:w-44 lg:w-60 xl:w-96 mx-auto z-10">
           <Image
             src={image}
             alt={title}
@@ -39,9 +39,9 @@ const ImageWithText: React.FC<BookType> = ({
             "font-sans flex flex-col items-center justify-start m-6 md:px-4 md:py-8 text-center"
           }
         >
-          <h3 className="lg:text-lg font-bold mb-2">{title}</h3>
+          <h3 className="font-serif lg:text-2xl font-bold mb-2">{title}</h3>
           {description && (
-            <span className="bg-defaultBg px-6 py-2 rounded-full">
+            <span className="text-lg bg-defaultBg px-6 py-2 rounded-full">
               {description}
             </span>
           )}

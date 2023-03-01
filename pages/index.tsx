@@ -89,7 +89,8 @@ export default function Home() {
       <HomeNavbar />
 
       <main>
-        <section className="w-full flex justify-evenly bg-white shadow-md rounded-3xl pt-20 pb-10">
+        <section className="w-full bg-white shadow-md rounded-3xl py-20 lg:py-32 px-8">
+          <div className="max-w-[1400px] mx-auto flex justify-evenly">
           {isMobile ? (
             <AliceCarousel
               mouseTracking
@@ -103,10 +104,11 @@ export default function Home() {
           ) : (
             <>{books}</>
           )}
+          </div>
         </section>
 
-        <section className="font-sans px-4 flex flex-col py-20 items-center justify-center">
-          <h2 className="mt-4 mb-8 font-bold text-2xl sm:text-3xl md:text-4xl text-center">
+        <section className="font-sans flex flex-col py-20 lg:py-32 px-8 items-center justify-center">
+          <h2 className="font-serif mt-4 mb-8 font-bold text-2xl sm:text-3xl md:text-5xl text-center">
             Cosa vuoi approfondire oggi?
           </h2>
           <div className="w-full mt-4 mb-8">
@@ -135,7 +137,8 @@ export default function Home() {
           </Link> */}
         </section>
 
-        <section className="bg-white flex flex-col items-center lg:items-stretch md:flex-row md:justify-evenly gap-10 shadow-md rounded-3xl m-0 py-20 px-8">
+        <section className="bg-white shadow-md rounded-3xl m-0 py-20 lg:py-32 px-8">
+        <div className="max-w-[1400px] mx-auto flex flex-col items-center lg:items-stretch md:flex-row md:justify-evenly gap-10">
           <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
             <div className="z-0 bg-defaultBg rounded-xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
             <Link href="/">
@@ -153,8 +156,8 @@ export default function Home() {
                     />
                   </div>
                   <div>
-                    <div className="font-sans flex flex-col justify-end text-left pt-6 pb-8 ">
-                      <h3 className="z-10 lg:text-lg font-bold">
+                    <div className="font-serif flex flex-col justify-end text-left pt-6 pb-8 ">
+                      <h3 className="font-serif z-10 lg:text-lg font-bold">
                         Sfoglia il glossario
                       </h3>
                       <span className="z-10">
@@ -185,7 +188,7 @@ export default function Home() {
                     />
                   </div>
                   <div>
-                    <div className="font-sans flex flex-col justify-end text-left pt-6 pb-8 ">
+                    <div className="font-serif flex flex-col justify-end text-left pt-6 pb-8 ">
                       <h3 className="z-10 lg:text-lg font-bold">
                         Ascolta la Raccolta degli Scritti di Nichiren Daishonin
                       </h3>
@@ -198,14 +201,15 @@ export default function Home() {
               </a>
             </Link>
           </div>
+          </div>
         </section>
 
-        <section className="py-14">
-          <div className="font-sans container px-4 mx-auto flex flex-col items-center justify-center my-16">
-            <h2 className="font-bold my-8  text-3xl md:text-4xl text-center">
+        <section className="py-20 lg:py-32 px-8">
+          <div className="font container mx-auto flex flex-col items-center justify-center">
+            <h2 className="font-bold my-8 text-3xl md:text-5xl text-center">
               Che cos&apos;è la Nichiren Library
             </h2>
-            <p className="text-center mx-4 md:mx-32 lg:mx-64 mb-12">
+            <p className="text-2xl font-serif text-center mx-4 md:mx-32 lg:mx-64">
               Praesent vel urna turpis. Aenean ultrices pharetra justo quis
               ultricies. Vestibulum imperdiet aliquam interdum. Nunc laoreet
               eget metus vitae semper. Class aptent taciti sociosqu ad litora
@@ -216,9 +220,7 @@ export default function Home() {
               libero ullamcorper, mollis massa vel, malesuada elit. Nulla
               vulputate ex a ligula mollis pharetra.
             </p>
-            <button className="btn border border-secondary text-secondary hover:text-white hover:bg-secondary rounded-3xl py-2 px-16">
-              Approfondisci
-            </button>
+            
           </div>
         </section>
         <Footer />

@@ -12,7 +12,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Bitter", serif;
-  --color-text: #2b4261;
+  --color-text: #000000;
   --primary-color: #00a2c3;
   --secondary-color: #2b4261;
   --background: #f8f8f8;
@@ -38,6 +38,9 @@ body {
   scroll-behavior: smooth;
 }
 
+h1, h2, h3 {
+  color: var(--secondary-color);
+}
 a {
   color: inherit;
   text-decoration: none;

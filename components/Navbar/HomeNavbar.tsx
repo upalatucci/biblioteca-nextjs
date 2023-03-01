@@ -22,15 +22,17 @@ const HomeNavbar = () => {
   };
 
   return (
-    <>
+    <header className="px-8 pb-14">      
+      <div className="container mx-auto text-center">
       <Link href="/" passHref>
-        <a>
+        <a className="inline-block">
           <h1 className="hidden lg:block text-center font-bold text-3xl md:text-5xl mb-8 mt-14">
             NICHIREN Library
           </h1>
         </a>
       </Link>
-      <nav className="container max-w-[1200px] mx-auto px-8 lg:px-8 flex items-center justify-between my-14 relative">
+      </div>
+      <nav className="container max-w-[1400px] mx-auto flex items-center justify-between mt-14 relative">
         <span className="lg:hidden"></span>
         <Link href="/" passHref>
           <a>
@@ -79,7 +81,7 @@ const HomeNavbar = () => {
           </div>
         )}
 
-        <div className="hidden lg:flex items-center justify-start gap-10 xl:gap-20 w-full">
+        <div className="text-black hidden lg:flex items-center justify-start gap-10 w-full">
           <NavbarItem
             href="/rsnd-vol1"
             upText="Raccolta degli Scritti di"
@@ -98,19 +100,19 @@ const HomeNavbar = () => {
         </div>
         <span className="hidden lg:flex gap-10">
           <Link href="/glossario" passHref>
-            <a className="btn bg-customYellow hover:bg-customYellowHover text-white px-8 h-10 block border rounded-3xl font-bold font-sans flex items-center">
-              <span>Glossario</span>
+            <a className="btn bg-customYellow hover:bg-customYellowHover text-white text-xl px-8 h-10 block border rounded-3xl font-medium font-sans flex items-center">
+              <span>GLOSSARIO</span>
             </a>
           </Link>
 
           <Link href="/ricerca" passHref>
-            <a className="btn bg-primary hover:bg-primaryHover text-white px-8 h-10 block border rounded-3xl font-bold font-sans flex items-center">
+            <a className="btn bg-primary hover:bg-primaryHover text-white text-xl px-8 h-10 block border rounded-3xl font-medium font-sans flex items-center">
               <span>RICERCA</span>
             </a>
           </Link>
         </span>
       </nav>
-    </>
+    </header>
   );
 };
 

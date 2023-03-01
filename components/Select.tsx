@@ -156,7 +156,7 @@ const Select: React.FC<SelectProps> = ({
       {isOpen && (
         <div className="select-background" onClick={() => setOpen(false)}></div>
       )}
-      <div className="select-container">
+      <div className="select-container text-black text-lg font-sans">
         <button
           type="button"
           aria-haspopup="listbox"

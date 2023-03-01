@@ -17,11 +17,11 @@ const NavbarItem: React.FC<NavbarItemProps> = ({
   <Link href={href} passHref>
     <a>
       <span className="flex flex-col font-sans">
-        <span className="font-lg font-bold hover:text-primary">
-          {upText && <div className="text-sm">{upText}</div>}
+        <span className="font-serif text-xl font-medium hover:text-primary leading-4">
+          {upText && <div className="text-lg">{upText}</div>}
           {title}
         </span>
-        {downText && <span className="text-sm text-gray-400">{downText}</span>}
+        {downText && <span className="text-sm text-gray-500">{downText}</span>}
       </span>
     </a>
   </Link>

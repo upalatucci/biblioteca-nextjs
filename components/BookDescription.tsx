@@ -25,12 +25,12 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
   subtitle,
   baseSlug = "rsnd"
 }) => (
-  <section className="w-full bg-white rounded-xl shadow-md p-10 md:p-20 mb-20">
-    <div className="mx-auto max-w-6xl pb-10">
-      <h2 className="text-3xl font-bold">{title}</h2>
-      <p className="text-gray-400">{subtitle}</p>
+  <section className="w-full bg-white rounded-xl shadow-md py-20 lg:py-32 px-8">
+    <div className="mx-auto max-w-[1400px] pb-10">
+      <h2 className="text-4xl font-bold">{title}</h2>
+      <p className="font-sans font-medium text-xl text-gray-500">{subtitle}</p>
     </div>
-    <div className="mx-auto max-w-6xl bg-defaultBg rounded-xl shadow-md flex flex-col md:flex-row gap-4 p-10 mb-10">
+    <div className="mx-auto max-w-[1400px] bg-defaultBg rounded-xl shadow-md flex flex-col md:flex-row gap-4 p-10">
       <div className="index flex-1">
         <h3 className="text-2xl font-bold mb-4 text-primary">
           Materiale introduttivo
@@ -95,7 +95,7 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
                   >
                     <a
                       className={classNames({
-                        "text-gray-400": chapter.disabled,
+                        "text-gray-500": chapter.disabled,
                         "pointer-events-none": !chapter.slug
                       })}
                     >
