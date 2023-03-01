@@ -114,21 +114,24 @@ const Select: React.FC<SelectProps> = ({
 
   const handleListKeyDown = React.useCallback(
     (e) => {
-      e.preventDefault();
       switch (e.key) {
         case "Escape":
+          e.preventDefault();
           setOpen(false);
           break;
         case "Enter":
+          e.preventDefault();
           setOpen(!isOpen);
           break;
         case "ArrowUp":
+          e.preventDefault();
           const prevOption = options?.[indexSelectedOption - 1];
 
           if (prevOption)
             onChange(typeof prevOption === "string" ? prevOption : prevOption);
           break;
         case "ArrowDown":
+          e.preventDefault();
           const nextOption = options?.[indexSelectedOption + 1];
           if (nextOption) onChange(nextOption);
           break;
@@ -137,6 +140,7 @@ const Select: React.FC<SelectProps> = ({
       }
 
       if (/^[A-z]$/.test(e.key)) {
+        e.preventDefault();
         setSearchText((text) => text.concat(e.key));
       }
     },
@@ -187,7 +191,6 @@ const Select: React.FC<SelectProps> = ({
         <ul
           className={`options max-h-64 overflow-y-auto ${isOpen ? "show" : ""}`}
           role="listbox"
-          tabIndex={-1}
           onKeyDown={handleListKeyDown}
           aria-activedescendant={options[indexSelectedOption]}
           ref={listRef}

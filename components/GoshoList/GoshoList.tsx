@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEventHandler } from "react";
 import SearchInput from "../SearchInput";
 import Select from "../Select";
 import GoshoListTable from "./GoshoListTable";
@@ -38,13 +38,20 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
     onSortChange(undefined, true);
   };
 
+  const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <section className="pb-10 p-10 md:p-20" id="gosho-list">
       <div className="container py-8 min-h-[50vh] mx-auto max-w-6xl">
         <h2 className="text-4xl md:text-3xl text-primary font-bold mb-8">
           Scritti
         </h2>
-        <form className="flex items-stretch flex-col lg:flex-row lg:items-center justify-between flex-wrap gap-4 pb-4">
+        <form
+          className="flex items-stretch flex-col lg:flex-row lg:items-center justify-between flex-wrap gap-4 pb-4"
+          onSubmit={onSubmit}
+        >
           <SearchInput
             value={titleFilter}
             onChange={onSearchInput}
