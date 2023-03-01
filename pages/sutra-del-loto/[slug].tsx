@@ -21,6 +21,7 @@ import { FontSizeContext } from "contexts/FontSizeContext";
 import { useContext } from "react";
 import { PrismaClient } from "@prisma/client";
 import { unifyAcfMetadata } from "lib/db";
+import useAudioWithMarks from "@hooks/useAudioWithMarks";
 const prisma = new PrismaClient();
 
 export default function PostPage({ post }) {
@@ -28,6 +29,7 @@ export default function PostPage({ post }) {
   const { fontSize } = useContext(FontSizeContext);
 
   const [highlightedPost] = useHighlightedPost(post);
+  const { audioRef, currentMark } = useAudioWithMarks(post?.slug);
 
   if (router.isFallback) {
     return <ArticleLoading originalPost={post} />;
@@ -82,16 +84,20 @@ export default function PostPage({ post }) {
                   withNotes={!!highlightedPost?.acf?.acf_note}
                   image={sutraDelLoto}
                   imageLink="/sutra-del-loto"
+                  postSlug={post.slug}
+                  ref={audioRef}
                 />
               </div>
             </div>
             <div className="py-20 lg:py-32 px-8 container mx-auto max-w-[1000px] print:py-0">
-              {paragraphs.map((p) => (
+              {paragraphs.map((p, index) => (
                 <ParagraphWithNotes
                   content={p}
                   notes={notesArray}
                   key={p}
                   fontSize={fontSize}
+                  id={index}
+                  currentMarkValue={currentMark?.value}
                 />
               ))}
             </div>

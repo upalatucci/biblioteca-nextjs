@@ -6,7 +6,8 @@
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
       "@hooks/*": ["hooks/*"],
-      "@public/*": ["public/*"]
+      "@public/*": ["public/*"],
+      "@audio/*": ["audio/*"]
     },
     "target": "es2021",
     "lib": ["dom", "dom.iterable", "esnext", "ES2021"],

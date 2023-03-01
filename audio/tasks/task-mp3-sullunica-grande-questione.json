@@ -1,0 +1,14 @@
+{
+    "SynthesisTask": {
+        "Engine": "neural",
+        "TaskId": "b070719e-2fee-4bab-887e-34a76e9d115f",
+        "TaskStatus": "scheduled",
+        "OutputUri": "https://s3.eu-west-1.amazonaws.com/biblioteca-audio/b070719e-2fee-4bab-887e-34a76e9d115f.mp3",
+        "CreationTime": "2023-03-30T18:59:56.548000+02:00",
+        "RequestCharacters": 501,
+        "OutputFormat": "mp3",
+        "TextType": "ssml",
+        "VoiceId": "Adriano",
+        "LanguageCode": "it-IT"
+    }
+}

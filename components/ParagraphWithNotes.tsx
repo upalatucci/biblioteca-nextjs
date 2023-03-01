@@ -18,9 +18,9 @@ const Note: React.FC<NoteProps> = ({ onClose, note, noteIndex }) => {
         className="absolute right-4 shadow-md hover:shadow-none rounded-3xl w-6"
         onClick={onClose}
       >
-        <img className="w-full" src="/icons/ico-close.svg"/>
+        <img className="w-full" src="/icons/ico-close.svg" />
       </button>
-      
+
       <span
         dangerouslySetInnerHTML={{
           __html: `
@@ -42,15 +42,21 @@ type ParagraphWithNotesProps = {
   content: string;
   notes: string[];
   fontSize?: string;
+  id: number;
+  currentMarkValue: string;
 };
 
 const ParagraphWithNotes: React.FC<ParagraphWithNotesProps> = ({
   notes,
   content,
   fontSize,
+  id,
+  currentMarkValue,
 }) => {
   const [notesToShow, setNotesToShow] = React.useState<number[]>([]);
   const notesRef = useRef<HTMLDivElement>();
+
+  const paragraphId = `paragraph-${id + 1}`;
 
   const onNoteClick = (e) => {
     const idNote = Number(e.target.id.replace("ref-", ""));
@@ -75,7 +81,10 @@ const ParagraphWithNotes: React.FC<ParagraphWithNotesProps> = ({
       <div
         dangerouslySetInnerHTML={{ __html: content }}
         onClick={onNoteClick}
-        className={classNames("font-medium my-4", fontSize)}
+        className={classNames("font-medium my-4", fontSize, {
+          "bg-customYellow": paragraphId === currentMarkValue,
+        })}
+        data-id={paragraphId}
       />
       <div
         className={classNames("font-sans", { "my-4": notesToShow.length })}

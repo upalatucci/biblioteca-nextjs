@@ -29,6 +29,7 @@ import { FontSizeContext } from "contexts/FontSizeContext";
 import { RSND_APPENDICE_CAT_ID } from "@utils/constants";
 import { PrismaClient } from "@prisma/client";
 import { unifyAcfMetadata } from "lib/db";
+import useAudioWithMarks from "@hooks/useAudioWithMarks";
 const prisma = new PrismaClient();
 
 const ItalianListFormatted = new Intl.ListFormat("it", {
@@ -41,7 +42,9 @@ export default function PostPage({ post }) {
   const { fontSize } = useContext(FontSizeContext);
   const [highlightedPost] = useHighlightedPost(post);
 
-  if (router.isFallback) {
+  const { audioRef, currentMark } = useAudioWithMarks(post?.slug);
+
+  if (router.isFallback || !router.isReady) {
     return <ArticleLoading originalPost={post} />;
   }
 
@@ -108,6 +111,8 @@ export default function PostPage({ post }) {
                   withNotes={!!highlightedPost?.acf?.acf_note}
                   image={isFirstVolume ? raccoltaVol1 : raccoltaVol2}
                   imageLink={rsndLink}
+                  postSlug={post.slug}
+                  ref={audioRef}
                 />
               </div>
             </div>
@@ -127,12 +132,14 @@ export default function PostPage({ post }) {
                     .
                   </p>
                 )}
-              {paragraphs.map((p) => (
+              {paragraphs.map((p, index) => (
                 <ParagraphWithNotes
                   content={p}
                   notes={notesArray}
                   key={p}
                   fontSize={fontSize}
+                  id={index}
+                  currentMarkValue={currentMark?.value}
                 />
               ))}
             </div>

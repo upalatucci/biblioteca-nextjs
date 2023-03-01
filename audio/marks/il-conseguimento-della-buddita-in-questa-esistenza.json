@@ -1,0 +1,86 @@
+[
+  {
+    "time": 125,
+    "type": "ssml",
+    "start": 7,
+    "end": 27,
+    "value": "title"
+  },
+  {
+    "time": 3137,
+    "type": "ssml",
+    "start": 84,
+    "end": 111,
+    "value": "paragraph-1"
+  },
+  {
+    "time": 28202,
+    "type": "ssml",
+    "start": 535,
+    "end": 562,
+    "value": "paragraph-2"
+  },
+  {
+    "time": 53097,
+    "type": "ssml",
+    "start": 977,
+    "end": 1004,
+    "value": "paragraph-3"
+  },
+  {
+    "time": 131587,
+    "type": "ssml",
+    "start": 2305,
+    "end": 2332,
+    "value": "paragraph-4"
+  },
+  {
+    "time": 175049,
+    "type": "ssml",
+    "start": 3052,
+    "end": 3079,
+    "value": "paragraph-5"
+  },
+  {
+    "time": 220557,
+    "type": "ssml",
+    "start": 3822,
+    "end": 3849,
+    "value": "paragraph-6"
+  },
+  {
+    "time": 259567,
+    "type": "ssml",
+    "start": 4475,
+    "end": 4502,
+    "value": "paragraph-7"
+  },
+  {
+    "time": 284919,
+    "type": "ssml",
+    "start": 4914,
+    "end": 4941,
+    "value": "paragraph-8"
+  },
+  {
+    "time": 308652,
+    "type": "ssml",
+    "start": 5303,
+    "end": 5330,
+    "value": "paragraph-9"
+  },
+  {
+    "time": 310682,
+    "type": "ssml",
+    "start": 5358,
+    "end": 5386,
+    "value": "paragraph-10"
+  },
+  {
+    "time": 318779,
+    "type": "ssml",
+    "start": 5504,
+    "end": 5532,
+    "value": "paragraph-11"
+  }
+]
