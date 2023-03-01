@@ -18,12 +18,12 @@ const ImageWithText: React.FC<BookType> = ({
   image,
   width,
   height,
-  path
+  path,
 }) => (
   <div className="flex flex-1 justify-center mx-4 relative">
     <Link href={path}>
       <a>
-        <div className="shadow-lg image w-60 md:w-44 lg:w-60 xl:w-96 mx-auto z-10">
+        <div className="image w-60 md:w-44 lg:w-60 mx-auto z-10 rounded-3xl shadow-xl">
           <Image
             src={image}
             alt={title}
@@ -31,7 +31,7 @@ const ImageWithText: React.FC<BookType> = ({
             width={width}
             height={height}
             objectFit="cover"
-            className="pointer-events-none rounded-xl"
+            className="pointer-events-none rounded-3xl"
           />
         </div>
         <div

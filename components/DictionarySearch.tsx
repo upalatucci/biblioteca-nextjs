@@ -17,6 +17,7 @@ type DictionaryItem = {
 type DictionarySearchProps = {
   filterText: string;
   letter: string;
+  clearFilters: () => void;
 };
 
 const getCategoryFromBook = (book: string) => {
@@ -36,6 +37,7 @@ const selectedTabClass =
 const DictionarySearch: React.FC<DictionarySearchProps> = ({
   letter,
   filterText,
+  clearFilters,
 }) => {
   const router = useRouter();
 
@@ -111,6 +113,8 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
               aria-current="page"
               className={classNames("inline-block p-4 h-full", {
                 [selectedTabClass]: filterCategory === GLOSSARY_RSND_CAT_ID,
+                "text-gray-400 pointer-events-none cursor-not-allowed":
+                  rsndResults === 0,
               })}
             >
               <span className="hidden md:inline">
@@ -128,6 +132,8 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
               aria-current="page"
               className={classNames("inline-block p-4 h-full", {
                 [selectedTabClass]: filterCategory === GLOSSARY_SDL_CAT_ID,
+                "text-gray-400 pointer-events-none cursor-not-allowed":
+                  sdlResults === 0,
               })}
             >
               <span className="hidden md:inline">Il Sutra del Loto</span>
@@ -138,33 +144,51 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
         </li>
       </ul>
       <div className="bg-white border-t border-gray-200 dark:border-gray-700 py-20">
-        <ul className="divide-y-2 divide-dashed mb-10 mx-auto md:max-w-6xl border-b border-gray-200 dark:border-gray-700 bg-defaultBg rounded-xl shadow-md  px-4 md:px-10 py-8">
-          {dictionaryToShow.map((glossarioRicerca) => (
-            <li
-              className="py-4"
-              key={`${glossarioRicerca.title}-${glossarioRicerca.cat?.[0]}`}
-            >
-              <button className="text-left">
-                <div
-                  className="font-bold text-lg"
-                  dangerouslySetInnerHTML={{ __html: glossarioRicerca.title }}
-                ></div>
-                <div className="mb-2">
-                  {glossarioRicerca.cat.includes(GLOSSARY_RSND_CAT_ID)
-                    ? "Raccolta degli scritti di Nichiren"
-                    : "Il Sutra del Loto"}
-                </div>
-              </button>
-              <div
-                dangerouslySetInnerHTML={{ __html: glossarioRicerca.content }}
-              ></div>
-            </li>
-          ))}
-        </ul>
-        <Pagination
-          totalResults={glossarioFilteredByCategory.length}
-          anchorHash="risultati"
-        />
+        {dictionaryToShow.length === 0 && (
+          <div className="mb-10 mx-auto md:max-w-5xl px-4 md:px-10 py-8">
+            <div className="font-bold text-xl ">
+              Non abbiamo trovato nessun risultato
+            </div>
+            <button className="font-sans text-primary" onClick={clearFilters}>
+              Rimuovi filtri
+            </button>
+          </div>
+        )}
+        {dictionaryToShow.length !== 0 && (
+          <>
+            <ul className="divide-y-2 divide-dashed mb-10 mx-auto md:max-w-6xl border-b border-gray-200 dark:border-gray-700 bg-defaultBg rounded-xl shadow-md  px-4 md:px-10 py-8">
+              {dictionaryToShow.map((glossarioRicerca) => (
+                <li
+                  className="py-4"
+                  key={`${glossarioRicerca.title}-${glossarioRicerca.cat?.[0]}`}
+                >
+                  <button className="text-left">
+                    <div
+                      className="font-bold text-lg"
+                      dangerouslySetInnerHTML={{
+                        __html: glossarioRicerca.title,
+                      }}
+                    ></div>
+                    <div className="mb-2">
+                      {glossarioRicerca.cat.includes(GLOSSARY_RSND_CAT_ID)
+                        ? "Raccolta degli scritti di Nichiren"
+                        : "Il Sutra del Loto"}
+                    </div>
+                  </button>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: glossarioRicerca.content,
+                    }}
+                  ></div>
+                </li>
+              ))}
+            </ul>
+            <Pagination
+              totalResults={glossarioFilteredByCategory.length}
+              anchorHash="risultati"
+            />
+          </>
+        )}
       </div>
     </div>
   );

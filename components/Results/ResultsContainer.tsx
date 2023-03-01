@@ -12,9 +12,13 @@ import { removeBook, removeRSNDParams } from "./utils";
 import TabFilters from "./TabFilters";
 
 const NoResults = () => (
-  <h2 className="text-3xl md:text-4xl px-4 font-bold">
-    Spiacenti nessun risultato trovato
-  </h2>
+  <div className="bg-white shadow-md rounded-xl">
+    <div className="px-8 md:px-20 xl:px-0 md:max-w-6xl mx-auto py-20">
+      <h2 className="text-3xl md:text-4xl px-4 font-bold">
+        Spiacenti nessun risultato trovato
+      </h2>
+    </div>
+  </div>
 );
 
 const removeParams = (routerPath: string, book: string) => {
@@ -22,15 +26,19 @@ const removeParams = (routerPath: string, book: string) => {
 };
 
 const NoResultsForThatBook = ({ router }) => (
-  <div className="my-4">
-    <h3 className="text-lg px-4 font-bold">
-      Spiacenti nessun risultato per questa fonte:{" "}
-      {MAP_BOOK_TO_HUMAN_READABLE[router?.query?.book as string] ||
-        router?.query?.book}
-    </h3>
-    <Link href={removeParams(router.asPath, router?.query?.book as string)}>
-      <a className=" px-4">Prova a cercare su tutte le fonti</a>
-    </Link>
+  <div className="bg-white shadow-md rounded-xl">
+    <div className="px-8 md:px-20 xl:px-0 md:max-w-6xl mx-auto py-20">
+      <div className="my-4">
+        <h3 className="text-lg px-4 font-bold">
+          Spiacenti nessun risultato per questa fonte:{" "}
+          {MAP_BOOK_TO_HUMAN_READABLE[router?.query?.book as string] ||
+            router?.query?.book}
+        </h3>
+        <Link href={removeParams(router.asPath, router?.query?.book as string)}>
+          <a className=" px-4">Prova a cercare su tutte le fonti</a>
+        </Link>
+      </div>
+    </div>
   </div>
 );
 
