@@ -18,10 +18,12 @@ import PostMenu from "@components/PostMenu";
 import sutraDelLoto from "@public/sutra-del-loto.jpg";
 import Link from "next/link";
 import { SDL_INTRO_CAT_ID } from "@utils/constants";
+import { FontSizeContext } from "contexts/FontSizeContext";
+import { useContext } from "react";
 
 export default function PostPage({ post }) {
   const router = useRouter();
-  
+  const { fontSize } = useContext(FontSizeContext);
 
   const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
 
@@ -76,7 +78,12 @@ export default function PostPage({ post }) {
             </div>
             <div className="py-20 lg:py-32 px-8 container mx-auto max-w-[1000px] print:py-0">
               {paragraphs.map((p) => (
-                <ParagraphWithNotes content={p} notes={notesArray} key={p} />
+                <ParagraphWithNotes
+                  content={p}
+                  notes={notesArray}
+                  key={p}
+                  fontSize={fontSize}
+                />
               ))}
             </div>
 
@@ -89,7 +96,8 @@ export default function PostPage({ post }) {
                       <h3 className="text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
                         Cenni Storici
                       </h3>
-                      <div className="text-lg"
+                      <div
+                        className={fontSize}
                         dangerouslySetInnerHTML={{
                           __html: highlightedPost.acf.acf_cenni_storici
                             ?.replace("CENNI STORICI – ", "")
@@ -104,7 +112,8 @@ export default function PostPage({ post }) {
                       <h3 className="text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
                         Note
                       </h3>
-                      <div className="text-lg"
+                      <div
+                        className={fontSize}
                         dangerouslySetInnerHTML={{
                           __html: highlightedPost.acf.acf_note,
                         }}

@@ -75,7 +75,7 @@ const ParagraphWithNotes: React.FC<ParagraphWithNotesProps> = ({
       <p
         dangerouslySetInnerHTML={{ __html: content }}
         onClick={onNoteClick}
-        className={classNames("my-4 text-lg", fontSize)}
+        className={classNames("my-4", fontSize)}
       />
       <div
         className={classNames("font-sans", { "my-4": notesToShow.length })}
