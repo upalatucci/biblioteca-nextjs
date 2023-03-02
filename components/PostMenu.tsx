@@ -86,13 +86,13 @@ const PostMenu: React.FC<PostMenuProps> = ({
       )}
       <div className="gap-10 p-10 w-full text-md mb-4 rounded-3xl shadow-md bg-defaultBg flex items-center justify-start">
         {image && (
-          <div>
-            <Link href={imageLink ?? "#"}>
-              <a>
+          <Link href={imageLink ?? "#"}>
+            <a>
+              <div className="image-post-menu">
                 <Image src={image} alt="image" width={100} height={140} />
-              </a>
-            </Link>
-          </div>
+              </div>
+            </a>
+          </Link>
         )}
         <ul className="flex items-center justify-start gap-10 flex-wrap w-full">
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">

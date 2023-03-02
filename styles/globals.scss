@@ -188,3 +188,13 @@ mark {
   scroll-margin-top: 100px;
   background-color: #fbfdba;
 }
+
+.image-post-menu {
+  span {
+    overflow: visible !important;
+  }
+  img {
+    box-shadow: 0px 11px 17px rgb(0 0 0 / 10%);
+    border-radius: var(--border-radius-sm);
+  }
+}
