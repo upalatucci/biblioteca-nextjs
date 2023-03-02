@@ -46,7 +46,7 @@ export default function PostPage({ post }) {
 
   const rsndLink = `/rsnd-vol${isFirstVolume ? "1" : "2"}`;
 
-  const withNumber =
+  const isMainBookContent =
     highlightedPost?.acf?.acf_numero &&
     !highlightedPost?.cat_rsnd.find((category) =>
       [
@@ -73,7 +73,9 @@ export default function PostPage({ post }) {
                   className="text-4xl md:text-3xl container text-secondary font-bold print:mb-4"
                   dangerouslySetInnerHTML={{
                     __html: `${
-                      withNumber ? `${highlightedPost?.acf?.acf_numero}. ` : ""
+                      isMainBookContent
+                        ? `${highlightedPost?.acf?.acf_numero}. `
+                        : ""
                     } ${highlightedPost.title.rendered}`,
                   }}
                 ></h2>
@@ -96,15 +98,16 @@ export default function PostPage({ post }) {
             </div>
 
             <div className="py-20 lg:py-32 px-8 container mx-auto max-w-[1000px] print:py-0">
-              {(highlightedPost?.acf?.acf_luogo ||
-                highlightedPost?.acf?.acf_data ||
-                highlightedPost?.acf?.acf_destinatario.length !== 0) && (
-                <p className="text-primary font-sans text-lg">
-                  {highlightedPost?.acf?.acf_luogo},{" "}
-                  {highlightedPost?.acf?.acf_data}. Indirizzata a{" "}
-                  {highlightedPost?.acf?.acf_destinatario.join(", ")}.
-                </p>
-              )}
+              {isMainBookContent &&
+                (highlightedPost?.acf?.acf_luogo ||
+                  highlightedPost?.acf?.acf_data ||
+                  highlightedPost?.acf?.acf_destinatario.length !== 0) && (
+                  <p className="text-primary font-sans text-lg">
+                    {highlightedPost?.acf?.acf_luogo},{" "}
+                    {highlightedPost?.acf?.acf_data}. Indirizzata a{" "}
+                    {highlightedPost?.acf?.acf_destinatario.join(", ")}.
+                  </p>
+                )}
               {paragraphs.map((p) => (
                 <ParagraphWithNotes
                   content={p}
