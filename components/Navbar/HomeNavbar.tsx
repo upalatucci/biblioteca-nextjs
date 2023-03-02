@@ -42,7 +42,7 @@ const HomeNavbar = () => {
         <div className="container mx-auto text-center">
           <Link href="/" passHref>
             <a className="inline-block">
-              <h1 className="hidden lg:block text-center font-bold text-3xl md:text-5xl mb-8 mt-14">
+              <h1 className="hidden lg:block text-center font-bold text-3xl md:text-5xl mb-8 mt-14 print:mt-0">
                 NICHIREN Library
               </h1>
             </a>

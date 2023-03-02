@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
           <button
             className={classNames(
-              "rounded-full shadow-lg z-10 fixed items-center justify-center w-10 h-10 bottom-10 right-10 bg-defaultBg hover:scale-110 flex scale-0",
+              "rounded-full shadow-lg z-10 fixed items-center justify-center w-10 h-10 bottom-10 right-10 bg-defaultBg hover:scale-110 flex scale-0 print:hidden",
               { "scale-100": showArrow }
             )}
             onClick={() => window.scrollTo(0, 0)}
