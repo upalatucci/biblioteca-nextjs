@@ -22,16 +22,23 @@ const HomeNavbar = () => {
   };
 
   return (
-    <header className="pb-14"> 
+    <header className="pb-14">
       <div className="top-bar bg-neutral-800 px-8 py-2">
         <div className="container max-w-[1406px] mx-auto ">
-          <a href="https://www.sgi-italia.org" target="_blank" rel="noreferrer">
-            <img className="w-7 h-7 inline-block mr-2" src="/icons/ibisg.svg"/>
-            <span className="text-white">Istituto Buddista Italiano Soka Gakkai</span>
+          <a
+            href="https://www.sgi-italia.org"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center"
+          >
+            <img className="w-7 h-7 inline-block mr-2" src="/icons/ibisg.svg" />
+            <span className="text-white">
+              Istituto Buddista Italiano Soka Gakkai
+            </span>
           </a>
         </div>
-      </div>  
-      <div className="px-8">   
+      </div>
+      <div className="px-8">
         <div className="container mx-auto text-center">
           <Link href="/" passHref>
             <a className="inline-block">
@@ -40,7 +47,6 @@ const HomeNavbar = () => {
               </h1>
             </a>
           </Link>
-          
         </div>
         <nav className="container max-w-[1400px] mx-auto flex items-center justify-between mt-14 relative">
           <span className="lg:hidden"></span>
@@ -55,7 +61,7 @@ const HomeNavbar = () => {
             className={classNames(
               "mobileMenu block relative lg:hidden w-12 h-10",
               {
-                open: [SHOW, SHOWING].includes(mobileMenuOpen)
+                open: [SHOW, SHOWING].includes(mobileMenuOpen),
               }
             )}
             onClick={closeMobileMenu}
