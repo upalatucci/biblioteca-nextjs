@@ -12,19 +12,26 @@ const Note: React.FC<NoteProps> = ({ onClose, note, noteIndex }) => {
   return (
     <li
       id={`note-text-${noteIndex + 1}`}
-      className="text-lg relative rounded-3xl text-secondary bg-white pl-4 pr-12 py-4 mb-4 shadow-md pr-10"
+      className="text-lg relative rounded-3xl text-secondary bg-white pl-4 py-4 mb-4 shadow-md pr-10"
     >
-      
       <button
         className="absolute right-4 shadow-md hover:shadow-none rounded-3xl w-6"
         onClick={onClose}
       >
-        <img className="w-full" src="/icons/ico-close.svg"/>
+        <img className="w-full" src="/icons/ico-close.svg" />
       </button>
-      
+
       <span
         dangerouslySetInnerHTML={{
-          __html: note,
+          __html: `
+          <div class='flex gap-2'>
+            <span class="n-nota">
+              ${noteIndex + 1}. 
+            </span> 
+            <span>
+            ${note.replace(/\w+\. <a.*?<\/a>/g, "")}
+            </span>
+          </div>`,
         }}
       />
     </li>
