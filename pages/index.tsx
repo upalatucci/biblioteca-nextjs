@@ -15,6 +15,7 @@ import Footer from "@components/Footer";
 import ImageWithText from "@components/ImageWithText";
 import Image from "next/image";
 import Link from "next/link";
+import classNames from "classnames";
 
 const responsive = {
   0: { items: 1.1 },
@@ -89,21 +90,26 @@ export default function Home() {
       <HomeNavbar />
 
       <main>
-        <section className="w-full bg-white shadow-md rounded-3xl py-20 lg:py-32 px-8">
-          <div className="max-w-[1400px] mx-auto flex justify-evenly">
-          {isMobile ? (
-            <AliceCarousel
-              mouseTracking
-              items={books}
-              responsive={responsive}
-              paddingLeft={30}
-              paddingRight={30}
-              disableButtonsControls
-              disableDotsControls
-            />
-          ) : (
-            <>{books}</>
+        <section
+          className={classNames(
+            "w-full bg-white shadow-md rounded-3xl py-20 lg:py-32 ",
+            { "px-8": !isMobile }
           )}
+        >
+          <div className="max-w-[1400px] mx-auto flex justify-evenly">
+            {isMobile ? (
+              <AliceCarousel
+                mouseTracking
+                items={books}
+                responsive={responsive}
+                paddingLeft={10}
+                paddingRight={10}
+                disableButtonsControls
+                disableDotsControls
+              />
+            ) : (
+              <>{books}</>
+            )}
           </div>
         </section>
 
@@ -138,69 +144,70 @@ export default function Home() {
         </section>
 
         <section className="bg-white shadow-md rounded-3xl m-0 py-20 lg:py-32 px-8">
-        <div className="max-w-[1400px] mx-auto flex flex-col items-center lg:items-stretch md:flex-row md:justify-evenly gap-10">
-          <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
-            <div className="z-0 bg-defaultBg rounded-xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
-            <Link href="/">
-              <a>
-                <div className="z-10">
-                  <div className="">
-                    <Image
-                      src={sfogliaGlossario}
-                      alt="Sfoglia il glossario"
-                      layout="responsive"
-                      width={800}
-                      height={700}
-                      objectFit="cover"
-                      className="pointer-events-none rounded-xl"
-                    />
-                  </div>
-                  <div>
-                    <div className="font-serif flex flex-col justify-end text-left pt-6 pb-8 ">
-                      <h3 className="font-serif z-10 lg:text-lg font-bold">
-                        Sfoglia il glossario
-                      </h3>
-                      <span className="z-10">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nam eu ipsum urna
-                      </span>
+          <div className="max-w-[1400px] mx-auto flex flex-col items-center lg:items-stretch md:flex-row md:justify-evenly gap-10">
+            <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
+              <div className="z-0 bg-defaultBg rounded-xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
+              <Link href="/">
+                <a>
+                  <div className="z-10">
+                    <div className="">
+                      <Image
+                        src={sfogliaGlossario}
+                        alt="Sfoglia il glossario"
+                        layout="responsive"
+                        width={800}
+                        height={700}
+                        objectFit="cover"
+                        className="pointer-events-none rounded-xl"
+                      />
+                    </div>
+                    <div>
+                      <div className="font-serif flex flex-col justify-end text-left pt-6 pb-8 ">
+                        <h3 className="font-serif z-10 lg:text-lg font-bold">
+                          Sfoglia il glossario
+                        </h3>
+                        <span className="z-10">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Nam eu ipsum urna
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            </Link>
-          </div>
+                </a>
+              </Link>
+            </div>
 
-          <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
-            <div className="z-0 bg-defaultBg rounded-xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
-            <Link href="/">
-              <a>
-                <div className="z-10">
-                  <div className="">
-                    <Image
-                      src={ascolta}
-                      alt="Ascolta la Raccolta degli Scritti di Nichiren Daishonin"
-                      layout="responsive"
-                      width={800}
-                      height={700}
-                      objectFit="cover"
-                      className="pointer-events-none rounded-xl"
-                    />
-                  </div>
-                  <div>
-                    <div className="font-serif flex flex-col justify-end text-left pt-6 pb-8 ">
-                      <h3 className="z-10 lg:text-lg font-bold">
-                        Ascolta la Raccolta degli Scritti di Nichiren Daishonin
-                      </h3>
-                      <span className="z-10">
-                        Nam eu ipsum urna. Aenean odio nulla,
-                      </span>
+            <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
+              <div className="z-0 bg-defaultBg rounded-xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
+              <Link href="/">
+                <a>
+                  <div className="z-10">
+                    <div className="">
+                      <Image
+                        src={ascolta}
+                        alt="Ascolta la Raccolta degli Scritti di Nichiren Daishonin"
+                        layout="responsive"
+                        width={800}
+                        height={700}
+                        objectFit="cover"
+                        className="pointer-events-none rounded-xl"
+                      />
+                    </div>
+                    <div>
+                      <div className="font-serif flex flex-col justify-end text-left pt-6 pb-8 ">
+                        <h3 className="z-10 lg:text-lg font-bold">
+                          Ascolta la Raccolta degli Scritti di Nichiren
+                          Daishonin
+                        </h3>
+                        <span className="z-10">
+                          Nam eu ipsum urna. Aenean odio nulla,
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            </Link>
-          </div>
+                </a>
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -220,7 +227,6 @@ export default function Home() {
               libero ullamcorper, mollis massa vel, malesuada elit. Nulla
               vulputate ex a ligula mollis pharetra.
             </p>
-            
           </div>
         </section>
         <Footer />
