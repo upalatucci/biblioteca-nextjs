@@ -15,13 +15,18 @@ import {
 } from "@utils/articleUtils";
 import useHighlightedPost from "@hooks/useHighlightedPost";
 import { removeHTMLTags } from "@utils/utils";
-import { RSND_VOL_1_CATEGORY_ID } from "@utils/constants";
+import {
+  RSND_INTRO_1_CAT_ID,
+  RSND_INTRO_2_CAT_ID,
+  RSND_VOL_1_CATEGORY_ID,
+} from "@utils/constants";
 
 import raccoltaVol1 from "@public/rsnd-I.svg";
 import raccoltaVol2 from "@public/rsnd-II.svg";
 import Link from "next/link";
 import { useContext } from "react";
 import { FontSizeContext } from "contexts/FontSizeContext";
+import { RSND_APPENDICE_CAT_ID } from "@utils/constants";
 
 export default function PostPage({ post }) {
   const router = useRouter();
@@ -41,6 +46,16 @@ export default function PostPage({ post }) {
 
   const rsndLink = `/rsnd-vol${isFirstVolume ? "1" : "2"}`;
 
+  const withNumber =
+    highlightedPost?.acf?.acf_numero &&
+    !highlightedPost?.cat_rsnd.find((category) =>
+      [
+        RSND_APPENDICE_CAT_ID,
+        RSND_INTRO_1_CAT_ID,
+        RSND_INTRO_2_CAT_ID,
+      ].includes(category)
+    );
+
   return (
     <>
       <Head>
@@ -57,7 +72,9 @@ export default function PostPage({ post }) {
                 <h2
                   className="text-4xl md:text-3xl container text-secondary font-bold"
                   dangerouslySetInnerHTML={{
-                    __html: `${highlightedPost?.acf?.acf_numero}. ${highlightedPost.title.rendered}`,
+                    __html: `${
+                      withNumber ? `${highlightedPost?.acf?.acf_numero}. ` : ""
+                    } ${highlightedPost.title.rendered}`,
                   }}
                 ></h2>
                 <p className="text-gray-400 pb-14">

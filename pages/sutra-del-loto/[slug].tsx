@@ -17,6 +17,7 @@ import { removeHTMLTags } from "@utils/utils";
 import PostMenu from "@components/PostMenu";
 import sutraDelLoto from "@public/sutra-del-loto.jpg";
 import Link from "next/link";
+import { SDL_INTRO_CAT_ID } from "@utils/constants";
 
 export default function PostPage({ post }) {
   const router = useRouter();
@@ -29,6 +30,10 @@ export default function PostPage({ post }) {
 
   const notesArray = extractNotes(highlightedPost?.acf?.acf_note);
   const paragraphs = extractParagraphs(highlightedPost.content.rendered);
+
+  const withNumber =
+    highlightedPost?.acf?.acf_numero &&
+    !highlightedPost?.cat_sdlpe?.includes(SDL_INTRO_CAT_ID);
 
   return (
     <>
@@ -46,7 +51,9 @@ export default function PostPage({ post }) {
                 <h2
                   className="text-4xl md:text-3xl container text-secondary font-bold"
                   dangerouslySetInnerHTML={{
-                    __html: `${highlightedPost?.acf?.acf_numero} ${highlightedPost.title.rendered}`,
+                    __html: `${
+                      withNumber ? `${highlightedPost?.acf?.acf_numero}. ` : ""
+                    } ${highlightedPost.title.rendered}`,
                   }}
                 ></h2>
                 <p className="text-gray-400 pb-14">

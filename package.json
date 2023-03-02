@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "generate-books": "node ./scripts/getGoshoCetegory.js && node ./scripts/getGlossario.js && node ./scripts/getSutra.js"
+    "generate-books": "node ./scripts/getGoshoCategory.js && node ./scripts/getGlossario.js && node ./scripts/getSutra.js"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.1.0",

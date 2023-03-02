@@ -30,3 +30,4 @@ export const RSND_INTRO_2_CAT_ID = 22;
 export const SDL_CAT_ID = 12;
 export const GLOSSARY_RSND_CAT_ID = 14;
 export const GLOSSARY_SDL_CAT_ID = 15;
+export const SDL_INTRO_CAT_ID = 18;
