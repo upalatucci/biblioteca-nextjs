@@ -43,7 +43,7 @@ const ResultTab: React.FC<ResultTabProps> = ({
 
   if (count === 0) {
     return (
-      <li className="mr-4">
+      <li className="mr-4 min-w-60 whitespace-pre">
         <a
           aria-current="page"
           className={classNames("inline-block p-4 cursor-not-allowed")}
