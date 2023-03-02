@@ -1,0 +1,29 @@
+.paragraph-content table {
+  table-layout: auto;
+  border-collapse: collapse;
+
+  th {
+    text-align: left;
+    padding-top: 0;
+    padding-bottom: 0.75rem;
+
+    padding: 1rem;
+  }
+
+  thead {
+    border-width: 1px;
+  }
+
+  tbody {
+    background-color: white;
+
+    td {
+      color: rgb(100 116 139);
+
+      padding-left: 2rem;
+      padding: 1rem;
+      border-color: rgb(241 245 249);
+      border-bottom-width: 1px;
+    }
+  }
+}
