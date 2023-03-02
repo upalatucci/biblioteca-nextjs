@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import {
   DEFAULT_REVALIDATE,
   extractNotes,
-  extractParagraphs
+  extractParagraphs,
 } from "@utils/articleUtils";
 import useHighlightedPost from "@hooks/useHighlightedPost";
 import { removeHTMLTags } from "@utils/utils";
@@ -46,12 +46,14 @@ export default function PostPage({ post }) {
                 <h2
                   className="text-4xl md:text-3xl container text-secondary font-bold"
                   dangerouslySetInnerHTML={{
-                    __html: `${highlightedPost?.acf?.acf_numero} ${highlightedPost.title.rendered}`
+                    __html: `${highlightedPost?.acf?.acf_numero} ${highlightedPost.title.rendered}`,
                   }}
                 ></h2>
                 <p className="text-gray-400 pb-14">
                   <Link href="/sutra-del-loto">
-                    <a className="font-sans font-medium text-xl text-gray-500 hover:text-primary">Sutra del Loto</a>
+                    <a className="font-sans font-medium text-xl text-gray-500 hover:text-primary">
+                      Sutra del Loto
+                    </a>
                   </Link>
                 </p>
 
@@ -83,7 +85,7 @@ export default function PostPage({ post }) {
                         dangerouslySetInnerHTML={{
                           __html: highlightedPost.acf.acf_cenni_storici
                             ?.replace("CENNI STORICI – ", "")
-                            .replace(/\n/g, "<br>")
+                            .replace(/\n/g, "<br>"),
                         }}
                       ></div>
                     </div>
@@ -96,7 +98,7 @@ export default function PostPage({ post }) {
                       </h3>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: highlightedPost.acf.acf_note
+                          __html: highlightedPost.acf.acf_note,
                         }}
                       ></div>
                     </div>
@@ -119,7 +121,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths,
     //this option below renders in the server (at request time) pages that were not rendered at build time
     //e.g when a new blogpost is added to the app
-    fallback: true
+    fallback: true,
   };
 };
 
@@ -131,8 +133,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return {
       props: {
-        post
-      }
+        post,
+      },
     };
   } catch (error) {
     console.log("Error fetching static props for", params.slug, error);

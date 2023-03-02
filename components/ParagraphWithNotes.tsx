@@ -32,11 +32,13 @@ const Note: React.FC<NoteProps> = ({ onClose, note, noteIndex }) => {
 type ParagraphWithNotesProps = {
   content: string;
   notes: string[];
+  fontSize?: string;
 };
 
 const ParagraphWithNotes: React.FC<ParagraphWithNotesProps> = ({
   notes,
   content,
+  fontSize,
 }) => {
   const [notesToShow, setNotesToShow] = React.useState<number[]>([]);
   const notesRef = useRef<HTMLDivElement>();
@@ -64,7 +66,7 @@ const ParagraphWithNotes: React.FC<ParagraphWithNotesProps> = ({
       <p
         dangerouslySetInnerHTML={{ __html: content }}
         onClick={onNoteClick}
-        className="my-4"
+        className={classNames("my-4", fontSize)}
       />
       <div
         className={classNames("font-sans", { "my-4": notesToShow.length })}

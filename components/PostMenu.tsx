@@ -1,4 +1,10 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import ShareModal from "./ShareModal";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +13,11 @@ import shareIcon from "@public/icons/ico-share.svg";
 import printIcon from "@public/icons/ico-print.svg";
 import notesIcon from "@public/icons/ico-notes.svg";
 import backgroundIcon from "@public/icons/ico-background.svg";
+import {
+  FontSizeContext,
+  FontSizeType,
+  fontSizes,
+} from "contexts/FontSizeContext";
 
 const nLi = new Array(10).fill(0).map((_, index) => index);
 
@@ -38,8 +49,9 @@ const PostMenu: React.FC<PostMenuProps> = ({
   withNotes = false,
   withBackgrounds = false,
   image,
-  imageLink
+  imageLink,
 }) => {
+  const { fontSize, setFontSize } = useContext(FontSizeContext);
   const [openShareModal, setOpenShareModal] = useState(false);
   const activeLiRef = useRef<HTMLLIElement>();
 
@@ -57,7 +69,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
       navigator
         .share({
           title: currentPostTitle,
-          url: window.location.href
+          url: window.location.href,
         })
         .then(() => console.log("Successful share"))
         .catch((error) => console.log("Error sharing", error));
@@ -65,6 +77,14 @@ const PostMenu: React.FC<PostMenuProps> = ({
       setOpenShareModal(true);
     }
   }, [currentPostTitle]);
+
+  const rotateFontSizes = useCallback(() => {
+    const currentFontIndex = fontSizes.findIndex((sizes) => sizes === fontSize);
+
+    const nextIndex = (currentFontIndex + 1) % fontSizes.length;
+
+    setFontSize(fontSizes[nextIndex] as FontSizeType);
+  }, [fontSize]);
 
   return (
     <div className="post-menu w-full print:hidden">
@@ -86,23 +106,37 @@ const PostMenu: React.FC<PostMenuProps> = ({
         )}
         <ul className="flex items-center justify-evenly flex-wrap w-full">
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
-              <button onClick={share} className="flex items-center gap-2 font-sans text-lg">
-                <Image src={shareIcon} alt="condividi" width={15} height={15} />{" "}
-                Condividi
-              </button>
+            <button
+              onClick={share}
+              className="flex items-center gap-2 font-sans text-lg"
+            >
+              <Image src={shareIcon} alt="condividi" width={15} height={15} />{" "}
+              Condividi
+            </button>
           </li>
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
-              <button
-                onClick={() => print()}
-                className="flex items-center gap-2 font-sans text-lg"
-              >
-                <Image src={printIcon} alt="stampa" width={15} height={15} />{" "}
-                Stampa
-              </button>
+            <button
+              onClick={() => print()}
+              className="flex items-center gap-2 font-sans text-lg"
+            >
+              <Image src={printIcon} alt="stampa" width={15} height={15} />{" "}
+              Stampa
+            </button>
           </li>
           {/* <li className="mx-2 lg:mx-0 py-1">Ascolta l&apos;audio</li> */}
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary font-sans text-lg">
-            <button>Dimensione del testo</button>
+            <button
+              className="flex items-center gap-2 font-sans text-lg"
+              onClick={rotateFontSizes}
+            >
+              <Image
+                src={textSizeIcon}
+                alt="condividi"
+                width={30}
+                height={30}
+              />{" "}
+              Dimensione del testo
+            </button>
           </li>
 
           {(withBackgrounds || withNotes) && (
@@ -111,23 +145,29 @@ const PostMenu: React.FC<PostMenuProps> = ({
 
           {withBackgrounds && (
             <li className="py-1 hover:text-primary">
-                <a href="#cenni_storici" className="flex items-center gap-3 font-sans text-lg">
-                  <Image
-                    src={backgroundIcon}
-                    alt="cenni storici"
-                    width={15}
-                    height={15}
-                  />{" "}
-                  <span>Vai ai cenni storici</span>
-                </a>
+              <a
+                href="#cenni_storici"
+                className="flex items-center gap-3 font-sans text-lg"
+              >
+                <Image
+                  src={backgroundIcon}
+                  alt="cenni storici"
+                  width={15}
+                  height={15}
+                />{" "}
+                <span>Vai ai cenni storici</span>
+              </a>
             </li>
           )}
           {withNotes && (
-              <li className="py-1 hover:text-primary">
-                <a href="#note" className="flex items-center gap-3 font-sans text-lg">
-                  <Image src={notesIcon} alt="note" width={15} height={15} />{" "}
-                  <span>Vai alle note</span>
-                </a>
+            <li className="py-1 hover:text-primary">
+              <a
+                href="#note"
+                className="flex items-center gap-3 font-sans text-lg"
+              >
+                <Image src={notesIcon} alt="note" width={15} height={15} />{" "}
+                <span>Vai alle note</span>
+              </a>
             </li>
           )}
         </ul>
