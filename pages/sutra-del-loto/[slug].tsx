@@ -21,6 +21,7 @@ import { SDL_INTRO_CAT_ID } from "@utils/constants";
 
 export default function PostPage({ post }) {
   const router = useRouter();
+  
 
   const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
 
@@ -88,7 +89,7 @@ export default function PostPage({ post }) {
                       <h3 className="text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
                         Cenni Storici
                       </h3>
-                      <div
+                      <div className="text-lg"
                         dangerouslySetInnerHTML={{
                           __html: highlightedPost.acf.acf_cenni_storici
                             ?.replace("CENNI STORICI – ", "")
@@ -103,7 +104,7 @@ export default function PostPage({ post }) {
                       <h3 className="text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
                         Note
                       </h3>
-                      <div
+                      <div className="text-lg"
                         dangerouslySetInnerHTML={{
                           __html: highlightedPost.acf.acf_note,
                         }}

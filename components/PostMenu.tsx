@@ -94,7 +94,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
           onClose={() => setOpenShareModal(false)}
         />
       )}
-      <div className="p-10 w-full text-md mb-4 rounded-3xl shadow-md bg-defaultBg flex items-center justify-start">
+      <div className="gap-10 p-10 w-full text-md mb-4 rounded-3xl shadow-md bg-defaultBg flex items-center justify-start">
         {image && (
           <div>
             <Link href={imageLink ?? "#"}>
@@ -104,13 +104,13 @@ const PostMenu: React.FC<PostMenuProps> = ({
             </Link>
           </div>
         )}
-        <ul className="flex items-center justify-evenly flex-wrap w-full">
+        <ul className="flex items-center justify-start gap-10 flex-wrap w-full">
           <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
             <button
               onClick={share}
               className="flex items-center gap-2 font-sans text-lg"
             >
-              <Image src={shareIcon} alt="condividi" width={15} height={15} />{" "}
+              <Image src={shareIcon} alt="Condividi" width={15} height={15} />{" "}
               Condividi
             </button>
           </li>
@@ -119,7 +119,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
               onClick={() => print()}
               className="flex items-center gap-2 font-sans text-lg"
             >
-              <Image src={printIcon} alt="stampa" width={15} height={15} />{" "}
+              <Image src={printIcon} alt="Stampa" width={15} height={15} />{" "}
               Stampa
             </button>
           </li>
@@ -131,9 +131,9 @@ const PostMenu: React.FC<PostMenuProps> = ({
             >
               <Image
                 src={textSizeIcon}
-                alt="condividi"
-                width={30}
-                height={30}
+                alt="Ridimensiona il testo"
+                width={27}
+                height={27}
               />{" "}
               Dimensione del testo
             </button>
@@ -151,7 +151,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
               >
                 <Image
                   src={backgroundIcon}
-                  alt="cenni storici"
+                  alt="Leggi i cenni storici"
                   width={15}
                   height={15}
                 />{" "}
@@ -165,7 +165,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
                 href="#note"
                 className="flex items-center gap-3 font-sans text-lg"
               >
-                <Image src={notesIcon} alt="note" width={15} height={15} />{" "}
+                <Image src={notesIcon} alt="Leggi le note" width={15} height={15} />{" "}
                 <span>Vai alle note</span>
               </a>
             </li>

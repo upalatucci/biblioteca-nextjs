@@ -12,14 +12,16 @@ const Note: React.FC<NoteProps> = ({ onClose, note, noteIndex }) => {
   return (
     <li
       id={`note-text-${noteIndex + 1}`}
-      className="paragraph-notes relative rounded-3xl text-secondary bg-white pl-4 pr-12 py-4 mb-4 shadow-md"
+      className="text-lg relative rounded-3xl text-secondary bg-white pl-4 pr-12 py-4 mb-4 shadow-md pr-10"
     >
+      
       <button
-        className="text-primary border border-grey-500 bg-defaultBg text-xs p-1 w-7 h-7 shadow rounded-xl absolute right-4 font-sans hover:shadow-inner"
+        className="absolute right-4 shadow-md hover:shadow-none rounded-3xl w-6"
         onClick={onClose}
       >
-        X
+        <img className="w-full" src="/icons/ico-close.svg"/>
       </button>
+      
       <span
         dangerouslySetInnerHTML={{
           __html: note,
@@ -66,7 +68,7 @@ const ParagraphWithNotes: React.FC<ParagraphWithNotesProps> = ({
       <p
         dangerouslySetInnerHTML={{ __html: content }}
         onClick={onNoteClick}
-        className={classNames("my-4", fontSize)}
+        className={classNames("my-4 text-lg", fontSize)}
       />
       <div
         className={classNames("font-sans", { "my-4": notesToShow.length })}

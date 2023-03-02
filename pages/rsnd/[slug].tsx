@@ -99,7 +99,7 @@ export default function PostPage({ post }) {
               {(highlightedPost?.acf?.acf_luogo ||
                 highlightedPost?.acf?.acf_data ||
                 highlightedPost?.acf?.acf_destinatario.length !== 0) && (
-                <p className="text-primary font-sans">
+                <p className="text-primary font-sans text-lg">
                   {highlightedPost?.acf?.acf_luogo},{" "}
                   {highlightedPost?.acf?.acf_data}. Indirizzata a{" "}
                   {highlightedPost?.acf?.acf_destinatario.join(", ")}.
@@ -137,7 +137,7 @@ export default function PostPage({ post }) {
 
                   {highlightedPost?.acf?.acf_note && (
                     <div id="note">
-                      <h3 className="text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
+                      <h3 className="text-xl md:text-3xl text-primary font-bold mt-14 mb-6">
                         Note
                       </h3>
                       <div
