@@ -67,7 +67,9 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
               })}
             >
               <td width="5" className="px-4 py-2">
-                <span className="mr-8 lg:mr-14 font-medium">{post.number}.</span>{" "}
+                <span className="mr-8 lg:mr-14 font-medium">
+                  {post.number}.
+                </span>{" "}
               </td>
               <td width="50%" className="px-4 py-2">
                 <Link href={`/rsnd/${post.slug}`}>
@@ -78,9 +80,15 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
                   </a>
                 </Link>
               </td>
-              <td className="px-4 py-2 font-medium">{post.recipient.join(", ")}</td>
-              <td className="px-4 py-2 font-medium">{post.place}</td>
-              <td className="px-4 py-2 font-medium">{post.date}</td>
+              <td width="20%" className="px-4 py-2 font-medium">
+                {post.recipient.join(", ")}
+              </td>
+              <td width="17%" className="px-4 py-2 font-medium">
+                {post.place}
+              </td>
+              <td width="10%" className="px-4 py-2 font-medium">
+                {post.date}
+              </td>
             </tr>
           ))}
         </tbody>

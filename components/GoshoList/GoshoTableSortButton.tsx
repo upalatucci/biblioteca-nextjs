@@ -9,40 +9,65 @@ type GoshoTableSortButtonProps = {
 
 const unOrderedIcon = (
   <svg
-    className="fill-gray-400"
-    height="1em"
-    width="1em"
-    viewBox="0 0 256 512"
-    aria-hidden="true"
-    role="img"
+    id="Order"
+    xmlns="http://www.w3.org/2000/svg"
+    width="25"
+    height="10"
+    className="ml-2"
+    viewBox="0 0 16.8 4.5"
   >
-    <path d="M214.059 377.941H168V134.059h46.059c21.382 0 32.09-25.851 16.971-40.971L144.971 7.029c-9.373-9.373-24.568-9.373-33.941 0L24.971 93.088c-15.119 15.119-4.411 40.971 16.971 40.971H88v243.882H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.568 9.373 33.941 0l86.059-86.059c15.12-15.119 4.412-40.971-16.97-40.971z"></path>
+    <path
+      id="Icon_ionic-md-arrow-dropdown"
+      data-name="Icon ionic-md-arrow-dropdown"
+      d="M9,13.5,13.5,18,18,13.5Z"
+      transform="translate(-9 -13.5)"
+      fill="#0e83a4"
+    />
+    <path
+      id="Icon_ionic-md-arrow-dropup"
+      data-name="Icon ionic-md-arrow-dropup"
+      d="M9,18l4.5-4.5L18,18Z"
+      transform="translate(-1.2 -13.5)"
+      fill="#0e83a4"
+    />
   </svg>
 );
 
 const discendentIcon = (
   <svg
-    className="fill-primary"
-    height="1em"
-    width="1em"
-    viewBox="0 0 256 512"
-    aria-hidden="true"
-    role="img"
+    id="Order"
+    xmlns="http://www.w3.org/2000/svg"
+    width="25"
+    height="10"
+    className="ml-2"
+    viewBox="0 0 16.8 4.2"
   >
-    <path d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"></path>
+    <path
+      id="Icon_ionic-md-arrow-dropup"
+      data-name="Icon ionic-md-arrow-dropup"
+      d="M9,18l4.5-4.5L18,18Z"
+      transform="translate(-9 -13.5)"
+      fill="#0e83a4"
+    />
   </svg>
 );
 
 const ascendentIcon = (
   <svg
-    className="fill-primary"
-    height="1em"
-    width="1em"
-    viewBox="0 0 256 512"
-    aria-hidden="true"
-    role="img"
+    id="Order"
+    xmlns="http://www.w3.org/2000/svg"
+    width="25"
+    height="10"
+    className="ml-2"
+    viewBox="0 0 16.8 4.2"
   >
-    <path d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"></path>
+    <path
+      id="Icon_ionic-md-arrow-dropdown"
+      data-name="Icon ionic-md-arrow-dropdown"
+      d="M9,13.5,13.5,18,18,13.5Z"
+      transform="translate(-9 -13.5)"
+      fill="#0e83a4"
+    />
   </svg>
 );
 
@@ -50,7 +75,7 @@ const GoshoTableSortButton: React.FC<GoshoTableSortButtonProps> = ({
   field,
   ascendent,
   onClick,
-  title
+  title,
 }) => {
   let icon = unOrderedIcon;
 
