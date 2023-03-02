@@ -18,7 +18,7 @@ import Link from "next/link";
 import classNames from "classnames";
 
 const responsive = {
-  0: { items: 1.1 },
+  0: { items: 1.2 },
   450: { items: 1.3 },
   700: { items: 2.3 },
 };
