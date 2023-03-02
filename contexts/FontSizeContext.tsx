@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 
-export const fontSizes = ["text-base", "text-lg", "text-xl", "text-2xl"];
-export type FontSizeType = "text-base" | "text-lg" | "text-xl" | "text-2xl";
+export const fontSizes = ["text-lg", "text-xl", "text-2xl", "text-3xl"];
+export type FontSizeType = "text-lg" | "text-xl" | "text-2xl" | "text-3xl";
 
 export type FontSizeContextType = {
   fontSize: FontSizeType;
@@ -9,12 +9,12 @@ export type FontSizeContextType = {
 };
 
 export const FontSizeContext = createContext<FontSizeContextType>({
-  fontSize: "text-base",
+  fontSize: "text-lg",
   setFontSize: () => {},
 });
 
 export const FontSizeProvider: React.FC = ({ children }) => {
-  const [fontSize, setFontSize] = useState<FontSizeType>("text-base");
+  const [fontSize, setFontSize] = useState<FontSizeType>("text-lg");
 
   useEffect(() => {
     const savedFontSize = localStorage.getItem("fontSize");

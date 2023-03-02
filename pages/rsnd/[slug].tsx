@@ -31,9 +31,9 @@ import { RSND_APPENDICE_CAT_ID } from "@utils/constants";
 export default function PostPage({ post }) {
   const router = useRouter();
   const { fontSize } = useContext(FontSizeContext);
-  const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
+  const [highlightedPost] = useHighlightedPost(post);
 
-  if (router.isFallback || isLoadingHighligh || !router.isReady) {
+  if (router.isFallback) {
     return <ArticleLoading originalPost={post} />;
   }
 

@@ -1,7 +1,7 @@
 import React, {
   useCallback,
   useContext,
-  useLayoutEffect,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -53,16 +53,6 @@ const PostMenu: React.FC<PostMenuProps> = ({
 }) => {
   const { fontSize, setFontSize } = useContext(FontSizeContext);
   const [openShareModal, setOpenShareModal] = useState(false);
-  const activeLiRef = useRef<HTMLLIElement>();
-
-  useLayoutEffect(() => {
-    if (activeLiRef.current) {
-      activeLiRef.current.parentElement.scrollTop =
-        activeLiRef.current.offsetTop -
-        activeLiRef.current.parentElement.offsetTop -
-        80;
-    }
-  });
 
   const share = useCallback(() => {
     if (navigator.share) {
@@ -165,7 +155,12 @@ const PostMenu: React.FC<PostMenuProps> = ({
                 href="#note"
                 className="flex items-center gap-3 font-sans text-lg"
               >
-                <Image src={notesIcon} alt="Leggi le note" width={15} height={15} />{" "}
+                <Image
+                  src={notesIcon}
+                  alt="Leggi le note"
+                  width={15}
+                  height={15}
+                />{" "}
                 <span>Vai alle note</span>
               </a>
             </li>

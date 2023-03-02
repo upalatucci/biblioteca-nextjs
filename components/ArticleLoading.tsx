@@ -54,11 +54,11 @@ const ArticleLoading: React.FC<ArticleLoadingType> = ({ originalPost }) => (
                   <div className="h-8 bg-slate-200 rounded w-full lg:w-1/2"></div>
                 </div>
               </h2>
-              <p className="text-gray-400 pb-6">
+              <div className="text-gray-400 pb-6">
                 <div className="animate-pulse flex space-x-2">
                   <div className="h-2 bg-slate-200 rounded w-1/2 lg:w-1/4"></div>
                 </div>
-              </p>
+              </div>
 
               <div className="px-6 py-4 w-full text-md mb-4 h-32 rounded-2xl shadow-md bg-defaultBg flex items-center justify-start">
                 <div className="animate-pulse flex space-x-4 w-32">
