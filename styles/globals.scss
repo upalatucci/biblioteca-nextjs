@@ -36,29 +36,34 @@ body {
   color: var(--color-text);
   background-color: var(--background);
   scroll-behavior: smooth;
-  
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: var(--secondary-color);
 }
 a {
   color: inherit;
   text-decoration: none;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
-a > * > *, button {
-  transition: all .3s ease;
+a > * > *,
+button {
+  transition: all 0.3s ease;
 }
 
 * {
   box-sizing: border-box;
 }
-sup a, #nota, #note a {
+sup a,
+#nota,
+#note a,
+.paragraph-notes a {
   color: var(--primary-color);
   font-weight: 600;
 }
-.n-nota  {
+.n-nota {
   color: var(--primary-color);
 }
 
