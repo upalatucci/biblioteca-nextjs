@@ -155,12 +155,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
                 href="#note"
                 className="flex items-center gap-3 font-sans text-lg"
               >
-                <Image
-                  src={notesIcon}
-                  alt="Leggi le note"
-                  width={15}
-                  height={15}
-                />{" "}
+                <Image src={notesIcon} alt="Leggi le note" width={15} height={15} />{" "}
                 <span>Vai alle note</span>
               </a>
             </li>

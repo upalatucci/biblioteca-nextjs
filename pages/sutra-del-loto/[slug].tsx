@@ -23,7 +23,7 @@ import { useContext } from "react";
 
 export default function PostPage({ post }) {
   const router = useRouter();
-  const { fontSize } = useContext(FontSizeContext);
+  
 
   const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
 
@@ -96,8 +96,7 @@ export default function PostPage({ post }) {
                       <h3 className="text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
                         Cenni Storici
                       </h3>
-                      <div
-                        className={fontSize}
+                      <div className="text-lg"
                         dangerouslySetInnerHTML={{
                           __html: highlightedPost.acf.acf_cenni_storici
                             ?.replace("CENNI STORICI – ", "")
@@ -112,8 +111,7 @@ export default function PostPage({ post }) {
                       <h3 className="text-xl md:text-3xl text-primary font-bold mt-4 mb-6">
                         Note
                       </h3>
-                      <div
-                        className={fontSize}
+                      <div className="text-lg"
                         dangerouslySetInnerHTML={{
                           __html: highlightedPost.acf.acf_note,
                         }}
