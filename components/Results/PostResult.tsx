@@ -84,7 +84,7 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
                 </span>
               ))}
 
-            <span className="font-semibold">
+            <span className="text-primary">
               {humanizeTypeCategory(post.type, post.categories)}
             </span>
           </p>
@@ -129,7 +129,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
             ></div>
           </a>
         </Link>
-        <p className="flex items-center mt-4  flex-wrap">
+        <p className="flex items-center mt-4  flex-wrap gap-2">
           {post.highlight_fields
             .filter(
               (field) => !["post_title", "post_title.exact"].includes(field)
@@ -141,7 +141,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
                 passHref
               >
                 <a>
-                  <span className="border border-gray-400 rounded-xl px-4 py-1 mr-2 text-sm bg-gray-50 text-gray-500 break-keep">
+                  <span className="border border-gray-400 rounded-xl px-4 py-1 text-sm bg-gray-50 text-gray-500 break-keep">
                     {humanizedField[highlightField]}
                   </span>
                 </a>
