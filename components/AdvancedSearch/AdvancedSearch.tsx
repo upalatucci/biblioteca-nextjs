@@ -88,16 +88,16 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
   };
 
   return (
-    <div className="bg-white py-14 rounded-xl shadow-md mb-20">
-      <form onSubmit={onSubmit} className="mx-auto max-w-6xl pb-10 mb-10">
-        <section className="font-sans">
+    <div className="w-full bg-white rounded-3xl shadow-md py-20 mb-20 lg:py-32 px-8">
+      <form onSubmit={onSubmit} className="mx-auto max-w-[1400px]">
+        <section className="">
           <div className="container mx-auto">
-            <h2 className="text-3xl px-4 md:px-0 font-bold">
+            <h2 className="text-3xl px-4 pb-10 md:px-0 font-bold ">
               Cosa vuoi approfondire oggi?
             </h2>
 
-            <div className="rounded-2xl bg-defaultBg p-8 my-14 shadow-md flex flex-col items-center justify-evenly">
-              <div className="w-full flex flex-col md:flex-row items-center justify-start gap-4 mb-8">
+            <div className="font-sans rounded-3xl bg-defaultBg px-14 py-20 shadow-md flex flex-col items-center justify-evenly gap-12">
+              <div className="w-full flex flex-col md:flex-row items-center justify-start gap-8">
                 <span className="font-bold mr-10">Cerca:</span>
                 <Select
                   onChange={(newVal) =>
@@ -116,7 +116,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                 />
               </div>
 
-              <div className="pt-4 pb-8 flex w-full justify-start">
+              <div className="pt-4 flex w-full justify-start">
                 <span className="font-bold mb-6 mr-10">in:</span>
                 <div className="">
                   <div className="flex items-center justify-start flex-wrap">
@@ -190,7 +190,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
 
               <div className="px-4 flex flex-wrap gap-4 items-center justify-center">
                 <button
-                  className="btn bg-primary hover:bg-primaryHover rounded-3xl w-36 h-10 text-white text-lg"
+                  className="btn bg-primary hover:bg-primaryHover rounded-3xl w-60 h-10 text-white text-lg"
                   type="submit"
                 >
                   <div className="flex items-center justify-center">
@@ -199,7 +199,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                 </button>
 
                 <button
-                  className="btn  rounded-3xl h-10 w-36 border border-secondary hover:text-white hover:bg-secondary"
+                  className="btn rounded-3xl h-10 w-60 border border-secondary hover:text-white hover:bg-secondary"
                   type="reset"
                   onClick={onReset}
                 >

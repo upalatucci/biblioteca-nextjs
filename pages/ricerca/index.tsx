@@ -18,10 +18,8 @@ export default function Ricerca() {
       <HomeNavbar />
       <main>
         <SimpleSearch loading={isLoading} />
-        <section className="py-20 lg:py-32 px-8">
-        <div className="container min-h-[50vh] mx-auto max-w-[1400px]">
         {searchedPosts && (
-          <h3 className="text-4xl md:text-3xl text-primary font-bold mb-8">
+          <h3 className="mx-auto max-w-[1400px] text-4xl md:text-3xl text-primary font-bold mb-8">
             Abbiamo trovato
           </h3>
         )}
@@ -54,8 +52,6 @@ export default function Ricerca() {
           totalResults={totalResults}
           loading={isLoading}
         />
-        </div>
-        </section>
       </main>
       <Footer />
     </>

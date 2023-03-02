@@ -29,15 +29,15 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
   }, [router.query.q]);
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md py-20 lg:py-32 px-8">
-      <form onSubmit={onSubmit} className="mx-auto max-w-[1400px] pb-10">
+    <div className="w-full bg-white rounded-3xl shadow-md py-20 mb-20 lg:py-32 px-8">
+      <form onSubmit={onSubmit} className="mx-auto max-w-[1400px]">
         <section className="">
           <div className="container mx-auto">
-            <h2 className="text-4xl pt-4 pb-10 md:px-0 font-bold">
+            <h2 className="text-4xl pb-10 md:px-0 font-bold">
               Cosa vuoi approfondire oggi?
             </h2>
           
-            <div className="rounded-3xl bg-defaultBg p-4 md:p-8 shadow-md flex flex-col items-center justify-evenly h-80">
+            <div className="font-sans rounded-3xl bg-defaultBg px-8 py-20 shadow-md flex flex-col items-center justify-evenly gap-20">
               <SearchInput
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
@@ -46,7 +46,7 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
               />
               <div className="flex flex-wrap gap-4 items-center justify-center">
                 <button
-                  className="btn font-sans bg-primary hover:bg-primaryHover rounded-3xl w-50 md:w-44 h-10 text-white text-lg mx-4"
+                  className="btn font-sans bg-primary hover:bg-primaryHover rounded-3xl w-60 h-10 text-white text-lg mx-4"
                   type="submit"
                 >
                   <div className="flex items-center justify-center">
@@ -56,7 +56,7 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
                 </button>
 
                 <Link href="/ricerca-avanzata" passHref>
-                  <a className=" h-10 flex justify-center items-center btn border border-primary text-primary hover:bg-white rounded-3xl text-center text-lg font-sans py-2 w-50 md:w-44 whitespace-pre">
+                  <a className=" h-10 flex justify-center items-center btn border border-primary text-primary hover:bg-white rounded-3xl text-center text-lg font-sans py-2 w-60 whitespace-pre">
                     Ricerca avanzata
                   </a>
                 </Link>
