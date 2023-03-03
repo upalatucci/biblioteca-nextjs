@@ -12,7 +12,7 @@ const Note: React.FC<NoteProps> = ({ onClose, note, noteIndex }) => {
   return (
     <li
       id={`note-text-${noteIndex + 1}`}
-      className="text-lg relative rounded-3xl text-secondary bg-white pl-4 pr-12 py-4 mb-4 shadow-md pr-10"
+      className="text-lg relative rounded-3xl text-black bg-white pl-4 pr-12 py-4 mb-4 shadow-md pr-10"
     >
       <button
         className="absolute right-4 shadow-md hover:shadow-none rounded-3xl w-6"
@@ -75,7 +75,7 @@ const ParagraphWithNotes: React.FC<ParagraphWithNotesProps> = ({
       <div
         dangerouslySetInnerHTML={{ __html: content }}
         onClick={onNoteClick}
-        className={classNames("my-4 text-lg", fontSize)}
+        className={classNames("font-medium my-4 text-lg", fontSize)}
       />
       <div
         className={classNames("font-sans", { "my-4": notesToShow.length })}

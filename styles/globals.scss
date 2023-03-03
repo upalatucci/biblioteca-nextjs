@@ -198,9 +198,13 @@ mark {
   img {
     box-shadow: 0px 11px 17px rgb(0 0 0 / 10%);
     border-radius: var(--border-radius-sm);
+    object-fit: cover;
   }
 }
 
+.result p {
+  display: inline-block;
+}
 /* Checkbox custom css*/
 .form-control {
   display: grid;

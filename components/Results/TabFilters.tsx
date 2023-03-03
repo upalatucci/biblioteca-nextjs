@@ -51,7 +51,7 @@ const TabFilters: React.FC = () => {
 
   return (
     <div className="mb-10 flex items-center gap-8">
-      <span className="font-bold text-gray-500">Filtra i risultati:</span>
+      <span className="font-sans font-bold text-gray-500">Filtra i risultati:</span>
 
       <Select
         onChange={onChangeRecipient}

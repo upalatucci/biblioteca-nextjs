@@ -57,20 +57,20 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
   return (
     <li className="py-6">
       <button className="text-left" onClick={toggleOpen}>
-        <div className="font-sans">
+        <div className="text-lg">
           <h5
             className="font-bold pb-4"
             dangerouslySetInnerHTML={{ __html: post.title.rendered }}
           />
           <div
             ref={contentRef}
-            className="lg:mr-20"
+            className="result lg:mr-20 font-medium"
             dangerouslySetInnerHTML={{
               __html: isOpen ? contentOpen : contentClose,
             }}
           ></div>
 
-          <p className="flex items-center mt-4 flex-wrap">
+          <p className="font-sans flex items-center mt-4 flex-wrap gap-2 uppercase">
             {post.highlight_fields
               .filter(
                 (field) => !["post_title", "post_title.exact"].includes(field)
@@ -111,7 +111,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
 
   return (
     <li className="py-6">
-      <div className="font-sans">
+      <div className="text-lg">
         <Link href={`/${post.baseURL}/${post.slug}${postQueryParams}`} passHref>
           <a>
             <h5
@@ -119,7 +119,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
               dangerouslySetInnerHTML={{ __html: post.title.rendered }}
             />
             <div
-              className="lg:mr-20"
+              className="result lg:mr-20 font-medium"
               dangerouslySetInnerHTML={{
                 __html: `${(post?.highlight || post.content.rendered).substring(
                   0,
@@ -129,7 +129,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
             ></div>
           </a>
         </Link>
-        <p className="flex items-center mt-4  flex-wrap gap-2">
+        <p className="font-sans flex items-center mt-4 flex-wrap gap-2 uppercase">
           {post.highlight_fields
             .filter(
               (field) => !["post_title", "post_title.exact"].includes(field)
