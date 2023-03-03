@@ -122,8 +122,8 @@ const PostMenu: React.FC<PostMenuProps> = ({
               <Image
                 src={textSizeIcon}
                 alt="Ridimensiona il testo"
-                width={27}
-                height={27}
+                width={21}
+                height={21}
               />{" "}
               Dimensione del testo
             </button>
@@ -142,8 +142,8 @@ const PostMenu: React.FC<PostMenuProps> = ({
                 <Image
                   src={backgroundIcon}
                   alt="Leggi i cenni storici"
-                  width={15}
-                  height={15}
+                  width={17}
+                  height={17}
                 />{" "}
                 <span>Vai ai cenni storici</span>
               </a>

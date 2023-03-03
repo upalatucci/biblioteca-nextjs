@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="19" height="25" viewBox="0 0 19 25">
-  <g id="Raggruppa_209" data-name="Raggruppa 209" transform="translate(-1432.066 -277.111)">
-    <text id="A" transform="translate(1432.066 297.111)" fill="#0e83a4" font-size="19" font-family="Roboto-Medium, Roboto" font-weight="500"><tspan x="0" y="0">A</tspan></text>
-    <text id="A-2" data-name="A" transform="translate(1443.066 297.111)" fill="#0e83a4" font-size="12" font-family="Roboto-Medium, Roboto" font-weight="500"><tspan x="0" y="0">A</tspan></text>
+<svg xmlns="http://www.w3.org/2000/svg" width="18.72" height="13.508" viewBox="0 0 18.72 13.508">
+  <g id="Raggruppa_209" data-name="Raggruppa 209" transform="translate(-1432.233 -283.603)">
+    <path id="A" d="M8.934-3.145H3.7L2.607,0H.167l5.1-13.508H7.375L12.487,0H10.038ZM4.36-5.038H8.275l-1.958-5.6Z" transform="translate(1432.066 297.111)" fill="#0e83a4"/>
+    <path id="A-2" data-name="A" d="M5.643-1.986h-3.3L1.646,0H.105L3.328-8.531h1.33L7.887,0H6.34Zm-2.889-1.2H5.227L3.99-6.721Z" transform="translate(1443.066 297.111)" fill="#0e83a4"/>
   </g>
 </svg>
