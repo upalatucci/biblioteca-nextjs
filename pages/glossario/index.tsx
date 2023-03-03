@@ -38,11 +38,11 @@ export default function Glossario() {
       <HomeNavbar />
       <main>
         <section className="bg-defaultBg" id="glossario-cerca">
-          <div className="bg-white shadow-md rounded-xl p-8 md:p-20 mb-20">
-            <div className="mx-auto md:max-w-6xl">
+          <div className="bg-white shadow-md rounded-3xl py-20 mb-20 lg:py-32 px-8">
+            <div className="mx-auto max-w-[1400px]">
               <h2 className="text-3xl font-bold mb-8">Glossario</h2>
               <form
-                className="bg-defaultBg shadow-md rounded-xl px-10 py-14 flex flex-col flex-wrap font-sans"
+                className="bg-defaultBg shadow-md rounded-3xl px-10 py-14 flex flex-col flex-wrap font-sans"
                 onSubmit={onSubmit}
               >
                 <div className="mb-4 flex items-stretch lg:items-center justify-between flex-wrap flex-col xl:flex-row">
