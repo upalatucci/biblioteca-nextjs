@@ -71,7 +71,7 @@ export default function RSND1() {
         )}
         {jsonData.length > 0 ? (
           <section className="py-20 lg:py-32 px-8" id="gosho-list">
-            <div className="container py-8 min-h-[50vh] mx-auto max-w-6xl">
+            <div className="container min-h-[50vh] mx-auto max-w-[1400px]">
               <h2 className="text-4xl md:text-3xl text-primary font-bold mb-8">
                 Capitoli del Sutra del Loto
               </h2>
