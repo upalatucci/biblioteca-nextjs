@@ -116,13 +116,13 @@ const HomeNavbar = () => {
           </div>
           <span className="hidden lg:flex gap-10">
             <Link href="/glossario" passHref>
-              <a className="btn bg-customYellow hover:bg-customYellowHover text-white text-lg px-8 h-10 block border rounded-3xl font-medium font-sans flex items-center">
+              <a className="btn bg-customYellow hover:bg-customYellowHover text-white text-lg px-8 h-10 block rounded-3xl font-medium font-sans flex items-center">
                 <span>GLOSSARIO</span>
               </a>
             </Link>
 
             <Link href="/ricerca" passHref>
-              <a className="btn bg-primary hover:bg-primaryHover text-white text-lg px-8 h-10 block border rounded-3xl font-medium font-sans flex items-center">
+              <a className="btn bg-primary hover:bg-primaryHover text-white text-lg px-8 h-10 block rounded-3xl font-medium font-sans flex items-center">
                 <span>RICERCA</span>
               </a>
             </Link>

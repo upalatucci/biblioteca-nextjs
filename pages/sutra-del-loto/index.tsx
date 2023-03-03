@@ -70,14 +70,14 @@ export default function RSND1() {
           />
         )}
         {jsonData.length > 0 ? (
-          <section className="pb-10 p-10 md:p-20" id="gosho-list">
+          <section className="py-20 lg:py-32 px-8" id="gosho-list">
             <div className="container py-8 min-h-[50vh] mx-auto max-w-6xl">
               <h2 className="text-4xl md:text-3xl text-primary font-bold mb-8">
                 Capitoli del Sutra del Loto
               </h2>
 
               <div className="overflow-auto pb-4">
-                <table className="mt-4 text-xl w-full table-auto bg-white rounded-xl border-collapse">
+                <table className="mt-4 text-xl w-full table-auto bg-white rounded-3xl border-collapse">
                   <thead className="text-left">
                     <tr className="border-b-2 border-primary">
                       <GoshoTableSortButton

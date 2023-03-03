@@ -121,7 +121,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                 <div className="">
                   <div className="flex items-center justify-start flex-wrap">
                     <span className="w-32 lg:w-40">
-                      <label className="flex items-center">
+                      <label className="flex items-center form-control">
                         <input
                           type="checkbox"
                           value={FIELDS.CONTENT}
@@ -133,7 +133,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                       </label>
                     </span>
                     <span className="w-32 lg:w-40">
-                      <label className="flex items-center">
+                      <label className="flex items-center form-control">
                         <input
                           type="checkbox"
                           value={FIELDS.CENNI_STORICI}
@@ -145,7 +145,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                       </label>
                     </span>
                     <span className="w-32 lg:w-40">
-                      <label className="flex items-center">
+                      <label className="flex items-center form-control">
                         <input
                           type="checkbox"
                           value={FIELDS.NOTE}
@@ -157,7 +157,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                       </label>
                     </span>
                     <span className="w-32 lg:w-40">
-                      <label className="flex items-center">
+                      <label className="flex items-center form-control">
                         <input
                           type="checkbox"
                           value={EXTRA_CATEGORIES.INTRO}
@@ -171,7 +171,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                       </label>
                     </span>
                     <span className="w-32 lg:w-40">
-                      <label className="flex items-center">
+                      <label className="flex items-center form-control">
                         <input
                           type="checkbox"
                           value={EXTRA_CATEGORIES.APPENDICI}
