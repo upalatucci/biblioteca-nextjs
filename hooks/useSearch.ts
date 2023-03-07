@@ -10,7 +10,7 @@ const useSearch = (searchURL = "simple_search") => {
 
   const { data, isLoading, error } = useQuery({
     queryKey: [searchURL, router.query],
-    queryFn: () => {
+    queryFn: async () => {
       if (router.query.q) {
         let searchQuery = location.search;
 
@@ -18,25 +18,33 @@ const useSearch = (searchURL = "simple_search") => {
           searchQuery += `&sources=${
             MAP_BOOK_URL_KEY_TO_POST_TYPE[router.query.book as string]
           }`;
-        return fetch(`/api/${searchURL}${searchQuery}`).then((res) =>
-          res.json()
-        );
+
+        const response = await fetch(`/api/${searchURL}${searchQuery}`);
+
+        if (!response.ok)
+          return Promise.reject(
+            new Error(
+              "Si e' verificato un errore improvviso. Per favore, riprovare piu tardi."
+            )
+          );
+        return response.json();
       }
     },
     refetchOnWindowFocus: false,
+    retry: false,
   });
 
   useEffect(() => setIgnoringError(false), [error]);
 
   const totalResults = data?.hits?.total?.value;
 
-  return [
+  return {
     data,
     totalResults,
     isLoading,
-    ignoringError ? null : error,
+    error: ignoringError ? null : error,
     setIgnoringError,
-  ];
+  };
 };
 
 export default useSearch;
