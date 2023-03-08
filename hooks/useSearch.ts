@@ -1,4 +1,9 @@
 import {
+  AggregationsAggregate,
+  SearchResponseBody,
+  SearchTotalHits,
+} from "@elastic/elasticsearch/lib/api/types";
+import {
   MAP_BOOK_URL_KEY_TO_POST_TYPE,
   PostResultType,
 } from "@utils/elasticSearchUtils";
@@ -11,7 +16,10 @@ const useSearch = (searchURL = "simple_search") => {
 
   const [ignoringError, setIgnoringError] = useState(false);
 
-  const { data, isLoading, error } = useQuery<PostResultType, Error>({
+  const { data, isLoading, error } = useQuery<
+    SearchResponseBody<PostResultType, Record<string, AggregationsAggregate>>,
+    Error
+  >({
     queryKey: [searchURL, router.query],
     queryFn: async () => {
       if (router.query.q) {
@@ -39,7 +47,7 @@ const useSearch = (searchURL = "simple_search") => {
 
   useEffect(() => setIgnoringError(false), [error]);
 
-  const totalResults = data?.hits?.total?.value;
+  const totalResults = (data?.hits?.total as SearchTotalHits)?.value;
 
   return {
     data,
