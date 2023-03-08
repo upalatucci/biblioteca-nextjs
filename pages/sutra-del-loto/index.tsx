@@ -40,7 +40,7 @@ export default function RSND1() {
   return (
     <>
       <Head>
-        <title>Sutra del Loto | NICHIREN Library</title>
+        <title>Sutra del Loto | La Biblioteca di Nichiren</title>
       </Head>
 
       <HomeNavbar />
@@ -54,18 +54,18 @@ export default function RSND1() {
               {
                 number: 0,
                 title: "Sutra degli innumerevoli significati",
-                disabled: true
+                disabled: true,
               },
               {
                 number: 1,
-                title: "Sutra del Loto"
+                title: "Sutra del Loto",
               },
               {
                 number: 2,
                 title:
                   "Sutra per la pratica della meditazione sul bodhisattva virtu universale",
-                disabled: true
-              }
+                disabled: true,
+              },
             ]}
           />
         )}
@@ -103,11 +103,13 @@ export default function RSND1() {
                       <tr
                         key={post.slug}
                         className={classNames("bg-defaultBg", {
-                          "!bg-white": postIndex % 2
+                          "!bg-white": postIndex % 2,
                         })}
                       >
                         <td width="5" className="px-4 py-2">
-                          <span className="mr-8 lg:mr-14  font-medium">{post.number}</span>{" "}
+                          <span className="mr-8 lg:mr-14  font-medium">
+                            {post.number}
+                          </span>{" "}
                         </td>
                         <td className="px-4 py-2  font-medium">
                           <Link href={`/sutra-del-loto/${post.slug}`}>

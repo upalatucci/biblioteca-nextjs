@@ -20,7 +20,7 @@ export default function RSND1() {
   return (
     <>
       <Head>
-        <title>RSND Vol. 2 | NICHIREN Library</title>
+        <title>RSND Vol. 2 | La Biblioteca di Nichiren</title>
       </Head>
 
       <HomeNavbar />

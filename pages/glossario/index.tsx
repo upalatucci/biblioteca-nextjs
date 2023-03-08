@@ -32,7 +32,7 @@ export default function Glossario() {
   return (
     <>
       <Head>
-        <title>Glossario | NICHIREN Library</title>
+        <title>Glossario | La Biblioteca di Nichiren</title>
       </Head>
 
       <HomeNavbar />
