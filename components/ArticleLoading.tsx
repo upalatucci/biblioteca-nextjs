@@ -39,8 +39,15 @@ const ArticleLoading: React.FC<ArticleLoadingType> = ({ originalPost }) => (
   <>
     <Head>
       <title>
-        {removeHTMLTags(originalPost?.title?.rendered)} | NICHIREN Library
+        {removeHTMLTags(originalPost?.title?.rendered)} | La Biblioteca di
+        Nichiren
       </title>
+      <meta
+        name="Description"
+        content={removeHTMLTags(
+          originalPost?.content.rendered?.substring(0, 155)
+        )}
+      ></meta>
     </Head>
     <HomeNavbar />
 

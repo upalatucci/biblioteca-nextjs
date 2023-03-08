@@ -6,7 +6,7 @@ import Link from "next/link";
 const PageNotFound = () => (
   <>
     <Head>
-      <title>Pagina non trovata | NICHIREN Library</title>
+      <title>Pagina non trovata | La Biblioteca di Nichiren</title>
     </Head>
 
     <HomeNavbar />

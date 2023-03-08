@@ -84,7 +84,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Home | NICHIREN Library</title>
+        <title>Home | La Biblioteca di Nichiren</title>
       </Head>
 
       <HomeNavbar />
@@ -214,7 +214,7 @@ export default function Home() {
         <section className="py-20 lg:py-32 px-8">
           <div className="font container mx-auto flex flex-col items-center justify-center">
             <h2 className="font-bold my-8 text-3xl md:text-5xl text-center">
-              Che cos&apos;è la Nichiren Library
+              Che cos&apos;è La Biblioteca di Nichiren
             </h2>
             <p className="text-2xl font-serif text-center mx-4 md:mx-32 lg:mx-64">
               Praesent vel urna turpis. Aenean ultrices pharetra justo quis

@@ -1,4 +1,7 @@
-import { MAP_BOOK_URL_KEY_TO_POST_TYPE } from "@utils/elasticSearchUtils";
+import {
+  MAP_BOOK_URL_KEY_TO_POST_TYPE,
+  PostResultType,
+} from "@utils/elasticSearchUtils";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
@@ -8,7 +11,7 @@ const useSearch = (searchURL = "simple_search") => {
 
   const [ignoringError, setIgnoringError] = useState(false);
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<PostResultType, Error>({
     queryKey: [searchURL, router.query],
     queryFn: async () => {
       if (router.query.q) {

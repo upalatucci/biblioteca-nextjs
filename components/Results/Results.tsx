@@ -6,7 +6,7 @@ type ResultsProps = {
   data: any;
   totalResults: number;
   loading: boolean;
-  error?: unknown;
+  error?: Error;
   onErrorDismiss: () => void;
 };
 

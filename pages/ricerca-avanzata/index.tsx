@@ -17,7 +17,7 @@ export default function Ricerca() {
   return (
     <>
       <Head>
-        <title>Ricerca Avanzata | NICHIREN Library</title>
+        <title>Ricerca Avanzata | La Biblioteca di Nichiren</title>
       </Head>
 
       <HomeNavbar />

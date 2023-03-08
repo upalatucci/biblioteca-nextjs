@@ -60,8 +60,15 @@ export default function PostPage({ post }) {
     <>
       <Head>
         <title>
-          {removeHTMLTags(highlightedPost.title.rendered)} | NICHIREN Library
+          {removeHTMLTags(highlightedPost.title.rendered)} | La Biblioteca di
+          Nichiren
         </title>
+        <meta
+          name="Description"
+          content={removeHTMLTags(
+            highlightedPost?.content.rendered?.substring(0, 155)
+          )}
+        ></meta>
       </Head>
       <HomeNavbar />
       <main>
