@@ -28,6 +28,11 @@ import { useContext } from "react";
 import { FontSizeContext } from "contexts/FontSizeContext";
 import { RSND_APPENDICE_CAT_ID } from "@utils/constants";
 
+const ItalianListFormatted = new Intl.ListFormat("it", {
+  style: "long",
+  type: "conjunction",
+});
+
 export default function PostPage({ post }) {
   const router = useRouter();
   const { fontSize } = useContext(FontSizeContext);
@@ -112,7 +117,10 @@ export default function PostPage({ post }) {
                   <p className="text-primary font-sans text-lg">
                     {highlightedPost?.acf?.acf_luogo},{" "}
                     {highlightedPost?.acf?.acf_data}. Indirizzata a{" "}
-                    {highlightedPost?.acf?.acf_destinatario.join(", ")}.
+                    {ItalianListFormatted.format(
+                      highlightedPost?.acf?.acf_destinatario
+                    )}
+                    .
                   </p>
                 )}
               {paragraphs.map((p) => (
