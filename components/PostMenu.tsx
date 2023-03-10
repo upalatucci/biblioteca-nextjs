@@ -84,7 +84,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
           onClose={() => setOpenShareModal(false)}
         />
       )}
-      <div className="gap-10 p-10 w-full text-md mb-4 rounded-3xl shadow-md bg-defaultBg flex items-center justify-start">
+      <div className="gap-10 p-10 w-full text-md mb-4 rounded-3xl shadow-md bg-defaultBg flex flex-col md:flex-row items-center justify-start">
         {image && (
           <Link href={imageLink ?? "#"}>
             <a>
@@ -95,7 +95,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
           </Link>
         )}
         <ul className="flex items-center justify-start gap-10 flex-wrap w-full">
-          <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
+          <li className="lg:mx-0 py-2 hover:text-primary">
             <button
               onClick={share}
               className="flex items-center gap-2 font-sans text-lg"
@@ -104,7 +104,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
               Condividi
             </button>
           </li>
-          <li className="mx-2 lg:mx-0 py-2 hover:text-primary">
+          <li className="lg:mx-0 py-2 hover:text-primary">
             <button
               onClick={() => print()}
               className="flex items-center gap-2 font-sans text-lg"
@@ -113,8 +113,8 @@ const PostMenu: React.FC<PostMenuProps> = ({
               Stampa
             </button>
           </li>
-          {/* <li className="mx-2 lg:mx-0 py-1">Ascolta l&apos;audio</li> */}
-          <li className="mx-2 lg:mx-0 py-2 hover:text-primary font-sans text-lg">
+          {/* <li className="lg:mx-0 py-1">Ascolta l&apos;audio</li> */}
+          <li className="lg:mx-0 py-2 hover:text-primary font-sans text-lg">
             <button
               className="flex items-center gap-2 font-sans text-lg"
               onClick={rotateFontSizes}
@@ -130,7 +130,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
           </li>
 
           {(withBackgrounds || withNotes) && (
-            <span className="hidden md:inline border-l-2 border-gray-300 h-4 w-2"></span>
+            <span className="hidden lg:inline border-l-2 border-gray-300 h-4 w-2"></span>
           )}
 
           {withBackgrounds && (
@@ -155,7 +155,12 @@ const PostMenu: React.FC<PostMenuProps> = ({
                 href="#note"
                 className="flex items-center gap-3 font-sans text-lg"
               >
-                <Image src={notesIcon} alt="Leggi le note" width={15} height={15} />{" "}
+                <Image
+                  src={notesIcon}
+                  alt="Leggi le note"
+                  width={15}
+                  height={15}
+                />{" "}
                 <span>Vai alle note</span>
               </a>
             </li>
