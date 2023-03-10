@@ -18,7 +18,9 @@ const SearchInput: FC<SearchInputProps> = ({
   "aria-label": ariaLabel,
   required = false,
 }) => (
-  <div className={classNames("w-full max-w-[50%] input-container", className)}>
+  <div
+    className={classNames("w-full md:max-w-[50%] input-container", className)}
+  >
     <input
       type="search"
       className="border border-primary h-[42px] w-full px-4 py-1 rounded-3xl bg-white placeholder:text-gray-500 text-lg font-sans"

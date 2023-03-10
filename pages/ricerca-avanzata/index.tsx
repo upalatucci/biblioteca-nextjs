@@ -25,7 +25,7 @@ export default function Ricerca() {
         <AdvancedSearch loading={isLoading} />
 
         {searchedPosts && (
-          <h3 className="mx-auto max-w-[1400px] text-4xl md:text-3xl text-primary font-bold mb-8">
+          <h3 className="mx-4 md:mx-auto max-w-[1400px] text-4xl md:text-3xl text-primary font-bold mb-8">
             Abbiamo trovato
           </h3>
         )}

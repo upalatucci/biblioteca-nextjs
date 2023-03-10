@@ -30,7 +30,10 @@ const CountLoading = ({ loading, count }) =>
   );
 
 const selectedTabClass =
-  "font-bold text-black !bg-white border border-gray-200 rounded-t-3xl border-b-0 relative top-[0.5px]";
+  "font-bold text-black !bg-white border border-gray-200  border-b-0 relative top-[0.5px]";
+
+const baseTabClass =
+  "transition-none rounded-t-3xl text-lg inline-block py-4 px-8";
 
 const ResultTab: React.FC<ResultTabProps> = ({
   count,
@@ -46,7 +49,7 @@ const ResultTab: React.FC<ResultTabProps> = ({
       <li className="mr-4 min-w-80 whitespace-pre">
         <a
           aria-current="page"
-          className={classNames("text-lg inline-block p-4 cursor-not-allowed")}
+          className={classNames(baseTabClass, "cursor-not-allowed")}
         >
           {title} <CountLoading loading={loading} count={count} />
         </a>
@@ -59,7 +62,7 @@ const ResultTab: React.FC<ResultTabProps> = ({
       <Link href={createTabURL(router, tabKey)}>
         <a
           aria-current="page"
-          className={classNames("text-lg inline-block py-4 px-8", {
+          className={classNames(baseTabClass, {
             [selectedTabClass]: active,
           })}
         >
