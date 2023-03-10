@@ -7,6 +7,12 @@ const PageNotFound = () => (
   <>
     <Head>
       <title>Pagina non trovata | La Biblioteca di Nichiren</title>
+
+      <meta
+        name="robots"
+        content="noindex, nofollow"
+        data-react-helmet="true"
+      ></meta>
     </Head>
 
     <HomeNavbar />

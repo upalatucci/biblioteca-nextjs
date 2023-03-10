@@ -17,6 +17,12 @@ class MyDocument extends Document {
           />
           <meta name="Description" content="Libreria"></meta>
           <meta property="og:description" content="Libreria"></meta>
+
+          <meta
+            name="robots"
+            content="index, follow"
+            data-react-helmet="true"
+          ></meta>
           <meta
             name="Keywords"
             content="Nichiren, Daishonin, Gosho, Sutra del Loto, Soka Gakkai, Soka, Gakkai, Buddismo, Buddha, Shakyamuni"

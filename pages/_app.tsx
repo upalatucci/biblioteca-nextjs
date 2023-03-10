@@ -8,6 +8,7 @@ import iconArrowTop from "@public/icons/ico-arrow-top.svg";
 import Image from "next/image";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
+import ErrorBoundary from "@components/ErrorBoundary";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [showArrow, setShowArrow] = useState(false);
@@ -32,7 +33,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <FontSizeProvider>
       <QueryClientProvider client={queryClient}>
         <div className="app-container">
-          <Component {...pageProps} />
+          <ErrorBoundary>
+            <Component {...pageProps} />
+          </ErrorBoundary>
 
           <button
             className={classNames(
