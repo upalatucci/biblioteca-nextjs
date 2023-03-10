@@ -146,7 +146,7 @@ export default function Home() {
         <section className="bg-white shadow-md rounded-3xl m-0 py-20 lg:py-32 px-8">
           <div className="max-w-[1400px] mx-auto flex flex-col items-center lg:items-stretch md:flex-row md:justify-evenly gap-10">
             <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
-              <div className="z-0 bg-defaultBg rounded-xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
+              <div className="z-0 bg-defaultBg rounded-3xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
               <Link href="/">
                 <a>
                   <div className="z-10">
@@ -158,11 +158,14 @@ export default function Home() {
                         width={800}
                         height={700}
                         objectFit="cover"
-                        className="pointer-events-none rounded-xl"
+                        className="pointer-events-none rounded-3xl"
                       />
                     </div>
                     <div>
-                      <div className="font-serif flex flex-col justify-end text-left pt-6 pb-8 ">
+                    <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
+                        <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#EEE8DD] ">
+                        <img className="" src="/icons/ico-glossario.svg" /></span>
+                        <div className="z-10">
                         <h3 className="font-serif z-10 lg:text-lg font-bold">
                           Sfoglia il glossario
                         </h3>
@@ -170,6 +173,7 @@ export default function Home() {
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Nam eu ipsum urna
                         </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -178,7 +182,7 @@ export default function Home() {
             </div>
 
             <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
-              <div className="z-0 bg-defaultBg rounded-xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
+              <div className="z-0 bg-defaultBg rounded-3xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
               <Link href="/">
                 <a>
                   <div className="z-10">
@@ -190,18 +194,21 @@ export default function Home() {
                         width={800}
                         height={700}
                         objectFit="cover"
-                        className="pointer-events-none rounded-xl"
+                        className="pointer-events-none rounded-3xl"
                       />
                     </div>
                     <div>
-                      <div className="font-serif flex flex-col justify-end text-left pt-6 pb-8 ">
-                        <h3 className="z-10 lg:text-lg font-bold">
-                          Ascolta la Raccolta degli Scritti di Nichiren
-                          Daishonin
-                        </h3>
-                        <span className="z-10">
-                          Nam eu ipsum urna. Aenean odio nulla,
-                        </span>
+                      <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
+                        <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#D5E6EB] ">
+                        <img className="" src="/icons/ico-advance-search.svg" /></span>
+                        <div className="z-10">
+                          <h3 className="lg:text-lg font-bold">
+                            Fai una ricerca avanzata
+                          </h3>
+                          <span className="flex-col">
+                            Nam eu ipsum urna. Aenean odio nulla, Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
