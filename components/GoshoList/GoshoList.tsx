@@ -43,13 +43,13 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   };
 
   return (
-    <section className="py-20 lg:py-32 px-8" id="gosho-list">
+    <section className="py-14 lg:py-32 px-8" id="gosho-list">
       <div className="container min-h-[50vh] mx-auto max-w-[1400px]">
-        <h2 className="text-4xl md:text-3xl text-primary font-bold mb-8">
+        <h2 className="text-2xl md:text-4xl text-primary font-bold mb-8">
           Scritti
         </h2>
         <form
-          className="flex items-stretch flex-col lg:flex-row lg:items-center justify-between flex-wrap gap-4 pb-4"
+          className="flex items-stretch flex-col sm:flex-row lg:items-center justify-between flex-wrap gap-4 pb-4"
           onSubmit={onSubmit}
         >
           <SearchInput
@@ -57,13 +57,14 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
             onChange={onSearchInput}
             placeholder="Inserisci il titolo del Gosho che stai cercando"
             aria-label="Titolo"
+            className="w-full md:w-[38%]"
           />
           <Select
             onChange={setRecipient}
             value={recipient}
             name="destinatario"
             options={recipientOptions}
-            className="w-64"
+            className="w-full sm:w-[48%] md:w-[28%]"
             aria-label="Destinatario"
             placeholder="Seleziona destinatario"
           />
@@ -72,7 +73,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
             value={place}
             name="destinatario"
             options={placesOptions}
-            className="w-64"
+            className="w-full sm:w-[48%] md:w-[28%]"
             aria-label="Luogo"
             placeholder="Seleziona il luogo"
           />

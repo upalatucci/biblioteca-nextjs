@@ -25,17 +25,17 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
   subtitle,
   baseSlug = "rsnd"
 }) => (
-  <section className="w-full bg-white rounded-3xl shadow-md py-20 lg:py-32 px-8">
+  <section className="w-full bg-white rounded-3xl shadow-md py-14 lg:py-32 px-8">
     <div className="mx-auto max-w-[1400px] pb-10">
-      <h2 className="text-4xl font-bold">{title}</h2>
-      <p className="font-sans font-medium text-xl text-gray-500">{subtitle}</p>
+      <h2 className="text-2xl md:text-4xl font-bold">{title}</h2>
+      <p className="font-sans font-medium text-md md:text-xl text-gray-500">{subtitle}</p>
     </div>
-    <div className="mx-auto max-w-[1400px] bg-defaultBg rounded-3xl shadow-md flex flex-col md:flex-row md:gap-16 p-10">
+    <div className="mx-auto max-w-[1400px] bg-defaultBg rounded-3xl shadow-md flex flex-col md:flex-row md:gap-16 p-8 md:p-10">
       <div className="index flex-1">
-        <h3 className="text-3xl font-bold mb-4 text-primary">
+        <h3 className="text-xl md:text-3xl font-bold mb-4 text-primary">
           Materiale introduttivo
         </h3>
-        <ul className="divide-y-2 divide-gray-200 divide-dashed">
+        <ul className="divide-y-2 divide-gray-200 divide-dashed mb-8 md:mb-0">
           {index
             .sort((a, b) => (a.number > b.number ? 1 : -1))
             .map((item) => {
@@ -51,7 +51,7 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
                     <li className="py-2" key={item.title}>
                       <Link href={`/${baseSlug}/${item.slug}`}>
                         <a>
-                          <span className="font-medium text-lg">
+                          <span className="font-medium text-md md:text-lg">
                             {item.title}
                           </span>
                         </a>
@@ -65,15 +65,15 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
       </div>
       {notes && (
         <div className="notes flex-1">
-          <h3 className="text-3xl font-bold mb-4 text-primary">Appendici</h3>
-          <ul className="divide-y-2 divide-transparent divide-dashed">
+          <h3 className="text-xl md:text-3xl font-bold mb-4 text-primary">Appendici</h3>
+          <ul className="divide-y-2 divide-transparent divide-dashed mb-8 md:mb-0">
             {notes
               .sort((a, b) => (a.number > b.number ? 1 : -1))
               .map((note) => (
                 <li className="py-2" key={note.slug}>
                   <Link href={`/${baseSlug}/${note.slug}`}>
                     <a>
-                      <span className="font-medium text-lg">
+                      <span className="font-medium text-md md:text-lg">
                         {note.title.replace("Appendice", "")}
                       </span>
                     </a>

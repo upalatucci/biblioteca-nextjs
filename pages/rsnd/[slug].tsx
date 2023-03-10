@@ -82,7 +82,7 @@ export default function PostPage({ post }) {
             <div className="bg-white py-20 lg:py-32 print:py-0 px-8 rounded-xl shadow-md print:rounded-none print:shadow-none">
               <div className="container mx-auto max-w-[1400px] print:py-0">
                 <h2
-                  className="text-4xl md:text-3xl container text-secondary font-bold print:mb-4"
+                  className="text-3xl md:text-4xl  container text-secondary font-bold print:mb-4"
                   dangerouslySetInnerHTML={{
                     __html: `${
                       isMainBookContent
