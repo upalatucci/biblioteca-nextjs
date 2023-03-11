@@ -18,7 +18,7 @@ const pageNumerDisabledClassName = "text-gray-300 !border-gray-300";
 const Pagination: FC<PaginationProps> = ({
   totalResults = 1,
   itemsPerPage = DEFAULT_ITEMS_PER_PAGE,
-  anchorHash
+  anchorHash,
 }) => {
   const page = usePage();
   const router = useRouter();
@@ -45,21 +45,21 @@ const Pagination: FC<PaginationProps> = ({
         pathname: router.pathname,
         query: {
           ...otherQuery,
-          page: pageNumber.toString()
+          page: pageNumber.toString(),
         },
-        hash: anchorHash
+        hash: anchorHash,
       };
     },
     [router.query, router.pathname]
   );
 
   return (
-    <div className="flex items-center justify-center py-10">
+    <div className="flex items-center justify-center pb-10 pt-14">
       <Link href={generateHref(page - 1)} passHref>
         <a
           aria-label="Pagina precedente"
           className={classNames(pageClassName, {
-            [pageNumerDisabledClassName]: page === 1
+            [pageNumerDisabledClassName]: page === 1,
           })}
         >
           {"<"}
@@ -85,7 +85,7 @@ const Pagination: FC<PaginationProps> = ({
           <a
             aria-label={`Pagina ${prevPrevPage}`}
             className={classNames(pageClassName, {
-              [pageNumerDisabledClassName]: nextPage === page
+              [pageNumerDisabledClassName]: nextPage === page,
             })}
           >
             {nextPage}
@@ -96,7 +96,7 @@ const Pagination: FC<PaginationProps> = ({
         <a
           aria-label="Pagina successiva"
           className={classNames(pageClassName, {
-            [pageNumerDisabledClassName]: totalPage === page
+            [pageNumerDisabledClassName]: totalPage === page,
           })}
         >
           {">"}

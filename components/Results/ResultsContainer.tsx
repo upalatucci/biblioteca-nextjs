@@ -71,14 +71,14 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({
 
   return (
     <div className="border-b border-gray-400 bg-white px-8 shadow-md rounded-3xl">
-      <div className="md:px-20 xl:px-0 mx-auto max-w-[1400px] pt-20">
+      <div className="md:px-20 xl:px-0 mx-auto max-w-[1400px] py-20">
         <TabFilters />
         <ul className="divide-y-2 divide-dashed mb-10 mx-auto bg-defaultBg  rounded-3xl shadow-md  px-4 md:px-10 py-8">
           {searchedPosts?.map((postResult) => (
             <PostResult key={postResult.id} post={postResult} />
           ))}
+          <Pagination totalResults={totalResults} anchorHash="risultati" />
         </ul>
-        <Pagination totalResults={totalResults} anchorHash="risultati" />
       </div>
     </div>
   );
