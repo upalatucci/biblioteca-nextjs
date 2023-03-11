@@ -8,7 +8,7 @@ import raccoltaVol1 from "../public/rsnd-I.svg";
 import raccoltaVol2 from "../public/rsnd-II.svg";
 import sutraDelLoto from "../public/sutra-del-loto.jpg";
 import sfogliaGlossario from "../public/sfoglia.jpeg";
-import ascolta from "../public/ascolta.jpeg";
+import ricercaAvanzata from "../public/ricerca-avanzata-scritti-daishonin.jpg";
 import SearchInput from "@components/SearchInput";
 import { useRouter } from "next/router";
 import Footer from "@components/Footer";
@@ -147,7 +147,7 @@ export default function Home() {
           <div className="max-w-[1400px] mx-auto flex flex-col items-center lg:items-stretch md:flex-row md:justify-evenly gap-10">
             <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
               <div className="z-0 bg-defaultBg rounded-3xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
-              <Link href="/">
+              <Link href="/glossario">
                 <a>
                   <div className="z-10">
                     <div className="">
@@ -162,17 +162,18 @@ export default function Home() {
                       />
                     </div>
                     <div>
-                    <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
+                      <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
                         <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#EEE8DD] ">
-                        <img className="" src="/icons/ico-glossario.svg" /></span>
-                        <div className="z-10">
-                        <h3 className="font-serif z-10 lg:text-lg font-bold">
-                          Sfoglia il glossario
-                        </h3>
-                        <span className="z-10">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Nam eu ipsum urna
+                          <img className="" src="/icons/ico-glossario.svg" />
                         </span>
+                        <div className="z-10">
+                          <h3 className="font-serif z-10 lg:text-lg font-bold">
+                            Sfoglia il glossario
+                          </h3>
+                          <span className="z-10">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Nam eu ipsum urna
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -183,13 +184,13 @@ export default function Home() {
 
             <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
               <div className="z-0 bg-defaultBg rounded-3xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
-              <Link href="/">
+              <Link href="/ricerca-avanzata">
                 <a>
                   <div className="z-10">
                     <div className="">
                       <Image
-                        src={ascolta}
-                        alt="Ascolta la Raccolta degli Scritti di Nichiren Daishonin"
+                        src={ricercaAvanzata}
+                        alt="Ricerca avanzata"
                         layout="responsive"
                         width={800}
                         height={700}
@@ -200,13 +201,18 @@ export default function Home() {
                     <div>
                       <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
                         <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#D5E6EB] ">
-                        <img className="" src="/icons/ico-advance-search.svg" /></span>
+                          <img
+                            className=""
+                            src="/icons/ico-advance-search.svg"
+                          />
+                        </span>
                         <div className="z-10">
                           <h3 className="lg:text-lg font-bold">
                             Fai una ricerca avanzata
                           </h3>
                           <span className="flex-col">
-                            Nam eu ipsum urna. Aenean odio nulla, Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Nam eu ipsum urna. Aenean odio nulla, Lorem ipsum
+                            dolor sit amet consectetur adipisicing elit.
                           </span>
                         </div>
                       </div>
