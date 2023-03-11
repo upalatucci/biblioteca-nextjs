@@ -164,22 +164,24 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
                 >
                   <button className="text-left">
                     <div
-                      className="font-bold text-lg"
+                      className="font-bold text-lg mb-4"
                       dangerouslySetInnerHTML={{
                         __html: glossarioRicerca.title,
                       }}
                     ></div>
-                    <div className="mb-2">
-                      {glossarioRicerca.cat.includes(GLOSSARY_RSND_CAT_ID)
-                        ? "Raccolta degli scritti di Nichiren"
-                        : "Il Sutra del Loto"}
-                    </div>
                   </button>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: glossarioRicerca.content,
                     }}
+                    className="mb-4"
                   ></div>
+
+                  <div className="mb-2 text-primary">
+                    {glossarioRicerca.cat.includes(GLOSSARY_RSND_CAT_ID)
+                      ? "Raccolta degli scritti di Nichiren"
+                      : "Il Sutra del Loto"}
+                  </div>
                 </li>
               ))}
             </ul>
