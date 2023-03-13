@@ -20,23 +20,21 @@ const LoadingElement = memo(() => (
 
 LoadingElement.displayName = "LoadingElement";
 
-const ResultsLoading: React.FC = () => {
-  return (
-    <div className="bg-white shadow-md rounded-xl py-20">
-      <div className="px-8 md:px-20 xl:px-0 md:max-w-6xl mx-auto">
-        <ul className="divide-y-2 divide-dashed pt-4 mb-10 mx-auto bg-defaultBg  rounded-xl shadow-md  px-4 md:px-10 py-8">
-          <LoadingElement />
-          <LoadingElement />
-          <LoadingElement />
-          <LoadingElement />
-          <LoadingElement />
-          <LoadingElement />
-          <LoadingElement />
-          <LoadingElement />
-        </ul>
-      </div>
+const ResultsLoading: React.FC = () => (
+  <div className="border-b border-gray-400 bg-white px-8 shadow-md rounded-3xl">
+    <div className="md:px-20 xl:px-0 mx-auto max-w-[1400px] py-20">
+      <ul className="divide-y-2 divide-dashed mb-10 mx-auto bg-defaultBg  rounded-3xl shadow-md  px-4 md:px-10 py-8">
+        <LoadingElement />
+        <LoadingElement />
+        <LoadingElement />
+        <LoadingElement />
+        <LoadingElement />
+        <LoadingElement />
+        <LoadingElement />
+        <LoadingElement />
+      </ul>
     </div>
-  );
-};
+  </div>
+);
 
 export default ResultsLoading;
