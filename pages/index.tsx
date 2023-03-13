@@ -4,11 +4,11 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
 
-import raccoltaVol1 from "../public/rsnd-I.svg";
-import raccoltaVol2 from "../public/rsnd-II.svg";
-import sutraDelLoto from "../public/sutra-del-loto.jpg";
-import sfogliaGlossario from "../public/sfoglia.jpeg";
-import ricercaAvanzata from "../public/ricerca-avanzata-scritti-daishonin.jpg";
+import raccoltaVol1 from "@public/rsnd-I.svg";
+import raccoltaVol2 from "@public/rsnd-II.svg";
+import sutraDelLoto from "@public/sutra-del-loto.jpg";
+import sfogliaGlossario from "@public/sfoglia.jpeg";
+import ricercaAvanzata from "@public/ricerca-avanzata-scritti-daishonin.jpg";
 import SearchInput from "@components/SearchInput";
 import { useRouter } from "next/router";
 import Footer from "@components/Footer";

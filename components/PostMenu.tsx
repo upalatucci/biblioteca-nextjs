@@ -1,12 +1,6 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useContext, useState } from "react";
 import ShareModal from "./ShareModal";
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import Link from "next/link";
 import textSizeIcon from "@public/icons/ico-text-size.svg";
 import shareIcon from "@public/icons/ico-share.svg";
@@ -40,7 +34,7 @@ type PostMenuProps = {
   currentPostTitle?: string;
   withBackgrounds?: boolean;
   withNotes?: boolean;
-  image?: StaticImageData;
+  image?: ImageProps["src"];
   imageLink?: string;
 };
 

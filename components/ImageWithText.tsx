@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import Link from "next/link";
 
 type BookType = {
   title: string;
   description?: string;
-  image: StaticImageData;
+  image: ImageProps["src"];
   textOverlayHeight?: number;
   width: number;
   height: number;
