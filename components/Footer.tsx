@@ -50,7 +50,12 @@ const Footer: React.FC = () => {
               className="flex items-center opacity-75 hover:opacity-150"
               rel="noreferrer"
             >
-              <Image width={150} height={100} src={IstitutoIcon} />
+              <Image
+                width={150}
+                height={100}
+                src={IstitutoIcon}
+                alt="istituto buddista italiano soka gakkai"
+              />
             </a>
           </li>
           <li className="mt-4">
@@ -60,7 +65,12 @@ const Footer: React.FC = () => {
               className="flex items-center opacity-75 hover:opacity-150"
               rel="noreferrer"
             >
-              <Image width={150} height={100} src={SenzatomicaIcon} />
+              <Image
+                width={150}
+                height={100}
+                src={SenzatomicaIcon}
+                alt="senzamotica"
+              />
             </a>
           </li>
           <li className="mt-4">
