@@ -48,7 +48,7 @@ const HomeNavbar = () => {
             </a>
           </Link>
         </div>
-        <nav className="container max-w-[1400px] mx-auto flex items-center justify-between mt-14 relative">
+        <nav className="container max-w-[1400px] mx-auto flex items-center justify-between mt-8 relative">
           <span className="lg:hidden"></span>
           <Link href="/" passHref>
             <a>

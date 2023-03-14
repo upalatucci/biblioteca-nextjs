@@ -99,7 +99,7 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
                         "pointer-events-none": !chapter.slug
                       })}
                     >
-                      <span className="font-medium text-lg">
+                      <span className="font-medium text-md md:text-lg">
                         {chapter.title.replace("Appendice", "")}
                       </span>
                     </a>

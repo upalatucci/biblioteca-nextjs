@@ -38,8 +38,8 @@ nav {
     position: absolute;
     left: 0;
     top: 0;
-    height: 3px;
-    width: 33px;
+    height: 2px;
+    width: 27px;
     border-radius: 20px;
     background-color: #0e3933;
     display: block;
@@ -49,11 +49,11 @@ nav {
   }
 
   .ham:first-child {
-    top: -10px;
+    top: -8px;
   }
 
   .ham:last-child {
-    top: 10px;
+    top: 8px;
   }
 
   &.open .ham:first-child {

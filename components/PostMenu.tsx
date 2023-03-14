@@ -78,7 +78,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
           onClose={() => setOpenShareModal(false)}
         />
       )}
-      <div className="gap-10 p-10 w-full text-md mb-4 rounded-3xl shadow-md bg-defaultBg flex flex-col md:flex-row items-center justify-start">
+      <div className="gap-10 p-8 md:p-10 w-full text-md rounded-3xl shadow-md bg-defaultBg flex flex-col md:flex-row items-center justify-start">
         {image && (
           <Link href={imageLink ?? "#"}>
             <a>
@@ -88,11 +88,11 @@ const PostMenu: React.FC<PostMenuProps> = ({
             </a>
           </Link>
         )}
-        <ul className="flex items-center justify-start gap-10 flex-wrap w-full">
+        <ul className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-1 md:gap-10 flex-wrap w-full">
           <li className="lg:mx-0 py-2 hover:text-primary">
             <button
               onClick={share}
-              className="flex items-center gap-2 font-sans text-lg"
+              className="flex items-center gap-2 font-sans text-md lg:text-lg"
             >
               <Image src={shareIcon} alt="Condividi" width={15} height={15} />{" "}
               Condividi
@@ -101,16 +101,16 @@ const PostMenu: React.FC<PostMenuProps> = ({
           <li className="lg:mx-0 py-2 hover:text-primary">
             <button
               onClick={() => print()}
-              className="flex items-center gap-2 font-sans text-lg"
+              className="flex items-center gap-2 font-sans text-md lg:text-lg"
             >
               <Image src={printIcon} alt="Stampa" width={15} height={15} />{" "}
               Stampa
             </button>
           </li>
           {/* <li className="lg:mx-0 py-1">Ascolta l&apos;audio</li> */}
-          <li className="lg:mx-0 py-2 hover:text-primary font-sans text-lg">
+          <li className="lg:mx-0 py-2 hover:text-primary font-sans text-md lg:text-lg">
             <button
-              className="flex items-center gap-2 font-sans text-lg"
+              className="flex items-center gap-2 font-sans text-md lg:text-lg"
               onClick={rotateFontSizes}
             >
               <Image
@@ -128,10 +128,10 @@ const PostMenu: React.FC<PostMenuProps> = ({
           )}
 
           {withBackgrounds && (
-            <li className="py-1 hover:text-primary">
+            <li className="py-2 hover:text-primary">
               <a
                 href="#cenni_storici"
-                className="flex items-center gap-3 font-sans text-lg"
+                className="flex items-center gap-3 font-sans text-md lg:text-lg"
               >
                 <Image
                   src={backgroundIcon}
@@ -144,10 +144,10 @@ const PostMenu: React.FC<PostMenuProps> = ({
             </li>
           )}
           {withNotes && (
-            <li className="py-1 hover:text-primary">
+            <li className="py-2 hover:text-primary">
               <a
                 href="#note"
-                className="flex items-center gap-3 font-sans text-lg"
+                className="flex items-center gap-3 font-sans text-md lg:text-lg"
               >
                 <Image
                   src={notesIcon}

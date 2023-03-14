@@ -28,7 +28,7 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
 
   return (
     <>
-      <table className="mt-4 text-lg w-full table-auto bg-white rounded-3xl border-collapse">
+      <table className="mt-4 text-md md:text-lg w-full table-auto bg-white rounded-3xl border-collapse">
         <thead className="text-left">
           <tr className="border-b-2 border-primary">
             <GoshoTableSortButton

@@ -79,10 +79,10 @@ export default function PostPage({ post }) {
       <main>
         <div className="bg-defaultBg">
           <div className="">
-            <div className="bg-white py-20 lg:py-32 print:py-0 px-8 rounded-xl shadow-md print:rounded-none print:shadow-none">
+            <div className="bg-white py-14 lg:py-32 px-8 print:py-0 rounded-3xl shadow-md print:rounded-none print:shadow-none">
               <div className="container mx-auto max-w-[1400px] print:py-0">
                 <h2
-                  className="text-3xl md:text-4xl  container text-secondary font-bold print:mb-4"
+                  className="text-2xl md:text-4xl container text-secondary font-bold print:mb-4"
                   dangerouslySetInnerHTML={{
                     __html: `${
                       isMainBookContent
@@ -91,9 +91,9 @@ export default function PostPage({ post }) {
                     } ${highlightedPost.title.rendered}`,
                   }}
                 ></h2>
-                <p className="text-gray-400 pb-14">
+                <p className="pb-14">
                   <Link href={rsndLink}>
-                    <a className="font-sans font-medium text-xl text-gray-500 hover:text-primary">
+                    <a className="font-sans font-medium text-md md:text-xl text-gray-500 hover:text-primary">
                       RSND, VOLUME {isFirstVolume ? "I" : "II"}
                     </a>
                   </Link>
