@@ -73,26 +73,26 @@ const HomeNavbar = () => {
 
           {mobileMenuOpen !== CLOSE && (
             <div
-              className={`p-2 z-40 shadow-md absolute top-28 h-80 bg-white left-4 md:left-0 right-4 md:right-0 flex flex-col items-center justify-evenly
-          border rounded-md transition-all mobile-nav-items ${mobileMenuOpen}`}
+              className={`px-4 py-2 z-40 shadow-md text-lg font-medium absolute top-28 h-[55vh] bg-white left-4 md:left-0 right-4 md:right-0 flex flex-col justify-evenly
+          border rounded-3xl transition-all mobile-nav-items ${mobileMenuOpen}`}
             >
               <Link href="/rsnd-vol1" passHref>
-                <a>Raccolta degli Scritti di Nichiren Daishonin VOLUME I</a>
+                <a className="!text-left border-b border-gray-200 pb-4">Raccolta degli Scritti di<br/>NICHIREN DAISHONIN <span className="block text-sm text-gray-500 font-sans font-normal">VOLUME I</span></a>
               </Link>
 
               <Link href="/rsnd-vol2" passHref>
-                <a>Raccolta degli Scritti di Nichiren Daishonin VOLUME II</a>
+                <a className="!text-left border-b border-gray-200 pb-4">Raccolta degli Scritti di<br/>NICHIREN DAISHONIN <span className="block text-sm text-gray-500 font-sans font-normal">VOLUME II</span></a>
               </Link>
 
               <Link href="/sutra-del-loto" passHref>
-                <a>Sutra del Loto</a>
+                <a className="!text-left border-b border-gray-200 pb-4">Sutra del Loto</a>
               </Link>
 
               <Link href="/glossario" passHref>
-                <a>Glossario</a>
+                <a className="!text-left font-sans text-customYellow uppercase border-b border-gray-200 pb-4">Glossario</a>
               </Link>
               <Link href="/ricerca" passHref>
-                <a>Ricerca</a>
+                <a className="!text-left font-sans text-primary uppercase">Ricerca</a>
               </Link>
             </div>
           )}
@@ -116,13 +116,13 @@ const HomeNavbar = () => {
           </div>
           <span className="hidden lg:flex gap-10">
             <Link href="/glossario" passHref>
-              <a className="btn bg-customYellow hover:bg-customYellowHover text-white text-lg px-8 h-10 block rounded-3xl font-medium font-sans flex items-center">
+              <a className="btn bg-customYellow hover:bg-customYellowHover text-white text-base px-8 h-10 block rounded-3xl font-medium font-sans flex items-center">
                 <span>GLOSSARIO</span>
               </a>
             </Link>
 
             <Link href="/ricerca" passHref>
-              <a className="btn bg-primary hover:bg-primaryHover text-white text-lg px-8 h-10 block rounded-3xl font-medium font-sans flex items-center">
+              <a className="btn bg-primary hover:bg-primaryHover text-white text-base px-8 h-10 block rounded-3xl font-medium font-sans flex items-center">
                 <span>RICERCA</span>
               </a>
             </Link>

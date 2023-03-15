@@ -39,7 +39,7 @@ nav {
     left: 0;
     top: 0;
     height: 2px;
-    width: 27px;
+    width: 28px;
     border-radius: 20px;
     background-color: #0e3933;
     display: block;
@@ -57,11 +57,11 @@ nav {
   }
 
   &.open .ham:first-child {
-    transform: translateY(11px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
   }
 
   &.open .ham:last-child {
-    transform: translateY(-12px) rotate(-45deg);
+    transform: translateY(-11px) rotate(-45deg);
   }
 
   &.open .ham:nth-child(2) {
