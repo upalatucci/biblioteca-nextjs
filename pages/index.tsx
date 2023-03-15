@@ -164,7 +164,11 @@ export default function Home() {
                     <div>
                       <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
                         <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#EEE8DD] ">
-                          <img className="" src="/icons/ico-glossario.svg" />
+                          <img
+                            className=""
+                            src="/icons/ico-glossario.svg"
+                            alt="icona glossario"
+                          />
                         </span>
                         <div className="z-10">
                           <h3 className="font-serif z-10 lg:text-lg font-bold">
@@ -204,6 +208,7 @@ export default function Home() {
                           <img
                             className=""
                             src="/icons/ico-advance-search.svg"
+                            alt="icona ricerca avanzata"
                           />
                         </span>
                         <div className="z-10">

@@ -31,7 +31,11 @@ const HomeNavbar = () => {
             rel="noreferrer"
             className="flex items-center"
           >
-            <img className="w-7 h-7 inline-block mr-2" src="/icons/ibisg.svg" />
+            <img
+              className="w-7 h-7 inline-block mr-2"
+              src="/icons/ibisg.svg"
+              alt="icona istituto buddista italiano soka gakkai"
+            />
             <span className="text-white">
               Istituto Buddista Italiano Soka Gakkai
             </span>
@@ -41,7 +45,10 @@ const HomeNavbar = () => {
       <div className="px-8">
         <div className="container mx-auto text-center">
           <Link href="/" passHref>
-            <a className="inline-block">
+            <a
+              className="inline-block"
+              aria-label="La Biblioteca di Nichiren, Home"
+            >
               <h1 className="hidden lg:block text-center font-bold text-3xl md:text-5xl mb-8 mt-14 print:mt-0">
                 La Biblioteca di Nichiren
               </h1>
@@ -64,6 +71,7 @@ const HomeNavbar = () => {
                 open: [SHOW, SHOWING].includes(mobileMenuOpen),
               }
             )}
+            aria-label="hamburger menu"
             onClick={closeMobileMenu}
           >
             <span className="ham"></span>

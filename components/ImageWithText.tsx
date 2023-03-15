@@ -39,7 +39,7 @@ const ImageWithText: React.FC<BookType> = ({
             "font-sans flex flex-col items-center justify-start m-6 md:px-4 md:py-8 text-center"
           }
         >
-          <h3 className="font-serif lg:text-2xl font-bold mb-2">{title}</h3>
+          <h2 className="font-serif lg:text-2xl font-bold mb-2">{title}</h2>
           {description && (
             <span className="text-lg bg-defaultBg px-6 py-2 rounded-full">
               {description}
