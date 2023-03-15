@@ -81,7 +81,7 @@ const HomeNavbar = () => {
 
           {mobileMenuOpen !== CLOSE && (
             <div
-              className={`px-4 py-2 z-40 shadow-md text-lg font-medium absolute top-28 h-[80vh] sm:h-[55vh] bg-white left-0 md:left-4 right-0 md:right-4 flex flex-col justify-evenly
+              className={`px-4 py-2 z-40 shadow-md text-lg font-medium absolute top-28 h-[65vh] sm:h-[55vh] bg-white left-0 md:left-4 right-0 md:right-4 flex flex-col justify-evenly
           border rounded-3xl transition-all mobile-nav-items ${mobileMenuOpen}`}
             >
               <Link href="/rsnd-vol1" passHref>
