@@ -57,14 +57,14 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
   return (
     <li className="py-6">
       <button className="text-left" onClick={toggleOpen}>
-        <div className="text-lg">
+        <div className="text-md md:text-lg">
           <h5
-            className="font-bold pb-4"
+            className="font-bold pb-4 text-lg md:text-xl"
             dangerouslySetInnerHTML={{ __html: post.title.rendered }}
           />
           <div
             ref={contentRef}
-            className="result lg:mr-20 font-medium"
+            className="result lg:mr-20 font-medium text-md md:text-lg"
             dangerouslySetInnerHTML={{
               __html: isOpen ? contentOpen : contentClose,
             }}
@@ -84,7 +84,7 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
                 </span>
               ))}
 
-            <span className="text-primary">
+            <span className="text-md md:text-lg text-primary">
               {humanizeTypeCategory(post.type, post.categories)}
             </span>
           </p>
@@ -111,15 +111,15 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
 
   return (
     <li className="py-6">
-      <div className="text-lg">
+      <div className="">
         <Link href={`/${post.baseURL}/${post.slug}${postQueryParams}`} passHref>
           <a>
             <h5
-              className="font-bold pb-4"
+              className="font-bold pb-4 text-lg md:text-xl"
               dangerouslySetInnerHTML={{ __html: post.title.rendered }}
             />
             <div
-              className="result lg:mr-20 font-medium"
+              className="result lg:mr-20 font-medium text-md md:text-lg"
               dangerouslySetInnerHTML={{
                 __html: `${(post?.highlight || post.content.rendered).substring(
                   0,

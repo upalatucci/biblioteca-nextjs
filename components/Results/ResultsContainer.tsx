@@ -14,7 +14,7 @@ import TabFilters from "./TabFilters";
 const NoResults = () => (
   <div className="border-b border-gray-400 bg-white px-8 shadow-md rounded-3xl">
     <div className="md:px-20 xl:px-0 mx-auto max-w-[1400px] py-20">
-      <h3 className="text-3xl md:text-4xl px-4 font-bold">
+      <h3 className="text-lg md:text-4xl px-4 font-bold">
         Spiacenti nessun risultato trovato
       </h3>
     </div>
@@ -71,9 +71,9 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({
 
   return (
     <div className="border-b border-gray-400 bg-white px-8 shadow-md rounded-3xl">
-      <div className="md:px-20 xl:px-0 mx-auto max-w-[1400px] py-20">
+      <div className="px-0 mx-auto max-w-[1400px] py-8 md:py-14">
         <TabFilters />
-        <ul className="divide-y-2 divide-dashed mb-10 mx-auto bg-defaultBg  rounded-3xl shadow-md  px-4 md:px-10 py-8">
+        <ul className="divide-y-2 divide-dashed mb-10 mx-auto bg-defaultBg rounded-3xl shadow-md px-4 md:px-10 py-4">
           {searchedPosts?.map((postResult) => (
             <PostResult key={postResult.id} post={postResult} />
           ))}

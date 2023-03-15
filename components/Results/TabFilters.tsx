@@ -50,7 +50,7 @@ const TabFilters: React.FC = () => {
     return null;
 
   return (
-    <div className="mb-10 flex items-center gap-8">
+    <div className="w-full flex flex-col md:flex-row mb-10 flex md:items-center gap-4">
       <span className="font-sans font-bold text-gray-500">Filtra i risultati:</span>
 
       <Select
@@ -58,7 +58,7 @@ const TabFilters: React.FC = () => {
         value={(recipient as string) || RECIPIENTS_OPTIONS[0]}
         name="destinatario"
         options={RECIPIENTS_OPTIONS}
-        className="w-64 border-primary"
+        className="w-full md:w-1/3 border-primary"
         aria-label="Destinatario"
       />
 
@@ -67,7 +67,7 @@ const TabFilters: React.FC = () => {
         value={(place as string) || PLACES_OPTIONS[0]}
         name="luogo"
         options={PLACES_OPTIONS}
-        className="w-64"
+        className="w-full md:w-1/3"
         aria-label="Scritto a"
       />
 

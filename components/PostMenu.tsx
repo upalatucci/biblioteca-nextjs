@@ -78,7 +78,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
           onClose={() => setOpenShareModal(false)}
         />
       )}
-      <div className="gap-10 p-8 md:p-10 w-full text-md rounded-3xl shadow-md bg-defaultBg flex flex-col md:flex-row items-center justify-start">
+      <div className="post-menu gap-10 p-8 md:p-10 w-full text-md rounded-3xl shadow-md bg-defaultBg flex sm:flex-row items-center justify-start">
         {image && (
           <Link href={imageLink ?? "#"}>
             <a>
@@ -88,14 +88,14 @@ const PostMenu: React.FC<PostMenuProps> = ({
             </a>
           </Link>
         )}
-        <ul className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-1 md:gap-10 flex-wrap w-full">
+        <ul className="post-menu-list flex sm:flex-row items-start sm:items-center sm:justify-start gap-4 lg:gap-10 flex-wrap w-full">
           <li className="lg:mx-0 py-2 hover:text-primary">
             <button
               onClick={share}
               className="flex items-center gap-2 font-sans text-md lg:text-lg"
             >
               <Image src={shareIcon} alt="Condividi" width={15} height={15} />{" "}
-              Condividi
+              <span className="post-menu-item-label">Condividi</span>
             </button>
           </li>
           <li className="lg:mx-0 py-2 hover:text-primary">
@@ -104,7 +104,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
               className="flex items-center gap-2 font-sans text-md lg:text-lg"
             >
               <Image src={printIcon} alt="Stampa" width={15} height={15} />{" "}
-              Stampa
+              <span className="post-menu-item-label">Stampa</span>
             </button>
           </li>
           {/* <li className="lg:mx-0 py-1">Ascolta l&apos;audio</li> */}
@@ -119,7 +119,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
                 width={21}
                 height={21}
               />{" "}
-              Dimensione del testo
+              <span className="post-menu-item-label">Dimensione del testo</span>
             </button>
           </li>
 
@@ -139,7 +139,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
                   width={17}
                   height={17}
                 />{" "}
-                <span>Vai ai cenni storici</span>
+                <span className="post-menu-item-label">Vai ai cenni storici</span>
               </a>
             </li>
           )}
@@ -155,7 +155,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
                   width={15}
                   height={15}
                 />{" "}
-                <span>Vai alle note</span>
+                <span className="post-menu-item-label">Vai alle note</span>
               </a>
             </li>
           )}

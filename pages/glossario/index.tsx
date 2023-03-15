@@ -38,21 +38,21 @@ export default function Glossario() {
       <HomeNavbar />
       <main>
         <section className="bg-defaultBg" id="glossario-cerca">
-          <div className="bg-white shadow-md rounded-3xl py-20 mb-20 lg:py-32 px-8">
+          <div className="bg-white shadow-md rounded-3xl py-14 lg:py-32 px-8">
             <div className="mx-auto max-w-[1400px]">
-              <h2 className="text-3xl font-bold mb-8">Glossario</h2>
+              <h2 className="text-2xl md:text-4xl font-bold mb-8">Glossario</h2>
               <form
-                className="bg-defaultBg shadow-md rounded-3xl px-10 py-14 flex flex-col flex-wrap font-sans"
+                className="bg-defaultBg shadow-md rounded-3xl p-8 flex flex-col flex-wrap font-sans"
                 onSubmit={onSubmit}
               >
                 <div className="mb-4 flex items-stretch lg:items-center justify-between flex-wrap flex-col xl:flex-row">
-                  <label className="flex w-full items-center mb-6">
-                    <span className="font-bold mr-4">Cerca un termine</span>
+                  <label className="flex flex-col md:flex-row w-full md:items-center mb-6">
+                    <span className="font-bold mr-4 mb-4 md:mb-0">Cerca un termine</span>
                     <SearchInput
                       onChange={(e) => setSearchText(e.currentTarget.value)}
                       value={searchText}
                       placeholder="Inserisci la parola che stai cercando"
-                      className="!bg-white border-primary"
+                      className="border-primary"
                     />
                   </label>
                 </div>

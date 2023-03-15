@@ -46,11 +46,11 @@ const Results: React.FC<ResultsProps> = ({
   }
 
   if (!router.query.q) {
-    return <div id="risultati"></div>;
+    return <div className="py-14 px-8" id="risultati"></div>;
   }
 
   return (
-    <div id="risultati">
+    <div className="py-14 px-8" id="risultati">
       <ResultsHeader data={data} loading={loading} />
 
       <ResultsContainer

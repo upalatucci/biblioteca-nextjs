@@ -88,17 +88,17 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
   };
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md py-20 mb-20 lg:py-32 px-8">
+    <div className="w-full bg-white rounded-3xl shadow-md py-14 lg:py-32 px-8 mb-14">
       <form onSubmit={onSubmit} className="mx-auto max-w-[1400px]">
         <section className="">
           <div className="container mx-auto">
-            <h2 className="text-3xl px-4 pb-10 md:px-0 font-bold ">
+            <h2 className="text-2xl md:text-4xl pb-10 md:px-0 font-bold">
               Cosa vuoi approfondire oggi?
             </h2>
 
-            <div className="font-sans rounded-3xl bg-defaultBg px-14 py-20 shadow-md flex flex-col items-center justify-evenly gap-12">
-              <div className="w-full flex flex-col md:flex-row items-center justify-start gap-8">
-                <span className="font-bold mr-10">Cerca:</span>
+            <div className="font-sans rounded-3xl bg-defaultBg p-8 md:p-10 shadow-md flex flex-col items-center justify-evenly gap-12">
+              <div className="w-full flex flex-col md:flex-row md:items-center justify-start gap-4">
+                <span className="font-bold mr-4 md:mb-0">Cerca:</span>
                 <Select
                   onChange={(newVal) =>
                     setSearchType(mapSelectToType[newVal.toString()])
@@ -106,7 +106,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                   value={mapSearchType[searchType]}
                   name="type"
                   options={SELECTABLE_TYPES}
-                  className="mb-4 md:mb-0 md:mr-4 w-full md:w-96"
+                  className="md:mb-0 md:mr-4 w-full md:w-100"
                 />
                 <SearchInput
                   value={searchText}
@@ -119,8 +119,8 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
               <div className="pt-4 flex w-full justify-start">
                 <span className="font-bold mb-6 mr-10">in:</span>
                 <div className="">
-                  <div className="flex items-center justify-start flex-wrap">
-                    <span className="w-32 lg:w-40">
+                  <div className="flex items-center justify-start flex-wrap gap-4 lg:gap-10">
+                    <span className="">
                       <label className="flex items-center form-control">
                         <input
                           type="checkbox"
@@ -132,7 +132,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                         Contenuto
                       </label>
                     </span>
-                    <span className="w-32 lg:w-40">
+                    <span className="">
                       <label className="flex items-center form-control">
                         <input
                           type="checkbox"
@@ -144,7 +144,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                         Cenni storici
                       </label>
                     </span>
-                    <span className="w-32 lg:w-40">
+                    <span className="">
                       <label className="flex items-center form-control">
                         <input
                           type="checkbox"
@@ -156,7 +156,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                         Note
                       </label>
                     </span>
-                    <span className="w-32 lg:w-40">
+                    <span className="">
                       <label className="flex items-center form-control">
                         <input
                           type="checkbox"
@@ -170,7 +170,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                         Introduzione
                       </label>
                     </span>
-                    <span className="w-32 lg:w-40">
+                    <span className="">
                       <label className="flex items-center form-control">
                         <input
                           type="checkbox"
@@ -188,9 +188,9 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                 </div>
               </div>
 
-              <div className="px-4 flex flex-wrap gap-4 items-center justify-center">
+              <div className="w-full px-4 flex flex-wrap gap-4 items-center justify-center">
                 <button
-                  className="btn bg-primary hover:bg-primaryHover rounded-3xl w-60 h-10 text-white text-lg"
+                  className="btn bg-primary hover:bg-primaryHover rounded-3xl w-full sm:w-1/3 h-10 text-white text-lg"
                   type="submit"
                 >
                   <div className="flex items-center justify-center">
@@ -199,7 +199,7 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                 </button>
 
                 <button
-                  className="btn rounded-3xl h-10 w-60 border border-secondary hover:text-white hover:bg-secondary"
+                  className="btn rounded-3xl h-10 w-full sm:w-1/3 border border-secondary hover:text-white hover:bg-secondary"
                   type="reset"
                   onClick={onReset}
                 >

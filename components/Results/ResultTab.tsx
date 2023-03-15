@@ -33,7 +33,7 @@ const selectedTabClass =
   "font-bold text-black !bg-white border border-gray-200  border-b-0 relative top-[0.5px]";
 
 const baseTabClass =
-  "transition-none rounded-t-3xl text-lg inline-block py-4 px-8";
+  "transition-none rounded-t-3xl text-sm md:text-lg inline-block py-4 px-5 tab-mobile";
 
 const ResultTab: React.FC<ResultTabProps> = ({
   count,
@@ -46,7 +46,7 @@ const ResultTab: React.FC<ResultTabProps> = ({
 
   if (count === 0) {
     return (
-      <li className="mr-4 min-w-80 whitespace-pre">
+      <li className="mr-2 min-w-80 whitespace-pre">
         <a
           aria-current="page"
           className={classNames(baseTabClass, "cursor-not-allowed")}
@@ -58,7 +58,7 @@ const ResultTab: React.FC<ResultTabProps> = ({
   }
 
   return (
-    <li className="mr-4 min-w-80 whitespace-pre">
+    <li className="mr-2 min-w-80 whitespace-pre">
       <Link href={createTabURL(router, tabKey)}>
         <a
           aria-current="page"
