@@ -27,6 +27,12 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
+ENV ELASTIC_SEARCH_USERNAME=elastic
+ENV ELASTIC_SEARCH_PASSWORD=password
+ENV ELASTIC_SEARCH_URL=https://sd.sgi-italia.org:8881
+ENV ELASTIC_SEARCH_INDEX=bibliotecasgiitaliaorgsite-post-1
+ENV WORDPRESS_API_ENDPOINT=https://biblioteca.sgi-italia.org/wp-json/wp/v2
+
 RUN yarn build
 
 # If using npm comment out above and use below instead
@@ -55,10 +61,5 @@ USER nextjs
 EXPOSE 3000
 
 ENV PORT 3000
-ENV ELASTIC_SEARCH_USERNAME=elastic
-ENV ELASTIC_SEARCH_PASSWORD=password
-ENV ELASTIC_SEARCH_URL=https://sd.sgi-italia.org:8881
-ENV ELASTIC_SEARCH_INDEX=bibliotecasgiitaliaorgsite-post-1
-ENV WORDPRESS_API_ENDPOINT=https://biblioteca.sgi-italia.org/wp-json/wp/v2
 
 CMD ["node", "server.js"]
