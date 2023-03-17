@@ -21,7 +21,6 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-COPY .env.local .env.production
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
@@ -56,5 +55,10 @@ USER nextjs
 EXPOSE 3000
 
 ENV PORT 3000
+ENV ELASTIC_SEARCH_USERNAME=elastic
+ENV ELASTIC_SEARCH_PASSWORD=password
+ENV ELASTIC_SEARCH_URL=https://sd.sgi-italia.org:8881
+ENV ELASTIC_SEARCH_INDEX=bibliotecasgiitaliaorgsite-post-1
+ENV WORDPRESS_API_ENDPOINT=https://biblioteca.sgi-italia.org/wp-json/wp/v2
 
 CMD ["node", "server.js"]
