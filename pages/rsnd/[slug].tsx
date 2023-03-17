@@ -5,7 +5,6 @@ import HomeNavbar from "@components/Navbar/HomeNavbar";
 import ParagraphWithNotes from "@components/ParagraphWithNotes";
 import PostMenu from "@components/PostMenu";
 
-import { getPost, getSlugs } from "../../lib/wordpress";
 import { useRouter } from "next/router";
 import ArticleLoading from "@components/ArticleLoading";
 import {
@@ -27,6 +26,8 @@ import Link from "next/link";
 import { useContext } from "react";
 import { FontSizeContext } from "contexts/FontSizeContext";
 import { RSND_APPENDICE_CAT_ID } from "@utils/constants";
+import { PrismaClient } from "@prisma/client";
+import { parsePHP } from "@utils/parsePHP";
 
 const ItalianListFormatted = new Intl.ListFormat("it", {
   style: "long",
@@ -178,7 +179,13 @@ export default function PostPage({ post }) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getSlugs("rsnd");
+  const prisma = new PrismaClient();
+
+  const posts = await prisma.d1b1_posts.findMany({
+    where: { post_type: "rsnd" },
+  });
+
+  const paths = posts.map((post) => ({ params: { slug: post.post_name } }));
 
   return {
     paths,
@@ -189,14 +196,74 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  try {
-    const post = await getPost(params.slug);
+  const prisma = new PrismaClient();
 
+  try {
+    const post = await prisma.d1b1_posts.findUnique({
+      where: { post_name: params.slug as string },
+      include: {
+        d1b1_term_relationships: {
+          select: {
+            term_taxonomy_id: true,
+          },
+        },
+        d1b1_postmeta: {
+          select: {
+            meta_value: true,
+            meta_key: true,
+          },
+          where: {
+            meta_key: {
+              in: [
+                "acf_numero",
+                "acf_cenni_storici",
+                "acf_note",
+                "acf_destinatario",
+                "acf_luogo",
+                "acf_data",
+              ],
+            },
+          },
+        },
+      },
+    });
+
+    const acf: { [key in string]: string } = post.d1b1_postmeta.reduce(
+      (acc, metadata) => {
+        const value = metadata.meta_value.includes("{")
+          ? parsePHP(metadata.meta_value)
+          : metadata.meta_value;
+
+        acc[metadata.meta_key] = value;
+
+        if (
+          metadata.meta_key === "acf_destinatario" &&
+          typeof value === "string"
+        )
+          acc[metadata.meta_key] = [value];
+
+        return acc;
+      },
+      {}
+    );
+
+    // console.log(post);
     if (!post) return { notFound: true, revalidate: DEFAULT_REVALIDATE };
 
     return {
       props: {
-        post,
+        post: {
+          content: {
+            rendered: post.post_content,
+          },
+          title: {
+            rendered: post.post_title,
+          },
+          acf,
+          cat_rsnd: post.d1b1_term_relationships.map((term) =>
+            Number(term.term_taxonomy_id)
+          ),
+        },
       },
     };
   } catch (error) {
