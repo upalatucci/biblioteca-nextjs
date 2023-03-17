@@ -235,15 +235,9 @@ export default function Home() {
               Che cos&apos;è La Biblioteca di Nichiren
             </h2>
             <p className="text-2xl font-serif text-center mx-4 md:mx-32 lg:mx-64">
-              Praesent vel urna turpis. Aenean ultrices pharetra justo quis
-              ultricies. Vestibulum imperdiet aliquam interdum. Nunc laoreet
-              eget metus vitae semper. Class aptent taciti sociosqu ad litora
-              torquent per conubia nostra, per inceptos himenaeos. Aliquam
-              consectetur interdum velit in gravida. Sed eget sapien odio.
-              Vivamus tincidunt dictum lorem, sollicitudin varius enim
-              condimentum ac. Vestibulum sit amet arcu nulla. Nullam vitae
-              libero ullamcorper, mollis massa vel, malesuada elit. Nulla
-              vulputate ex a ligula mollis pharetra.
+            Benvenuti nella Libreria Nichiren Online, una libreria di testi buddisti aperta a tutti per la libera consultazione e ricerca. 
+              Essa contiene le traduzioni in italiano dei testi essenziali del buddismo di Nichiren: La raccolta degli scritti di Nichiren Daishonin Vol. 1 e 2 e il Sutra del Loto. 
+              Come aiuto alla lettura è presente anche un glossario dei termini buddisti usati.
             </p>
           </div>
         </section>

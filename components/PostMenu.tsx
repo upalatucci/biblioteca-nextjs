@@ -88,7 +88,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
             </a>
           </Link>
         )}
-        <ul className="post-menu-list flex sm:flex-row items-start sm:items-center sm:justify-start gap-4 lg:gap-10 flex-wrap w-full">
+        <ul className="post-menu-list flex sm:flex-row items-start sm:items-center sm:justify-start gap-x-4 gap-y-0 lg:gap-10 flex-wrap w-full">
           <li className="lg:mx-0 py-2 hover:text-primary">
             <button
               onClick={share}
@@ -124,7 +124,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
           </li>
 
           {(withBackgrounds || withNotes) && (
-            <span className="hidden lg:inline border-l-2 border-gray-300 h-4 w-2"></span>
+            <span className="block invisible !w-full md:!w-auto md:visible md:inline border-l-2 border-gray-300 h-4 w-2"></span>
           )}
 
           {withBackgrounds && (

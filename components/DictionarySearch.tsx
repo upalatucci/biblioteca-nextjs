@@ -164,7 +164,7 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
                 >
                   <button className="text-left">
                     <div
-                      className="font-bold font-bold pb-4 text-lg md:text-xl"
+                      className="first-letter font-bold font-bold pb-4 text-lg md:text-xl"
                       dangerouslySetInnerHTML={{
                         __html: glossarioRicerca.title,
                       }}

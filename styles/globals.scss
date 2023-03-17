@@ -202,6 +202,9 @@ mark {
   }
 }
 
+h5:first-letter, .first-letter:first-letter {
+  text-transform: uppercase;
+}
 .result p {
   display: inline-block;
 }

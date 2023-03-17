@@ -1,6 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="15.691" height="15.677" viewBox="0 0 15.691 15.677">
-  <g id="Icon_feather-link" data-name="Icon feather-link" transform="translate(-1.993 -2.008)">
-    <path id="Tracciato_338" data-name="Tracciato 338" d="M15,10.53a3.421,3.421,0,0,0,5.159.369l2.053-2.053a3.421,3.421,0,1,0-4.838-4.838L16.2,5.18" transform="translate(-6.531 0)" fill="none" stroke="#0e83a4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-    <path id="Tracciato_339" data-name="Tracciato 339" d="M11.206,14.864a3.421,3.421,0,0,0-5.159-.369L3.995,16.547a3.421,3.421,0,1,0,4.838,4.838L10,20.215" transform="translate(0 -5.702)" fill="none" stroke="#0e83a4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="13.707" height="15.169" viewBox="0 0 13.707 15.169">
+  <path id="Icon_material-share" data-name="Icon material-share" d="M15.923,13.722a2.218,2.218,0,0,0-1.493.586L9,11.148a2.107,2.107,0,0,0,0-1.066l5.369-3.13a2.279,2.279,0,1,0-.731-1.668,2.493,2.493,0,0,0,.069.533L8.338,8.947a2.285,2.285,0,1,0,0,3.335l5.422,3.168a2.148,2.148,0,0,0-.061.495,2.224,2.224,0,1,0,2.224-2.224Z" transform="translate(-4.5 -3)" fill="#0e83a4"/>
 </svg>
