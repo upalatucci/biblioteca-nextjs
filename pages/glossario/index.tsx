@@ -11,12 +11,27 @@ const alfabeto = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 
 export default function Glossario() {
   const router = useRouter();
-  const [selectedLetter, setSelectedLetter] = useState("");
+
+  const selectedLetter = router?.query?.lettera as string;
+
   const [searchText, setSearchText] = useState("");
 
+  useEffect(() => {
+    setSearchText(router?.query?.q as string);
+  }, [router?.query?.q]);
+
   const clearFilters = () => {
-    setSelectedLetter("");
     setSearchText("");
+
+    const newQuery = { ...router.query };
+
+    delete newQuery.lettera;
+
+    router.push({
+      ...router,
+      query: newQuery,
+      hash: null,
+    });
   };
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
@@ -28,6 +43,16 @@ export default function Glossario() {
   useEffect(() => {
     setSearchText(router?.query?.q as string);
   }, [router?.query?.q]);
+
+  const onClickLetter = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const letter = event.currentTarget.innerText;
+
+    router.push({
+      ...router,
+      query: { ...router.query, lettera: letter },
+      hash: "risultati",
+    });
+  };
 
   return (
     <>
@@ -47,7 +72,9 @@ export default function Glossario() {
               >
                 <div className="mb-4 flex items-stretch lg:items-center justify-between flex-wrap flex-col xl:flex-row">
                   <label className="flex flex-col md:flex-row w-full md:items-center mb-6">
-                    <span className="font-bold mr-4 mb-4 md:mb-0">Cerca un termine</span>
+                    <span className="font-bold mr-4 mb-4 md:mb-0">
+                      Cerca un termine
+                    </span>
                     <SearchInput
                       onChange={(e) => setSearchText(e.currentTarget.value)}
                       value={searchText}
@@ -68,11 +95,7 @@ export default function Glossario() {
                             selectedLetter === lettera,
                         }
                       )}
-                      onClick={() =>
-                        lettera === selectedLetter
-                          ? setSelectedLetter("")
-                          : setSelectedLetter(lettera)
-                      }
+                      onClick={onClickLetter}
                     >
                       {lettera}
                     </button>
