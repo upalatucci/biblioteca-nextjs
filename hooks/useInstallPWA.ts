@@ -6,10 +6,6 @@ const useInstallPWA = (): [installable: boolean, install: () => void] => {
 
   useEffect(() => {
     const handlePWAPrompt = (installPromptEvent) => {
-      console.log(installPromptEvent);
-
-      installPromptEvent.preventDefault();
-
       setDeferredPrompt(installPromptEvent);
     };
 
