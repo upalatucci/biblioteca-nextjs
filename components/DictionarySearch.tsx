@@ -6,7 +6,8 @@ import Pagination, { usePagination } from "./Pagination";
 import { GLOSSARY_RSND_CAT_ID, GLOSSARY_SDL_CAT_ID } from "@utils/constants";
 import Link from "next/link";
 import classNames from "classnames";
-import { useRouter } from "next/router";
+import { createRouter, NextRouter, useRouter } from "next/router";
+import { Url } from "url";
 
 type DictionaryItem = {
   title: string;
@@ -34,10 +35,23 @@ const getCategoryFromBook = (book: string) => {
 const selectedTabClass =
   "font-bold text-black !bg-white border border-gray-200 rounded-t-3xl border-b-0 relative top-[0.5px]";
 
+const getTabUrl = (router: NextRouter, book?: string): Partial<Url> => {
+  const newQuery = { ...router.query };
+
+  if (!book) delete newQuery.book;
+  else newQuery.book = book;
+
+  return {
+    pathname: book ? "/glossario/[book]" : "/glossario",
+    query: newQuery,
+    hash: "risultati"
+  };
+};
+
 const DictionarySearch: React.FC<DictionarySearchProps> = ({
   letter,
   filterText,
-  clearFilters,
+  clearFilters
 }) => {
   const router = useRouter();
 
@@ -95,12 +109,15 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
       </h3>
       <ul className="relative mb-[-1px] max-w-[1400px] flex flex-wrap text-center font-sans dark:text-gray-400 pt-14 md:pl-8">
         <li className="mr-2 min-w-80">
-          <Link href="/glossario#risultati">
+          <Link href={getTabUrl(router, null)}>
             <a
               aria-current="page"
-              className={classNames("inline-block p-4 tab-mobile transition-none", {
-                [selectedTabClass]: !filterCategory,
-              })}
+              className={classNames(
+                "inline-block p-4 tab-mobile transition-none",
+                {
+                  [selectedTabClass]: !filterCategory
+                }
+              )}
             >
               Tutti ({totalResults})
             </a>
@@ -108,14 +125,17 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
         </li>
 
         <li className="mr-2 min-w-80">
-          <Link href="/glossario/rsnd#risultati">
+          <Link href={getTabUrl(router, "rsnd")}>
             <a
               aria-current="page"
-              className={classNames("inline-block p-4 tab-mobile transition-none", {
-                [selectedTabClass]: filterCategory === GLOSSARY_RSND_CAT_ID,
-                "text-gray-400 pointer-events-none cursor-not-allowed":
-                  rsndResults === 0,
-              })}
+              className={classNames(
+                "inline-block p-4 tab-mobile transition-none",
+                {
+                  [selectedTabClass]: filterCategory === GLOSSARY_RSND_CAT_ID,
+                  "text-gray-400 pointer-events-none cursor-not-allowed":
+                    rsndResults === 0
+                }
+              )}
             >
               <span className="hidden lg:inline">
                 Raccolta degli Scritti di Nichiren Daishonin
@@ -127,14 +147,17 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
         </li>
 
         <li className="mr-2 min-w-80">
-          <Link href="/glossario/sdl#risultati">
+          <Link href={getTabUrl(router, "sdl")}>
             <a
               aria-current="page"
-              className={classNames("inline-block p-4 tab-mobile transition-none", {
-                [selectedTabClass]: filterCategory === GLOSSARY_SDL_CAT_ID,
-                "text-gray-400 pointer-events-none cursor-not-allowed":
-                  sdlResults === 0,
-              })}
+              className={classNames(
+                "inline-block p-4 tab-mobile transition-none",
+                {
+                  [selectedTabClass]: filterCategory === GLOSSARY_SDL_CAT_ID,
+                  "text-gray-400 pointer-events-none cursor-not-allowed":
+                    sdlResults === 0
+                }
+              )}
             >
               <span className="hidden md:inline">Il Sutra del Loto</span>
               <span className="md:hidden">SDL</span>
@@ -166,13 +189,13 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
                     <div
                       className="first-letter font-bold font-bold pb-4 text-lg md:text-xl"
                       dangerouslySetInnerHTML={{
-                        __html: glossarioRicerca.title,
+                        __html: glossarioRicerca.title
                       }}
                     ></div>
                   </button>
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: glossarioRicerca.content,
+                      __html: glossarioRicerca.content
                     }}
                     className="result lg:mr-20 font-medium text-md md:text-lg"
                   ></div>

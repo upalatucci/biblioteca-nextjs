@@ -3,14 +3,6 @@ import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import { useEffect, useRef } from "react";
 
-export const removeBook = (routerPath: string, book: string): string => {
-  return routerPath.replace(book, "");
-};
-
-export const removeRSNDParams = (routerPath: string) => {
-  return routerPath.replace(/(recipient|from|to|place)=[\w\d\+]+&?/g, "");
-};
-
 const usePrevious = <T>(value: T): T => {
   const ref = useRef<T>();
   useEffect(() => {

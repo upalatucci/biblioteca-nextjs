@@ -1,15 +1,15 @@
 import {
   MAP_BOOK_TO_HUMAN_READABLE,
-  mapElasticResultToPost,
+  mapElasticResultToPost
 } from "@utils/elasticSearchUtils";
 import React, { useMemo } from "react";
 import PostResult from "./PostResult";
 import Pagination from "@components/Pagination";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import ResultsLoading from "./ResultsLoading";
 import Link from "next/link";
-import { removeBook, removeRSNDParams } from "./utils";
 import TabFilters from "./TabFilters";
+import { Url } from "url";
 
 const NoResults = () => (
   <div className="border-b border-gray-400 bg-white px-8 shadow-md rounded-3xl">
@@ -21,8 +21,16 @@ const NoResults = () => (
   </div>
 );
 
-const removeParams = (routerPath: string, book: string) => {
-  return removeRSNDParams(removeBook(routerPath, book));
+const getBaseSearchPath = (router: NextRouter): Partial<Url> => {
+  return {
+    pathname: router.pathname.replace("/[book]", ""),
+    query: {
+      q: router?.query?.q,
+      fields: router?.query?.fields,
+      searchType: router?.query?.searchType
+    },
+    hash: "risultati"
+  };
 };
 
 const NoResultsForThatBook = ({ router }) => (
@@ -34,8 +42,8 @@ const NoResultsForThatBook = ({ router }) => (
           {MAP_BOOK_TO_HUMAN_READABLE[router?.query?.book as string] ||
             router?.query?.book}
         </h3>
-        <Link href={removeParams(router.asPath, router?.query?.book as string)}>
-          <a className=" px-4">Prova a cercare su tutte le fonti</a>
+        <Link href={getBaseSearchPath(router)}>
+          <a className="text-primary px-4">Prova a cercare su tutte le fonti</a>
         </Link>
       </div>
     </div>
@@ -52,7 +60,7 @@ type ResultsContainerProps = {
 const ResultsContainer: React.FC<ResultsContainerProps> = ({
   data,
   loading,
-  totalResults,
+  totalResults
 }) => {
   const router = useRouter();
   const searchedPosts = useMemo(() => mapElasticResultToPost(data), [data]);

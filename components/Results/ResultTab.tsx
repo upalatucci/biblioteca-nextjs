@@ -1,7 +1,8 @@
 import classNames from "classnames";
 import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
-import { removeRSNDParams } from "./utils";
+import { Url } from "url";
+// import { removeRSNDParams } from "./utils";
 
 type ResultTabProps = {
   count: number;
@@ -11,13 +12,33 @@ type ResultTabProps = {
   loading?: boolean;
 };
 
-const createTabURL = (router: NextRouter, tabKey) => {
-  const basePath = router.pathname.replace("/[book]", "");
-  const stringToReplace = tabKey ? `${basePath}/${tabKey}?` : `${basePath}?`;
+const createTabURL = (router: NextRouter, tabKey?: string): Partial<Url> => {
+  const newQuery = { ...router.query };
 
-  return removeRSNDParams(router.asPath)
-    .replace(/\/ricerca(-avanzata)?(\/)?.*\?/, stringToReplace)
-    .replace(/&?page=\d+/, "");
+  delete newQuery.page;
+  delete newQuery.recipient;
+  delete newQuery.from;
+  delete newQuery.to;
+  delete newQuery.place;
+  delete newQuery.book;
+
+  if (tabKey) newQuery.book = tabKey;
+
+  const advancedSearch = router.pathname.match("ricerca-avanzata");
+
+  if (tabKey) {
+    return {
+      pathname: advancedSearch ? "/ricerca-avanzata/[book]" : "/ricerca/[book]",
+      query: newQuery,
+      hash: "risultati"
+    };
+  }
+
+  return {
+    pathname: advancedSearch ? "/ricerca-avanzata" : "/ricerca",
+    query: newQuery,
+    hash: "risultati"
+  };
 };
 
 const CountLoading = ({ loading, count }) =>
@@ -40,7 +61,7 @@ const ResultTab: React.FC<ResultTabProps> = ({
   title,
   active,
   tabKey,
-  loading,
+  loading
 }) => {
   const router = useRouter();
 
@@ -63,7 +84,7 @@ const ResultTab: React.FC<ResultTabProps> = ({
         <a
           aria-current="page"
           className={classNames(baseTabClass, {
-            [selectedTabClass]: active,
+            [selectedTabClass]: active
           })}
         >
           {title} <CountLoading loading={loading} count={count} />
