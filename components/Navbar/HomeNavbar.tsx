@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import NavbarItem from "./NavbarItem";
 import classNames from "classnames";
+import useInstallPWA from "@hooks/useInstallPWA";
 
 const CLOSE = "close";
 const SHOW = "show";
@@ -10,6 +11,7 @@ const CLOSING = "closing";
 
 const HomeNavbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(CLOSE);
+  const [installable, install] = useInstallPWA();
 
   const closeMobileMenu = () => {
     if (mobileMenuOpen === CLOSE) {
@@ -126,6 +128,14 @@ const HomeNavbar = () => {
                   <div>Ricerca</div>
                 </a>
               </Link>
+              {installable && (
+                <button
+                  className="!text-left font-sans text-primary uppercase flex-1 flex flex-col justify-center"
+                  onClick={install}
+                >
+                  Installa
+                </button>
+              )}
             </div>
           )}
 

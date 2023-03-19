@@ -21,7 +21,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         setShowArrow(false);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
