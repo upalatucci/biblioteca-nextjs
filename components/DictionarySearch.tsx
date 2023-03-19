@@ -6,7 +6,7 @@ import Pagination, { usePagination } from "./Pagination";
 import { GLOSSARY_RSND_CAT_ID, GLOSSARY_SDL_CAT_ID } from "@utils/constants";
 import Link from "next/link";
 import classNames from "classnames";
-import { createRouter, NextRouter, useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { Url } from "url";
 
 type DictionaryItem = {
