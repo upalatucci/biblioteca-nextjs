@@ -68,7 +68,7 @@ const HomeNavbar = () => {
             className={classNames(
               "mobileMenu block relative lg:hidden w-12 h-10",
               {
-                open: [SHOW, SHOWING].includes(mobileMenuOpen),
+                open: [SHOW, SHOWING].includes(mobileMenuOpen)
               }
             )}
             aria-label="hamburger menu"
@@ -85,22 +85,46 @@ const HomeNavbar = () => {
           border rounded-3xl transition-all mobile-nav-items ${mobileMenuOpen}`}
             >
               <Link href="/rsnd-vol1" passHref>
-                <a className="!text-left border-b border-gray-200 pb-4">Raccolta degli Scritti di<br/>NICHIREN DAISHONIN <span className="block text-sm text-gray-500 font-sans font-normal">VOLUME I</span></a>
+                <a className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center">
+                  <div>
+                    Raccolta degli Scritti di
+                    <br />
+                    NICHIREN DAISHONIN{" "}
+                    <span className="block text-sm text-gray-500 font-sans font-normal">
+                      VOLUME I
+                    </span>
+                  </div>
+                </a>
               </Link>
 
               <Link href="/rsnd-vol2" passHref>
-                <a className="!text-left border-b border-gray-200 pb-4">Raccolta degli Scritti di<br/>NICHIREN DAISHONIN <span className="block text-sm text-gray-500 font-sans font-normal">VOLUME II</span></a>
+                <a className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center">
+                  <div>
+                    Raccolta degli Scritti di
+                    <br />
+                    NICHIREN DAISHONIN{" "}
+                    <span className="block text-sm text-gray-500 font-sans font-normal">
+                      VOLUME II
+                    </span>
+                  </div>
+                </a>
               </Link>
 
               <Link href="/sutra-del-loto" passHref>
-                <a className="!text-left border-b border-gray-200 pb-4">Sutra del Loto</a>
+                <a className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center">
+                  <div>Sutra del Loto</div>
+                </a>
               </Link>
 
               <Link href="/glossario" passHref>
-                <a className="!text-left font-sans text-customYellow uppercase border-b border-gray-200 pb-4">Glossario</a>
+                <a className="!text-left font-sans text-customYellow uppercase border-b border-gray-200 flex-1 flex flex-col justify-center">
+                  <div>Glossario</div>
+                </a>
               </Link>
               <Link href="/ricerca" passHref>
-                <a className="!text-left font-sans text-primary uppercase">Ricerca</a>
+                <a className="!text-left font-sans text-primary uppercase flex-1 flex flex-col justify-center">
+                  <div>Ricerca</div>
+                </a>
               </Link>
             </div>
           )}
