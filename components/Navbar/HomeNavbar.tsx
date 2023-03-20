@@ -70,7 +70,7 @@ const HomeNavbar = () => {
             className={classNames(
               "mobileMenu block relative lg:hidden w-12 h-10",
               {
-                open: [SHOW, SHOWING].includes(mobileMenuOpen)
+                open: [SHOW, SHOWING].includes(mobileMenuOpen),
               }
             )}
             aria-label="hamburger menu"
@@ -130,7 +130,7 @@ const HomeNavbar = () => {
               </Link>
               {installable && (
                 <button
-                  className="!text-left font-sans text-primary uppercase flex-1 flex flex-col justify-center"
+                  className="!text-left font-sans text-primary uppercase flex-1 flex flex-col justify-center border-t border-gray-200"
                   onClick={install}
                 >
                   Installa
