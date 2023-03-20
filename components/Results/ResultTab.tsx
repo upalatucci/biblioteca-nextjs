@@ -30,14 +30,14 @@ const createTabURL = (router: NextRouter, tabKey?: string): Partial<Url> => {
     return {
       pathname: advancedSearch ? "/ricerca-avanzata/[book]" : "/ricerca/[book]",
       query: newQuery,
-      hash: "risultati"
+      hash: "risultati",
     };
   }
 
   return {
     pathname: advancedSearch ? "/ricerca-avanzata" : "/ricerca",
     query: newQuery,
-    hash: "risultati"
+    hash: "risultati",
   };
 };
 
@@ -61,7 +61,7 @@ const ResultTab: React.FC<ResultTabProps> = ({
   title,
   active,
   tabKey,
-  loading
+  loading,
 }) => {
   const router = useRouter();
 
@@ -80,11 +80,11 @@ const ResultTab: React.FC<ResultTabProps> = ({
 
   return (
     <li className="mr-2 min-w-80 whitespace-pre">
-      <Link href={createTabURL(router, tabKey)}>
+      <Link href={createTabURL(router, tabKey)} scroll={false}>
         <a
           aria-current="page"
           className={classNames(baseTabClass, {
-            [selectedTabClass]: active
+            [selectedTabClass]: active,
           })}
         >
           {title} <CountLoading loading={loading} count={count} />

@@ -44,14 +44,14 @@ const getTabUrl = (router: NextRouter, book?: string): Partial<Url> => {
   return {
     pathname: book ? "/glossario/[book]" : "/glossario",
     query: newQuery,
-    hash: "risultati"
+    hash: "risultati",
   };
 };
 
 const DictionarySearch: React.FC<DictionarySearchProps> = ({
   letter,
   filterText,
-  clearFilters
+  clearFilters,
 }) => {
   const router = useRouter();
 
@@ -109,13 +109,13 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
       </h3>
       <ul className="relative mb-[-1px] max-w-[1400px] flex flex-wrap text-center font-sans dark:text-gray-400 pt-14 md:pl-8">
         <li className="mr-2 min-w-80">
-          <Link href={getTabUrl(router, null)}>
+          <Link href={getTabUrl(router, null)} scroll={false}>
             <a
               aria-current="page"
               className={classNames(
                 "inline-block p-4 tab-mobile transition-none",
                 {
-                  [selectedTabClass]: !filterCategory
+                  [selectedTabClass]: !filterCategory,
                 }
               )}
             >
@@ -125,7 +125,7 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
         </li>
 
         <li className="mr-2 min-w-80">
-          <Link href={getTabUrl(router, "rsnd")}>
+          <Link href={getTabUrl(router, "rsnd")} scroll={false}>
             <a
               aria-current="page"
               className={classNames(
@@ -133,7 +133,7 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
                 {
                   [selectedTabClass]: filterCategory === GLOSSARY_RSND_CAT_ID,
                   "text-gray-400 pointer-events-none cursor-not-allowed":
-                    rsndResults === 0
+                    rsndResults === 0,
                 }
               )}
             >
@@ -147,7 +147,7 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
         </li>
 
         <li className="mr-2 min-w-80">
-          <Link href={getTabUrl(router, "sdl")}>
+          <Link href={getTabUrl(router, "sdl")} scroll={false}>
             <a
               aria-current="page"
               className={classNames(
@@ -155,7 +155,7 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
                 {
                   [selectedTabClass]: filterCategory === GLOSSARY_SDL_CAT_ID,
                   "text-gray-400 pointer-events-none cursor-not-allowed":
-                    sdlResults === 0
+                    sdlResults === 0,
                 }
               )}
             >
@@ -189,13 +189,13 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
                     <div
                       className="first-letter font-bold font-bold pb-4 text-lg md:text-xl"
                       dangerouslySetInnerHTML={{
-                        __html: glossarioRicerca.title
+                        __html: glossarioRicerca.title,
                       }}
                     ></div>
                   </button>
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: glossarioRicerca.content
+                      __html: glossarioRicerca.content,
                     }}
                     className="result lg:mr-20 font-medium text-md md:text-lg"
                   ></div>
