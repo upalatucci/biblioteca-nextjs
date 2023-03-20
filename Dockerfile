@@ -30,8 +30,8 @@ ENV NEXT_TELEMETRY_DISABLED 1
 ENV ELASTIC_SEARCH_USERNAME=elastic
 ENV ELASTIC_SEARCH_PASSWORD=password
 ENV ELASTIC_SEARCH_URL=https://sd.sgi-italia.org:8881
-ENV ELASTIC_SEARCH_INDEX=bibliotecasgiitaliaorgsite-post-1
-ENV WORDPRESS_API_ENDPOINT=https://biblioteca.sgi-italia.org/wp-json/wp/v2
+ENV ELASTIC_SEARCH_INDEX=bibliotecawpsgiitaliaorgsite-post-1
+ENV WORDPRESS_API_ENDPOINT=https://biblioteca-wp.sgi-italia.org/wp-json/wp/v2
 
 RUN yarn build
 
