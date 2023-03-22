@@ -1,6 +1,11 @@
 import Head from "next/head";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
-import { FormEventHandler, useEffect, useState } from "react";
+import {
+  ChangeEventHandler,
+  FormEventHandler,
+  useEffect,
+  useState,
+} from "react";
 import SearchInput from "@components/SearchInput";
 import classNames from "classnames";
 import Footer from "@components/Footer";
@@ -27,17 +32,25 @@ export default function Glossario() {
 
     delete newQuery.lettera;
 
-    router.push({
-      ...router,
-      query: newQuery,
-      hash: null,
-    });
+    router.push(
+      {
+        ...router,
+        query: newQuery,
+        hash: null,
+      },
+      null,
+      { scroll: false }
+    );
   };
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
-    router.push({ ...router, query: { ...router.query, q: searchText } });
+    router.push({
+      ...router,
+      query: { ...router.query, q: searchText },
+      hash: "risultati",
+    });
   };
 
   useEffect(() => {
@@ -45,13 +58,26 @@ export default function Glossario() {
   }, [router?.query?.q]);
 
   const onClickLetter = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     const letter = event.currentTarget.innerText;
 
-    router.push({
-      ...router,
-      query: { ...router.query, lettera: letter },
-      hash: "risultati",
-    });
+    router.push(
+      {
+        ...router,
+        query: { ...router.query, lettera: letter },
+        hash: "risultati",
+      },
+      null,
+      { scroll: false }
+    );
+  };
+
+  const onSearch: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setSearchText(event.currentTarget.value);
+
+    if (router.query.lettera) {
+      router.push({ ...router, query: null }, null, { scroll: false });
+    }
   };
 
   return (
@@ -76,7 +102,7 @@ export default function Glossario() {
                       Cerca un termine
                     </span>
                     <SearchInput
-                      onChange={(e) => setSearchText(e.currentTarget.value)}
+                      onChange={onSearch}
                       value={searchText}
                       placeholder="Inserisci la parola che stai cercando"
                       className="border-primary"
