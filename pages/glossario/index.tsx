@@ -11,6 +11,7 @@ import classNames from "classnames";
 import Footer from "@components/Footer";
 import DictionarySearch from "@components/DictionarySearch";
 import { useRouter } from "next/router";
+import { ParsedUrlQuery } from "querystring";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 
@@ -61,10 +62,16 @@ export default function Glossario() {
     event.preventDefault();
     const letter = event.currentTarget.innerText;
 
+    setSearchText("");
+
+    const newQuery: ParsedUrlQuery = { ...router.query, lettera: letter };
+
+    delete newQuery.q;
+
     router.push(
       {
         ...router,
-        query: { ...router.query, lettera: letter },
+        query: newQuery,
         hash: "risultati",
       },
       null,
