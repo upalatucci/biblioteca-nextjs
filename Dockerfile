@@ -1,3 +1,5 @@
+ARG ARG_DATABASE_URL="mysql://username:password@biblioteca.sgi-italia.org:3306/db"
+
 FROM node:16-alpine AS base
 
 # Install dependencies only when needed
@@ -6,8 +8,10 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+
+ENV DATABASE_URL=$ARG_DATABASE_URL
 # Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* prisma ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
@@ -16,12 +20,14 @@ RUN \
   fi
 
 
+
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+ARG ARG_DATABASE_URL
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
@@ -32,7 +38,9 @@ ENV ELASTIC_SEARCH_PASSWORD=password
 ENV ELASTIC_SEARCH_URL=https://sd.sgi-italia.org:8881
 ENV ELASTIC_SEARCH_INDEX=bibliotecawpsgiitaliaorgsite-post-1
 ENV WORDPRESS_API_ENDPOINT=https://biblioteca-wp.sgi-italia.org/wp-json/wp/v2
+ENV DATABASE_URL $ARG_DATABASE_URL
 
+RUN npx prisma generate
 RUN yarn build
 
 # If using npm comment out above and use below instead

@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import Fuse from "fuse.js";
-import DictionarySkeleton from "@components/DictionarySkeleton";
 import { createFuzzyIndex } from "@utils/fuzzySearch";
 import Pagination, { usePagination } from "./Pagination";
 import { GLOSSARY_RSND_CAT_ID, GLOSSARY_SDL_CAT_ID } from "@utils/constants";
@@ -16,6 +15,7 @@ type DictionaryItem = {
 };
 
 type DictionarySearchProps = {
+  glossary: DictionaryItem[];
   filterText: string;
   letter: string;
   clearFilters: () => void;
@@ -49,6 +49,7 @@ const getTabUrl = (router: NextRouter, book?: string): Partial<Url> => {
 };
 
 const DictionarySearch: React.FC<DictionarySearchProps> = ({
+  glossary,
   letter,
   filterText,
   clearFilters,
@@ -56,30 +57,24 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
   const router = useRouter();
 
   const filterCategory = getCategoryFromBook(router.query.book as string);
-  const [glossario, setGlossario] = useState<DictionaryItem[]>();
   const fuseRef = useRef<Fuse<DictionaryItem>>();
 
   useEffect(() => {
-    import("../books/glossario.json").then((fetchedDictionary) => {
-      fuseRef.current = createFuzzyIndex<DictionaryItem>(
-        fetchedDictionary.default
-      );
-      setGlossario(fetchedDictionary.default);
-    });
-  }, []);
+    fuseRef.current = createFuzzyIndex<DictionaryItem>(glossary);
+  }, [glossary]);
 
   let glossarioFiltrato: DictionaryItem[];
 
   if (filterText) {
     glossarioFiltrato = fuseRef.current
       ?.search(filterText)
-      .map((result) => result.item);
+      ?.map((result) => result.item);
   } else if (letter) {
-    glossarioFiltrato = glossario?.filter((termine) =>
+    glossarioFiltrato = glossary?.filter((termine) =>
       termine?.title?.charAt(0).toUpperCase().startsWith(letter)
     );
   } else {
-    glossarioFiltrato = glossario;
+    glossarioFiltrato = glossary;
   }
 
   const totalResults = glossarioFiltrato?.length || 0;
@@ -97,10 +92,6 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
     : glossarioFiltrato;
 
   const dictionaryToShow = usePagination(glossarioFilteredByCategory);
-
-  if (!glossario) {
-    return <DictionarySkeleton />;
-  }
 
   return (
     <div className="py-14 lg:py-32 px-8 mb-14" id="risultati">

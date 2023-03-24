@@ -28,6 +28,7 @@ import { FontSizeContext } from "contexts/FontSizeContext";
 import { RSND_APPENDICE_CAT_ID } from "@utils/constants";
 import { PrismaClient } from "@prisma/client";
 import { parsePHP } from "@utils/parsePHP";
+const prisma = new PrismaClient();
 
 const ItalianListFormatted = new Intl.ListFormat("it", {
   style: "long",
@@ -114,7 +115,8 @@ export default function PostPage({ post }) {
               {isMainBookContent &&
                 (highlightedPost?.acf?.acf_luogo ||
                   highlightedPost?.acf?.acf_data ||
-                  highlightedPost?.acf?.acf_destinatario.length !== 0) && (
+                  (!!highlightedPost?.acf?.acf_destinatario &&
+                    highlightedPost?.acf?.acf_destinatario?.length !== 0)) && (
                   <p className="text-primary font-sans text-lg">
                     {highlightedPost?.acf?.acf_luogo},{" "}
                     {highlightedPost?.acf?.acf_data}. Indirizzata a{" "}
@@ -179,8 +181,6 @@ export default function PostPage({ post }) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const prisma = new PrismaClient();
-
   const posts = await prisma.d1b1_posts.findMany({
     where: { post_type: "rsnd" },
   });
@@ -196,8 +196,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const prisma = new PrismaClient();
-
   try {
     const post = await prisma.d1b1_posts.findUnique({
       where: { post_name: params.slug as string },
@@ -247,7 +245,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       {}
     );
 
-    // console.log(post);
     if (!post) return { notFound: true, revalidate: DEFAULT_REVALIDATE };
 
     return {

@@ -18,3 +18,11 @@ export const extractParagraphs = (content: string): string[] => {
 };
 
 export const DEFAULT_REVALIDATE = 7 * 24 * 60 * 60;
+
+export const serializeDB = (obj: unknown): unknown =>
+  JSON.parse(
+    JSON.stringify(
+      obj,
+      (key, value) => (typeof value === "bigint" ? Number(value) : value) // return everything else unchanged
+    )
+  );

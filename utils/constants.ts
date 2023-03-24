@@ -31,3 +31,10 @@ export const SDL_CAT_ID = 12;
 export const GLOSSARY_RSND_CAT_ID = 14;
 export const GLOSSARY_SDL_CAT_ID = 15;
 export const SDL_INTRO_CAT_ID = 18;
+
+export enum ACF_METADATA {
+  NUMBER = "acf_numero",
+  RECIPIENT = "acf_destinatario",
+  PLACE = "acf_luogo",
+  DATE = "acf_data",
+}

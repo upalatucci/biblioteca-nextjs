@@ -2,12 +2,12 @@
   "name": "biblioteca-nextjs",
   "private": true,
   "scripts": {
+    "postinstall": "npx prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit",
-    "generate-books": "node ./scripts/getGoshoCategory.js && node ./scripts/getGlossario.js && node ./scripts/getSutra.js"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.1.0",

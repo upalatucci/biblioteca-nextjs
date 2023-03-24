@@ -4,7 +4,5 @@ const withPWA = require("next-pwa")({
 
 module.exports = withPWA({
   reactStrictMode: true,
-  experimental: {
-    outputStandalone: true,
-  },
+  output: "standalone",
 });

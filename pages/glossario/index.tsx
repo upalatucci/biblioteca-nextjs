@@ -12,10 +12,13 @@ import Footer from "@components/Footer";
 import DictionarySearch from "@components/DictionarySearch";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
+import { PrismaClient } from "@prisma/client";
+import { GetStaticProps } from "next";
+import { INCLUDE_CATEGORY } from "lib/db";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 
-export default function Glossario() {
+export default function Glossario({ glossary }) {
   const router = useRouter();
 
   const selectedLetter = router?.query?.lettera as string;
@@ -138,6 +141,7 @@ export default function Glossario() {
             </div>
           </div>
           <DictionarySearch
+            glossary={glossary}
             letter={selectedLetter}
             filterText={searchText}
             clearFilters={clearFilters}
@@ -148,3 +152,28 @@ export default function Glossario() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const prisma = new PrismaClient();
+
+  const posts = await prisma.d1b1_posts.findMany({
+    where: {
+      post_type: "glossary",
+    },
+    include: INCLUDE_CATEGORY,
+  });
+
+  const glossary = posts.map((post) => ({
+    title: post.post_title,
+    content: post.post_content,
+    cat: post.d1b1_term_relationships.map((term) =>
+      Number(term.term_taxonomy_id)
+    ),
+  }));
+
+  return {
+    props: {
+      glossary,
+    },
+  };
+};

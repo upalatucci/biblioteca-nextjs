@@ -29,3 +29,5 @@ jobs:
         with:
           push: true
           tags: upalatucci/biblioteca:latest
+          build-args: |
+            ARG_DATABASE_URL=${{ secrets.DATABASE_URL }}
