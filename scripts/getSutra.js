@@ -7,7 +7,7 @@ async function getPosts() {
 
   while (true) {
     const postsResponse = await fetch(
-      `https://biblioteca.sgi-italia.org/wp-json/wp/v2/sdlpe?per_page=100&page=${page}`
+      `https://biblioteca-wp.sgi-italia.org/wp-json/wp/v2/sdlpe?per_page=100&page=${page}`
     );
     const posts = await postsResponse.json();
 
@@ -35,7 +35,7 @@ getPosts().then((posts) => {
       slug: post.slug,
       category: post.cat_sdlpe,
       number: post.menu_order,
-      number: Number(post.acf.acf_numero)
+      number: Number(post.acf.acf_numero),
     }));
 
   fs.writeFile("./books/sdl.json", JSON.stringify(json), (err) =>
@@ -48,7 +48,7 @@ getPosts().then((posts) => {
       title: post.title.rendered,
       slug: post.slug,
       category: post.cat_sdlpe,
-      number: Number(post.acf.acf_numero)
+      number: Number(post.acf.acf_numero),
     }));
 
   fs.writeFile("./books/intro_sdl.json", JSON.stringify(jsonIntro), (err) =>

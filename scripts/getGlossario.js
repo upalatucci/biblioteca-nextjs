@@ -7,7 +7,7 @@ async function getGlossario() {
 
   while (true) {
     const postsResponse = await fetch(
-      `https://biblioteca.sgi-italia.org/wp-json/wp/v2/glossary?per_page=100&page=${page}`
+      `https://biblioteca-wp.sgi-italia.org/wp-json/wp/v2/glossary?per_page=100&page=${page}`
     );
     const posts = await postsResponse.json();
 
@@ -29,7 +29,7 @@ getGlossario().then((posts) => {
     .map((post) => ({
       title: post.title.rendered,
       content: post.content.rendered,
-      cat: post.cat_glossary
+      cat: post.cat_glossary,
     }))
     .sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
 

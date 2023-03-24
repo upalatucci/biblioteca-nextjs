@@ -13,7 +13,7 @@ async function getPosts() {
 
   while (true) {
     const postsResponse = await fetch(
-      `https://biblioteca.sgi-italia.org/wp-json/wp/v2/rsnd?per_page=100&page=${page}`
+      `https://biblioteca-wp.sgi-italia.org/wp-json/wp/v2/rsnd?per_page=100&page=${page}`
     );
     const posts = await postsResponse.json();
 
