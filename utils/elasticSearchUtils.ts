@@ -63,7 +63,8 @@ const removeUnclosedTags = (text: string): string => {
 
   const div = document.createElement("div");
   div.innerHTML = text;
-  return div.innerHTML;
+
+  return div.innerHTML.replace(/^[^<]*?(&gt;|>)/g, '')
 };
 
 const buildHighlight = (highlight) => {
