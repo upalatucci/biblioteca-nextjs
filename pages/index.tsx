@@ -115,7 +115,7 @@ export default function Home() {
 
         <section className="font-sans flex flex-col py-20 lg:py-32 px-8 items-center justify-center">
           <h2 className="font-serif mt-4 mb-8 font-bold text-2xl sm:text-3xl md:text-5xl text-center">
-            Cosa vuoi approfondire oggi?
+            Cosa vuoi trovare oggi?
           </h2>
           <div className="w-full mt-4 mb-8">
             <form
@@ -175,8 +175,7 @@ export default function Home() {
                             Sfoglia il glossario
                           </h3>
                           <span className="z-10">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Nam eu ipsum urna
+                          Sfoglia il glossario in base alle iniziali del termine o ricerca per parola
                           </span>
                         </div>
                       </div>
@@ -216,8 +215,7 @@ export default function Home() {
                             Fai una ricerca avanzata
                           </h3>
                           <span className="flex-col">
-                            Nam eu ipsum urna. Aenean odio nulla, Lorem ipsum
-                            dolor sit amet consectetur adipisicing elit.
+                          Raffina la ricerca scegliendo il tipo di logica e il contesto in cui cercare.
                           </span>
                         </div>
                       </div>
@@ -235,7 +233,7 @@ export default function Home() {
               Che cos&apos;è La Biblioteca di Nichiren
             </h2>
             <p className="text-2xl font-serif text-center mx-4 md:mx-32 lg:mx-64">
-            Benvenuti nella Libreria Nichiren Online, una libreria di testi buddisti aperta a tutti per la libera consultazione e ricerca. 
+            Benvenuti nella Biblioteca di Nichiren, una libreria online di testi buddisti aperta a tutti per la libera consultazione e ricerca. 
               Essa contiene le traduzioni in italiano dei testi essenziali del buddismo di Nichiren: La raccolta degli scritti di Nichiren Daishonin Vol. 1 e 2 e il Sutra del Loto. 
               Come aiuto alla lettura è presente anche un glossario dei termini buddisti usati.
             </p>
