@@ -198,8 +198,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const post = await prisma.d1b1_posts.findUnique({
-      where: { post_name: params.slug as string },
+    const post = await prisma.d1b1_posts.findFirst({
+      where: { post_name: params.slug as string, post_type: "rsnd" },
       include: {
         d1b1_term_relationships: {
           select: {

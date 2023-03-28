@@ -142,7 +142,7 @@ export default function PostPage({ post }) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await prisma.d1b1_posts.findMany({
-    where: { post_type: "rsnd" },
+    where: { post_type: "sdlpe" },
   });
 
   const paths = posts.map((post) => ({ params: { slug: post.post_name } }));
@@ -157,8 +157,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const post = await prisma.d1b1_posts.findUnique({
-      where: { post_name: params.slug as string },
+    const post = await prisma.d1b1_posts.findFirst({
+      where: { post_name: params.slug as string, post_type: "sdlpe" },
       include: {
         d1b1_term_relationships: {
           select: {
