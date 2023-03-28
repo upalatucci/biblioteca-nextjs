@@ -160,6 +160,9 @@ export const getStaticProps: GetStaticProps = async () => {
       post_type: "glossary",
     },
     include: INCLUDE_CATEGORY,
+    orderBy: {
+      post_title: "asc",
+    },
   });
 
   const glossary = posts.map((post) => ({
