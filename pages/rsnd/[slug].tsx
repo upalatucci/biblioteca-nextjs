@@ -15,6 +15,7 @@ import {
 import useHighlightedPost from "@hooks/useHighlightedPost";
 import { removeHTMLTags } from "@utils/utils";
 import {
+  ACF_METADATA,
   RSND_INTRO_1_CAT_ID,
   RSND_INTRO_2_CAT_ID,
   RSND_VOL_1_CATEGORY_ID,
@@ -27,7 +28,7 @@ import { useContext } from "react";
 import { FontSizeContext } from "contexts/FontSizeContext";
 import { RSND_APPENDICE_CAT_ID } from "@utils/constants";
 import { PrismaClient } from "@prisma/client";
-import { parsePHP } from "@utils/parsePHP";
+import { unifyAcfMetadata } from "lib/db";
 const prisma = new PrismaClient();
 
 const ItalianListFormatted = new Intl.ListFormat("it", {
@@ -213,12 +214,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           where: {
             meta_key: {
               in: [
-                "acf_numero",
-                "acf_cenni_storici",
-                "acf_note",
-                "acf_destinatario",
-                "acf_luogo",
-                "acf_data",
+                ACF_METADATA.NUMBER,
+                ACF_METADATA.BACKGROUND,
+                ACF_METADATA.NOTE,
+                ACF_METADATA.RECIPIENT,
+                ACF_METADATA.PLACE,
+                ACF_METADATA.DATE,
               ],
             },
           },
@@ -226,24 +227,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
     });
 
-    const acf: { [key in string]: string } = post.d1b1_postmeta.reduce(
-      (acc, metadata) => {
-        const value = metadata.meta_value.includes("{")
-          ? parsePHP(metadata.meta_value)
-          : metadata.meta_value;
-
-        acc[metadata.meta_key] = value;
-
-        if (
-          metadata.meta_key === "acf_destinatario" &&
-          typeof value === "string"
-        )
-          acc[metadata.meta_key] = [value];
-
-        return acc;
-      },
-      {}
-    );
+    const acf = unifyAcfMetadata(post.d1b1_postmeta);
 
     if (!post) return { notFound: true, revalidate: DEFAULT_REVALIDATE };
 
@@ -256,6 +240,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           title: {
             rendered: post.post_title,
           },
+          slug: post.post_name,
           acf,
           cat_rsnd: post.d1b1_term_relationships.map((term) =>
             Number(term.term_taxonomy_id)

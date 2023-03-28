@@ -15,6 +15,7 @@ import { ParsedUrlQuery } from "querystring";
 import { PrismaClient } from "@prisma/client";
 import { GetStaticProps } from "next";
 import { INCLUDE_CATEGORY } from "lib/db";
+const prisma = new PrismaClient();
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 
@@ -154,8 +155,6 @@ export default function Glossario({ glossary }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const prisma = new PrismaClient();
-
   const posts = await prisma.d1b1_posts.findMany({
     where: {
       post_type: "glossary",

@@ -4,7 +4,6 @@ import Footer from "@components/Footer";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
 import ParagraphWithNotes from "@components/ParagraphWithNotes";
 
-import { getPost, getSlugs } from "../../lib/wordpress";
 import ArticleLoading from "@components/ArticleLoading";
 import { useRouter } from "next/router";
 import {
@@ -17,18 +16,20 @@ import { removeHTMLTags } from "@utils/utils";
 import PostMenu from "@components/PostMenu";
 import sutraDelLoto from "@public/sutra-del-loto.jpg";
 import Link from "next/link";
-import { SDL_INTRO_CAT_ID } from "@utils/constants";
+import { ACF_METADATA, SDL_INTRO_CAT_ID } from "@utils/constants";
 import { FontSizeContext } from "contexts/FontSizeContext";
 import { useContext } from "react";
+import { PrismaClient } from "@prisma/client";
+import { unifyAcfMetadata } from "lib/db";
+const prisma = new PrismaClient();
 
 export default function PostPage({ post }) {
   const router = useRouter();
   const { fontSize } = useContext(FontSizeContext);
 
-  const [highlightedPost, isLoadingHighligh] = useHighlightedPost(post);
+  const [highlightedPost] = useHighlightedPost(post);
 
-  console.log(post);
-  if (router.isFallback || isLoadingHighligh) {
+  if (router.isFallback) {
     return <ArticleLoading originalPost={post} />;
   }
 
@@ -140,7 +141,11 @@ export default function PostPage({ post }) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getSlugs("sdlpe");
+  const posts = await prisma.d1b1_posts.findMany({
+    where: { post_type: "rsnd" },
+  });
+
+  const paths = posts.map((post) => ({ params: { slug: post.post_name } }));
 
   return {
     paths,
@@ -152,13 +157,57 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const post = await getPost(params.slug, "sdlpe");
+    const post = await prisma.d1b1_posts.findUnique({
+      where: { post_name: params.slug as string },
+      include: {
+        d1b1_term_relationships: {
+          select: {
+            term_taxonomy_id: true,
+          },
+        },
+        d1b1_postmeta: {
+          select: {
+            meta_value: true,
+            meta_key: true,
+          },
+          where: {
+            meta_key: {
+              in: [
+                ACF_METADATA.NUMBER,
+                ACF_METADATA.BACKGROUND,
+                ACF_METADATA.NOTE,
+                ACF_METADATA.RECIPIENT,
+                ACF_METADATA.PLACE,
+                ACF_METADATA.DATE,
+              ],
+            },
+          },
+        },
+      },
+    });
+
+    const acf: { [key in string]: string } = unifyAcfMetadata(
+      post.d1b1_postmeta
+    );
 
     if (!post) return { notFound: true, revalidate: DEFAULT_REVALIDATE };
 
+    console.log(post);
     return {
       props: {
-        post,
+        post: {
+          content: {
+            rendered: post.post_content,
+          },
+          title: {
+            rendered: post.post_title,
+          },
+          slug: post.post_name,
+          acf,
+          cat_rsnd: post.d1b1_term_relationships.map((term) =>
+            Number(term.term_taxonomy_id)
+          ),
+        },
       },
     };
   } catch (error) {

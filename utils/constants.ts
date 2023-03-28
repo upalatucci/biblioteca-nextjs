@@ -37,4 +37,6 @@ export enum ACF_METADATA {
   RECIPIENT = "acf_destinatario",
   PLACE = "acf_luogo",
   DATE = "acf_data",
+  BACKGROUND = "acf_cenni_storici",
+  NOTE = "acf_note",
 }

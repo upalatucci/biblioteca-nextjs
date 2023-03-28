@@ -18,6 +18,7 @@ import {
 } from "@utils/constants";
 import { PrismaClient } from "@prisma/client";
 import { GetStaticProps } from "next";
+const prisma = new PrismaClient();
 
 export default function RSND2({ gosho, index, appendix }) {
   return (
@@ -42,8 +43,6 @@ export default function RSND2({ gosho, index, appendix }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const prisma = new PrismaClient();
-
   const [posts, indexPosts, appendixPosts] = await Promise.all([
     prisma.d1b1_posts.findMany({
       where: {

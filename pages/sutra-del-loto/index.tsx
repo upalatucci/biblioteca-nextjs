@@ -10,6 +10,7 @@ import { INCLUDE_CATEGORY, INCLUDE_NUMBER, getAcfMetadataValue } from "lib/db";
 import { ACF_METADATA, SDL_CAT_ID, SDL_INTRO_CAT_ID } from "@utils/constants";
 import { PrismaClient } from "@prisma/client";
 import { GetStaticProps } from "next";
+const prisma = new PrismaClient();
 
 export default function RSND1({ chapters, index }) {
   const [sortField, setSortField] = useState("number");
@@ -123,8 +124,6 @@ export default function RSND1({ chapters, index }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const prisma = new PrismaClient();
-
   const [posts, indexPosts] = await Promise.all([
     prisma.d1b1_posts.findMany({
       where: {

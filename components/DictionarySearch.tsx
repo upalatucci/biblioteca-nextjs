@@ -42,7 +42,7 @@ const getTabUrl = (router: NextRouter, book?: string): Partial<Url> => {
   else newQuery.book = book;
 
   return {
-    pathname: book ? "/glossario/[book]" : "/glossario",
+    pathname: "/glossario",
     query: newQuery,
     hash: "risultati",
   };
