@@ -36,11 +36,11 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
             <h2 className="text-2xl md:text-4xl pb-10 md:px-0 font-bold">
               Cosa vuoi approfondire oggi?
             </h2>
-          
+
             <div className="font-sans rounded-3xl bg-defaultBg p-8 md:p-10 shadow-md flex flex-col items-center justify-evenly gap-20">
               <SearchInput
                 value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
+                onChange={setSearchText}
                 required
                 aria-label="Cerca parole o frase"
               />
