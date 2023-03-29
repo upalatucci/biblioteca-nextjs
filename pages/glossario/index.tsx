@@ -84,11 +84,16 @@ export default function Glossario({ glossary }) {
   };
 
   const onSearch: ChangeEventHandler<HTMLInputElement> = (event) => {
-    setSearchText(event.currentTarget.value);
+    const newQuery: ParsedUrlQuery = { ...router.query, q: event.target.value };
 
-    if (router.query.lettera) {
-      router.push({ ...router, query: null }, null, { scroll: false });
+    delete newQuery.lettera;
+    delete newQuery.page;
+
+    if (router.query.lettera || router.query.page) {
+      router.push({ ...router, query: newQuery }, null, { scroll: false });
     }
+
+    setSearchText(event.currentTarget.value);
   };
 
   return (
