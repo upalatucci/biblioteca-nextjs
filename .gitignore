@@ -36,3 +36,7 @@ yarn-error.log*
 /public/sw.js.map
 
 .env*
+#audio ignore
+
+audio/tasks/*
+audio/posts/*
