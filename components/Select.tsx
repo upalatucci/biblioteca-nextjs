@@ -150,7 +150,9 @@ const Select: React.FC<SelectProps> = ({
   useEffect(() => {
     if (!searchText) return;
 
-    const findOption = options?.find((option) => option.startsWith(searchText));
+    const findOption = options?.find((option) =>
+      option.toLowerCase().startsWith(searchText.toLowerCase())
+    );
 
     if (findOption) onChange(findOption);
 
