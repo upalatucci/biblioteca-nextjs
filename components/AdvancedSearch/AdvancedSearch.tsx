@@ -110,9 +110,10 @@ const AdvancedSearch: FC<AdvancedSearchType> = ({ loading }) => {
                 />
                 <SearchInput
                   value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
+                  onChange={setSearchText}
                   required
                   aria-label="Cerca parole o frase"
+                  withSuggestions
                 />
               </div>
 

@@ -83,8 +83,8 @@ export default function Glossario({ glossary }) {
     );
   };
 
-  const onSearch: ChangeEventHandler<HTMLInputElement> = (event) => {
-    const newQuery: ParsedUrlQuery = { ...router.query, q: event.target.value };
+  const onSearch = (newSearchValue: string) => {
+    const newQuery: ParsedUrlQuery = { ...router.query, q: newSearchValue };
 
     delete newQuery.lettera;
     delete newQuery.page;
@@ -93,7 +93,7 @@ export default function Glossario({ glossary }) {
       router.push({ ...router, query: newQuery }, null, { scroll: false });
     }
 
-    setSearchText(event.currentTarget.value);
+    setSearchText(newSearchValue);
   };
 
   return (

@@ -33,8 +33,8 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   const { sortedGosho, sortField, sortAscend, onSortChange } =
     useOrder(filteredGosho);
 
-  const onSearchInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setTitleFilter(e.target.value);
+  const onSearchInput = (newSearchValue: string) => {
+    setTitleFilter(newSearchValue);
     onSortChange(undefined, true);
   };
 
