@@ -120,12 +120,11 @@ export default function PostPage({ post }: { post: GetStaticPost }) {
                   (!!highlightedPost?.acf?.acf_destinatario &&
                     highlightedPost?.acf?.acf_destinatario?.length !== 0)) && (
                   <p className="text-primary font-sans text-lg">
-                    {highlightedPost?.acf?.acf_luogo},{" "}
-                    {highlightedPost?.acf?.acf_data}. Indirizzata a{" "}
-                    {ItalianListFormatted.format(
+                    {`${highlightedPost?.acf?.acf_luogo}, ${
+                      highlightedPost?.acf?.acf_data
+                    }. Indirizzata a ${ItalianListFormatted.format(
                       highlightedPost?.acf?.acf_destinatario
-                    )}
-                    .
+                    )}.`}
                   </p>
                 )}
               {paragraphs.map((p) => (

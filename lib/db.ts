@@ -57,7 +57,14 @@ export const filterByCategory = (
   },
 });
 
-export type ACF_Types = { [key in ACF_METADATA]?: string };
+export type ACF_Types = {
+  [ACF_METADATA.RECIPIENT]?: string[];
+  [ACF_METADATA.NUMBER]?: number;
+  [ACF_METADATA.DATE]?: string;
+  [ACF_METADATA.PLACE]?: string;
+  [ACF_METADATA.NOTE]?: string;
+  [ACF_METADATA.BACKGROUND]?: string;
+};
 
 export const unifyAcfMetadata = (
   postMetadata: {
