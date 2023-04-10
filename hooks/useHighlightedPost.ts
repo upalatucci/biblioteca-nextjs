@@ -39,20 +39,8 @@ const useHighlightedPost = (originalPost): any => {
   });
 
   useEffect(() => {
-    if (
-      router.isReady &&
-      router.asPath.indexOf("#") !== -1 &&
-      data &&
-      !isLoading &&
-      router.query.q
-    )
-      setTimeout(
-        () =>
-          document
-            .querySelector("#" + router.asPath?.split("#")?.[1])
-            ?.scrollIntoView(),
-        500
-      );
+    if (router.isReady && data && !isLoading && router.query.q)
+      setTimeout(() => document.querySelector("mark")?.scrollIntoView(), 500);
   }, [data]);
 
   return [

@@ -195,10 +195,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     if (!post) return { notFound: true, revalidate: DEFAULT_REVALIDATE };
 
-    console.log(post);
     return {
       props: {
         post: {
+          id: Number(post.ID),
           content: {
             rendered: post.post_content,
           },

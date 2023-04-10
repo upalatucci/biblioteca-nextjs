@@ -237,6 +237,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return {
       props: {
         post: {
+          id: Number(post.ID),
           content: {
             rendered: post.post_content,
           },
