@@ -63,8 +63,9 @@ const SearchInput: FC<SearchInputProps> = ({
 
   const useSuggestion: MouseEventHandler<HTMLButtonElement> = useCallback(
     (event) => {
-      event.preventDefault();
+      if (!suggestionFocusIndex) return;
 
+      event.preventDefault();
       if (!value) return;
       const words = value.split(" ");
 
@@ -78,7 +79,7 @@ const SearchInput: FC<SearchInputProps> = ({
       setSuggestionFocusIndex(null);
       if (inputRef.current) inputRef.current.focus();
     },
-    [value]
+    [value, suggestionFocusIndex]
   );
 
   const suggestions = [

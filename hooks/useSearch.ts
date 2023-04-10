@@ -16,14 +16,17 @@ const useSearch = (searchURL = "simple_search") => {
     queryKey: [searchURL, router.query],
     queryFn: async () => {
       if (router.query.q) {
-        let searchQuery = location.search;
+        const queryParams = new URLSearchParams(location.search);
 
         if (router.query.book)
-          searchQuery += `&sources=${
+          queryParams.append(
+            "sources",
             MAP_BOOK_URL_KEY_TO_POST_TYPE[router.query.book as string]
-          }`;
+          );
 
-        const response = await fetch(`/api/${searchURL}${searchQuery}`);
+        const response = await fetch(
+          `/api/${searchURL}?${queryParams.toString()}`
+        );
 
         if (!response.ok)
           return Promise.reject(
