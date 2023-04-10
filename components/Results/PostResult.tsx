@@ -1,42 +1,15 @@
 import Link from "next/link";
 import { FC, useCallback, useRef, useState } from "react";
-import { PostResultType, PostType } from "@utils/elasticSearchUtils";
+import { PostResultType } from "@utils/elasticSearchUtils";
 import { useRouter } from "next/router";
-import { FIELDS } from "@utils/constants";
-import { getQueryParamAsArray } from "@utils/utils";
+import {
+  getPostResultLink,
+  humanizeTypeCategory,
+  humanizedField,
+} from "./utils";
 
 type PostProps = {
   post: PostResultType;
-};
-
-const humanizedField = {
-  post_content_filtered: "CONTENUTO",
-  "post_content_filtered.exact": "CONTENUTO",
-  "meta.acf_cenni_storici.value": "CENNI STORICI",
-  "meta.acf_cenni_storici.value.exact": "CENNI STORICI",
-  "meta.acf_note.value": "NOTE",
-  "meta.acf_note.value.exact": "NOTE",
-};
-
-const humanizeTypeCategory = (type: PostType, categories: string[]) => {
-  if (type === "glossary") return "Glossario";
-
-  if (type === "rsnd") {
-    if (categories.length > 1)
-      return `Raccolta degli scritti di Nichiren Daishonin Volume I/II`;
-    return `Raccolta degli scritti di Nichiren Daishonin ${categories?.[0]}`;
-  }
-
-  return categories?.[0];
-};
-
-const linkField = {
-  post_content_filtered: "contenuto",
-  "post_content_filtered.exact": "contenuto",
-  "meta.acf_cenni_storici.value": "cenni_storici",
-  "meta.acf_cenni_storici.value.exact": "cenni_storici",
-  "meta.acf_note.value": "note",
-  "meta.acf_note.value.exact": "note",
 };
 
 const GlossarioResult: FC<PostProps> = ({ post }) => {
@@ -96,23 +69,11 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
 
 const PostResultContent: FC<PostProps> = ({ post }) => {
   const router = useRouter();
-  const fields = getQueryParamAsArray<FIELDS>(
-    router.query.fields || Object.values(FIELDS)
-  );
-  const textSearch = router.query.q;
-
-  let postQueryParams = `?q=${textSearch}${fields
-    ?.map((field) => `&fields=${field}`)
-    .join("")}`;
-
-  if (router.query.searchType) {
-    postQueryParams += `&searchType=${router.query.searchType}`;
-  }
 
   return (
     <li className="py-6">
       <div className="">
-        <Link href={`/${post.baseURL}/${post.slug}${postQueryParams}`} passHref>
+        <Link href={getPostResultLink(post, router.query)} passHref>
           <a>
             <h5
               className="font-bold pb-4 text-lg md:text-xl"
@@ -137,7 +98,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
             .map((highlightField) => (
               <Link
                 key={highlightField}
-                href={`/${post.baseURL}/${post.slug}${postQueryParams}#${linkField[highlightField]}`}
+                href={getPostResultLink(post, router.query, highlightField)}
                 passHref
               >
                 <a>

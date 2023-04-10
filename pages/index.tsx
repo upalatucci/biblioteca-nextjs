@@ -250,12 +250,3 @@ export default function Home() {
     </>
   );
 }
-
-// export const getStaticProps: GetStaticProps = async ({ params }) => {
-//   const posts = await getPosts();
-//   return {
-//     props: {
-//       posts,
-//     },
-//   };
-// };

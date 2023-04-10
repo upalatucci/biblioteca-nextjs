@@ -112,7 +112,10 @@ export default function PostPage({ post }) {
               </div>
             </div>
 
-            <div className="py-20 lg:py-32 px-8 container mx-auto max-w-[1000px] print:py-0">
+            <div
+              className="py-20 lg:py-32 px-8 container mx-auto max-w-[1000px] print:py-0"
+              id="contenuto"
+            >
               {isMainBookContent &&
                 (highlightedPost?.acf?.acf_luogo ||
                   highlightedPost?.acf?.acf_data ||
