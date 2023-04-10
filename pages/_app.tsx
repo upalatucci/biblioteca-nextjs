@@ -7,7 +7,7 @@ import { FontSizeProvider } from "contexts/FontSizeContext";
 import iconArrowTop from "@public/icons/ico-arrow-top.svg";
 import Image from "next/image";
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ErrorBoundary from "@components/ErrorBoundary";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -28,6 +28,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, []);
 
+  const scrollToTop = useCallback(() => {
+    window.scrollTo(0, 0);
+    setShowArrow(false);
+  }, []);
+
   return (
     <FontSizeProvider>
       <QueryClientProvider client={queryClient}>
@@ -41,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               "rounded-full shadow-lg z-10 fixed items-center justify-center w-10 h-10 bottom-10 right-10 bg-defaultBg hover:scale-110 flex scale-0 print:hidden",
               { "scale-100": showArrow }
             )}
-            onClick={() => window.scrollTo(0, 0)}
+            onClick={scrollToTop}
           >
             <Image src={iconArrowTop} width={20} height={20} alt="arrow top" />
           </button>
