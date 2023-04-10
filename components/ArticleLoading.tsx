@@ -3,6 +3,7 @@ import { memo } from "react";
 import Footer from "./Footer";
 import HomeNavbar from "./Navbar/HomeNavbar";
 import { removeHTMLTags } from "@utils/utils";
+import { GetStaticPost } from "lib/db";
 
 const GoshoPageSkeleton = memo(() => (
   <ul>
@@ -32,21 +33,18 @@ const GoshoPageSkeleton = memo(() => (
 GoshoPageSkeleton.displayName = "GoshoPageSkeleton";
 
 type ArticleLoadingType = {
-  originalPost: any;
+  originalPost: GetStaticPost;
 };
 
 const ArticleLoading: React.FC<ArticleLoadingType> = ({ originalPost }) => (
   <>
     <Head>
       <title>
-        {removeHTMLTags(originalPost?.title?.rendered)} | La Biblioteca di
-        Nichiren
+        {removeHTMLTags(originalPost?.post_title)} | La Biblioteca di Nichiren
       </title>
       <meta
         name="Description"
-        content={removeHTMLTags(
-          originalPost?.content.rendered?.substring(0, 155)
-        )}
+        content={removeHTMLTags(originalPost?.post_content?.substring(0, 155))}
       ></meta>
     </Head>
     <HomeNavbar />

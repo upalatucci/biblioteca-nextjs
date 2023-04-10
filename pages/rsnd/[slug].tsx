@@ -28,7 +28,7 @@ import { useContext } from "react";
 import { FontSizeContext } from "contexts/FontSizeContext";
 import { RSND_APPENDICE_CAT_ID } from "@utils/constants";
 import { PrismaClient } from "@prisma/client";
-import { unifyAcfMetadata } from "lib/db";
+import { GetStaticPost, unifyAcfMetadata } from "lib/db";
 const prisma = new PrismaClient();
 
 const ItalianListFormatted = new Intl.ListFormat("it", {
@@ -36,7 +36,7 @@ const ItalianListFormatted = new Intl.ListFormat("it", {
   type: "conjunction",
 });
 
-export default function PostPage({ post }) {
+export default function PostPage({ post }: { post: GetStaticPost }) {
   const router = useRouter();
   const { fontSize } = useContext(FontSizeContext);
   const [highlightedPost] = useHighlightedPost(post);
@@ -46,17 +46,15 @@ export default function PostPage({ post }) {
   }
 
   const notesArray = extractNotes(highlightedPost?.acf?.acf_note);
-  const paragraphs = extractParagraphs(highlightedPost.content.rendered);
+  const paragraphs = extractParagraphs(highlightedPost.post_content);
 
-  const isFirstVolume = highlightedPost?.cat_rsnd.includes(
-    RSND_VOL_1_CATEGORY_ID
-  );
+  const isFirstVolume = highlightedPost?.cat.includes(RSND_VOL_1_CATEGORY_ID);
 
   const rsndLink = `/rsnd-vol${isFirstVolume ? "1" : "2"}`;
 
   const isMainBookContent =
     highlightedPost?.acf?.acf_numero &&
-    !highlightedPost?.cat_rsnd.find((category) =>
+    !highlightedPost?.cat.find((category) =>
       [
         RSND_APPENDICE_CAT_ID,
         RSND_INTRO_1_CAT_ID,
@@ -68,13 +66,13 @@ export default function PostPage({ post }) {
     <>
       <Head>
         <title>
-          {removeHTMLTags(highlightedPost.title.rendered)} | La Biblioteca di
+          {removeHTMLTags(highlightedPost.post_title)} | La Biblioteca di
           Nichiren
         </title>
         <meta
           name="Description"
           content={removeHTMLTags(
-            highlightedPost?.content.rendered?.substring(0, 155)
+            highlightedPost?.post_content?.substring(0, 155)
           )}
         ></meta>
       </Head>
@@ -91,7 +89,7 @@ export default function PostPage({ post }) {
                       isMainBookContent
                         ? `${highlightedPost?.acf?.acf_numero}. `
                         : ""
-                    } ${highlightedPost.title.rendered}`,
+                    } ${highlightedPost.post_title}`,
                   }}
                 ></h2>
                 <p className="pb-14">
@@ -103,7 +101,7 @@ export default function PostPage({ post }) {
                 </p>
 
                 <PostMenu
-                  currentPostTitle={post.title.rendered}
+                  currentPostTitle={post.post_title}
                   withBackgrounds={!!highlightedPost?.acf?.acf_cenni_storici}
                   withNotes={!!highlightedPost?.acf?.acf_note}
                   image={isFirstVolume ? raccoltaVol1 : raccoltaVol2}
@@ -238,15 +236,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       props: {
         post: {
           id: Number(post.ID),
-          content: {
-            rendered: post.post_content,
-          },
-          title: {
-            rendered: post.post_title,
-          },
+          post_content: post.post_content,
+          post_title: post.post_title,
           slug: post.post_name,
           acf,
-          cat_rsnd: post.d1b1_term_relationships.map((term) =>
+          cat: post.d1b1_term_relationships.map((term) =>
             Number(term.term_taxonomy_id)
           ),
         },

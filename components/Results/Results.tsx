@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import ResultsHeader from "./ResultsHeader";
 import ResultsContainer from "./ResultsContainer";
+import { ElasticSearchPostResult } from "@utils/elasticSearchUtils";
+
 type ResultsProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any;
+  data: ElasticSearchPostResult;
   totalResults: number;
   loading: boolean;
   error?: Error;

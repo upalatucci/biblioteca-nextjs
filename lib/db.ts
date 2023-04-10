@@ -57,12 +57,14 @@ export const filterByCategory = (
   },
 });
 
+export type ACF_Types = { [key in ACF_METADATA]?: string };
+
 export const unifyAcfMetadata = (
   postMetadata: {
     meta_value: string;
     meta_key: string;
   }[]
-): { [key in ACF_METADATA]?: string } =>
+): ACF_Types =>
   postMetadata.reduce((acc, metadata) => {
     const value = metadata.meta_value.includes("{")
       ? parsePHP(metadata.meta_value)
@@ -98,4 +100,13 @@ export const getAcfMetadataValue = (
   }
 
   return metadataValue;
+};
+
+export type GetStaticPost = {
+  id: number;
+  post_content: string;
+  post_title: string;
+  slug: string;
+  acf: ACF_Types;
+  cat: number[];
 };

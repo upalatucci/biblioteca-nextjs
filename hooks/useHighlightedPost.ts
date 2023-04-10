@@ -1,17 +1,15 @@
 import { SearchResponse } from "@elastic/elasticsearch/lib/api/types";
 import { FIELDS } from "@utils/constants";
-import {
-  ElasticSearchPostResult,
-  PostResultType,
-} from "@utils/elasticSearchUtils";
+import { ElasticSearchPostResult } from "@utils/elasticSearchUtils";
 import { getQueryParamAsArray } from "@utils/utils";
+import { GetStaticPost } from "lib/db";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 
 const useHighlightedPost = (
-  originalPost: PostResultType
-): [post: PostResultType, loading: boolean, error: Error | undefined] => {
+  originalPost: GetStaticPost
+): [post: GetStaticPost, loading: boolean, error: Error | undefined] => {
   const router = useRouter();
   const searchText = router.query.q;
   const fields = getQueryParamAsArray<FIELDS>(router.query.fields || []);
@@ -55,21 +53,19 @@ const useHighlightedPost = (
       setTimeout(() => document.querySelector("mark")?.scrollIntoView(), 500);
   }, [data]);
 
+  if (!originalPost) return [undefined, isLoading, error];
+
   return [
     {
-      ...(originalPost || {}),
-      title: {
-        rendered:
-          data?.post_title?.[0] ||
-          data?.["post_title.exact"]?.[0] ||
-          originalPost?.title?.rendered,
-      },
-      content: {
-        rendered:
-          data?.post_content_filtered?.[0] ||
-          data?.["post_content_filtered.exact"]?.[0] ||
-          originalPost?.content?.rendered,
-      },
+      ...originalPost,
+      post_title:
+        data?.post_title?.[0] ||
+        data?.["post_title.exact"]?.[0] ||
+        originalPost?.post_title,
+      post_content:
+        data?.post_content_filtered?.[0] ||
+        data?.["post_content_filtered.exact"]?.[0] ||
+        originalPost?.post_content,
       acf: {
         ...originalPost?.acf,
         acf_cenni_storici:

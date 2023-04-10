@@ -1,12 +1,15 @@
-import { MAP_POST_TYPE_TO_BOOK_URL, PostType } from "@utils/elasticSearchUtils";
+import {
+  ElasticSearchPostResult,
+  MAP_POST_TYPE_TO_BOOK_URL,
+  PostType,
+} from "@utils/elasticSearchUtils";
 import React from "react";
 import ResultTab from "./ResultTab";
 import { useRouter } from "next/router";
 import { retainAggregationData, useLoadingTab } from "./utils";
 
 type ResultsHeaderProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any;
+  data: ElasticSearchPostResult;
   loading: boolean;
 };
 

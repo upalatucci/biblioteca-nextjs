@@ -1,5 +1,5 @@
 import {
-  AggregationsAggregate,
+  AggregationsMultiBucketAggregateBase,
   SearchResponse,
 } from "@elastic/elasticsearch/lib/api/typesWithBodyKey";
 
@@ -167,7 +167,7 @@ const buildHighlight = (highlight) => {
 
 export type ElasticSearchPostResult = SearchResponse<
   ElasticSearchPost,
-  Record<string, AggregationsAggregate>
+  Record<string, AggregationsMultiBucketAggregateBase>
 >;
 
 export const mapElasticResultToPost = (

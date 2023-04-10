@@ -1,11 +1,7 @@
+import { SearchTotalHits } from "@elastic/elasticsearch/lib/api/types";
 import {
-  AggregationsAggregate,
-  SearchResponseBody,
-  SearchTotalHits,
-} from "@elastic/elasticsearch/lib/api/types";
-import {
+  ElasticSearchPostResult,
   MAP_BOOK_URL_KEY_TO_POST_TYPE,
-  PostResultType,
 } from "@utils/elasticSearchUtils";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -16,10 +12,7 @@ const useSearch = (searchURL = "simple_search") => {
 
   const [ignoringError, setIgnoringError] = useState(false);
 
-  const { data, isLoading, error } = useQuery<
-    SearchResponseBody<PostResultType, Record<string, AggregationsAggregate>>,
-    Error
-  >({
+  const { data, isLoading, error } = useQuery<ElasticSearchPostResult, Error>({
     queryKey: [searchURL, router.query],
     queryFn: async () => {
       if (router.query.q) {

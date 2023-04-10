@@ -1,6 +1,7 @@
 import {
+  ElasticSearchPostResult,
   MAP_BOOK_TO_HUMAN_READABLE,
-  mapElasticResultToPost
+  mapElasticResultToPost,
 } from "@utils/elasticSearchUtils";
 import React, { useMemo } from "react";
 import PostResult from "./PostResult";
@@ -27,9 +28,9 @@ const getBaseSearchPath = (router: NextRouter): Partial<Url> => {
     query: {
       q: router?.query?.q,
       fields: router?.query?.fields,
-      searchType: router?.query?.searchType
+      searchType: router?.query?.searchType,
     },
-    hash: "risultati"
+    hash: "risultati",
   };
 };
 
@@ -51,8 +52,7 @@ const NoResultsForThatBook = ({ router }) => (
 );
 
 type ResultsContainerProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any;
+  data: ElasticSearchPostResult;
   loading: boolean;
   totalResults: number;
 };
@@ -60,7 +60,7 @@ type ResultsContainerProps = {
 const ResultsContainer: React.FC<ResultsContainerProps> = ({
   data,
   loading,
-  totalResults
+  totalResults,
 }) => {
   const router = useRouter();
   const searchedPosts = useMemo(() => mapElasticResultToPost(data), [data]);
