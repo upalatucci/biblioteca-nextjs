@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { EXTRA_CATEGORIES, FIELDS, SEARCH_TYPE } from "@utils/constants";
 import searchQuery, { client, DEFAULT_PAGE_SIZE } from "lib/elastic";
 import { getQueryParamAsArray } from "@utils/utils";
-import { PostType } from "@utils/elasticSearchUtils";
+import { ElasticSearchPost, PostType } from "@utils/elasticSearchUtils";
 
 export default async function handler(
   req: NextApiRequest,
@@ -49,7 +49,7 @@ export default async function handler(
       elasticQuery.post_filter
     );
 
-    const searchResult = await client.search({
+    const searchResult = await client.search<ElasticSearchPost>({
       ...elasticQuery,
       size: DEFAULT_PAGE_SIZE,
       from: (page - 1) * DEFAULT_PAGE_SIZE,

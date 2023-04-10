@@ -6,7 +6,7 @@ import {
   QueryDslQueryContainer,
   SearchRequest,
 } from "@elastic/elasticsearch/lib/api/types";
-import { PostType } from "@utils/elasticSearchUtils";
+import { ElasticSearchPost, PostType } from "@utils/elasticSearchUtils";
 
 export const DEFAULT_PAGE_SIZE = 20;
 
@@ -134,7 +134,7 @@ export const highlighPost = (
     });
   }
 
-  return client.search(elasticQuery);
+  return client.search<ElasticSearchPost>(elasticQuery);
 };
 
 export const simpleSearchQuery = (

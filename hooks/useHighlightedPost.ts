@@ -1,16 +1,25 @@
 import { SearchResponse } from "@elastic/elasticsearch/lib/api/types";
 import { FIELDS } from "@utils/constants";
+import {
+  ElasticSearchPostResult,
+  PostResultType,
+} from "@utils/elasticSearchUtils";
 import { getQueryParamAsArray } from "@utils/utils";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 
-const useHighlightedPost = (originalPost): any => {
+const useHighlightedPost = (
+  originalPost: PostResultType
+): [post: PostResultType, loading: boolean, error: Error | undefined] => {
   const router = useRouter();
   const searchText = router.query.q;
   const fields = getQueryParamAsArray<FIELDS>(router.query.fields || []);
 
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data } = useQuery<
+    ElasticSearchPostResult["hits"]["hits"][0]["highlight"],
+    Error
+  >({
     queryKey: [
       "highligh-post",
       searchText,
@@ -18,22 +27,25 @@ const useHighlightedPost = (originalPost): any => {
       router.query.searchType,
     ],
     queryFn: () => {
-      if (searchText) {
-        let queryParams = `q=${searchText}&postId=${originalPost.id}${fields
-          .map((field) => `&fields=${field}`)
-          .join("")}`;
+      if (!searchText) return;
 
-        if (router.query.searchType) {
-          queryParams += `&searchType=${router.query.searchType}`;
-        }
+      const urlParams = new URLSearchParams();
 
-        return fetch(`/api/highlight?${queryParams}`)
-          .then((res) => res.json())
-          .then(
-            (elasticResult: SearchResponse) =>
-              elasticResult?.hits?.hits?.[0]?.highlight
-          );
+      urlParams.set("q", searchText as string);
+      urlParams.set("postId", originalPost.id.toString());
+
+      fields.forEach((field) => urlParams.append("fields", field));
+
+      if (router.query.searchType) {
+        urlParams.set("searchType", router.query.searchType as string);
       }
+
+      return fetch(`/api/highlight?${urlParams.toString()}`)
+        .then((res) => res.json())
+        .then(
+          (elasticResult: SearchResponse) =>
+            elasticResult?.hits?.hits?.[0]?.highlight
+        );
     },
     refetchOnWindowFocus: false,
   });

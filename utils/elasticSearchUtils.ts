@@ -1,3 +1,8 @@
+import {
+  AggregationsAggregate,
+  SearchResponse,
+} from "@elastic/elasticsearch/lib/api/typesWithBodyKey";
+
 export enum PostType {
   RSND = "rsnd",
   SDL = "sdlpe",
@@ -33,6 +38,65 @@ const typeToBaseUrl = (type: PostType) => {
   }
 };
 
+export type ElasticSearchPost = {
+  post_id: number;
+  ID: number;
+  post_author: {
+    raw: string;
+    login: string;
+    display_name: string;
+    id: number;
+  };
+  post_date: string;
+  post_date_gmt: string;
+  post_title: string;
+  post_excerpt: string;
+  post_content_filtered: string;
+  post_content: string;
+  post_status: string;
+  post_name: string;
+  post_modified: string;
+  post_modified_gmt: string;
+  post_parent: number;
+  post_type: PostType;
+  post_mime_type: string;
+  permalink: string;
+  terms: {
+    cat_glossary: [
+      {
+        term_id: number;
+        slug: string;
+        name: string;
+        parent: number;
+        term_taxonomy_id: number;
+        term_order: number;
+        facet: string;
+      }
+    ];
+  };
+  meta: string[];
+  date_terms: {
+    year: number;
+    month: number;
+    week: number;
+    dayofyear: number;
+    day: number;
+    dayofweek: number;
+    dayofweek_iso: number;
+    hour: number;
+    minute: number;
+    second: number;
+    m: number;
+  };
+  comment_count: number;
+  comment_status: string;
+  ping_status: string;
+  menu_order: number;
+  guid: string;
+  thumbnail: string;
+  term_suggest: string[];
+};
+
 export type PostResultType = {
   categories: string[];
   comment_status: string;
@@ -45,9 +109,9 @@ export type PostResultType = {
   featured_media: 0;
   format: "standard";
   guid: { rendered: string };
-  id: string;
+  id: number;
   link: string;
-  meta: string;
+  meta: string[];
   modified: string;
   ping_status: string;
   slug: string;
@@ -64,7 +128,7 @@ const removeUnclosedTags = (text: string): string => {
   const div = document.createElement("div");
   div.innerHTML = text;
 
-  return div.innerHTML.replace(/^[^<]*?(&gt;|>)/g, '')
+  return div.innerHTML.replace(/^[^<]*?(&gt;|>)/g, "");
 };
 
 const buildHighlight = (highlight) => {
@@ -101,7 +165,14 @@ const buildHighlight = (highlight) => {
     .join("[...]");
 };
 
-export const mapElasticResultToPost = (result: any): PostResultType[] => {
+export type ElasticSearchPostResult = SearchResponse<
+  ElasticSearchPost,
+  Record<string, AggregationsAggregate>
+>;
+
+export const mapElasticResultToPost = (
+  result: ElasticSearchPostResult
+): PostResultType[] => {
   return result?.hits?.hits?.map(({ _source, highlight }) => ({
     categories: _source.term_suggest || [],
     comment_status: _source.comment_status,
@@ -123,8 +194,8 @@ export const mapElasticResultToPost = (result: any): PostResultType[] => {
     slug: _source.post_name,
     title: {
       rendered:
-        highlight?.post_title ||
-        highlight?.["post_title.exact"] ||
+        highlight?.post_title?.[0] ||
+        highlight?.["post_title.exact"]?.[0] ||
         _source.post_title,
     },
     type: _source.post_type,

@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { client } from "lib/elastic";
+import { ElasticSearchPost } from "@utils/elasticSearchUtils";
 
 export default async function handler(
   req: NextApiRequest,
@@ -7,7 +8,7 @@ export default async function handler(
 ) {
   try {
     const searchText = req.query.term as string;
-    const searchResult = await client.search({
+    const searchResult = await client.search<ElasticSearchPost>({
       query: {
         bool: {
           must: [
