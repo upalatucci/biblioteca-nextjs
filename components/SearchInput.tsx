@@ -6,6 +6,7 @@ import {
   KeyboardEventHandler,
   MouseEventHandler,
   useCallback,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -63,9 +64,6 @@ const SearchInput: FC<SearchInputProps> = ({
 
   const useSuggestion: MouseEventHandler<HTMLButtonElement> = useCallback(
     (event) => {
-      if (!suggestionFocusIndex) return;
-
-      event.preventDefault();
       if (!value) return;
       const words = value.split(" ");
 
@@ -82,42 +80,54 @@ const SearchInput: FC<SearchInputProps> = ({
     [value, suggestionFocusIndex]
   );
 
-  const suggestions = [
-    ...new Set(data?.hits?.hits?.map((s) => s._source?.post_title) || []),
-  ];
+  const suggestions = useMemo(
+    () => [
+      ...new Set(data?.hits?.hits?.map((s) => s._source?.post_title) || []),
+    ],
+    [data]
+  );
 
-  const onKeyDown: KeyboardEventHandler<HTMLDivElement> = (event) => {
-    const suggestions = listSuggestionRef.current?.querySelectorAll(
-      "li > button"
-    ) as NodeListOf<HTMLButtonElement>;
+  const onKeyDown: KeyboardEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      const suggestions = listSuggestionRef.current?.querySelectorAll(
+        "li > button"
+      ) as NodeListOf<HTMLButtonElement>;
 
-    if (event.key === "ArrowDown" && suggestions) {
-      event.preventDefault();
-      const nextFocusIndex =
-        suggestionFocusIndex !== null
-          ? (suggestionFocusIndex + 1) % suggestions.length
-          : 0;
-
-      suggestions?.[nextFocusIndex]?.focus();
-      setSuggestionFocusIndex(nextFocusIndex);
-    } else if (event.key === "ArrowUp" && suggestions) {
-      event.preventDefault();
-
-      if (!suggestionFocusIndex) {
-        inputRef.current?.focus();
-        setSuggestionFocusIndex(null);
+      if (event.key === "Enter" && suggestionFocusIndex === null) {
+        setSuggestionVisible(false);
         return;
       }
 
-      const prevFocusIndex =
-        !suggestionFocusIndex || suggestionFocusIndex <= 0
-          ? suggestions.length - 1
-          : (suggestionFocusIndex - 1) % suggestions.length;
+      if (event.key === "ArrowDown" && suggestions) {
+        event.preventDefault();
+        const nextFocusIndex =
+          suggestionFocusIndex !== null
+            ? (suggestionFocusIndex + 1) % suggestions.length
+            : 0;
 
-      suggestions?.[prevFocusIndex]?.focus();
-      setSuggestionFocusIndex(prevFocusIndex);
-    }
-  };
+        suggestions?.[nextFocusIndex]?.focus();
+        setSuggestionFocusIndex(nextFocusIndex);
+      } else if (event.key === "ArrowUp" && suggestions) {
+        event.preventDefault();
+        console.log(suggestionFocusIndex);
+
+        if (!suggestionFocusIndex) {
+          inputRef.current?.focus();
+          setSuggestionFocusIndex(null);
+          return;
+        }
+
+        const prevFocusIndex =
+          !suggestionFocusIndex || suggestionFocusIndex <= 0
+            ? suggestions.length - 1
+            : (suggestionFocusIndex - 1) % suggestions.length;
+
+        suggestions?.[prevFocusIndex]?.focus();
+        setSuggestionFocusIndex(prevFocusIndex);
+      }
+    },
+    [suggestions, suggestionFocusIndex]
+  );
 
   const showSuggestionDropDown =
     suggestionVisible &&
@@ -160,7 +170,8 @@ const SearchInput: FC<SearchInputProps> = ({
                 tabIndex={-1}
               >
                 <button
-                  onClick={useSuggestion}
+                  type="button"
+                  onClick={(e) => useSuggestion(e)}
                   className="py-2 px-4 focus:bg-defaultBg rounded-3xl w-full text-left"
                 >
                   {suggestion}
