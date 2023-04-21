@@ -92,7 +92,11 @@ const PostResultContent: FC<PostProps> = ({ post, highlights }) => {
   return (
     <li className="py-6">
       <div className="">
-        <Link href={getPostResultLink(post, router.query)} passHref>
+        <Link
+          href={getPostResultLink(post, router.query)}
+          passHref
+          scroll={false}
+        >
           <a>
             <h5
               className="font-bold pb-4 text-lg md:text-xl"

@@ -49,9 +49,15 @@ const useHighlightedPost = (
   });
 
   useEffect(() => {
-    if (router.isReady && data && !isLoading && router.query.q)
+    if (
+      router.isReady &&
+      data &&
+      !isLoading &&
+      router.query.q &&
+      !router.asPath.includes("#")
+    )
       setTimeout(() => document.querySelector("mark")?.scrollIntoView(), 500);
-  }, [data]);
+  }, [data, isLoading]);
 
   if (!originalPost) return [undefined, isLoading, error];
 
