@@ -1,9 +1,8 @@
 import {
   ElasticSearchPostResult,
   MAP_BOOK_TO_HUMAN_READABLE,
-  mapElasticResultToPost,
 } from "@utils/elasticSearchUtils";
-import React, { useMemo } from "react";
+import React from "react";
 import PostResult from "./PostResult";
 import Pagination from "@components/Pagination";
 import { NextRouter, useRouter } from "next/router";
@@ -63,7 +62,6 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({
   totalResults,
 }) => {
   const router = useRouter();
-  const searchedPosts = useMemo(() => mapElasticResultToPost(data), [data]);
 
   if (!loading && totalResults === 0 && !router?.query?.book) {
     return <NoResults />;
@@ -82,8 +80,12 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({
       <div className="px-0 mx-auto max-w-[1400px] py-8 md:py-14">
         <TabFilters />
         <ul className="divide-y-2 divide-dashed mb-10 mx-auto bg-defaultBg rounded-3xl shadow-md px-4 md:px-10 py-4">
-          {searchedPosts?.map((postResult) => (
-            <PostResult key={postResult.id} post={postResult} />
+          {data?.hits?.hits?.map((searchHit) => (
+            <PostResult
+              key={searchHit._id}
+              post={searchHit._source}
+              highlights={searchHit.highlight}
+            />
           ))}
           <Pagination totalResults={totalResults} anchorHash="risultati" />
         </ul>

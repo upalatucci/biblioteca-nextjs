@@ -1,18 +1,20 @@
 import Link from "next/link";
 import { FC, useCallback, useRef, useState } from "react";
-import { PostResultType } from "@utils/elasticSearchUtils";
+import { ElasticSearchPost, buildHighlight } from "@utils/elasticSearchUtils";
 import { useRouter } from "next/router";
 import {
+  getFullGlossaryContentHighlighted,
   getPostResultLink,
   humanizeTypeCategory,
   humanizedField,
 } from "./utils";
 
 type PostProps = {
-  post: PostResultType;
+  post: ElasticSearchPost;
+  highlights?: Record<string, string[]>;
 };
 
-const GlossarioResult: FC<PostProps> = ({ post }) => {
+const GlossarioResult: FC<PostProps> = ({ post, highlights }) => {
   const [isOpen, setIsOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>();
 
@@ -20,12 +22,22 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
     setIsOpen((open) => !open);
   }, []);
 
-  const contentOpen = post.content.rendered;
+  const contentOpen = getFullGlossaryContentHighlighted(
+    post.post_content,
+    highlights?.["post_content.exact"] || highlights?.["post_content"]
+  );
 
-  const contentClose = `${(post?.highlight || post.content.rendered).substring(
+  const highlightedContent = buildHighlight(highlights);
+
+  const contentClose = `${(highlightedContent || post.post_content).substring(
     0,
     400
   )}...`;
+
+  const title =
+    highlights?.post_title?.[0] ||
+    highlights?.["post_title.exact"]?.[0] ||
+    post.post_title;
 
   return (
     <li className="py-6">
@@ -33,7 +45,7 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
         <div className="text-md md:text-lg">
           <h5
             className="font-bold pb-4 text-lg md:text-xl"
-            dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+            dangerouslySetInnerHTML={{ __html: title }}
           />
           <div
             ref={contentRef}
@@ -44,8 +56,8 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
           ></div>
 
           <p className="font-sans flex items-center mt-4 flex-wrap gap-2 uppercase">
-            {post.highlight_fields
-              .filter(
+            {Object.keys(highlights)
+              ?.filter(
                 (field) => !["post_title", "post_title.exact"].includes(field)
               )
               .map((highlightField) => (
@@ -58,7 +70,7 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
               ))}
 
             <span className="text-md md:text-lg text-primary">
-              {humanizeTypeCategory(post.type, post.categories)}
+              {humanizeTypeCategory(post.post_type, post.term_suggest)}
             </span>
           </p>
         </div>
@@ -67,8 +79,15 @@ const GlossarioResult: FC<PostProps> = ({ post }) => {
   );
 };
 
-const PostResultContent: FC<PostProps> = ({ post }) => {
+const PostResultContent: FC<PostProps> = ({ post, highlights }) => {
   const router = useRouter();
+
+  const title =
+    highlights?.post_title?.[0] ||
+    highlights?.["post_title.exact"]?.[0] ||
+    post.post_title;
+
+  const highlightedContent = buildHighlight(highlights);
 
   return (
     <li className="py-6">
@@ -77,12 +96,12 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
           <a>
             <h5
               className="font-bold pb-4 text-lg md:text-xl"
-              dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+              dangerouslySetInnerHTML={{ __html: title }}
             />
             <div
               className="result lg:mr-20 font-medium text-md md:text-lg"
               dangerouslySetInnerHTML={{
-                __html: `${(post?.highlight || post.content.rendered).substring(
+                __html: `${(highlightedContent || post.post_content).substring(
                   0,
                   400
                 )}...`,
@@ -91,8 +110,8 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
           </a>
         </Link>
         <p className="font-sans flex items-center mt-4 flex-wrap gap-2 uppercase">
-          {post.highlight_fields
-            .filter(
+          {Object.keys(highlights)
+            ?.filter(
               (field) => !["post_title", "post_title.exact"].includes(field)
             )
             .map((highlightField) => (
@@ -110,7 +129,7 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
             ))}
 
           <span className="text-primary">
-            {humanizeTypeCategory(post.type, post.categories)}
+            {humanizeTypeCategory(post.post_type, post.term_suggest)}
           </span>
         </p>
       </div>
@@ -118,12 +137,12 @@ const PostResultContent: FC<PostProps> = ({ post }) => {
   );
 };
 
-const Post: FC<PostProps> = ({ post }) => {
-  if (post?.type === "glossary") {
-    return <GlossarioResult post={post} />;
+const Post: FC<PostProps> = ({ post, highlights }) => {
+  if (post?.post_type === "glossary") {
+    return <GlossarioResult post={post} highlights={highlights} />;
   }
 
-  return <PostResultContent post={post} />;
+  return <PostResultContent post={post} highlights={highlights} />;
 };
 
 export default Post;

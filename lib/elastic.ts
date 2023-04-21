@@ -19,7 +19,7 @@ export const client = new Client({
 });
 
 const mapElasticSearchFields = {
-  [FIELDS.CONTENT]: "post_content_filtered",
+  [FIELDS.CONTENT]: "post_content",
   [FIELDS.CENNI_STORICI]: "meta.acf_cenni_storici.value",
   [FIELDS.NOTE]: "meta.acf_note.value",
 };
@@ -81,9 +81,9 @@ export const highlighPost = (
       post_tags: ["</mark>"],
       number_of_fragments: 0,
       fields: {
-        post_content_filtered: {},
+        post_content: {},
         post_title: {},
-        "post_content_filtered.exact": {},
+        "post_content.exact": {},
         "post_title.exact": {},
         "meta.acf_note.value": {},
         "meta.acf_note.value.exact": {},
@@ -158,7 +158,7 @@ export const simpleSearchQuery = (
               query: textQuery,
               fields: [
                 "post_title^5",
-                "post_content_filtered^3",
+                "post_content^3",
                 "meta.acf_cenni_storici.value",
                 "meta.acf_note.value",
               ],
@@ -173,7 +173,7 @@ export const simpleSearchQuery = (
       pre_tags: ["<mark>"],
       post_tags: ["</mark>"],
       fields: {
-        post_content_filtered: {},
+        post_content: {},
         post_title: {},
         "meta.acf_note.value": {},
         "meta.acf_cenni_storici.value": {},
@@ -239,9 +239,9 @@ const searchQuery = (
       pre_tags: ["<mark>"],
       post_tags: ["</mark>"],
       fields: {
-        post_content_filtered: {},
+        post_content: {},
         post_title: {},
-        "post_content_filtered.exact": {},
+        "post_content.exact": {},
         "post_title.exact": {},
         "meta.acf_note.value": {},
         "meta.acf_note.value.exact": {},

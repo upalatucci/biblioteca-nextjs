@@ -63,8 +63,8 @@ const useHighlightedPost = (
         data?.["post_title.exact"]?.[0] ||
         originalPost?.post_title,
       post_content:
-        data?.post_content_filtered?.[0] ||
-        data?.["post_content_filtered.exact"]?.[0] ||
+        data?.post_content?.[0] ||
+        data?.["post_content.exact"]?.[0] ||
         originalPost?.post_content,
       acf: {
         ...originalPost?.acf,

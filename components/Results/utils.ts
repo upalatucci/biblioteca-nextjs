@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PostResultType, PostType } from "@utils/elasticSearchUtils";
+import {
+  ElasticSearchPost,
+  MAP_POST_TYPE_TO_BASE_URL,
+  PostType,
+} from "@utils/elasticSearchUtils";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import { useEffect, useRef } from "react";
@@ -43,7 +47,9 @@ export const retainAggregationData = (data: any): any => {
 };
 
 export const humanizedField = {
+  post_content: "CONTENUTO",
   post_content_filtered: "CONTENUTO",
+  "post_content.exact": "CONTENUTO",
   "post_content_filtered.exact": "CONTENUTO",
   "meta.acf_cenni_storici.value": "CENNI STORICI",
   "meta.acf_cenni_storici.value.exact": "CENNI STORICI",
@@ -75,14 +81,14 @@ export const linkField = {
 };
 
 export const getPostResultLink = (
-  post: PostResultType,
+  post: ElasticSearchPost,
   queryParams: ParsedUrlQuery,
   goToField?: string
 ) => {
   const { fields, q, searchType } = queryParams;
 
   const query: ParsedUrlQuery = {
-    slug: post.slug,
+    slug: post.post_name,
     q,
   };
 
@@ -95,8 +101,25 @@ export const getPostResultLink = (
   }
 
   return {
-    pathname: `/${post.baseURL}/[slug]`,
+    pathname: `/${MAP_POST_TYPE_TO_BASE_URL[post.post_type]}/[slug]`,
     query,
     hash: goToField ? `#${linkField[goToField]}` : null,
   };
+};
+
+export const getFullGlossaryContentHighlighted = (
+  content: string,
+  highlights: string[]
+) => {
+  let fullContentHighlighted = content;
+
+  highlights?.forEach((highlight) => {
+    const highlightedPlainText = highlight.replace(/<\/?mark>/g, "");
+    fullContentHighlighted = fullContentHighlighted.replace(
+      highlightedPlainText,
+      highlight
+    );
+  });
+
+  return fullContentHighlighted;
 };
