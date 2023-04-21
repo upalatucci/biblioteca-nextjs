@@ -1,5 +1,7 @@
 import { ACF_METADATA } from "@utils/constants";
 import { parsePHP } from "@utils/parsePHP";
+import { PrismaClient } from "@prisma/client";
+export const prismaClient = new PrismaClient();
 
 export const INCLUDE_METADATA = {
   d1b1_term_relationships: {

@@ -19,9 +19,7 @@ import Link from "next/link";
 import { ACF_METADATA, SDL_INTRO_CAT_ID } from "@utils/constants";
 import { FontSizeContext } from "contexts/FontSizeContext";
 import { useContext } from "react";
-import { PrismaClient } from "@prisma/client";
-import { ACF_Types, unifyAcfMetadata } from "lib/db";
-const prisma = new PrismaClient();
+import { ACF_Types, prismaClient, unifyAcfMetadata } from "lib/db";
 
 export default function PostPage({ post }) {
   const router = useRouter();
@@ -144,7 +142,7 @@ export default function PostPage({ post }) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await prisma.d1b1_posts.findMany({
+  const posts = await prismaClient.d1b1_posts.findMany({
     where: { post_type: "sdlpe" },
   });
 
@@ -160,7 +158,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const post = await prisma.d1b1_posts.findFirst({
+    const post = await prismaClient.d1b1_posts.findFirst({
       where: { post_name: params.slug as string, post_type: "sdlpe" },
       include: {
         d1b1_term_relationships: {

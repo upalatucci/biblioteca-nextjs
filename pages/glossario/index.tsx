@@ -1,21 +1,14 @@
 import Head from "next/head";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
-import {
-  ChangeEventHandler,
-  FormEventHandler,
-  useEffect,
-  useState,
-} from "react";
+import { FormEventHandler, useEffect, useState } from "react";
 import SearchInput from "@components/SearchInput";
 import classNames from "classnames";
 import Footer from "@components/Footer";
 import DictionarySearch from "@components/DictionarySearch";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
-import { PrismaClient } from "@prisma/client";
 import { GetStaticProps } from "next";
-import { INCLUDE_CATEGORY } from "lib/db";
-const prisma = new PrismaClient();
+import { INCLUDE_CATEGORY, prismaClient } from "lib/db";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 
@@ -160,7 +153,7 @@ export default function Glossario({ glossary }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await prisma.d1b1_posts.findMany({
+  const posts = await prismaClient.d1b1_posts.findMany({
     where: {
       post_type: "glossary",
     },

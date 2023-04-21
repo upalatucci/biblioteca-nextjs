@@ -4,7 +4,6 @@ import HomeNavbar from "@components/Navbar/HomeNavbar";
 import Footer from "@components/Footer";
 import GoshoList from "@components/GoshoList";
 import { GetStaticProps } from "next";
-import { PrismaClient } from "@prisma/client";
 import {
   ACF_METADATA,
   RSND_APPENDICE_CAT_ID,
@@ -17,8 +16,8 @@ import {
   INCLUDE_METADATA,
   INCLUDE_NUMBER,
   getAcfMetadataValue,
+  prismaClient,
 } from "lib/db";
-const prisma = new PrismaClient();
 
 export default function RSND1({ gosho, index, appendix }) {
   return (
@@ -44,7 +43,7 @@ export default function RSND1({ gosho, index, appendix }) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const [posts, indexPosts, appendixPosts] = await Promise.all([
-    prisma.d1b1_posts.findMany({
+    prismaClient.d1b1_posts.findMany({
       where: {
         post_type: "rsnd",
 
@@ -64,7 +63,7 @@ export const getStaticProps: GetStaticProps = async () => {
       },
       include: INCLUDE_METADATA,
     }),
-    prisma.d1b1_posts.findMany({
+    prismaClient.d1b1_posts.findMany({
       where: {
         post_type: "rsnd",
 
@@ -74,7 +73,7 @@ export const getStaticProps: GetStaticProps = async () => {
       },
       include: { ...INCLUDE_CATEGORY, ...INCLUDE_NUMBER },
     }),
-    prisma.d1b1_posts.findMany({
+    prismaClient.d1b1_posts.findMany({
       where: {
         post_type: "rsnd",
         d1b1_term_relationships: {

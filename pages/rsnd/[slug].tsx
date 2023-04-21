@@ -27,9 +27,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import { FontSizeContext } from "contexts/FontSizeContext";
 import { RSND_APPENDICE_CAT_ID } from "@utils/constants";
-import { PrismaClient } from "@prisma/client";
-import { GetStaticPost, unifyAcfMetadata } from "lib/db";
-const prisma = new PrismaClient();
+import { GetStaticPost, prismaClient, unifyAcfMetadata } from "lib/db";
 
 const ItalianListFormatted = new Intl.ListFormat("it", {
   style: "long",
@@ -182,7 +180,7 @@ export default function PostPage({ post }: { post: GetStaticPost }) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await prisma.d1b1_posts.findMany({
+  const posts = await prismaClient.d1b1_posts.findMany({
     where: { post_type: "rsnd" },
   });
 
@@ -198,7 +196,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const post = await prisma.d1b1_posts.findFirst({
+    const post = await prismaClient.d1b1_posts.findFirst({
       where: { post_name: params.slug as string, post_type: "rsnd" },
       include: {
         d1b1_term_relationships: {

@@ -8,6 +8,7 @@ import {
   INCLUDE_METADATA,
   INCLUDE_NUMBER,
   getAcfMetadataValue,
+  prismaClient,
 } from "lib/db";
 import {
   ACF_METADATA,
@@ -16,9 +17,7 @@ import {
   RSND_VOL_1_CATEGORY_ID,
   RSND_VOL_2_CATEGORY_ID,
 } from "@utils/constants";
-import { PrismaClient } from "@prisma/client";
 import { GetStaticProps } from "next";
-const prisma = new PrismaClient();
 
 export default function RSND2({ gosho, index, appendix }) {
   return (
@@ -44,7 +43,7 @@ export default function RSND2({ gosho, index, appendix }) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const [posts, indexPosts, appendixPosts] = await Promise.all([
-    prisma.d1b1_posts.findMany({
+    prismaClient.d1b1_posts.findMany({
       where: {
         post_type: "rsnd",
 
@@ -64,7 +63,7 @@ export const getStaticProps: GetStaticProps = async () => {
       },
       include: INCLUDE_METADATA,
     }),
-    prisma.d1b1_posts.findMany({
+    prismaClient.d1b1_posts.findMany({
       where: {
         post_type: "rsnd",
 
@@ -74,7 +73,7 @@ export const getStaticProps: GetStaticProps = async () => {
       },
       include: { ...INCLUDE_CATEGORY, ...INCLUDE_NUMBER },
     }),
-    prisma.d1b1_posts.findMany({
+    prismaClient.d1b1_posts.findMany({
       where: {
         post_type: "rsnd",
         d1b1_term_relationships: {

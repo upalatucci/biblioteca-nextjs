@@ -6,11 +6,14 @@ import { useState } from "react";
 import Link from "next/link";
 import classNames from "classnames";
 import GoshoTableSortButton from "@components/GoshoList/GoshoTableSortButton";
-import { INCLUDE_CATEGORY, INCLUDE_NUMBER, getAcfMetadataValue } from "lib/db";
+import {
+  INCLUDE_CATEGORY,
+  INCLUDE_NUMBER,
+  getAcfMetadataValue,
+  prismaClient,
+} from "lib/db";
 import { ACF_METADATA, SDL_CAT_ID, SDL_INTRO_CAT_ID } from "@utils/constants";
-import { PrismaClient } from "@prisma/client";
 import { GetStaticProps } from "next";
-const prisma = new PrismaClient();
 
 export default function RSND1({ chapters, index }) {
   const [sortField, setSortField] = useState("number");
@@ -125,7 +128,7 @@ export default function RSND1({ chapters, index }) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const [posts, indexPosts] = await Promise.all([
-    prisma.d1b1_posts.findMany({
+    prismaClient.d1b1_posts.findMany({
       where: {
         post_type: "sdlpe",
         d1b1_term_relationships: {
@@ -136,7 +139,7 @@ export const getStaticProps: GetStaticProps = async () => {
       include: { ...INCLUDE_CATEGORY, ...INCLUDE_NUMBER },
     }),
 
-    prisma.d1b1_posts.findMany({
+    prismaClient.d1b1_posts.findMany({
       where: {
         post_type: "sdlpe",
         d1b1_term_relationships: {
