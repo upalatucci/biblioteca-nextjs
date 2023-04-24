@@ -32,9 +32,8 @@ ENV WORDPRESS_API_ENDPOINT=https://biblioteca-wp.sgi-italia.org/wp-json/wp/v2
 ENV REVALIDATE_SECRET=''
 
 RUN --mount=type=secret,id=DATABASE_URL \
-  export DATABASE_URL=$(cat /run/secrets/DATABASE_URL)
-
-RUN yarn build
+  export DATABASE_URL=$(cat /run/secrets/DATABASE_URL) && \
+  yarn build
 
 # If using npm comment out above and use below instead
 # RUN npm run build
@@ -58,13 +57,11 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 
-RUN --mount=type=secret,id=DATABASE_URL \
-  export DATABASE_URL=$(cat /run/secrets/DATABASE_URL)
-
 USER nextjs
 
 EXPOSE 3000
 
 ENV PORT 3000
+ENV DATABASE_URL ''
 
 CMD ["node", "server.js"]
