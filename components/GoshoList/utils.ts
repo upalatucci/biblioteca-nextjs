@@ -47,16 +47,16 @@ export const useFilters = (allGosho: GoshoType[]) => {
     fuseRef.current = createFuzzyIndex<GoshoType>(allGosho);
   }, [allGosho]);
 
-  const clearFilters = useCallback(() => {
+  const clearFilters = () =>
     router.push(
       {
+        pathname: router.pathname,
         query: {},
         hash: "gosho-list",
       },
       undefined,
       { scroll: false, shallow: true }
     );
-  }, []);
 
   const goshoFilteredByTitle =
     !titleFilter || !fuseRef.current
@@ -81,44 +81,41 @@ export const useFilters = (allGosho: GoshoType[]) => {
 
   const setRouterState = useCallback(
     (key: string, value: string, replace?: boolean) => {
-      const newQuery: ParsedUrlQuery = {
-        ...router.query,
-        [key]: value,
-      };
+      const query = new URLSearchParams(window.location.search);
+      query.set(key, value);
 
-      if (router.query.page) {
+      const newQuery: ParsedUrlQuery = {};
+
+      for (const [key, value] of query) {
+        newQuery[key] = value;
+      }
+
+      if (newQuery.page) {
         delete newQuery.page;
       }
 
+      const routerOptions = { scroll: false, shallow: true };
+      const routerParams = {
+        pathname: router.pathname,
+        query: newQuery,
+        hash: "gosho-list",
+      };
+
       if (replace) {
-        router.replace(
-          {
-            query: newQuery,
-            hash: "gosho-list",
-          },
-          undefined,
-          { scroll: false, shallow: true }
-        );
+        router.replace(routerParams, undefined, routerOptions);
         return;
       }
 
-      router.push(
-        {
-          query: newQuery,
-          hash: "gosho-list",
-        },
-        undefined,
-        { scroll: false, shallow: true }
-      );
+      router.push(routerParams, undefined, routerOptions);
     },
-    [router.query]
+    [router.pathname]
   );
 
   const setTitleFilter = useCallback(
     (newValue) => {
-      setRouterState("titleFilter", newValue, true);
+      setRouterState("titleFilter", newValue, !!router.query.titleFilter);
     },
-    [setRouterState]
+    [setRouterState, router.query.titleFilter]
   );
 
   const setRecipient = useCallback(
