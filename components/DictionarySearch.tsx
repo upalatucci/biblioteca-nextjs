@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import Fuse from "fuse.js";
-import { createFuzzyIndex } from "@utils/fuzzySearch";
+import { createFuzzyIndex, highlight } from "@utils/fuzzySearch";
 import Pagination, { usePagination } from "./Pagination";
 import { GLOSSARY_RSND_CAT_ID, GLOSSARY_SDL_CAT_ID } from "@utils/constants";
 import Link from "next/link";
@@ -66,9 +66,8 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
   let glossarioFiltrato: DictionaryItem[];
 
   if (filterText) {
-    glossarioFiltrato = fuseRef.current
-      ?.search(filterText)
-      ?.map((result) => result.item);
+    glossarioFiltrato = highlight(fuseRef.current?.search(filterText));
+    console.log(glossarioFiltrato);
   } else if (letter) {
     glossarioFiltrato = glossary?.filter((termine) =>
       termine?.title?.charAt(0).toUpperCase().startsWith(letter)
