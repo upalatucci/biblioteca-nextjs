@@ -81,11 +81,9 @@ const PostMenu: React.FC<PostMenuProps> = ({
       <div className="post-menu gap-10 p-8 md:p-10 w-full text-md rounded-3xl shadow-md bg-defaultBg flex sm:flex-row items-center justify-start">
         {image && (
           <Link href={imageLink ?? "#"}>
-            <a>
-              <div className="image-post-menu">
-                <Image src={image} alt="image" width={100} height={140} />
-              </div>
-            </a>
+            <div className="image-post-menu">
+              <Image src={image} alt="image" width={100} height={140} />
+            </div>
           </Link>
         )}
         <ul className="post-menu-list flex sm:flex-row items-start sm:items-center sm:justify-start gap-x-4 gap-y-0 lg:gap-10 flex-wrap w-full">
@@ -139,7 +137,9 @@ const PostMenu: React.FC<PostMenuProps> = ({
                   width={17}
                   height={17}
                 />{" "}
-                <span className="post-menu-item-label">Vai ai cenni storici</span>
+                <span className="post-menu-item-label">
+                  Vai ai cenni storici
+                </span>
               </a>
             </li>
           )}

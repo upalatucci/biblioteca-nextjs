@@ -91,10 +91,11 @@ export default function PostPage({ post }: { post: GetStaticPost }) {
                   }}
                 ></h2>
                 <p className="pb-14">
-                  <Link href={rsndLink}>
-                    <a className="font-sans font-medium text-md md:text-xl text-gray-500 hover:text-primary">
-                      RSND, VOLUME {isFirstVolume ? "I" : "II"}
-                    </a>
+                  <Link
+                    href={rsndLink}
+                    className="font-sans font-medium text-md md:text-xl text-gray-500 hover:text-primary"
+                  >
+                    RSND, VOLUME {isFirstVolume ? "I" : "II"}
                   </Link>
                 </p>
 

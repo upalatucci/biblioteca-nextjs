@@ -77,12 +77,11 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
                 </span>{" "}
               </td>
               <td width="50%" className="px-4 py-2">
-                <Link href={`/rsnd/${post.slug}`}>
-                  <a className="flex hover:text-primary py-3 font-medium">
-                    <span
-                      dangerouslySetInnerHTML={{ __html: post.title }}
-                    ></span>
-                  </a>
+                <Link
+                  href={`/rsnd/${post.slug}`}
+                  className="flex hover:text-primary py-3 font-medium"
+                >
+                  <span dangerouslySetInnerHTML={{ __html: post.title }}></span>
                 </Link>
               </td>
               <td width="20%" className="px-4 py-2 font-medium">

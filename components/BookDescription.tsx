@@ -23,12 +23,14 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
   chapters,
   title,
   subtitle,
-  baseSlug = "rsnd"
+  baseSlug = "rsnd",
 }) => (
   <section className="w-full bg-white rounded-3xl shadow-md py-14 lg:py-32 px-8">
     <div className="mx-auto max-w-[1400px] pb-10">
       <h2 className="text-2xl md:text-4xl font-bold">{title}</h2>
-      <p className="font-sans font-medium text-md md:text-xl text-gray-500">{subtitle}</p>
+      <p className="font-sans font-medium text-md md:text-xl text-gray-500">
+        {subtitle}
+      </p>
     </div>
     <div className="mx-auto max-w-[1400px] bg-defaultBg rounded-3xl shadow-md flex flex-col md:flex-row md:gap-16 p-8 md:p-10">
       <div className="index flex-1">
@@ -50,11 +52,9 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
                   return (
                     <li className="py-2" key={item.title}>
                       <Link href={`/${baseSlug}/${item.slug}`}>
-                        <a>
-                          <span className="font-medium text-md md:text-lg">
-                            {item.title}
-                          </span>
-                        </a>
+                        <span className="font-medium text-md md:text-lg">
+                          {item.title}
+                        </span>
                       </Link>
                     </li>
                   );
@@ -65,18 +65,18 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
       </div>
       {notes && (
         <div className="notes flex-1">
-          <h3 className="text-xl md:text-3xl font-bold mb-4 text-primary">Appendici</h3>
+          <h3 className="text-xl md:text-3xl font-bold mb-4 text-primary">
+            Appendici
+          </h3>
           <ul className="divide-y-2 divide-transparent divide-dashed mb-8 md:mb-0">
             {notes
               .sort((a, b) => (a.number > b.number ? 1 : -1))
               .map((note) => (
                 <li className="py-2" key={note.slug}>
                   <Link href={`/${baseSlug}/${note.slug}`}>
-                    <a>
-                      <span className="font-medium text-md md:text-lg">
-                        {note.title.replace("Appendice", "")}
-                      </span>
-                    </a>
+                    <span className="font-medium text-md md:text-lg">
+                      {note.title.replace("Appendice", "")}
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -92,17 +92,14 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
                 <li className="py-2" key={chapter.slug ?? chapter.title}>
                   <Link
                     href={chapter.slug ? `/${baseSlug}/${chapter.slug}` : ""}
+                    className={classNames({
+                      "text-gray-400": chapter.disabled,
+                      "pointer-events-none": !chapter.slug,
+                    })}
                   >
-                    <a
-                      className={classNames({
-                        "text-gray-400": chapter.disabled,
-                        "pointer-events-none": !chapter.slug
-                      })}
-                    >
-                      <span className="font-medium text-md md:text-lg">
-                        {chapter.title.replace("Appendice", "")}
-                      </span>
-                    </a>
+                    <span className="font-medium text-md md:text-lg">
+                      {chapter.title.replace("Appendice", "")}
+                    </span>
                   </Link>
                 </li>
               ))}

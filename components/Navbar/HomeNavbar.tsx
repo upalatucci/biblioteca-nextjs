@@ -46,25 +46,22 @@ const HomeNavbar = () => {
       </div>
       <div className="px-8">
         <div className="container mx-auto text-center">
-          <Link href="/" passHref>
-            <a
-              className="inline-block"
-              aria-label="La Biblioteca di Nichiren, Home"
-            >
-              <h1 className="hidden lg:block text-center font-bold text-3xl md:text-5xl mb-8 mt-14 print:mt-0">
-                La Biblioteca di Nichiren
-              </h1>
-            </a>
+          <Link
+            href="/"
+            className="inline-block"
+            aria-label="La Biblioteca di Nichiren, Home"
+          >
+            <h1 className="hidden lg:block text-center font-bold text-3xl md:text-5xl mb-8 mt-14 print:mt-0">
+              La Biblioteca di Nichiren
+            </h1>
           </Link>
         </div>
         <nav className="container max-w-[1400px] mx-auto flex items-center justify-between mt-8 relative">
           <span className="lg:hidden"></span>
-          <Link href="/" passHref>
-            <a>
-              <h1 className="lg:hidden text-center font-bold text-3xl md:text-5xl mx-4 self-center">
-                La Biblioteca di Nichiren
-              </h1>
-            </a>
+          <Link href="/">
+            <h1 className="lg:hidden text-center font-bold text-3xl md:text-5xl mx-4 self-center">
+              La Biblioteca di Nichiren
+            </h1>
           </Link>
           <button
             className={classNames(
@@ -86,47 +83,52 @@ const HomeNavbar = () => {
               className={`px-4 py-2 z-40 shadow-md text-lg font-medium absolute top-28 h-[65vh] sm:h-[55vh] bg-white left-0 md:left-4 right-0 md:right-4 flex flex-col justify-evenly
           border rounded-3xl transition-all mobile-nav-items ${mobileMenuOpen}`}
             >
-              <Link href="/rsnd-vol1" passHref>
-                <a className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center">
-                  <div>
-                    Raccolta degli Scritti di
-                    <br />
-                    NICHIREN DAISHONIN{" "}
-                    <span className="block text-sm text-gray-500 font-sans font-normal">
-                      VOLUME I
-                    </span>
-                  </div>
-                </a>
+              <Link
+                href="/rsnd-vol1"
+                className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center"
+              >
+                <div>
+                  Raccolta degli Scritti di
+                  <br />
+                  NICHIREN DAISHONIN{" "}
+                  <span className="block text-sm text-gray-500 font-sans font-normal">
+                    VOLUME I
+                  </span>
+                </div>
               </Link>
 
-              <Link href="/rsnd-vol2" passHref>
-                <a className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center">
-                  <div>
-                    Raccolta degli Scritti di
-                    <br />
-                    NICHIREN DAISHONIN{" "}
-                    <span className="block text-sm text-gray-500 font-sans font-normal">
-                      VOLUME II
-                    </span>
-                  </div>
-                </a>
+              <Link
+                href="/rsnd-vol2"
+                className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center"
+              >
+                <div>
+                  Raccolta degli Scritti di
+                  <br />
+                  NICHIREN DAISHONIN{" "}
+                  <span className="block text-sm text-gray-500 font-sans font-normal">
+                    VOLUME II
+                  </span>
+                </div>
               </Link>
 
-              <Link href="/sutra-del-loto" passHref>
-                <a className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center">
-                  <div>Sutra del Loto</div>
-                </a>
+              <Link
+                href="/sutra-del-loto"
+                className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center"
+              >
+                <div>Sutra del Loto</div>
               </Link>
 
-              <Link href="/glossario" passHref>
-                <a className="!text-left font-sans text-customYellow uppercase border-b border-gray-200 flex-1 flex flex-col justify-center">
-                  <div>Glossario</div>
-                </a>
+              <Link
+                href="/glossario"
+                className="!text-left font-sans text-customYellow uppercase border-b border-gray-200 flex-1 flex flex-col justify-center"
+              >
+                <div>Glossario</div>
               </Link>
-              <Link href="/ricerca" passHref>
-                <a className="!text-left font-sans text-primary uppercase flex-1 flex flex-col justify-center">
-                  <div>Ricerca</div>
-                </a>
+              <Link
+                href="/ricerca"
+                className="!text-left font-sans text-primary uppercase flex-1 flex flex-col justify-center"
+              >
+                <div>Ricerca</div>
               </Link>
               {installable && (
                 <button
@@ -157,16 +159,18 @@ const HomeNavbar = () => {
             <NavbarItem href="/sutra-del-loto" title="SUTRA DEL LOTO" />
           </div>
           <span className="hidden lg:flex gap-10">
-            <Link href="/glossario" passHref>
-              <a className="btn bg-customYellow hover:bg-customYellowHover text-white text-base px-8 h-10 block rounded-3xl font-medium font-sans flex items-center">
-                <span>GLOSSARIO</span>
-              </a>
+            <Link
+              href="/glossario"
+              className="btn bg-customYellow hover:bg-customYellowHover text-white text-base px-8 h-10 block rounded-3xl font-medium font-sans flex items-center"
+            >
+              <span>GLOSSARIO</span>
             </Link>
 
-            <Link href="/ricerca" passHref>
-              <a className="btn bg-primary hover:bg-primaryHover text-white text-base px-8 h-10 block rounded-3xl font-medium font-sans flex items-center">
-                <span>RICERCA</span>
-              </a>
+            <Link
+              href="/ricerca"
+              className="btn bg-primary hover:bg-primaryHover text-white text-base px-8 h-10 block rounded-3xl font-medium font-sans flex items-center"
+            >
+              <span>RICERCA</span>
             </Link>
           </span>
         </nav>

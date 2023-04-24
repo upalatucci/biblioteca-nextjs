@@ -105,12 +105,13 @@ export default function RSND1({ chapters, index }) {
                         </span>{" "}
                       </td>
                       <td className="px-4 py-2">
-                        <Link href={`/sutra-del-loto/${post.slug}`}>
-                          <a className="flex hover:text-primary py-3 font-medium">
-                            <span
-                              dangerouslySetInnerHTML={{ __html: post.title }}
-                            ></span>
-                          </a>
+                        <Link
+                          href={`/sutra-del-loto/${post.slug}`}
+                          className="flex hover:text-primary py-3 font-medium"
+                        >
+                          <span
+                            dangerouslySetInnerHTML={{ __html: post.title }}
+                          ></span>
                         </Link>
                       </td>
                     </tr>

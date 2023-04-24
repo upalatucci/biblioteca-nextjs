@@ -80,15 +80,15 @@ const ResultTab: React.FC<ResultTabProps> = ({
 
   return (
     <li className="mr-2 min-w-80 whitespace-pre">
-      <Link href={createTabURL(router, tabKey)} scroll={false}>
-        <a
-          aria-current="page"
-          className={classNames(baseTabClass, {
-            [selectedTabClass]: active,
-          })}
-        >
-          {title} <CountLoading loading={loading} count={count} />
-        </a>
+      <Link
+        href={createTabURL(router, tabKey)}
+        scroll={false}
+        aria-current="page"
+        className={classNames(baseTabClass, {
+          [selectedTabClass]: active,
+        })}
+      >
+        {title} <CountLoading loading={loading} count={count} />
       </Link>
     </li>
   );

@@ -27,10 +27,8 @@ const PageNotFound = () => (
               Non puoi accedere a questo contenuto perche&#39; al momento sei
               offline
             </p>
-            <Link href="/">
-              <a className="text-primary hover:text-primaryHover">
-                Torna alla pagina iniziale!
-              </a>
+            <Link href="/" className="text-primary hover:text-primaryHover">
+              Torna alla pagina iniziale!
             </Link>
           </div>
         </div>

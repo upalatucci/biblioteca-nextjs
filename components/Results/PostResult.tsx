@@ -97,21 +97,19 @@ const PostResultContent: FC<PostProps> = ({ post, highlights }) => {
           passHref
           scroll={false}
         >
-          <a>
-            <h5
-              className="font-bold pb-4 text-lg md:text-xl"
-              dangerouslySetInnerHTML={{ __html: title }}
-            />
-            <div
-              className="result lg:mr-20 font-medium text-md md:text-lg"
-              dangerouslySetInnerHTML={{
-                __html: `${(highlightedContent || post.post_content).substring(
-                  0,
-                  400
-                )}...`,
-              }}
-            ></div>
-          </a>
+          <h5
+            className="font-bold pb-4 text-lg md:text-xl"
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
+          <div
+            className="result lg:mr-20 font-medium text-md md:text-lg"
+            dangerouslySetInnerHTML={{
+              __html: `${(highlightedContent || post.post_content).substring(
+                0,
+                400
+              )}...`,
+            }}
+          ></div>
         </Link>
         <p className="font-sans flex items-center mt-4 flex-wrap gap-2 uppercase">
           {Object.keys(highlights)
@@ -124,11 +122,9 @@ const PostResultContent: FC<PostProps> = ({ post, highlights }) => {
                 href={getPostResultLink(post, router.query, highlightField)}
                 passHref
               >
-                <a>
-                  <span className="border border-gray-400 rounded-xl px-4 py-1 text-sm bg-gray-50 text-gray-500 break-keep">
-                    {humanizedField[highlightField]}
-                  </span>
-                </a>
+                <span className="border border-gray-400 rounded-xl px-4 py-1 text-sm bg-gray-50 text-gray-500 break-keep">
+                  {humanizedField[highlightField]}
+                </span>
               </Link>
             ))}
 

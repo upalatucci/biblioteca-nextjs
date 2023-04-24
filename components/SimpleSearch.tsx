@@ -56,10 +56,12 @@ const SimpleSearch: FC<SimpleSearchType> = ({ loading }) => {
                   </div>
                 </button>
 
-                <Link href="/ricerca-avanzata" passHref>
-                  <a className=" h-10 flex justify-center items-center btn border border-primary text-primary hover:bg-white rounded-3xl text-center text-lg font-sans py-2 w-full sm:w-1/3 whitespace-pre">
-                    Ricerca avanzata
-                  </a>
+                <Link
+                  href="/ricerca-avanzata"
+                  passHref
+                  className=" h-10 flex justify-center items-center btn border border-primary text-primary hover:bg-white rounded-3xl text-center text-lg font-sans py-2 w-full sm:w-1/3 whitespace-pre"
+                >
+                  Ricerca avanzata
                 </Link>
               </div>
             </div>

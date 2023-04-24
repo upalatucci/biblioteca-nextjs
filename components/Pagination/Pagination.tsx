@@ -55,52 +55,54 @@ const Pagination: FC<PaginationProps> = ({
 
   return (
     <div className="flex items-center justify-center pb-10 pt-14">
-      <Link href={generateHref(page - 1)} passHref>
-        <a
-          aria-label="Pagina precedente"
-          className={classNames(pageClassName, {
-            [pageNumerDisabledClassName]: page === 1,
-          })}
-        >
-          {"<"}
-        </a>
+      <Link
+        href={generateHref(page - 1)}
+        aria-label="Pagina precedente"
+        className={classNames(pageClassName, {
+          [pageNumerDisabledClassName]: page === 1,
+        })}
+      >
+        {"<"}
       </Link>
       {prevPrevPage > 0 && (
-        <Link href={generateHref(prevPrevPage)} passHref>
-          <a aria-label={`Pagina ${prevPrevPage}`} className={pageClassName}>
-            {prevPrevPage}
-          </a>
+        <Link
+          href={generateHref(prevPrevPage)}
+          aria-label={`Pagina ${prevPrevPage}`}
+          className={pageClassName}
+        >
+          {prevPrevPage}
         </Link>
       )}
       {prevPage > 0 && (
-        <Link href={generateHref(prevPage)} passHref>
-          <a aria-label={`Pagina ${prevPage}`} className={pageClassName}>
-            {prevPage}
-          </a>
+        <Link
+          href={generateHref(prevPage)}
+          aria-label={`Pagina ${prevPage}`}
+          className={pageClassName}
+        >
+          {prevPage}
         </Link>
       )}
 
       {nextPages.map((nextPage) => (
-        <Link key={nextPage} href={generateHref(nextPage)} passHref>
-          <a
-            aria-label={`Pagina ${prevPrevPage}`}
-            className={classNames(pageClassName, {
-              [pageNumerDisabledClassName]: nextPage === page,
-            })}
-          >
-            {nextPage}
-          </a>
-        </Link>
-      ))}
-      <Link href={generateHref(totalPage === page ? page : page + 1)} passHref>
-        <a
-          aria-label="Pagina successiva"
+        <Link
+          key={nextPage}
+          href={generateHref(nextPage)}
+          aria-label={`Pagina ${prevPrevPage}`}
           className={classNames(pageClassName, {
-            [pageNumerDisabledClassName]: totalPage === page,
+            [pageNumerDisabledClassName]: nextPage === page,
           })}
         >
-          {">"}
-        </a>
+          {nextPage}
+        </Link>
+      ))}
+      <Link
+        href={generateHref(totalPage === page ? page : page + 1)}
+        aria-label="Pagina successiva"
+        className={classNames(pageClassName, {
+          [pageNumerDisabledClassName]: totalPage === page,
+        })}
+      >
+        {">"}
       </Link>
     </div>
   );

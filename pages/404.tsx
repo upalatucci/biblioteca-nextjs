@@ -27,10 +27,8 @@ const PageNotFound = () => (
           <div className="py-4">
             <p className="text-xl">
               Ti sei perso?{" "}
-              <Link href="/">
-                <a className="text-primary hover:text-primaryHover">
-                  Torna alla pagina iniziale!
-                </a>
+              <Link href="/" className="text-primary hover:text-primaryHover">
+                Torna alla pagina iniziale!
               </Link>
             </p>
           </div>

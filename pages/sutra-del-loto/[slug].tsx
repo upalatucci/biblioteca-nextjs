@@ -67,10 +67,11 @@ export default function PostPage({ post }) {
                   }}
                 ></h2>
                 <p className="text-gray-400 pb-14">
-                  <Link href="/sutra-del-loto">
-                    <a className="font-sans font-medium text-xl text-gray-500 hover:text-primary">
-                      Sutra del Loto
-                    </a>
+                  <Link
+                    href="/sutra-del-loto"
+                    className="font-sans font-medium text-xl text-gray-500 hover:text-primary"
+                  >
+                    Sutra del Loto
                   </Link>
                 </p>
 

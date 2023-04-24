@@ -42,8 +42,8 @@ const NoResultsForThatBook = ({ router }) => (
           {MAP_BOOK_TO_HUMAN_READABLE[router?.query?.book as string] ||
             router?.query?.book}
         </h3>
-        <Link href={getBaseSearchPath(router)}>
-          <a className="text-primary px-4">Prova a cercare su tutte le fonti</a>
+        <Link href={getBaseSearchPath(router)} className="text-primary px-4">
+          Prova a cercare su tutte le fonti
         </Link>
       </div>
     </div>

@@ -99,60 +99,60 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
       </h3>
       <ul className="relative mb-[-1px] max-w-[1400px] flex flex-wrap text-center font-sans dark:text-gray-400 pt-14 md:pl-8">
         <li className="mr-2 min-w-80">
-          <Link href={getTabUrl(router, null)} scroll={false}>
-            <a
-              aria-current="page"
-              className={classNames(
-                "inline-block p-4 tab-mobile transition-none",
-                {
-                  [selectedTabClass]: !filterCategory,
-                }
-              )}
-            >
-              Tutti ({totalResults})
-            </a>
+          <Link
+            href={getTabUrl(router, null)}
+            scroll={false}
+            aria-current="page"
+            className={classNames(
+              "inline-block p-4 tab-mobile transition-none",
+              {
+                [selectedTabClass]: !filterCategory,
+              }
+            )}
+          >
+            Tutti ({totalResults})
           </Link>
         </li>
 
         <li className="mr-2 min-w-80">
-          <Link href={getTabUrl(router, "rsnd")} scroll={false}>
-            <a
-              aria-current="page"
-              className={classNames(
-                "inline-block p-4 tab-mobile transition-none",
-                {
-                  [selectedTabClass]: filterCategory === GLOSSARY_RSND_CAT_ID,
-                  "text-gray-400 pointer-events-none cursor-not-allowed":
-                    rsndResults === 0,
-                }
-              )}
-            >
-              <span className="hidden lg:inline">
-                Raccolta degli Scritti di Nichiren Daishonin
-              </span>
-              <span className="lg:hidden">RSND</span>
-              <span> ({rsndResults})</span>
-            </a>
+          <Link
+            href={getTabUrl(router, "rsnd")}
+            scroll={false}
+            aria-current="page"
+            className={classNames(
+              "inline-block p-4 tab-mobile transition-none",
+              {
+                [selectedTabClass]: filterCategory === GLOSSARY_RSND_CAT_ID,
+                "text-gray-400 pointer-events-none cursor-not-allowed":
+                  rsndResults === 0,
+              }
+            )}
+          >
+            <span className="hidden lg:inline">
+              Raccolta degli Scritti di Nichiren Daishonin
+            </span>
+            <span className="lg:hidden">RSND</span>
+            <span> ({rsndResults})</span>
           </Link>
         </li>
 
         <li className="mr-2 min-w-80">
-          <Link href={getTabUrl(router, "sdl")} scroll={false}>
-            <a
-              aria-current="page"
-              className={classNames(
-                "inline-block p-4 tab-mobile transition-none",
-                {
-                  [selectedTabClass]: filterCategory === GLOSSARY_SDL_CAT_ID,
-                  "text-gray-400 pointer-events-none cursor-not-allowed":
-                    sdlResults === 0,
-                }
-              )}
-            >
-              <span className="hidden md:inline">Il Sutra del Loto</span>
-              <span className="md:hidden">SDL</span>
-              <span> ({sdlResults})</span>
-            </a>
+          <Link
+            href={getTabUrl(router, "sdl")}
+            scroll={false}
+            aria-current="page"
+            className={classNames(
+              "inline-block p-4 tab-mobile transition-none",
+              {
+                [selectedTabClass]: filterCategory === GLOSSARY_SDL_CAT_ID,
+                "text-gray-400 pointer-events-none cursor-not-allowed":
+                  sdlResults === 0,
+              }
+            )}
+          >
+            <span className="hidden md:inline">Il Sutra del Loto</span>
+            <span className="md:hidden">SDL</span>
+            <span> ({sdlResults})</span>
           </Link>
         </li>
       </ul>

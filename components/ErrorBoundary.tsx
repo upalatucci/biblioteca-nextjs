@@ -48,13 +48,12 @@ class ErrorBoundary extends Component<
                 <hr className="border border-secondary mt-6" />
                 <div className="py-4">
                   <p className="text-xl">
-                    <Link href="/">
-                      <a
-                        className="text-primary hover:text-primaryHover"
-                        onClick={() => this.setState({ hasError: false })}
-                      >
-                        Vogliamo riporvare di nuovo?
-                      </a>
+                    <Link
+                      href="/"
+                      className="text-primary hover:text-primaryHover"
+                      onClick={() => this.setState({ hasError: false })}
+                    >
+                      Vogliamo riporvare di nuovo?
                     </Link>
                   </p>
 

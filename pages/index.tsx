@@ -149,82 +149,78 @@ export default function Home() {
             <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
               <div className="z-0 bg-defaultBg rounded-3xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
               <Link href="/glossario">
-                <a>
-                  <div className="z-10">
-                    <div className="">
-                      <Image
-                        src={sfogliaGlossario}
-                        alt="Sfoglia il glossario"
-                        layout="responsive"
-                        width={800}
-                        height={700}
-                        objectFit="cover"
-                        className="pointer-events-none rounded-3xl"
-                      />
-                    </div>
-                    <div>
-                      <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
-                        <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#EEE8DD] ">
-                          <img
-                            className=""
-                            src="/icons/ico-glossario.svg"
-                            alt="icona glossario"
-                          />
+                <div className="z-10">
+                  <div className="">
+                    <Image
+                      src={sfogliaGlossario}
+                      alt="Sfoglia il glossario"
+                      layout="responsive"
+                      width={800}
+                      height={700}
+                      objectFit="cover"
+                      className="pointer-events-none rounded-3xl"
+                    />
+                  </div>
+                  <div>
+                    <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
+                      <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#EEE8DD] ">
+                        <img
+                          className=""
+                          src="/icons/ico-glossario.svg"
+                          alt="icona glossario"
+                        />
+                      </span>
+                      <div className="z-10">
+                        <h3 className="font-serif z-10 lg:text-lg font-bold">
+                          Sfoglia il glossario
+                        </h3>
+                        <span className="z-10">
+                          Sfoglia il glossario in base alle iniziali del termine
+                          o ricerca per parola
                         </span>
-                        <div className="z-10">
-                          <h3 className="font-serif z-10 lg:text-lg font-bold">
-                            Sfoglia il glossario
-                          </h3>
-                          <span className="z-10">
-                            Sfoglia il glossario in base alle iniziali del
-                            termine o ricerca per parola
-                          </span>
-                        </div>
                       </div>
                     </div>
                   </div>
-                </a>
+                </div>
               </Link>
             </div>
 
             <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
               <div className="z-0 bg-defaultBg rounded-3xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
               <Link href="/ricerca-avanzata">
-                <a>
-                  <div className="z-10">
-                    <div className="">
-                      <Image
-                        src={ricercaAvanzata}
-                        alt="Ricerca avanzata"
-                        layout="responsive"
-                        width={800}
-                        height={700}
-                        objectFit="cover"
-                        className="pointer-events-none rounded-3xl"
-                      />
-                    </div>
-                    <div>
-                      <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
-                        <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#D5E6EB] ">
-                          <img
-                            className=""
-                            src="/icons/ico-advance-search.svg"
-                            alt="icona ricerca avanzata"
-                          />
+                <div className="z-10">
+                  <div className="">
+                    <Image
+                      src={ricercaAvanzata}
+                      alt="Ricerca avanzata"
+                      layout="responsive"
+                      width={800}
+                      height={700}
+                      objectFit="cover"
+                      className="pointer-events-none rounded-3xl"
+                    />
+                  </div>
+                  <div>
+                    <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
+                      <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#D5E6EB] ">
+                        <img
+                          className=""
+                          src="/icons/ico-advance-search.svg"
+                          alt="icona ricerca avanzata"
+                        />
+                      </span>
+                      <div className="z-10">
+                        <h3 className="lg:text-lg font-bold">
+                          Fai una ricerca avanzata
+                        </h3>
+                        <span className="flex-col">
+                          Raffina la ricerca scegliendo il tipo di logica e il
+                          contesto in cui cercare.
                         </span>
-                        <div className="z-10">
-                          <h3 className="lg:text-lg font-bold">
-                            Fai una ricerca avanzata
-                          </h3>
-                          <span className="flex-col">
-                            Raffina la ricerca scegliendo il tipo di logica e il
-                            contesto in cui cercare.
-                          </span>
-                        </div>
                       </div>
                     </div>
                   </div>
-                </a>
+                </div>
               </Link>
             </div>
           </div>
