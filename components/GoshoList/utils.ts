@@ -35,15 +35,11 @@ export const useFilters = (allGosho: GoshoType[]) => {
     [allGosho]
   );
 
-  const [titleFilter, setTitleFilter] = useState(
-    (router.query.titleFilter as string) || ""
-  );
-  const [recipient, setRecipient] = useState<string>(
-    (router.query.recipient as string) || ALL_LABEL
-  );
-  const [place, setPlace] = useState<string>(
-    (router.query.place as string) || ALL_LABEL
-  );
+  const titleFilter = (router.query.titleFilter as string) || "";
+
+  const recipient = (router.query.recipient as string) || ALL_LABEL;
+
+  const place = (router.query.place as string) || ALL_LABEL;
 
   const fuseRef = useRef<Fuse<GoshoType>>();
 
@@ -52,9 +48,14 @@ export const useFilters = (allGosho: GoshoType[]) => {
   }, [allGosho]);
 
   const clearFilters = useCallback(() => {
-    setTitleFilter("");
-    setRecipient(ALL_LABEL);
-    setPlace(ALL_LABEL);
+    router.push(
+      {
+        query: {},
+        hash: "gosho-list",
+      },
+      undefined,
+      { scroll: false, shallow: true }
+    );
   }, []);
 
   const goshoFilteredByTitle =
@@ -78,27 +79,61 @@ export const useFilters = (allGosho: GoshoType[]) => {
     return true;
   });
 
-  useEffect(() => {
-    const newQuery: ParsedUrlQuery = {
-      ...router.query,
-      place,
-      recipient,
-      titleFilter,
-    };
-    if (router.query.page) {
-      delete newQuery.page;
-    }
+  const setRouterState = useCallback(
+    (key: string, value: string, replace?: boolean) => {
+      const newQuery: ParsedUrlQuery = {
+        ...router.query,
+        [key]: value,
+      };
 
-    router.push(
-      {
-        ...router,
-        query: newQuery,
-        hash: "gosho-list",
-      },
-      undefined,
-      { scroll: false }
-    );
-  }, [place, recipient, titleFilter]);
+      if (router.query.page) {
+        delete newQuery.page;
+      }
+
+      if (replace) {
+        router.replace(
+          {
+            query: newQuery,
+            hash: "gosho-list",
+          },
+          undefined,
+          { scroll: false, shallow: true }
+        );
+        return;
+      }
+
+      router.push(
+        {
+          query: newQuery,
+          hash: "gosho-list",
+        },
+        undefined,
+        { scroll: false, shallow: true }
+      );
+    },
+    [router.query]
+  );
+
+  const setTitleFilter = useCallback(
+    (newValue) => {
+      setRouterState("titleFilter", newValue, true);
+    },
+    [setRouterState]
+  );
+
+  const setRecipient = useCallback(
+    (newValue) => {
+      setRouterState("recipient", newValue);
+    },
+    [setRouterState]
+  );
+
+  const setPlace = useCallback(
+    (newValue) => {
+      setRouterState("place", newValue);
+    },
+    [setRouterState]
+  );
 
   return {
     titleFilter,
