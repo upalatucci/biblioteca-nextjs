@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GoshoType } from "./GoshoList";
 import Fuse from "fuse.js";
 import { useRouter } from "next/router";
+import { ParsedUrlQuery } from "querystring";
 
 export const ALL_LABEL = "Tutti";
 
@@ -17,14 +18,15 @@ const generateUniqueOptions = (jsonData: GoshoType[], key) => {
 
     uniqueValues.add(post[key]);
   });
-  
+
   return Array.from(uniqueValues);
 };
 
 export const useFilters = (allGosho: GoshoType[]) => {
   const router = useRouter();
   const recipientOptions = useMemo(
-    () => [ALL_LABEL].concat(generateUniqueOptions(allGosho, "recipient").sort()),
+    () =>
+      [ALL_LABEL].concat(generateUniqueOptions(allGosho, "recipient").sort()),
     [allGosho]
   );
 
@@ -33,9 +35,15 @@ export const useFilters = (allGosho: GoshoType[]) => {
     [allGosho]
   );
 
-  const [titleFilter, setTitleFilter] = useState("");
-  const [recipient, setRecipient] = useState<string>(ALL_LABEL);
-  const [place, setPlace] = useState<string>(ALL_LABEL);
+  const [titleFilter, setTitleFilter] = useState(
+    (router.query.titleFilter as string) || ""
+  );
+  const [recipient, setRecipient] = useState<string>(
+    (router.query.recipient as string) || ALL_LABEL
+  );
+  const [place, setPlace] = useState<string>(
+    (router.query.place as string) || ALL_LABEL
+  );
 
   const fuseRef = useRef<Fuse<GoshoType>>();
 
@@ -71,22 +79,25 @@ export const useFilters = (allGosho: GoshoType[]) => {
   });
 
   useEffect(() => {
+    const newQuery: ParsedUrlQuery = {
+      ...router.query,
+      place,
+      recipient,
+      titleFilter,
+    };
     if (router.query.page) {
-      const newQuery = { ...router.query };
-
       delete newQuery.page;
-      router.push(
-        {
-          ...router,
-          query: {
-            ...newQuery,
-          },
-          hash: "gosho-list",
-        },
-        undefined,
-        { scroll: false }
-      );
     }
+
+    router.push(
+      {
+        ...router,
+        query: newQuery,
+        hash: "gosho-list",
+      },
+      undefined,
+      { scroll: false }
+    );
   }, [place, recipient, titleFilter]);
 
   return {
