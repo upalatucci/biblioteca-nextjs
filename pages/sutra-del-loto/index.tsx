@@ -15,7 +15,7 @@ import {
 import { ACF_METADATA, SDL_CAT_ID, SDL_INTRO_CAT_ID } from "@utils/constants";
 import { GetStaticProps } from "next";
 
-export default function RSND1({ chapters, index }) {
+export default function SDL({ chapters, index }) {
   const [sortField, setSortField] = useState("number");
   const [sortAscend, setSortAscend] = useState(true);
 

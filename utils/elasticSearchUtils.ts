@@ -56,7 +56,29 @@ export type ElasticSearchPost = {
   post_mime_type: string;
   permalink: string;
   terms: {
-    cat_glossary: [
+    cat_glossary?: [
+      {
+        term_id: number;
+        slug: string;
+        name: string;
+        parent: number;
+        term_taxonomy_id: number;
+        term_order: number;
+        facet: string;
+      }
+    ];
+    cat_sdlpe?: [
+      {
+        term_id: number;
+        slug: string;
+        name: string;
+        parent: number;
+        term_taxonomy_id: number;
+        term_order: number;
+        facet: string;
+      }
+    ];
+    cat_rsnd?: [
       {
         term_id: number;
         slug: string;
@@ -68,7 +90,14 @@ export type ElasticSearchPost = {
       }
     ];
   };
-  meta: string[];
+  meta: {
+    acf_note: { exact: string; value: string }[];
+    acf_cenni_storici: { exact: string; value: string }[];
+    acf_destinatario: { value: string }[];
+    acf_numero: { value: string }[];
+    acf_luogo: { value: string }[];
+    acf_data: { value: string }[];
+  };
   date_terms: {
     year: number;
     month: number;

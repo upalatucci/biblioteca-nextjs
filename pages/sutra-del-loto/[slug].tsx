@@ -88,11 +88,11 @@ export default function PostPage({ post }) {
               className="py-20 lg:py-32 px-8 container mx-auto max-w-[1000px] print:py-0"
               id="contenuto"
             >
-              {paragraphs.map((p) => (
+              {paragraphs.map((p, index) => (
                 <ParagraphWithNotes
                   content={p}
                   notes={notesArray}
-                  key={p}
+                  key={`${index}-${p}`}
                   fontSize={fontSize}
                 />
               ))}

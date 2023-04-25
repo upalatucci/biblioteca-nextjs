@@ -8,6 +8,7 @@ import {
   humanizeTypeCategory,
   humanizedField,
 } from "./utils";
+import { SDL_CAT_ID } from "@utils/constants";
 
 type PostProps = {
   post: ElasticSearchPost;
@@ -82,12 +83,16 @@ const GlossarioResult: FC<PostProps> = ({ post, highlights }) => {
 const PostResultContent: FC<PostProps> = ({ post, highlights }) => {
   const router = useRouter();
 
-  const title =
+  let title =
     highlights?.post_title?.[0] ||
     highlights?.["post_title.exact"]?.[0] ||
     post.post_title;
 
   const highlightedContent = buildHighlight(highlights);
+
+  if (post?.terms?.cat_sdlpe?.find((cat) => cat.term_id === SDL_CAT_ID)) {
+    title = `${post?.meta?.acf_numero?.[0]?.value}. ${title}`;
+  }
 
   return (
     <li className="py-6">
