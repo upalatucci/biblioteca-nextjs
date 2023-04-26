@@ -1,12 +1,14 @@
 import React, { useRef, useEffect } from "react";
 import Fuse from "fuse.js";
 import { createFuzzyIndex, highlight } from "@utils/fuzzySearch";
-import Pagination, { usePagination } from "./Pagination";
+import Pagination, { usePagination } from "../Pagination";
 import { GLOSSARY_RSND_CAT_ID, GLOSSARY_SDL_CAT_ID } from "@utils/constants";
 import Link from "next/link";
 import classNames from "classnames";
-import { NextRouter, useRouter } from "next/router";
-import { Url } from "url";
+import { useRouter } from "next/router";
+import SearchInput from "../SearchInput";
+import { ParsedUrlQuery } from "querystring";
+import { getTabUrl } from "./utils";
 
 type DictionaryItem = {
   id: number;
@@ -19,6 +21,7 @@ type DictionarySearchProps = {
   glossary: DictionaryItem[];
   filterText: string;
   letter: string;
+  setSearchText: (newValue: string) => void;
   clearFilters: () => void;
 };
 
@@ -36,23 +39,11 @@ const getCategoryFromBook = (book: string) => {
 const selectedTabClass =
   "font-bold text-black !bg-white border border-gray-200 rounded-t-3xl border-b-0 relative top-[0.5px]";
 
-const getTabUrl = (router: NextRouter, book?: string): Partial<Url> => {
-  const newQuery = { ...router.query };
-
-  if (!book) delete newQuery.book;
-  else newQuery.book = book;
-
-  return {
-    pathname: "/glossario",
-    query: newQuery,
-    hash: "risultati",
-  };
-};
-
 const DictionarySearch: React.FC<DictionarySearchProps> = ({
   glossary,
   letter,
   filterText,
+  setSearchText,
   clearFilters,
 }) => {
   const router = useRouter();
@@ -93,11 +84,39 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
 
   const dictionaryToShow = usePagination(glossarioFilteredByCategory);
 
+  const onSearch = (newSearchValue: string) => {
+    const newQuery: ParsedUrlQuery = { ...router.query, q: newSearchValue };
+
+    delete newQuery.lettera;
+    delete newQuery.page;
+
+    if (router.query.lettera || router.query.page) {
+      router.push({ ...router, query: newQuery }, null, {
+        scroll: false,
+        shallow: true,
+      });
+    }
+
+    setSearchText(newSearchValue);
+  };
+
   return (
     <div className="py-14 lg:py-32 px-8 mb-14" id="risultati">
-      <h3 className="max-w-[1400px] text-2xl md:text-4xl text-primary font-bold ">
+      <h3 className="max-w-[1400px] text-2xl md:text-4xl text-primary font-bold mb-4">
         Abbiamo trovato
       </h3>
+
+      <div className="flex items-stretch lg:items-center justify-between flex-wrap flex-col xl:flex-row">
+        <label className="flex flex-col md:flex-row w-full md:items-cente">
+          <SearchInput
+            onChange={onSearch}
+            value={filterText}
+            placeholder="Cerca un termine"
+            className="border-primary !max-w-[500px]"
+            aria-label="Cerca un termine"
+          />
+        </label>
+      </div>
       <ul className="relative mb-[-1px] max-w-[1400px] flex flex-wrap text-center font-sans dark:text-gray-400 pt-14 md:pl-8">
         <li className="mr-2 min-w-80">
           <Link

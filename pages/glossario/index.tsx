@@ -1,23 +1,21 @@
 import Head from "next/head";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
 import { FormEventHandler, useEffect, useState } from "react";
-import SearchInput from "@components/SearchInput";
 import classNames from "classnames";
 import Footer from "@components/Footer";
-import DictionarySearch from "@components/DictionarySearch";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import { GetStaticProps } from "next";
 import { INCLUDE_CATEGORY, prismaClient } from "lib/db";
+import DictionarySearch from "@components/DictionarySearch/DictionarySearch";
 
 const alfabeto = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 
 export default function Glossario({ glossary }) {
   const router = useRouter();
 
-  const selectedLetter = router?.query?.lettera as string;
-
   const [searchText, setSearchText] = useState("");
+  const selectedLetter = router?.query?.lettera as string;
 
   useEffect(() => {
     setSearchText(router?.query?.q as string);
@@ -37,7 +35,7 @@ export default function Glossario({ glossary }) {
         hash: null,
       },
       null,
-      { scroll: false }
+      { scroll: false, shallow: true }
     );
   };
 
@@ -76,19 +74,6 @@ export default function Glossario({ glossary }) {
     );
   };
 
-  const onSearch = (newSearchValue: string) => {
-    const newQuery: ParsedUrlQuery = { ...router.query, q: newSearchValue };
-
-    delete newQuery.lettera;
-    delete newQuery.page;
-
-    if (router.query.lettera || router.query.page) {
-      router.push({ ...router, query: newQuery }, null, { scroll: false });
-    }
-
-    setSearchText(newSearchValue);
-  };
-
   return (
     <>
       <Head>
@@ -105,19 +90,6 @@ export default function Glossario({ glossary }) {
                 className="bg-defaultBg shadow-md rounded-3xl p-8 flex flex-col flex-wrap font-sans"
                 onSubmit={onSubmit}
               >
-                <div className="mb-4 flex items-stretch lg:items-center justify-between flex-wrap flex-col xl:flex-row">
-                  <label className="flex flex-col md:flex-row w-full md:items-center mb-6">
-                    <span className="font-bold mr-4 mb-4 md:mb-0">
-                      Cerca un termine
-                    </span>
-                    <SearchInput
-                      onChange={onSearch}
-                      value={searchText}
-                      placeholder="Inserisci la parola che stai cercando"
-                      className="border-primary"
-                    />
-                  </label>
-                </div>
                 <div className="flex flex-wrap items-center justify-center xl:justify-between gap-1">
                   {alfabeto.map((lettera) => (
                     <button
@@ -143,6 +115,7 @@ export default function Glossario({ glossary }) {
             glossary={glossary}
             letter={selectedLetter}
             filterText={searchText}
+            setSearchText={setSearchText}
             clearFilters={clearFilters}
           />
         </section>

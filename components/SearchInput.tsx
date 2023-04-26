@@ -26,7 +26,7 @@ const SearchInput: FC<SearchInputProps> = ({
   value,
   onChange,
   placeholder,
-  className,
+  className = "",
   "aria-label": ariaLabel,
   required = false,
   withSuggestions = false,
@@ -136,10 +136,7 @@ const SearchInput: FC<SearchInputProps> = ({
 
   return (
     <div
-      className={classNames(
-        "w-full md:max-w-[50%] input-container relative",
-        className
-      )}
+      className={`${className} w-full md:max-w-[50%] input-container relative`}
       onKeyDown={onKeyDown}
     >
       <input
