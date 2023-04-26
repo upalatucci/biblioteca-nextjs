@@ -164,6 +164,7 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   const glossary = posts.map((post) => ({
+    id: Number(post.ID),
     title: post.post_title,
     content: post.post_content,
     cat: post.d1b1_term_relationships.map((term) =>

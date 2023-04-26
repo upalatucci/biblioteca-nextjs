@@ -9,6 +9,7 @@ import { NextRouter, useRouter } from "next/router";
 import { Url } from "url";
 
 type DictionaryItem = {
+  id: number;
   title: string;
   content: string;
   cat: number[];
@@ -70,7 +71,7 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
     console.log(glossarioFiltrato);
   } else if (letter) {
     glossarioFiltrato = glossary?.filter((termine) =>
-      termine?.title?.charAt(0).toUpperCase().startsWith(letter)
+      termine?.title?.toUpperCase().startsWith(letter)
     );
   } else {
     glossarioFiltrato = glossary;
@@ -171,10 +172,7 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
           <>
             <ul className="divide-y-2 divide-dashed mb-10 mx-auto md:max-w-6xl border-b border-gray-200 dark:border-gray-700 bg-defaultBg rounded-3xl shadow-md  px-4 md:px-10 py-4">
               {dictionaryToShow.map((glossarioRicerca) => (
-                <li
-                  className="py-6"
-                  key={`${glossarioRicerca.title}-${glossarioRicerca.cat?.[0]}`}
-                >
+                <li className="py-6" key={glossarioRicerca.id}>
                   <button className="text-left">
                     <div
                       className="first-letter font-bold font-bold pb-4 text-lg md:text-xl"
