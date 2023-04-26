@@ -149,15 +149,13 @@ export default function Home() {
             <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
               <div className="z-0 bg-defaultBg rounded-3xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
               <Link href="/glossario">
-                <div className="z-10">
+                <div className="z-10  relative">
                   <div className="">
                     <Image
                       src={sfogliaGlossario}
                       alt="Sfoglia il glossario"
-                      layout="responsive"
                       width={800}
                       height={700}
-                      objectFit="cover"
                       className="pointer-events-none rounded-3xl"
                     />
                   </div>
@@ -188,15 +186,13 @@ export default function Home() {
             <div className="relative flex-1 text-center w-full max-w-[400px] md:max-w-[30%] 2xl:max-w-[450px] sm:w-[450px] md:w-[500px] lg:w-[500px]">
               <div className="z-0 bg-defaultBg rounded-3xl shadow-md absolute top-20 bottom-0 -right-4 -left-4 sm:-right-10 sm:-left-10"></div>
               <Link href="/ricerca-avanzata">
-                <div className="z-10">
+                <div className="z-10 relative">
                   <div className="">
                     <Image
                       src={ricercaAvanzata}
                       alt="Ricerca avanzata"
-                      layout="responsive"
                       width={800}
                       height={700}
-                      objectFit="cover"
                       className="pointer-events-none rounded-3xl"
                     />
                   </div>

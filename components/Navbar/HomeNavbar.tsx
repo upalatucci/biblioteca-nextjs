@@ -3,6 +3,9 @@ import { useState } from "react";
 import NavbarItem from "./NavbarItem";
 import classNames from "classnames";
 import useInstallPWA from "@hooks/useInstallPWA";
+import Image from "next/image";
+import Logo from "@public/biblioteca-nichiren-logo.svg";
+import { useRouter } from "next/router";
 
 const CLOSE = "close";
 const SHOW = "show";
@@ -23,8 +26,11 @@ const HomeNavbar = () => {
     }
   };
 
+  const router = useRouter();
+  const isHomepage = router.pathname === "/";
+
   return (
-    <header className="pb-14">
+    <header className="pb-14 relative">
       <div className="top-bar bg-neutral-800 px-8 py-2">
         <div className="container max-w-[1406px] mx-auto ">
           <a
@@ -38,31 +44,32 @@ const HomeNavbar = () => {
               src="/icons/ibisg.svg"
               alt="icona istituto buddista italiano soka gakkai"
             />
-            <span className="text-white">
+            <span className="text-white hidden lg:block">
               Istituto Buddista Italiano Soka Gakkai
             </span>
           </a>
         </div>
       </div>
       <div className="px-8">
-        <div className="container mx-auto text-center">
+        <div
+          className={`container mx-auto text-right ${
+            isHomepage ? "md:text-center" : ""
+          } absolute top-0 left-0 right-0`}
+        >
           <Link
             href="/"
-            className="inline-block"
+            className="inline-block bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-4 md:mr-0 max-w-[250px] md:max-w-none z-10 relative"
             aria-label="La Biblioteca di Nichiren, Home"
           >
-            <h1 className="hidden lg:block text-center font-bold text-3xl md:text-5xl mb-8 mt-14 print:mt-0">
-              La Biblioteca di Nichiren
-            </h1>
+            <Image
+              src={Logo}
+              alt="logo"
+              width={isHomepage ? 300 : 200}
+              height={isHomepage ? 150 : 100}
+            />
           </Link>
         </div>
         <nav className="container max-w-[1400px] mx-auto flex items-center justify-between mt-8 relative">
-          <span className="lg:hidden"></span>
-          <Link href="/">
-            <h1 className="lg:hidden text-center font-bold text-3xl md:text-5xl mx-4 self-center">
-              La Biblioteca di Nichiren
-            </h1>
-          </Link>
           <button
             className={classNames(
               "mobileMenu block relative lg:hidden w-12 h-10",
@@ -141,7 +148,7 @@ const HomeNavbar = () => {
             </div>
           )}
 
-          <div className="text-black hidden lg:flex items-center justify-start gap-10 w-full">
+          <div className="text-black hidden lg:flex items-center justify-start gap-10 w-full md:pt-24">
             <NavbarItem
               href="/rsnd-vol1"
               upText="Raccolta degli Scritti di"
@@ -158,7 +165,7 @@ const HomeNavbar = () => {
 
             <NavbarItem href="/sutra-del-loto" title="SUTRA DEL LOTO" />
           </div>
-          <span className="hidden lg:flex gap-10">
+          <span className="hidden lg:flex gap-10  md:pt-24">
             <Link
               href="/glossario"
               className="btn bg-customYellow hover:bg-customYellowHover text-white text-base px-8 h-10 block rounded-3xl font-medium font-sans flex items-center"

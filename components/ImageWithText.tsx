@@ -26,10 +26,8 @@ const ImageWithText: React.FC<BookType> = ({
         <Image
           src={image}
           alt={title}
-          layout="responsive"
           width={width}
           height={height}
-          objectFit="cover"
           className="pointer-events-none rounded-3xl"
         />
       </div>
