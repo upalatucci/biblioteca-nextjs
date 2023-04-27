@@ -105,6 +105,8 @@ const CookieBanner = () => {
         <a
           href="https://privacy.sgi-italia.org/"
           className="underline text-primary hover:text-primaryHover"
+          target="_blank"
+          rel="noreferrer"
         >
           Privacy Policy
         </a>
