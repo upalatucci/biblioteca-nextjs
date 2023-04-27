@@ -64,6 +64,7 @@ const HomeNavbar = () => {
             <Image
               src={Logo}
               alt="logo"
+              priority
               width={isHomepage ? 300 : 200}
               height={isHomepage ? 150 : 100}
             />

@@ -28,6 +28,7 @@ const ImageWithText: React.FC<BookType> = ({
           alt={title}
           width={width}
           height={height}
+          priority
           className="pointer-events-none rounded-3xl"
         />
       </div>
