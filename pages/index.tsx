@@ -156,7 +156,9 @@ export default function Home() {
                     <Image
                       src={sfogliaGlossario}
                       alt="Sfoglia il glossario"
-                      height={300}
+                      sizes="(max-width: 768px) 400px,
+                              (max-width: 1024px) 290px,
+                              450px"
                       className="pointer-events-none rounded-3xl"
                     />
                   </div>
@@ -194,7 +196,9 @@ export default function Home() {
                     <Image
                       src={ricercaAvanzata}
                       alt="Ricerca avanzata"
-                      height={300}
+                      sizes="(max-width: 768px) 400px,
+                              (max-width: 1024px) 290px,
+                              450px"
                       className="pointer-events-none rounded-3xl"
                     />
                   </div>
