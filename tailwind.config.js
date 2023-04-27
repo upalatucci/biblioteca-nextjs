@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('tailwindcss').Config} */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const colors = require("tailwindcss/colors");
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 module.exports = {
   content: [
@@ -9,8 +10,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      serif: "Bitter",
-      sans: "Roboto",
+      serif: ["var(--font-bitter)", ...fontFamily.serif],
+      sans: ["var(--font-roboto)", ...fontFamily.sans],
     },
     colors: {
       ...colors,

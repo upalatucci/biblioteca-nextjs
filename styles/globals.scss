@@ -12,14 +12,11 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Bitter", serif;
   --color-text: #000000;
   --primary-color: #00a2c3;
   --secondary-color: #2b4261;
   --background: #f8f8f8;
   --color-gray: #dadada;
-  --primary-font: "Bitter", serif;
-  --secondary-font: "Roboto", sans-serif;
   --border-radius-sm: 10px;
   --border-radius-md: 25px;
   --border-radius-lg: 50px;
@@ -119,7 +116,7 @@ a.primary {
   min-width: 150px;
   min-height: 40px;
   color: white;
-  font-family: var(--secondary-font);
+  font-family: var(--font-roboto);
   font-size: 18px;
   padding: 0 var(--space-md);
 
@@ -142,7 +139,7 @@ button.secondary {
   min-width: 150px;
   min-height: 40px;
   color: var(--color-text);
-  font-family: var(--secondary-font);
+  font-family: var(--font-roboto);
   font-size: 18px;
   padding: 0 var(--space-md);
 
@@ -202,7 +199,8 @@ mark {
   }
 }
 
-h5:first-letter, .first-letter:first-letter {
+h5:first-letter,
+.first-letter:first-letter {
   text-transform: uppercase;
 }
 .result p {
@@ -283,9 +281,9 @@ input[type="checkbox"]:disabled {
   border-radius: 5px;
 }
 main .wp-block-image img {
-  margin: 50px 0 50px; 
+  margin: 50px 0 50px;
 }
-@media screen and (max-width:767px) { 
+@media screen and (max-width: 767px) {
   .tab-mobile {
     border: 1px solid var(--color-gray);
     border-radius: 15px;
@@ -299,24 +297,24 @@ main .wp-block-image img {
     width: 100% !important;
   }
 }
-@media screen and (max-width:799px) {
- 
-  th:nth-of-type(5), td:nth-of-type(5)
-   {
+@media screen and (max-width: 799px) {
+  th:nth-of-type(5),
+  td:nth-of-type(5) {
     display: none;
   }
 }
-@media screen and (max-width:767px) { 
+@media screen and (max-width: 767px) {
   .post-menu {
     flex-direction: column;
   }
   .post-menu-list {
     justify-content: center;
-  } 
+  }
   .post-menu-list img {
     width: 25px !important;
   }
-  .post-menu-list button, .post-menu-list a {
+  .post-menu-list button,
+  .post-menu-list a {
     background-color: #fff;
     width: 50px;
     height: 50px;

@@ -12,6 +12,20 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import CookieBanner from "@components/CookieBanner";
 import useCookiePolicy from "@hooks/useCookiePolicy";
 
+import { Roboto, Bitter } from "next/font/google";
+
+const roboto = Roboto({
+  variable: "--font-roboto",
+  weight: ["100", "500", "700"],
+  subsets: ["latin"],
+});
+
+const bitter = Bitter({
+  variable: "--font-bitter",
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [showArrow, setShowArrow] = useState(false);
   const [showCookieBanner, setShowCookieBanner] = useState(true);
@@ -40,7 +54,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <FontSizeProvider>
       <QueryClientProvider client={queryClient}>
-        <div className="app-container">
+        <div
+          className={`app-container ${roboto.variable} ${bitter.variable} ${bitter.className}`}
+        >
           <ErrorBoundary>
             <Component {...pageProps} />
           </ErrorBoundary>
