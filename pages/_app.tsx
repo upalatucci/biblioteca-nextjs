@@ -28,8 +28,6 @@ const bitter = Bitter({
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [showArrow, setShowArrow] = useState(false);
-  const [showCookieBanner, setShowCookieBanner] = useState(true);
-  const { cookiePolicy } = useCookiePolicy();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,9 +69,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Image src={iconArrowTop} width={20} height={20} alt="arrow top" />
           </button>
 
-          {cookiePolicy === undefined && showCookieBanner && (
-            <CookieBanner onClose={() => setShowCookieBanner(false)} />
-          )}
+          <CookieBanner />
         </div>
       </QueryClientProvider>
     </FontSizeProvider>

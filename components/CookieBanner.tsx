@@ -1,18 +1,31 @@
 import useCookiePolicy from "@hooks/useCookiePolicy";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CloseIcon from "@public/icons/ico-close.svg";
 import Image from "next/image";
 
-const CookieBanner = ({ onClose }) => {
+const CookieBanner = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [withStatistics, setWithStatistics] = useState(true);
+  const [showCookieBanner, setShowCookieBanner] = useState(false);
 
-  const { handleCookiePolicy } = useCookiePolicy();
+  const { cookiePolicy, handleCookiePolicy } = useCookiePolicy();
+
+  const onClose = () => {
+    setShowCookieBanner(false);
+  };
 
   const handleBannerPolicy = (value: boolean) => {
     handleCookiePolicy(value);
     onClose();
   };
+
+  useEffect(() => {
+    if (!cookiePolicy) {
+      setTimeout(() => setShowCookieBanner(true), 1000);
+    }
+  }, [cookiePolicy]);
+
+  if (cookiePolicy || !showCookieBanner) return null;
 
   return (
     <div className="bg-defaultBg fixed w-full md:w-auto md:max-w-[550px] left-0 right-0 bottom-0 md:left-auto md:right-4 md:bottom-4 rounded-3xl shadow-md p-4 md:p-8 z-10">
