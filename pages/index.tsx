@@ -16,6 +16,8 @@ import ImageWithText from "@components/ImageWithText";
 import Image from "next/image";
 import Link from "next/link";
 import classNames from "classnames";
+import GlossaryIcon from "@public/icons/ico-glossario.svg";
+import AdvancedsearchIcon from "@public/icons/ico-advance-search.svg";
 
 const responsive = {
   0: { items: 1.2 },
@@ -154,17 +156,18 @@ export default function Home() {
                     <Image
                       src={sfogliaGlossario}
                       alt="Sfoglia il glossario"
-                      width={800}
-                      height={700}
+                      height={300}
                       className="pointer-events-none rounded-3xl"
                     />
                   </div>
                   <div>
                     <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
                       <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#EEE8DD] ">
-                        <img
+                        <Image
                           className=""
-                          src="/icons/ico-glossario.svg"
+                          src={GlossaryIcon}
+                          width={50}
+                          height={50}
                           alt="icona glossario"
                         />
                       </span>
@@ -191,17 +194,18 @@ export default function Home() {
                     <Image
                       src={ricercaAvanzata}
                       alt="Ricerca avanzata"
-                      width={800}
-                      height={700}
+                      height={300}
                       className="pointer-events-none rounded-3xl"
                     />
                   </div>
                   <div>
                     <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
                       <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#D5E6EB] ">
-                        <img
+                        <Image
                           className=""
-                          src="/icons/ico-advance-search.svg"
+                          src={AdvancedsearchIcon}
+                          width={50}
+                          height={50}
                           alt="icona ricerca avanzata"
                         />
                       </span>
