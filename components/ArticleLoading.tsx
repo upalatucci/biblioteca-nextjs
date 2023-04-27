@@ -47,7 +47,6 @@ const ArticleLoading: React.FC<ArticleLoadingType> = ({ originalPost }) => (
         content={removeHTMLTags(originalPost?.post_content?.substring(0, 155))}
       ></meta>
     </Head>
-    <HomeNavbar />
 
     <main>
       <div className="bg-defaultBg">
@@ -98,7 +97,6 @@ const ArticleLoading: React.FC<ArticleLoadingType> = ({ originalPost }) => (
         </div>
       </div>
     </main>
-    <Footer />
   </>
 );
 

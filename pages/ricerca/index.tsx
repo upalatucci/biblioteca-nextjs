@@ -20,7 +20,6 @@ export default function Ricerca() {
         <title>Ricerca | La Biblioteca di Nichiren</title>
       </Head>
 
-      <HomeNavbar />
       <main>
         <SimpleSearch loading={isLoading} />
         {searchedPosts && (
@@ -37,7 +36,6 @@ export default function Ricerca() {
           onErrorDismiss={() => setIgnoringError(true)}
         />
       </main>
-      <Footer />
     </>
   );
 }

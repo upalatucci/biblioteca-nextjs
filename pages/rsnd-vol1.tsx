@@ -26,7 +26,6 @@ export default function RSND1({ gosho, index, appendix }) {
         <title>RSND Vol. 1 | La Biblioteca di Nichiren</title>
       </Head>
 
-      <HomeNavbar />
       <main>
         <BookDescription
           index={index}
@@ -36,7 +35,6 @@ export default function RSND1({ gosho, index, appendix }) {
         />
         <GoshoList jsonData={gosho} />
       </main>
-      <Footer />
     </>
   );
 }

@@ -80,7 +80,6 @@ export default function Glossario({ glossary }) {
         <title>Glossario | La Biblioteca di Nichiren</title>
       </Head>
 
-      <HomeNavbar />
       <main>
         <section className="bg-defaultBg" id="glossario-cerca">
           <div className="bg-white shadow-md rounded-3xl py-14 lg:py-32 px-8">
@@ -120,7 +119,6 @@ export default function Glossario({ glossary }) {
           />
         </section>
       </main>
-      <Footer />
     </>
   );
 }

@@ -1,2 +1,109 @@
-if(!self.define){let e,a={};const s=(s,c)=>(s=new URL(s+".js",c).href,a[s]||new Promise((a=>{if("document"in self){const e=document.createElement("script");e.src=s,e.onload=a,document.head.appendChild(e)}else e=s,importScripts(s),a()})).then((()=>{let e=a[s];if(!e)throw new Error(`Module ${s} didn’t register its module`);return e})));self.define=(c,i)=>{const d=e||("document"in self?document.currentScript.src:"")||location.href;if(a[d])return;let n={};const r=e=>s(e,d),t={module:{uri:d},exports:n,require:r};a[d]=Promise.all(c.map((e=>t[e]||r(e)))).then((e=>(i(...e),n)))}}define(["./workbox-588899ac"],(function(e){"use strict";importScripts("fallback-F9in3jL0udO_d64SHhLh0.js"),self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"/_next/static/F9in3jL0udO_d64SHhLh0/_buildManifest.js",revision:"a7fdd11ad5ebb778161010e0ca5e423b"},{url:"/_next/static/F9in3jL0udO_d64SHhLh0/_ssgManifest.js",revision:"b6652df95db52feb4daf4eca35380933"},{url:"/_next/static/chunks/206-0fccf351adf5b209.js",revision:"0fccf351adf5b209"},{url:"/_next/static/chunks/206-0fccf351adf5b209.js.map",revision:"19c28e983fb252eafe3880b28cabf041"},{url:"/_next/static/chunks/221-8e899a64bd3f8ec5.js",revision:"8e899a64bd3f8ec5"},{url:"/_next/static/chunks/221-8e899a64bd3f8ec5.js.map",revision:"2f890b2e1093e772e80be9080f8650ec"},{url:"/_next/static/chunks/29-f5bc06441ee04470.js",revision:"f5bc06441ee04470"},{url:"/_next/static/chunks/29-f5bc06441ee04470.js.map",revision:"05feb43459c844682f13bb298dccd9df"},{url:"/_next/static/chunks/554-18fee5a5fcbe6ed1.js",revision:"18fee5a5fcbe6ed1"},{url:"/_next/static/chunks/554-18fee5a5fcbe6ed1.js.map",revision:"6dbebf46a5791b42c93165d877621d2a"},{url:"/_next/static/chunks/767-c9592bd8717e7681.js",revision:"c9592bd8717e7681"},{url:"/_next/static/chunks/767-c9592bd8717e7681.js.map",revision:"57d0243ea2797be3fd179f1d23bab142"},{url:"/_next/static/chunks/943-49c39d3c2ef1e843.js",revision:"49c39d3c2ef1e843"},{url:"/_next/static/chunks/943-49c39d3c2ef1e843.js.map",revision:"045666fd0d3f92bc95e9a6091ab815bc"},{url:"/_next/static/chunks/framework-2c79e2a64abdb08b.js",revision:"2c79e2a64abdb08b"},{url:"/_next/static/chunks/framework-2c79e2a64abdb08b.js.map",revision:"6b2cdced64f954e0d7bedc4cd595855b"},{url:"/_next/static/chunks/main-ebc6ba63df989cd9.js",revision:"ebc6ba63df989cd9"},{url:"/_next/static/chunks/main-ebc6ba63df989cd9.js.map",revision:"010db78b3269850e7b66b55e71004686"},{url:"/_next/static/chunks/pages/404-4cfcf4e4d1dcfd0e.js",revision:"4cfcf4e4d1dcfd0e"},{url:"/_next/static/chunks/pages/404-4cfcf4e4d1dcfd0e.js.map",revision:"8826923a06efce8466f569fed2c157fa"},{url:"/_next/static/chunks/pages/_app-c7efa7aa6d41b464.js",revision:"c7efa7aa6d41b464"},{url:"/_next/static/chunks/pages/_app-c7efa7aa6d41b464.js.map",revision:"2d141a216bbbe7c90724109b91545516"},{url:"/_next/static/chunks/pages/_error-40250bbcd70d5b97.js",revision:"40250bbcd70d5b97"},{url:"/_next/static/chunks/pages/_error-40250bbcd70d5b97.js.map",revision:"51bfb17683653c626068a4d8506fdc0d"},{url:"/_next/static/chunks/pages/_offline-3cd597598b00ca8d.js",revision:"3cd597598b00ca8d"},{url:"/_next/static/chunks/pages/_offline-3cd597598b00ca8d.js.map",revision:"0c4b486cc5a7f3dde4689fe018d35fe8"},{url:"/_next/static/chunks/pages/glossario-f79a8ea01df51d07.js",revision:"f79a8ea01df51d07"},{url:"/_next/static/chunks/pages/glossario-f79a8ea01df51d07.js.map",revision:"938bddc77acf333b2bc6c3f102e9ac4e"},{url:"/_next/static/chunks/pages/index-c9b0d47d9a32519c.js",revision:"c9b0d47d9a32519c"},{url:"/_next/static/chunks/pages/index-c9b0d47d9a32519c.js.map",revision:"583d01e35ec4e30f9d6ea002059fb007"},{url:"/_next/static/chunks/pages/ricerca-0b4110bbca20f307.js",revision:"0b4110bbca20f307"},{url:"/_next/static/chunks/pages/ricerca-0b4110bbca20f307.js.map",revision:"ddf4d49cdea663eccece83562c62c21b"},{url:"/_next/static/chunks/pages/ricerca-avanzata-9785e86cf466cf31.js",revision:"9785e86cf466cf31"},{url:"/_next/static/chunks/pages/ricerca-avanzata-9785e86cf466cf31.js.map",revision:"8236ffea3d034dc11a28ef9c641da9d9"},{url:"/_next/static/chunks/pages/ricerca-avanzata/%5Bbook%5D-fd5e856f794e1f7d.js",revision:"fd5e856f794e1f7d"},{url:"/_next/static/chunks/pages/ricerca-avanzata/%5Bbook%5D-fd5e856f794e1f7d.js.map",revision:"9600f060ed00af21ef72fb72b099dd94"},{url:"/_next/static/chunks/pages/ricerca/%5Bbook%5D-5ef1b2c425b5e469.js",revision:"5ef1b2c425b5e469"},{url:"/_next/static/chunks/pages/ricerca/%5Bbook%5D-5ef1b2c425b5e469.js.map",revision:"6e477efcd937db554acfafd674d1fd58"},{url:"/_next/static/chunks/pages/rsnd-vol1-b0c4718fd02d42d7.js",revision:"b0c4718fd02d42d7"},{url:"/_next/static/chunks/pages/rsnd-vol1-b0c4718fd02d42d7.js.map",revision:"917890e785564b92c602102c0de2187a"},{url:"/_next/static/chunks/pages/rsnd-vol2-c973b0db2deeb0f5.js",revision:"c973b0db2deeb0f5"},{url:"/_next/static/chunks/pages/rsnd-vol2-c973b0db2deeb0f5.js.map",revision:"a728fa854548c6cb50778ee17e2e59f9"},{url:"/_next/static/chunks/pages/rsnd/%5Bslug%5D-f1cb16ebd29cc498.js",revision:"f1cb16ebd29cc498"},{url:"/_next/static/chunks/pages/rsnd/%5Bslug%5D-f1cb16ebd29cc498.js.map",revision:"22e184a7dec69abf8ee6ed0e67e4d27d"},{url:"/_next/static/chunks/pages/sutra-del-loto-21fbe152401ed1ad.js",revision:"21fbe152401ed1ad"},{url:"/_next/static/chunks/pages/sutra-del-loto-21fbe152401ed1ad.js.map",revision:"99d95bd707591d7ca4af2c2437eadfc2"},{url:"/_next/static/chunks/pages/sutra-del-loto/%5Bslug%5D-5f8d8a34e51355f8.js",revision:"5f8d8a34e51355f8"},{url:"/_next/static/chunks/pages/sutra-del-loto/%5Bslug%5D-5f8d8a34e51355f8.js.map",revision:"5c630973bd69b70dc418763ad01e2abc"},{url:"/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js",revision:"837c0df77fd5009c9e46d446188ecfd0"},{url:"/_next/static/chunks/webpack-94547de1949c56d7.js",revision:"94547de1949c56d7"},{url:"/_next/static/chunks/webpack-94547de1949c56d7.js.map",revision:"0e296d57f52d35260148935f4ce9976c"},{url:"/_next/static/css/3ae6bd1faff6581a.css",revision:"3ae6bd1faff6581a"},{url:"/_next/static/css/3ae6bd1faff6581a.css.map",revision:"9a02d4a039885a910d24b30d22cdb39e"},{url:"/_next/static/css/87ee7642001629d2.css",revision:"87ee7642001629d2"},{url:"/_next/static/css/87ee7642001629d2.css.map",revision:"ae81d1c7a40b529a386aacc9518e0c09"},{url:"/_next/static/media/02205c9944024f15-s.p.woff2",revision:"4cf1e387b8e1c64a73ef01c8d1e14681"},{url:"/_next/static/media/0e4fe491bf84089c-s.p.woff2",revision:"5e22a46c04d947a36ea0cad07afcc9e1"},{url:"/_next/static/media/3340341464b53ac4-s.woff2",revision:"f1a339e66581b176f1b54fd7d861e6a3"},{url:"/_next/static/media/3511fdf6750b518d-s.woff2",revision:"e85775fd86060618bd4125d14654c36e"},{url:"/_next/static/media/3d8af05b1dbb5df8-s.woff2",revision:"94a5fb88423f24f3981739bfbf345680"},{url:"/_next/static/media/42d52f46a26971a3-s.woff2",revision:"b44d0dd122f9146504d444f290252d88"},{url:"/_next/static/media/627622453ef56b0d-s.p.woff2",revision:"e7df3d0942815909add8f9d0c40d00d9"},{url:"/_next/static/media/6ef254bc034cae71-s.woff2",revision:"ca977a46a9e1f81215a765e39d0b6839"},{url:"/_next/static/media/8fb72f69fba4e3d2-s.woff2",revision:"7a2e2eae214e49b4333030f789100720"},{url:"/_next/static/media/912a9cfe43c928d9-s.woff2",revision:"376ffe2ca0b038d08d5e582ec13a310f"},{url:"/_next/static/media/a50efca067c45ff7-s.woff2",revision:"0ea6e3886fc7639170a8e69463f4113e"},{url:"/_next/static/media/a5b77b63ef20339c-s.woff2",revision:"96e992d510ed36aa573ab75df8698b42"},{url:"/_next/static/media/a6d330d7873e7320-s.woff2",revision:"f7ec4e2d6c9f82076c56a871d1d23a2d"},{url:"/_next/static/media/a782bc8f0acd0968-s.p.woff2",revision:"f1256288f9283825ee63de464c2e3fa4"},{url:"/_next/static/media/a848c1be15c4ae97-s.woff2",revision:"eade716b3ed4f5dc069d64ebe38e16a8"},{url:"/_next/static/media/af961b7eb9a15f7e-s.woff2",revision:"2bbd1a9c77461a3bfbff4c9b3a43a89e"},{url:"/_next/static/media/baf12dd90520ae41-s.woff2",revision:"8096f9b1a15c26638179b6c9499ff260"},{url:"/_next/static/media/bbdb6f0234009aba-s.woff2",revision:"5756151c819325914806c6be65088b13"},{url:"/_next/static/media/biblioteca-nichiren-logo.3cb4892d.svg",revision:"cd0561a482364c626984ca9999024b60"},{url:"/_next/static/media/buddismo-societa.13af95ab.svg",revision:"d19d42b03095acc17f6d0693b10edf9c"},{url:"/_next/static/media/c0058a8df935bb33-s.woff2",revision:"815d6a78ad78085bd8593051c2631f4a"},{url:"/_next/static/media/d117eea74e01de14-s.woff2",revision:"4d1e5298f2c7e19ba39a6ac8d88e91bd"},{url:"/_next/static/media/dbe242b5c3b9d8cb-s.woff2",revision:"29445a64b7a514e94024e97416f26ecd"},{url:"/_next/static/media/dfa8b99978df7bbc-s.woff2",revision:"7a500aa24dccfcf0cc60f781072614f5"},{url:"/_next/static/media/e25729ca87cc7df9-s.woff2",revision:"9a74bbc5f0d651f8f5b6df4fb3c5c755"},{url:"/_next/static/media/eb52b768f62eeeb4-s.woff2",revision:"90687dc5a4b6b6271c9f1c1d4986ca10"},{url:"/_next/static/media/eredita-della-vita.1a78d1bb.svg",revision:"4c9b4692e6f8962209e84a6f09c55409"},{url:"/_next/static/media/f06116e890b3dadb-s.woff2",revision:"2855f7c90916c37fe4e6bd36205a26a8"},{url:"/_next/static/media/fb8fc7443e6cec5d-s.woff2",revision:"1eb40d98eda071118bca06d276e16722"},{url:"/_next/static/media/ico-arrow-top.e2f7e72a.svg",revision:"28881235ca2963f7104a6806196f1999"},{url:"/_next/static/media/ico-background.bd228508.svg",revision:"04e89fab23e70a5a35c89c898c5303a9"},{url:"/_next/static/media/ico-close.5a26c177.svg",revision:"c075611f6fd39608f94c3049eca78f42"},{url:"/_next/static/media/ico-notes.414d32e8.svg",revision:"a5e188a143f0847a4b6aa757f7373b01"},{url:"/_next/static/media/ico-print.abb143a7.svg",revision:"71ef9419807ad72017a7d08fbc1bd929"},{url:"/_next/static/media/ico-share.d8c16f0a.svg",revision:"37664a19262af80380321672d8236add"},{url:"/_next/static/media/ico-text-size.5b66a761.svg",revision:"135c5aee935dde856d806878ef0de854"},{url:"/_next/static/media/istituto-buddista-italiano-soka-gakkai.4a72f08e.svg",revision:"2364873985f6a8496f1d3f066576777d"},{url:"/_next/static/media/nuovo-rinascimento.cab09019.svg",revision:"8732801ce2f56fd4f173659a648412c5"},{url:"/_next/static/media/otto-per-mille.b0350fe9.svg",revision:"866bb8bd750a14cd6a2a950b5d6ed2ab"},{url:"/_next/static/media/ricerca-avanzata-scritti-daishonin.4059b896.jpg",revision:"b9c652d3a91247538ae2bf23d89bd2c2"},{url:"/_next/static/media/rsnd-I.f683922b.svg",revision:"8925a7f3faefdfffa65130d08380b781"},{url:"/_next/static/media/rsnd-II.e269c5a8.svg",revision:"c84901364515d94d20ebd2b05e9a0fd2"},{url:"/_next/static/media/senzatomica.1978e12e.svg",revision:"968cc91688a6a4d752e7a844d6c575dc"},{url:"/_next/static/media/sfoglia.bebf74cf.jpeg",revision:"bb2164bedbb36131504f2717f0307734"},{url:"/_next/static/media/sutra-del-loto.70cf6132.jpg",revision:"5c311eb6eb5ec223063d120a8c7083e7"},{url:"/_next/static/media/volo-continuo.c2355be2.svg",revision:"60363ef4bd282c576c74ab09c6b3fdec"},{url:"/_offline",revision:"F9in3jL0udO_d64SHhLh0"},{url:"/android-chrome-192x192.png",revision:"34708988eab55afed7e682c5e1d9e0cd"},{url:"/android-chrome-512x512.png",revision:"bc421845a11c13d92c58d4d2391e627b"},{url:"/apple-touch-icon.png",revision:"550e3a6b7f4a9d456ff58aabe5f8d7ef"},{url:"/ascolta.jpeg",revision:"a6007709466444d36536ffe4491f644d"},{url:"/audio/il-conseguimento-della-buddita-in-questa-esistenza.mp3",revision:"63fb04598a47eaf8dfa7add07e0c3039"},{url:"/audio/lettera-a-renjo.mp3",revision:"d9d5766854342092bc4d576278d20918"},{url:"/biblioteca-nichiren-logo.svg",revision:"cd0561a482364c626984ca9999024b60"},{url:"/favicon-16x16.png",revision:"c41c0e019d09a3011124fb38ddbf9626"},{url:"/favicon-32x32.png",revision:"4def6213700efcf05697dac0f081d484"},{url:"/favicon.ico",revision:"64c868d80e629f1d73549c3d0239aa96"},{url:"/icon-192x192.png",revision:"560534b362a588ecf3f0274fe9357c73"},{url:"/icon-256x256.png",revision:"a02807c661cf291cec880a41ccae6bcf"},{url:"/icon-384x384.png",revision:"aff53181090ebbc8a3ccfa73f225d7e1"},{url:"/icon-512x512.png",revision:"0b6cc159e25f1e6ebe1c898346280d80"},{url:"/icons/ibisg.svg",revision:"c97405da060ce6e7a73a6a17fdd2d1cb"},{url:"/icons/ico-advance-search.svg",revision:"900b6a6f6b6c7c84006543b37c3286ea"},{url:"/icons/ico-arrow-top.svg",revision:"28881235ca2963f7104a6806196f1999"},{url:"/icons/ico-audio.svg",revision:"f4d9af85c353cb3ae1a25a9a5365196d"},{url:"/icons/ico-background.svg",revision:"04e89fab23e70a5a35c89c898c5303a9"},{url:"/icons/ico-check.svg",revision:"3ed1dd1e656d435dd6bfca3c17b0c210"},{url:"/icons/ico-chevron-down.svg",revision:"9e31123742b8259fa5694da75c2ce7b2"},{url:"/icons/ico-close.svg",revision:"c075611f6fd39608f94c3049eca78f42"},{url:"/icons/ico-corner-right-up.svg",revision:"fdf584289c239c77c609e2ced36dc022"},{url:"/icons/ico-glossario.svg",revision:"8132e12fe089d906d79f72f9fa502b66"},{url:"/icons/ico-notes.svg",revision:"a5e188a143f0847a4b6aa757f7373b01"},{url:"/icons/ico-order.svg",revision:"b4157fef3203bfec827a4a00c26b3ce6"},{url:"/icons/ico-print.svg",revision:"71ef9419807ad72017a7d08fbc1bd929"},{url:"/icons/ico-scritti.svg",revision:"e0d47d0e960e5e50c27f573d8de9a5b2"},{url:"/icons/ico-search.svg",revision:"ff55ca93006a542bf05e72c25cd60dad"},{url:"/icons/ico-share.svg",revision:"37664a19262af80380321672d8236add"},{url:"/icons/ico-text-size.svg",revision:"135c5aee935dde856d806878ef0de854"},{url:"/istituto-buddista-soka-gakkai.svg",revision:"1eb3e72b398cb62309a185e184c3cf17"},{url:"/manifest.json",revision:"6ead5f1366a3c7791fd5181832d8b4eb"},{url:"/nl-logo.svg",revision:"3b0a46a6a382db1b78e0a58a4dcd523b"},{url:"/ricerca-avanzata-scritti-daishonin.jpg",revision:"b9c652d3a91247538ae2bf23d89bd2c2"},{url:"/rsnd-I.svg",revision:"8925a7f3faefdfffa65130d08380b781"},{url:"/rsnd-II.svg",revision:"c84901364515d94d20ebd2b05e9a0fd2"},{url:"/sfoglia.jpeg",revision:"bb2164bedbb36131504f2717f0307734"},{url:"/site.webmanifest",revision:"053100cb84a50d2ae7f5492f7dd7f25e"},{url:"/sites/buddismo-societa.svg",revision:"d19d42b03095acc17f6d0693b10edf9c"},{url:"/sites/eredita-della-vita.svg",revision:"4c9b4692e6f8962209e84a6f09c55409"},{url:"/sites/istituto-buddista-italiano-soka-gakkai.svg",revision:"2364873985f6a8496f1d3f066576777d"},{url:"/sites/nuovo-rinascimento.svg",revision:"8732801ce2f56fd4f173659a648412c5"},{url:"/sites/otto-per-mille.svg",revision:"866bb8bd750a14cd6a2a950b5d6ed2ab"},{url:"/sites/senzatomica.svg",revision:"968cc91688a6a4d752e7a844d6c575dc"},{url:"/sites/volo-continuo.svg",revision:"60363ef4bd282c576c74ab09c6b3fdec"},{url:"/sutra-del-loto.jpg",revision:"5c311eb6eb5ec223063d120a8c7083e7"},{url:"/vercel.svg",revision:"4b4f1876502eb6721764637fe5c41702"}],{ignoreURLParametersMatching:[]}),e.cleanupOutdatedCaches(),e.registerRoute("/",new e.NetworkFirst({cacheName:"start-url",plugins:[{cacheWillUpdate:async({request:e,response:a,event:s,state:c})=>a&&"opaqueredirect"===a.type?new Response(a.body,{status:200,statusText:"OK",headers:a.headers}):a},{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/^https:\/\/fonts\.(?:gstatic)\.com\/.*/i,new e.CacheFirst({cacheName:"google-fonts-webfonts",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:31536e3}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/^https:\/\/fonts\.(?:googleapis)\.com\/.*/i,new e.StaleWhileRevalidate({cacheName:"google-fonts-stylesheets",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:604800}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,new e.StaleWhileRevalidate({cacheName:"static-font-assets",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:604800}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,new e.StaleWhileRevalidate({cacheName:"static-image-assets",plugins:[new e.ExpirationPlugin({maxEntries:64,maxAgeSeconds:86400}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\/_next\/image\?url=.+$/i,new e.StaleWhileRevalidate({cacheName:"next-image",plugins:[new e.ExpirationPlugin({maxEntries:64,maxAgeSeconds:86400}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\.(?:mp3|wav|ogg)$/i,new e.CacheFirst({cacheName:"static-audio-assets",plugins:[new e.RangeRequestsPlugin,new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\.(?:mp4)$/i,new e.CacheFirst({cacheName:"static-video-assets",plugins:[new e.RangeRequestsPlugin,new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\.(?:js)$/i,new e.StaleWhileRevalidate({cacheName:"static-js-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\.(?:css|less)$/i,new e.StaleWhileRevalidate({cacheName:"static-style-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\/_next\/data\/.+\/.+\.json$/i,new e.StaleWhileRevalidate({cacheName:"next-data",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\.(?:json|xml|csv)$/i,new e.NetworkFirst({cacheName:"static-data-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute((({url:e})=>{if(!(self.origin===e.origin))return!1;const a=e.pathname;return!a.startsWith("/api/auth/")&&!!a.startsWith("/api/")}),new e.NetworkFirst({cacheName:"apis",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:16,maxAgeSeconds:86400}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute((({url:e})=>{if(!(self.origin===e.origin))return!1;return!e.pathname.startsWith("/api/")}),new e.NetworkFirst({cacheName:"others",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute((({url:e})=>!(self.origin===e.origin)),new e.NetworkFirst({cacheName:"cross-origin",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:3600}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET")}));
+/**
+ * Copyright 2018 Google Inc. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// If the loader is already loaded, just stop.
+if (!self.define) {
+  let registry = {};
+
+  // Used for `eval` and `importScripts` where we can't get script URL by other means.
+  // In both cases, it's safe to use a global var because those functions are synchronous.
+  let nextDefineUri;
+
+  const singleRequire = (uri, parentUri) => {
+    uri = new URL(uri + ".js", parentUri).href;
+    return registry[uri] || (
+      
+        new Promise(resolve => {
+          if ("document" in self) {
+            const script = document.createElement("script");
+            script.src = uri;
+            script.onload = resolve;
+            document.head.appendChild(script);
+          } else {
+            nextDefineUri = uri;
+            importScripts(uri);
+            resolve();
+          }
+        })
+      
+      .then(() => {
+        let promise = registry[uri];
+        if (!promise) {
+          throw new Error(`Module ${uri} didn’t register its module`);
+        }
+        return promise;
+      })
+    );
+  };
+
+  self.define = (depsNames, factory) => {
+    const uri = nextDefineUri || ("document" in self ? document.currentScript.src : "") || location.href;
+    if (registry[uri]) {
+      // Module is already loading or loaded.
+      return;
+    }
+    let exports = {};
+    const require = depUri => singleRequire(depUri, uri);
+    const specialDeps = {
+      module: { uri },
+      exports,
+      require
+    };
+    registry[uri] = Promise.all(depsNames.map(
+      depName => specialDeps[depName] || require(depName)
+    )).then(deps => {
+      factory(...deps);
+      return exports;
+    });
+  };
+}
+define(['./workbox-327c579b'], (function (workbox) { 'use strict';
+
+  importScripts("fallback-development.js");
+  self.skipWaiting();
+  workbox.clientsClaim();
+  workbox.registerRoute("/", new workbox.NetworkFirst({
+    "cacheName": "start-url",
+    plugins: [{
+      cacheWillUpdate: async ({
+        request,
+        response,
+        event,
+        state
+      }) => {
+        if (response && response.type === 'opaqueredirect') {
+          return new Response(response.body, {
+            status: 200,
+            statusText: 'OK',
+            headers: response.headers
+          });
+        }
+        return response;
+      }
+    }, {
+      handlerDidError: async ({
+        request
+      }) => self.fallback(request)
+    }]
+  }), 'GET');
+  workbox.registerRoute(/.*/i, new workbox.NetworkOnly({
+    "cacheName": "dev",
+    plugins: [{
+      handlerDidError: async ({
+        request
+      }) => self.fallback(request)
+    }]
+  }), 'GET');
+
+}));
 //# sourceMappingURL=sw.js.map

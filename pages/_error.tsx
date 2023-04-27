@@ -70,11 +70,9 @@ const ErrorPage: FallbackRender = () => (
       ></meta>
     </Head>
 
-    <HomeNavbar />
     <main>
       <ErrorSection />
     </main>
-    <Footer />
   </>
 );
 

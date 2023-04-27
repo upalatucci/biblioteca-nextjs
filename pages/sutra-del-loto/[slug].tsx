@@ -52,7 +52,6 @@ export default function PostPage({ post }) {
           )}
         ></meta>
       </Head>
-      <HomeNavbar />
       <main>
         <div className="bg-defaultBg">
           <div className="">
@@ -137,7 +136,6 @@ export default function PostPage({ post }) {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }

@@ -89,8 +89,6 @@ export default function Home() {
         <title>Home | La Biblioteca di Nichiren</title>
       </Head>
 
-      <HomeNavbar />
-
       <main>
         <section
           className={classNames(
@@ -246,7 +244,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

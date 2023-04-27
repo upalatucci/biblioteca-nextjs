@@ -13,6 +13,8 @@ import CookieBanner from "@components/CookieBanner";
 import { Roboto, Bitter } from "next/font/google";
 import { ErrorBoundary } from "@sentry/nextjs";
 import { ErrorSection } from "./_error";
+import HomeNavbar from "@components/Navbar/HomeNavbar";
+import Footer from "@components/Footer";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -56,7 +58,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           className={`app-container ${roboto.variable} ${bitter.variable} ${bitter.className}`}
         >
           <ErrorBoundary fallback={ErrorSection}>
+            <HomeNavbar />
             <Component {...pageProps} />
+            <Footer />
           </ErrorBoundary>
 
           <button

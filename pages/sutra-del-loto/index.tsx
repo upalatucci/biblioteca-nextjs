@@ -41,7 +41,6 @@ export default function SDL({ chapters, index }) {
         <title>Sutra del Loto | La Biblioteca di Nichiren</title>
       </Head>
 
-      <HomeNavbar />
       <main>
         <BookDescription
           index={index}
@@ -122,7 +121,6 @@ export default function SDL({ chapters, index }) {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

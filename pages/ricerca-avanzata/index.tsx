@@ -20,7 +20,6 @@ export default function Ricerca() {
         <title>Ricerca Avanzata | La Biblioteca di Nichiren</title>
       </Head>
 
-      <HomeNavbar />
       <main className="search-page">
         <AdvancedSearch loading={isLoading} />
 
@@ -38,7 +37,6 @@ export default function Ricerca() {
           onErrorDismiss={() => setIgnoringError(true)}
         />
       </main>
-      <Footer />
     </>
   );
 }

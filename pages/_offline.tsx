@@ -15,7 +15,6 @@ const PageNotFound = () => (
       ></meta>
     </Head>
 
-    <HomeNavbar />
     <main>
       <section className="bg-white" id="dictionary">
         <div className="container mx-auto py-8 px-4 min-h-[60vh]">
@@ -34,7 +33,6 @@ const PageNotFound = () => (
         </div>
       </section>
     </main>
-    <Footer />
   </>
 );
 

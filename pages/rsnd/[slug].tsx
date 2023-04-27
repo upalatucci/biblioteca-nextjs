@@ -74,7 +74,6 @@ export default function PostPage({ post }: { post: GetStaticPost }) {
           )}
         ></meta>
       </Head>
-      <HomeNavbar />
       <main>
         <div className="bg-defaultBg">
           <div className="">
@@ -175,7 +174,6 @@ export default function PostPage({ post }: { post: GetStaticPost }) {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }

@@ -51,25 +51,30 @@ const HomeNavbar = () => {
         </div>
       </div>
       <div className="px-8">
-        <div
-          className={`container mx-auto text-right ${
-            isHomepage ? "md:text-center" : ""
-          } absolute top-0 left-0 right-0`}
+        <Link
+          href="/"
+          className="bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-4 md:mr-0 max-w-[250px] md:max-w-none z-10 hidden md:block absolute top-0"
+          style={{
+            transform: isHomepage
+              ? "scale(1) translateX(50%)"
+              : "scale(0.7) translateX(10%)",
+            transition: "all .6s",
+            right: isHomepage ? "50%" : "10px",
+            transformOrigin: "top",
+          }}
+          aria-label="La Biblioteca di Nichiren, Home"
         >
-          <Link
-            href="/"
-            className="inline-block bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-4 md:mr-0 max-w-[250px] md:max-w-none z-10 relative"
-            aria-label="La Biblioteca di Nichiren, Home"
-          >
-            <Image
-              src={Logo}
-              alt="logo"
-              priority
-              width={isHomepage ? 300 : 200}
-              height={isHomepage ? 150 : 100}
-            />
-          </Link>
-        </div>
+          <Image src={Logo} alt="logo" priority width={300} height={150} />
+        </Link>
+
+        <Link
+          href="/"
+          className="inline-block bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-4 md:mr-0 max-w-[250px] md:hidden  md:max-w-none z-10 absolute top-0 right-4 sm:right-10"
+          aria-label="La Biblioteca di Nichiren, Home"
+        >
+          <Image src={Logo} alt="logo" priority width={300} height={150} />
+        </Link>
+
         <nav className="container max-w-[1400px] mx-auto flex items-center justify-between mt-8 relative">
           <button
             className={classNames(
