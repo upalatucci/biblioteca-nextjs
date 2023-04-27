@@ -8,11 +8,11 @@ import iconArrowTop from "@public/icons/ico-arrow-top.svg";
 import Image from "next/image";
 import classNames from "classnames";
 import { useCallback, useEffect, useState } from "react";
-import ErrorBoundary from "@components/ErrorBoundary";
 import CookieBanner from "@components/CookieBanner";
-import useCookiePolicy from "@hooks/useCookiePolicy";
 
 import { Roboto, Bitter } from "next/font/google";
+import { ErrorBoundary } from "@sentry/nextjs";
+import { ErrorSection } from "./_error";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <div
           className={`app-container ${roboto.variable} ${bitter.variable} ${bitter.className}`}
         >
-          <ErrorBoundary>
+          <ErrorBoundary fallback={ErrorSection}>
             <Component {...pageProps} />
           </ErrorBoundary>
 

@@ -31,3 +31,4 @@ jobs:
           tags: upalatucci/biblioteca:latest
           secrets: |
             "DATABASE_URL=${{ secrets.DATABASE_URL }}"
+            "SENTRY_SECRET=${{ secrets.SENTRY_SECRET }}"

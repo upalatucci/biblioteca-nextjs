@@ -15,7 +15,7 @@ Da implementare:
 
 Da fare:
 
-- [ ] Sentry
+- [x] Sentry
 - [ ] GA
 - [ ] Sistemare graficamente
 - [ ] Link ai volumi nella ricerca

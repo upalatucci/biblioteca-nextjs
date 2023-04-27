@@ -36,3 +36,5 @@ yarn-error.log*
 /public/sw.js.map
 
 .env*
+# Sentry Auth Token
+.sentryclirc

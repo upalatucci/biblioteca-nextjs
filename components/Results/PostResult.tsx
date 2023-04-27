@@ -48,6 +48,7 @@ const GlossarioResult: FC<PostProps> = ({ post, highlights }) => {
             className="font-bold pb-4 text-lg md:text-xl"
             dangerouslySetInnerHTML={{ __html: title }}
           />
+
           <div
             ref={contentRef}
             className="result lg:mr-20 font-medium text-md md:text-lg"
