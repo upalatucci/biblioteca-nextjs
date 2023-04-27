@@ -12,3 +12,11 @@ Da implementare:
 
 - [x] Nei risultati di ricerca appartenenti al SDL mettere anche il numero del capitolo
 - [ ] Per il volume I e II se si clicca sull’appendice A viene un elenco di gosho non cliccabile abbastanza inutile. Potremmo invece includere nell’elenco di gosho selezionabile che appare se si clicca su Raccolta degli Scritti I & II il titolo giapponese, il numero di pagina del gosho zenshu e la pagina della raccolta degli scritti che appaiono nell’appendice A
+
+Da fare:
+
+- [ ] Sentry
+- [ ] GA
+- [ ] Sistemare graficamente
+- [ ] Link ai volumi nella ricerca
+- [ ] Link destinatario e luogo nella pagina del post
