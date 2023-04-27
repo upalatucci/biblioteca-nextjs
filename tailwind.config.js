@@ -14,7 +14,12 @@ module.exports = {
       sans: ["var(--font-roboto)", ...fontFamily.sans],
     },
     colors: {
-      ...colors,
+      black: colors.black,
+      white: colors.white,
+      gray: colors.gray,
+      neutral: colors.neutral,
+      red: colors.red,
+      slate: colors.slate,
       primary: "#0E83A4",
       primaryHover: "#116b85",
       secondary: "#2b4261",
