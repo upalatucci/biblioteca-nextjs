@@ -1,8 +1,6 @@
 import Head from "next/head";
-import HomeNavbar from "@components/Navbar/HomeNavbar";
 import { FormEventHandler, useEffect, useState } from "react";
 import classNames from "classnames";
-import Footer from "@components/Footer";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import { GetStaticProps } from "next";

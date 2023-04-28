@@ -1,7 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import Footer from "@components/Footer";
-import HomeNavbar from "@components/Navbar/HomeNavbar";
 import ParagraphWithNotes from "@components/ParagraphWithNotes";
 import PostMenu from "@components/PostMenu";
 

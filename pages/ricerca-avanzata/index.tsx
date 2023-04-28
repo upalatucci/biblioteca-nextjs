@@ -1,7 +1,5 @@
 import Head from "next/head";
 import AdvancedSearch from "@components/AdvancedSearch/AdvancedSearch";
-import Footer from "@components/Footer";
-import HomeNavbar from "@components/Navbar/HomeNavbar";
 import Results from "@components/Results";
 import useSearch from "@hooks/useSearch";
 
