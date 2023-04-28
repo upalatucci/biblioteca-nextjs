@@ -15,6 +15,8 @@ import { ErrorBoundary } from "@sentry/nextjs";
 import { ErrorSection } from "./_error";
 import HomeNavbar from "@components/Navbar/HomeNavbar";
 import Footer from "@components/Footer";
+import Script from "next/script";
+import useCookiePolicy from "@hooks/useCookiePolicy";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -30,6 +32,7 @@ const bitter = Bitter({
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [showArrow, setShowArrow] = useState(false);
+  const { cookiePolicy } = useCookiePolicy();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,6 +77,22 @@ function MyApp({ Component, pageProps }: AppProps) {
           </button>
 
           <CookieBanner />
+
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-8PENDBW0Y5"
+            strategy="afterInteractive"
+          />
+          {cookiePolicy && process.env.NODE_ENV === "production" && (
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){window.dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'G-8PENDBW0Y5');
+              `}
+            </Script>
+          )}
         </div>
       </QueryClientProvider>
     </FontSizeProvider>
