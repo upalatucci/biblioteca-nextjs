@@ -51,7 +51,7 @@ const Results: React.FC<ResultsProps> = ({
   }
 
   return (
-    <div className="py-14 px-8" id="risultati">
+    <div className="py-14" id="risultati">
       <ResultsHeader data={data} loading={loading} />
 
       <ResultsContainer

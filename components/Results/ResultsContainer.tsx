@@ -34,7 +34,7 @@ const getBaseSearchPath = (router: NextRouter): Partial<Url> => {
 };
 
 const NoResultsForThatBook = ({ router }) => (
-  <div className="border-b border-gray-400 bg-white px-8 shadow-md rounded-3xl">
+  <div className="mx-auto border-b border-gray-400 bg-white shadow-md rounded-3xl">
     <div className="md:px-20 xl:px-0 mx-auto max-w-[1400px] py-20">
       <div className="my-4">
         <h3 className="text-lg px-4 font-bold">
@@ -76,8 +76,8 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({
   }
 
   return (
-    <div className="border-b border-gray-400 bg-white px-8 shadow-md rounded-3xl">
-      <div className="px-0 mx-auto max-w-[1400px] py-8 md:py-14">
+    <div className="mx-auto border-b border-gray-400 bg-white shadow-md rounded-3xl">
+      <div className="px-8 mx-auto max-w-[1400px] py-8 md:py-14">
         <TabFilters />
         <ul className="divide-y-2 divide-dashed mb-10 mx-auto bg-defaultBg rounded-3xl shadow-md px-4 md:px-10 py-4">
           {data?.hits?.hits?.map((searchHit) => (

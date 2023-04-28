@@ -21,7 +21,7 @@ export default function Ricerca() {
       <main>
         <SimpleSearch loading={isLoading} />
         {searchedPosts && (
-          <h3 className="max-w-[1400px] text-2xl md:text-4xl text-primary font-bold px-8">
+          <h3 className="max-w-[1400px] mx-auto text-2xl md:text-4xl text-primary font-bold px-8">
             Abbiamo trovato
           </h3>
         )}

@@ -87,7 +87,7 @@ export default function Home() {
         <title>La Biblioteca di Nichiren</title>
       </Head>
 
-      <main>
+      <main className="home">
         <section
           className={classNames(
             "w-full bg-white shadow-md rounded-3xl py-20 lg:py-32 ",

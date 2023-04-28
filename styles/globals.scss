@@ -75,11 +75,11 @@ hr {
 
   .input-search-icon {
     position: absolute;
-    right: 15px;
-    top: 11px;
+    left: 15px;
+    top: 14px;
     content: url("/icons/ico-search.svg");
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
   }
 }
 
@@ -283,7 +283,7 @@ input[type="checkbox"]:disabled {
 main .wp-block-image img {
   margin: 50px 0 50px;
 }
-mark {
+.home mark {
     border-radius: 17px;
     padding: 0 6px;
     box-decoration-break: clone;
