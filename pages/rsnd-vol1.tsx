@@ -24,7 +24,7 @@ export default function RSND1({ gosho, index, appendix }) {
         <title>RSND Vol. 1 | La Biblioteca di Nichiren</title>
       </Head>
 
-      <main>
+      <main className="rsnd-1">
         <BookDescription
           index={index}
           notes={appendix}
