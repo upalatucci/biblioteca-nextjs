@@ -28,11 +28,7 @@ import { useContext } from "react";
 import { FontSizeContext } from "contexts/FontSizeContext";
 import { RSND_APPENDICE_CAT_ID } from "@utils/constants";
 import { GetStaticPost, prismaClient, unifyAcfMetadata } from "lib/db";
-
-const ItalianListFormatted = new Intl.ListFormat("it", {
-  style: "long",
-  type: "conjunction",
-});
+import PostMetadata from "@components/GoshoMetadata";
 
 export default function PostPage({ post }: { post: GetStaticPost }) {
   const router = useRouter();
@@ -64,8 +60,9 @@ export default function PostPage({ post }: { post: GetStaticPost }) {
     <>
       <Head>
         <title>
-          {removeHTMLTags(highlightedPost.post_title)} | La Biblioteca di
-          Nichiren
+          {removeHTMLTags(
+            `${highlightedPost.post_title} | La Biblioteca di Nichiren`
+          )}
         </title>
         <meta
           name="Description"
@@ -112,19 +109,7 @@ export default function PostPage({ post }: { post: GetStaticPost }) {
               className="py-20 lg:py-32 px-8 container mx-auto max-w-[1000px] print:py-0"
               id="contenuto"
             >
-              {isMainBookContent &&
-                (highlightedPost?.acf?.acf_luogo ||
-                  highlightedPost?.acf?.acf_data ||
-                  (!!highlightedPost?.acf?.acf_destinatario &&
-                    highlightedPost?.acf?.acf_destinatario?.length !== 0)) && (
-                  <p className="text-primary font-sans text-lg">
-                    {`${highlightedPost?.acf?.acf_luogo}, ${
-                      highlightedPost?.acf?.acf_data
-                    }. Indirizzata a ${ItalianListFormatted.format(
-                      highlightedPost?.acf?.acf_destinatario
-                    )}.`}
-                  </p>
-                )}
+              <PostMetadata post={post} />
               {paragraphs.map((p) => (
                 <ParagraphWithNotes
                   content={p}

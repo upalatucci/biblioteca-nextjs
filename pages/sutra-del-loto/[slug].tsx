@@ -42,8 +42,9 @@ export default function PostPage({ post }) {
     <>
       <Head>
         <title>
-          {removeHTMLTags(highlightedPost.post_title)} | La Biblioteca di
-          Nichiren
+          {removeHTMLTags(
+            `${highlightedPost.post_title} | La Biblioteca di Nichiren`
+          )}
         </title>
         <meta
           name="Description"

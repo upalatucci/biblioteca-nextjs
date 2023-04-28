@@ -19,4 +19,4 @@ Da fare:
 - [ ] GA
 - [ ] Sistemare graficamente
 - [x] Link ai volumi nella ricerca
-- [ ] Link destinatario e luogo nella pagina del post
+- [x] Link destinatario e luogo nella pagina del post
