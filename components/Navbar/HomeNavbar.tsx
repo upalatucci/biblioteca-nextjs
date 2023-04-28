@@ -50,6 +50,7 @@ const HomeNavbar = () => {
           </a>
         </div>
       </div>
+      
       <div className="px-8">
         <Link
           href="/"
@@ -75,10 +76,12 @@ const HomeNavbar = () => {
           <Image src={Logo} alt="logo" priority width={300} height={150} />
         </Link>
 
-        <nav className="container max-w-[1400px] mx-auto flex items-center justify-between mt-8 relative">
+        <nav className={`container max-w-[1400px] mx-auto flex items-center justify-between ${
+            isHomepage ? "mt-8 md:mt-14" : "mt-8"
+          } relative`}>
           <button
             className={classNames(
-              "mobileMenu block relative lg:hidden w-12 h-10",
+              "mobileMenu block relative lg:hidden w-12 h-8",
               {
                 open: [SHOW, SHOWING].includes(mobileMenuOpen),
               }
@@ -133,7 +136,7 @@ const HomeNavbar = () => {
 
               <Link
                 href="/glossario"
-                className="!text-left font-sans text-customYellow uppercase border-b border-gray-200 flex-1 flex flex-col justify-center"
+                className="!text-left font-sans text-primary uppercase border-b border-gray-200 flex-1 flex flex-col justify-center"
               >
                 <div>Glossario</div>
               </Link>
@@ -145,7 +148,7 @@ const HomeNavbar = () => {
               </Link>
               {installable && (
                 <button
-                  className="!text-left font-sans text-primary uppercase flex-1 flex flex-col justify-center border-t border-gray-200"
+                  className="!text-left font-sans text-customYellow uppercase flex-1 flex flex-col justify-center border-t border-gray-200"
                   onClick={install}
                 >
                   Installa
@@ -174,7 +177,7 @@ const HomeNavbar = () => {
           <span className="hidden lg:flex gap-10  md:pt-24">
             <Link
               href="/glossario"
-              className="btn bg-customYellow hover:bg-customYellowHover text-white text-base px-8 h-10 block rounded-3xl font-medium font-sans flex items-center"
+              className="btn border-2 border-primary hover:bg-white text-primary text-base px-8 h-10 block rounded-3xl font-medium font-sans flex items-center"
             >
               <span>GLOSSARIO</span>
             </Link>

@@ -12,39 +12,24 @@ import SenzatomicaIcon from "@public/sites/senzatomica.svg";
 const Footer: React.FC = () => {
   return (
     <footer className="relative bg-[#0D2444] text-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24 font-sans print:hidden">
-      <div className="flex flex-col md:flex-row justify-between">
-        <div className="lg:mx-4 lg:pr-8">
-          <h3 className="font-bold text-2xl text-white mb-10">
-            La Biblioteca di Nichiren
-          </h3>
-
-          <ul>
-            <li>
-              <a
-                href="https://www.sgi-italia.org/"
-                target="_blank"
-                className="flex items-center opacity-75 hover:opacity-150"
-                rel="noreferrer"
-              >
-                Chi siamo
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://servizi.sgi-italia.org/abbonamenti/"
-                target="_blank"
-                className="flex items-center opacity-75 hover:opacity-150"
-                rel="noreferrer"
-              >
-                Portale abbonamenti
-              </a>
-            </li>
-          </ul>
+      <div className="grid grid-cols-6 gap-2">
+        <div className="row-span-3 col-span-2">
+          <a
+              href="https://www.sgi-italia.org/"
+              target="_blank"
+              className="flex items-center opacity-75 hover:opacity-150"
+              rel="noreferrer"
+            >
+              <Image
+                width={190}
+                height={54}
+                src={IstitutoIcon}
+                alt="La Biblioteca di Nichiren"
+              />
+          </a>
         </div>
-
-        <ul className="mt-4 flex flex-wrap max-w-[800px] items-center justify-center gap-4">
-          <li>
-            <a
+        <div>
+          <a
               href="https://www.sgi-italia.org/"
               target="_blank"
               className="flex items-center opacity-75 hover:opacity-150"
@@ -57,9 +42,9 @@ const Footer: React.FC = () => {
                 alt="istituto buddista italiano soka gakkai"
               />
             </a>
-          </li>
-          <li className="mt-4">
-            <a
+        </div>
+        <div>
+          <a
               href="https://senzatomica.it"
               target="_blank"
               className="flex items-center opacity-75 hover:opacity-150"
@@ -72,9 +57,9 @@ const Footer: React.FC = () => {
                 alt="senzamotica"
               />
             </a>
-          </li>
-          <li className="mt-4">
-            <a
+        </div>
+        <div>
+          <a
               href="https://www.ereditadellavita.it/"
               target="_blank"
               className="flex items-center opacity-75 hover:opacity-150"
@@ -87,9 +72,9 @@ const Footer: React.FC = () => {
                 alt="Ereditá della vita"
               />
             </a>
-          </li>
-          <li className="mt-4">
-            <a
+        </div>
+        <div>
+          <a
               href="https://ottopermille.sokagakkai.it/"
               target="_blank"
               className="flex items-center opacity-75 hover:opacity-150"
@@ -102,9 +87,9 @@ const Footer: React.FC = () => {
                 alt="otto per mille"
               />
             </a>
-          </li>
-          <li>
-            <a
+        </div>
+        <div>
+          <a
               href="https://ilnuovorinascimento.org"
               title=""
               className="flex items-center opacity-75 hover:opacity-150"
@@ -117,9 +102,9 @@ const Footer: React.FC = () => {
                 alt="nuovo rinascimento"
               />
             </a>
-          </li>
-          <li className="mt-4">
-            <a
+        </div>
+        <div>
+          <a
               href="https://buddismoesocieta.org"
               title=""
               className="flex items-center opacity-75 hover:opacity-150"
@@ -132,9 +117,9 @@ const Footer: React.FC = () => {
                 alt="buddismo e societá"
               />
             </a>
-          </li>
-          <li className="mt-4">
-            <a
+        </div>
+        <div>
+          <a
               href="https://ilvolocontinuo.it"
               className="flex items-center opacity-75 hover:opacity-150"
               rel="noreferrer"
@@ -146,13 +131,27 @@ const Footer: React.FC = () => {
                 alt="volo continuo"
               />
             </a>
-          </li>
-        </ul>
+        </div>
+        <div>
+          <a
+              href="https://ilvolocontinuo.it"
+              className="flex items-center opacity-75 hover:opacity-150"
+              rel="noreferrer"
+            >
+              <Image
+                width={180}
+                height={120}
+                src={VoloIcon}
+                alt="esperia"
+              />
+            </a>
+        </div>
       </div>
+      
 
       <p className="text-sm text-center text-gray-150 mt-12">
         © Istituto Buddista Italiano Soka Gakkai 2010-2021 | Via di Bellagio 2/E
-        50141 Firenze FI | C.F.: 94069310483 | P.IVA: 04935120487 | privacy.
+        50141 Firenze FI | C.F.: 94069310483 | P.IVA: 04935120487 | <a rel="nofollow" href="https://privacy.sgi-italia.org/">Privacy & Cookie Policy.</a>
       </p>
     </footer>
   );

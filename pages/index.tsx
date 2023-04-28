@@ -86,7 +86,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Home | La Biblioteca di Nichiren</title>
+        <title>La Biblioteca di Nichiren</title>
       </Head>
 
       <main>
@@ -234,8 +234,8 @@ export default function Home() {
               Che cos&apos;è La Biblioteca di Nichiren
             </h2>
             <p className="text-2xl font-serif text-center mx-4 md:mx-32 lg:mx-64">
-              Benvenuti nella Biblioteca di Nichiren, una libreria online di
-              testi buddisti aperta a tutti per la libera consultazione e
+              Benvenuti nella Biblioteca di Nichiren, una <mark>libreria online di
+              testi buddisti aperta a tutti</mark> per la libera consultazione e
               ricerca. Essa contiene le traduzioni in italiano dei testi
               essenziali del buddismo di Nichiren: La raccolta degli scritti di
               Nichiren Daishonin Vol. 1 e 2 e il Sutra del Loto. Come aiuto alla

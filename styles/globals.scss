@@ -283,6 +283,12 @@ input[type="checkbox"]:disabled {
 main .wp-block-image img {
   margin: 50px 0 50px;
 }
+mark {
+    border-radius: 17px;
+    padding: 0 6px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
 @media screen and (max-width: 767px) {
   .tab-mobile {
     border: 1px solid var(--color-gray);
@@ -323,5 +329,14 @@ main .wp-block-image img {
     align-items: center;
     border-radius: 10px;
     padding: 8px;
+  }
+  .logo-container img {
+    max-width: 150px !important;
+  }
+}
+@media all and (min-width: 1470px) {
+  .logo-container {
+    padding-right: 0;
+    padding-left: 0;
   }
 }
