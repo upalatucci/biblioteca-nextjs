@@ -16,7 +16,7 @@ Da implementare:
 Da fare:
 
 - [x] Sentry
-- [ ] GA
+- [x] GA
 - [ ] Sistemare graficamente
 - [x] Link ai volumi nella ricerca
 - [x] Link destinatario e luogo nella pagina del post
