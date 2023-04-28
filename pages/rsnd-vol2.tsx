@@ -1,7 +1,5 @@
 import Head from "next/head";
 import BookDescription from "@components/BookDescription";
-import HomeNavbar from "@components/Navbar/HomeNavbar";
-import Footer from "@components/Footer";
 import GoshoList from "@components/GoshoList";
 import {
   INCLUDE_CATEGORY,

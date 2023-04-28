@@ -1,7 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import Footer from "@components/Footer";
-import HomeNavbar from "@components/Navbar/HomeNavbar";
 import ParagraphWithNotes from "@components/ParagraphWithNotes";
 
 import ArticleLoading from "@components/ArticleLoading";
@@ -42,8 +40,9 @@ export default function PostPage({ post }) {
     <>
       <Head>
         <title>
-          {removeHTMLTags(highlightedPost.post_title)} | La Biblioteca di
-          Nichiren
+          {removeHTMLTags(
+            `${highlightedPost.post_title} | La Biblioteca di Nichiren`
+          )}
         </title>
         <meta
           name="Description"

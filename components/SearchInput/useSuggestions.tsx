@@ -1,8 +1,6 @@
 import { SearchResponse } from "@elastic/elasticsearch/lib/api/typesWithBodyKey";
-import classNames from "classnames";
 import {
   ChangeEventHandler,
-  FC,
   KeyboardEventHandler,
   MouseEventHandler,
   useCallback,
@@ -12,33 +10,24 @@ import {
 } from "react";
 import { useQuery } from "react-query";
 
-type SearchInputProps = {
+type UseSuggestionInputType = {
+  withSuggestions: boolean;
   value: string;
   onChange: (text: string) => void;
-  placeholder?: string;
-  className?: string;
-  required?: boolean;
-  "aria-label"?: string;
-  withSuggestions?: boolean;
 };
 
-const SearchInput: FC<SearchInputProps> = ({
+const useSuggestions = ({
+  withSuggestions,
   value,
   onChange,
-  placeholder,
-  className = "",
-  "aria-label": ariaLabel,
-  required = false,
-  withSuggestions = false,
-}) => {
-  const [searchText, setSearchText] = useState("");
+}: UseSuggestionInputType) => {
   const inputRef = useRef<HTMLInputElement>();
   const listSuggestionRef = useRef<HTMLUListElement>();
+  const [searchText, setSearchText] = useState("");
   const [suggestionFocusIndex, setSuggestionFocusIndex] = useState<
     number | null
   >(null);
   const [suggestionVisible, setSuggestionVisible] = useState(true);
-
   const onType: ChangeEventHandler<HTMLInputElement> = (event) => {
     onChange(event.currentTarget.value);
     if (event.currentTarget.value.endsWith(" ")) return;
@@ -62,7 +51,7 @@ const SearchInput: FC<SearchInputProps> = ({
     }
   );
 
-  const useSuggestion: MouseEventHandler<HTMLButtonElement> = useCallback(
+  const onSuggestionClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     (event) => {
       if (!value) return;
       const words = value.split(" ");
@@ -98,6 +87,12 @@ const SearchInput: FC<SearchInputProps> = ({
         return;
       }
 
+      if (event.key === "Escape" && suggestionVisible) {
+        event.preventDefault();
+        setSuggestionVisible(false);
+        return;
+      }
+
       if (event.key === "ArrowDown" && suggestions) {
         event.preventDefault();
         const nextFocusIndex =
@@ -126,65 +121,29 @@ const SearchInput: FC<SearchInputProps> = ({
         setSuggestionFocusIndex(prevFocusIndex);
       }
     },
-    [suggestions, suggestionFocusIndex]
+    [suggestions, suggestionVisible, suggestionFocusIndex]
   );
+
+  const hideSuggestions = useCallback(() => {
+    setSuggestionVisible(false);
+  }, []);
 
   const showSuggestionDropDown =
     suggestionVisible &&
     (suggestions?.length > 0 || isLoading) &&
     withSuggestions;
 
-  return (
-    <div
-      className={`${className} w-full md:max-w-[50%] input-container relative`}
-      onKeyDown={onKeyDown}
-    >
-      <input
-        type="search"
-        className="border border-primary h-[42px] w-full pl-4 pr-8 py-1 rounded-3xl bg-white placeholder:text-gray-500 text-md lg:text-lg font-sans"
-        placeholder={placeholder || "Inserisci la parola o frase..."}
-        value={value || ""}
-        onChange={onType}
-        required={required}
-        aria-label={ariaLabel}
-        ref={inputRef}
-      />
-      <span className="input-search-icon"></span>
-      {showSuggestionDropDown && (
-        <>
-          <div
-            className="fixed inset-0 w-full h-full z-10"
-            onClick={() => setSuggestionVisible(false)}
-          ></div>
-          <ul
-            className="suggestions absolute top-8 right-10 left-2 bg-white py-2 shadow-md rounded-b-3xl z-20"
-            ref={listSuggestionRef}
-          >
-            {suggestions.map((suggestion) => (
-              <li
-                key={suggestion}
-                id={`suggestion-${suggestion}`}
-                tabIndex={-1}
-              >
-                <button
-                  type="button"
-                  onClick={(e) => useSuggestion(e)}
-                  className="py-2 px-4 focus:bg-defaultBg rounded-3xl w-full text-left"
-                >
-                  {suggestion}
-                </button>
-              </li>
-            ))}
-            {isLoading && (
-              <li className="py-2 px-4 w-full text-left">
-                <span className="animate-pulse">Caricamento...</span>
-              </li>
-            )}
-          </ul>
-        </>
-      )}
-    </div>
-  );
+  return {
+    inputRef,
+    listSuggestionRef,
+    onType,
+    onKeyDown,
+    showSuggestionDropDown,
+    suggestions,
+    onSuggestionClick,
+    isLoading,
+    hideSuggestions,
+  };
 };
 
-export default SearchInput;
+export default useSuggestions;

@@ -2,7 +2,6 @@ import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import HomeNavbar from "@components/Navbar/HomeNavbar";
 
 import raccoltaVol1 from "@public/rsnd-I.svg";
 import raccoltaVol2 from "@public/rsnd-II.svg";
@@ -11,7 +10,6 @@ import sfogliaGlossario from "@public/sfoglia.jpeg";
 import ricercaAvanzata from "@public/ricerca-avanzata-scritti-daishonin.jpg";
 import SearchInput from "@components/SearchInput";
 import { useRouter } from "next/router";
-import Footer from "@components/Footer";
 import ImageWithText from "@components/ImageWithText";
 import Image from "next/image";
 import Link from "next/link";

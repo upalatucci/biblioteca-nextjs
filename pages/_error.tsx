@@ -1,5 +1,3 @@
-import Footer from "@components/Footer";
-import HomeNavbar from "@components/Navbar/HomeNavbar";
 import { FallbackRender } from "@sentry/nextjs/types/client";
 import Head from "next/head";
 import Link from "next/link";
