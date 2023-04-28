@@ -1,6 +1,6 @@
 Da correggere:
 
-- [ ] aggiungere il logo Esperia insieme agli altri enti dell’istituto
+- [x] aggiungere il logo Esperia insieme agli altri enti dell’istituto
 - [x] dall’elenco dei gosho, se filtri per destinatario e scegli un titolo, quando torni indietro perdi il filtro mentre invece potrebbe essere meglio mantenerlo.
 - [x] dai risultati quando clicchi sul titolo o su: ‘contenuto’ tutto ok, se c’è anche ‘cenni storici’ e ci clicchi non va sui cenni storici ma si comporta come se avessi cliccato su ‘contenuto’. Se c’è solo ‘note’ o ‘cenni storici’ apre il testo ma non evidenzia il termine cercato.
 - [x] Se viene un risultato da glossario quando clicchi sul termine o su ‘contenuto’ si espande la voce ma perde l’evidenziazione del termine cercato.
@@ -20,3 +20,6 @@ Da fare:
 - [ ] Sistemare graficamente
 - [x] Link ai volumi nella ricerca
 - [x] Link destinatario e luogo nella pagina del post
+- [ ] Fare in modo che il menu mobile si chiuda al click sulla voce
+- [ ] nascondere il 2.1 sul poscritto di Adottare...
+- [ ] rendere cliccabile la voce sutra del loto e farlo scendere fino alla lista dei capitoli del sutra

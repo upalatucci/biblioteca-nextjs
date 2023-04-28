@@ -69,7 +69,12 @@ sup a,
 hr {
   border-color: var(--primary-color);
 }
-
+#contenuto p a {
+  text-decoration: underline; 
+}
+#contenuto a:hover {
+  color: var(--primary-color);
+}
 .input-container {
   position: relative;
 
