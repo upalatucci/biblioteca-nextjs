@@ -18,5 +18,5 @@ Da fare:
 - [x] Sentry
 - [ ] GA
 - [ ] Sistemare graficamente
-- [ ] Link ai volumi nella ricerca
+- [x] Link ai volumi nella ricerca
 - [ ] Link destinatario e luogo nella pagina del post

@@ -9,6 +9,7 @@ import {
   humanizedField,
 } from "./utils";
 import { SDL_CAT_ID } from "@utils/constants";
+import CategoryLink from "./CategoryLink";
 
 type PostProps = {
   post: ElasticSearchPost;
@@ -71,9 +72,10 @@ const GlossarioResult: FC<PostProps> = ({ post, highlights }) => {
                 </span>
               ))}
 
-            <span className="text-md md:text-lg text-primary">
-              {humanizeTypeCategory(post.post_type, post.term_suggest)}
-            </span>
+            <CategoryLink
+              type={post.post_type}
+              categories={post.terms?.cat_glossary}
+            />
           </p>
         </div>
       </button>
@@ -91,7 +93,9 @@ const PostResultContent: FC<PostProps> = ({ post, highlights }) => {
 
   const highlightedContent = buildHighlight(highlights);
 
-  if (post?.terms?.cat_sdlpe?.find((cat) => cat.term_id === SDL_CAT_ID)) {
+  const categories = post.terms?.cat_rsnd || post.terms?.cat_sdlpe || [];
+
+  if (categories.find((cat) => cat.term_id === SDL_CAT_ID)) {
     title = `${post?.meta?.acf_numero?.[0]?.value}. ${title}`;
   }
 
@@ -134,9 +138,7 @@ const PostResultContent: FC<PostProps> = ({ post, highlights }) => {
               </Link>
             ))}
 
-          <span className="text-primary">
-            {humanizeTypeCategory(post.post_type, post.term_suggest)}
-          </span>
+          <CategoryLink type={post.post_type} categories={categories} />
         </p>
       </div>
     </li>

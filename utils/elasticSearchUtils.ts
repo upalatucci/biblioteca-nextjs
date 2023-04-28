@@ -30,6 +30,17 @@ export const MAP_BOOK_TO_HUMAN_READABLE = {
 export const MAP_POST_TYPE_TO_BASE_URL = {
   [PostType.SDL]: "sutra-del-loto",
   [PostType.RSND]: "rsnd",
+  [PostType.GLOSSARY]: "glossario",
+};
+
+export type CategoryType = {
+  term_id: number;
+  slug: string;
+  name: string;
+  parent: number;
+  term_taxonomy_id: number;
+  term_order: number;
+  facet: string;
 };
 
 export type ElasticSearchPost = {
@@ -56,39 +67,9 @@ export type ElasticSearchPost = {
   post_mime_type: string;
   permalink: string;
   terms: {
-    cat_glossary?: [
-      {
-        term_id: number;
-        slug: string;
-        name: string;
-        parent: number;
-        term_taxonomy_id: number;
-        term_order: number;
-        facet: string;
-      }
-    ];
-    cat_sdlpe?: [
-      {
-        term_id: number;
-        slug: string;
-        name: string;
-        parent: number;
-        term_taxonomy_id: number;
-        term_order: number;
-        facet: string;
-      }
-    ];
-    cat_rsnd?: [
-      {
-        term_id: number;
-        slug: string;
-        name: string;
-        parent: number;
-        term_taxonomy_id: number;
-        term_order: number;
-        facet: string;
-      }
-    ];
+    cat_glossary?: CategoryType[];
+    cat_sdlpe?: CategoryType[];
+    cat_rsnd?: CategoryType[];
   };
   meta: {
     acf_note: { exact: string; value: string }[];

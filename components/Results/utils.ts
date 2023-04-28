@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  CategoryType,
   ElasticSearchPost,
   MAP_POST_TYPE_TO_BASE_URL,
   PostType,
@@ -57,12 +58,26 @@ export const humanizedField = {
   "meta.acf_note.value.exact": "NOTE",
 };
 
-export const humanizeTypeCategory = (type: PostType, categories: string[]) => {
+export const humanizeTypeCategory = (
+  type: PostType,
+  categories: CategoryType[]
+) => {
   if (type === "glossary") return "Glossario";
 
   if (type === "rsnd") {
     if (categories.length > 1)
       return `Raccolta degli scritti di Nichiren Daishonin Volume I/II`;
+    return `Raccolta degli scritti di Nichiren Daishonin ${categories?.[0]?.name}`;
+  }
+
+  return categories?.[0]?.name;
+};
+
+export const getBookURL = (type: PostType, categories: string[]) => {
+  if (type === "glossary") return "glossario";
+
+  if (type === "rsnd") {
+    if (categories.length > 1) return "rsnd-vol2";
     return `Raccolta degli scritti di Nichiren Daishonin ${categories?.[0]}`;
   }
 
