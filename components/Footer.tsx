@@ -13,7 +13,7 @@ import Esperia from "@public/sites/esperia.svg";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative bg-[#0D2444] text-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24 font-sans print:hidden">
+    <footer className="relative bg-[#212833] text-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24 font-sans print:hidden">
       <div className="grid grid-cols-2 md:grid-cols-6 gap-10 justify-items-center">
         <div className="md:row-span-3 col-span-2 align-self-start md:justify-self-start">
           <a

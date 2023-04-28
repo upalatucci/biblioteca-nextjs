@@ -14,7 +14,7 @@ body {
   margin: 0;
   --color-text: #000000;
   --primary-color: #00a2c3;
-  --secondary-color: #2b4261;
+  --secondary-color: #212833; /* #2b4261;*/
   --background: #f8f8f8;
   --color-gray: #dadada;
   --border-radius-sm: 10px;
@@ -289,9 +289,7 @@ mark {
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
 }
-.rsnd-1 tr.bg-defaultBg:nth-child(3) td:first-child span {
-  display: none;
-}
+
 @media screen and (max-width: 767px) {
   .tab-mobile {
     border: 1px solid var(--color-gray);
@@ -333,13 +331,12 @@ mark {
     border-radius: 10px;
     padding: 8px;
   }
-  .logo-container img {
+  .logo-bn {
     max-width: 150px !important;
   }
 }
-@media all and (min-width: 1470px) {
-  .logo-container {
-    padding-right: 0;
-    padding-left: 0;
+@media all and (max-width: 1470px) {
+  .logo-container a {
+    right:0 !important;
   }
 }
