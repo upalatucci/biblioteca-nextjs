@@ -53,6 +53,7 @@ export default function SDL({ chapters, index }) {
             {
               number: 1,
               title: "Sutra del Loto",
+              link: "#chapters-list",
             },
             {
               number: 2,
@@ -62,7 +63,7 @@ export default function SDL({ chapters, index }) {
             },
           ]}
         />
-        <section className="py-14 lg:py-32 px-8" id="gosho-list">
+        <section className="py-14 lg:py-32 px-8" id="chapters-list">
           <div className="container min-h-[50vh] mx-auto max-w-[1400px]">
             <h2 className="text-2xl md:text-4xl text-primary font-bold mb-8">
               Capitoli del Sutra del Loto

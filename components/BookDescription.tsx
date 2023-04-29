@@ -6,6 +6,7 @@ export type ChapterWithParagraphs = {
   slug?: string;
   disabled?: boolean;
   number?: number;
+  link?: string;
 };
 
 type BookDescriptionProps = {
@@ -91,10 +92,14 @@ const BookDescription: React.FC<BookDescriptionProps> = ({
               .map((chapter) => (
                 <li className="py-2" key={chapter.slug ?? chapter.title}>
                   <Link
-                    href={chapter.slug ? `/${baseSlug}/${chapter.slug}` : ""}
+                    href={
+                      chapter.slug
+                        ? `/${baseSlug}/${chapter.slug}`
+                        : chapter.link || ""
+                    }
                     className={classNames({
                       "text-gray-400": chapter.disabled,
-                      "pointer-events-none": !chapter.slug,
+                      "pointer-events-none": !chapter.slug && !chapter.link,
                     })}
                   >
                     <span className="font-medium text-md md:text-lg">
