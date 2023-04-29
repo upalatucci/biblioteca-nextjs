@@ -1,7 +1,15 @@
 import { ACF_METADATA } from "@utils/constants";
 import { parsePHP } from "@utils/parsePHP";
 import { PrismaClient } from "@prisma/client";
-export const prismaClient = new PrismaClient();
+
+const globalForPrisma = global as unknown as {
+  prisma: PrismaClient | undefined;
+};
+
+export const prismaClient = globalForPrisma.prisma ?? new PrismaClient();
+
+if (process.env.NODE_ENV !== "production")
+  globalForPrisma.prisma = prismaClient;
 
 export const INCLUDE_METADATA = {
   d1b1_term_relationships: {
