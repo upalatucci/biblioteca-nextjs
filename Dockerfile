@@ -28,11 +28,9 @@ ENV ELASTIC_SEARCH_USERNAME=elastic
 ENV ELASTIC_SEARCH_PASSWORD=password
 ENV ELASTIC_SEARCH_URL=https://sd.sgi-italia.org:8881
 ENV ELASTIC_SEARCH_INDEX=bibliotecawpsgiitaliaorgsite-post-1
-ENV WORDPRESS_API_ENDPOINT=https://biblioteca-wp.sgi-italia.org/wp-json/wp/v2
 ENV REVALIDATE_SECRET=''
 
-RUN --mount=type=secret,id=SENTRY_SECRET,dst=./.sentryclirc --mount=type=secret,id=DATABASE_URL \
-  export DATABASE_URL=$(cat /run/secrets/DATABASE_URL) && \
+RUN --mount=type=secret,id=SENTRY_SECRET,dst=./.sentryclirc --mount=type=secret,id=ENV_WITH_SECRETS,dst=./.env \
   yarn build
 
 # If using npm comment out above and use below instead

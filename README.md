@@ -14,7 +14,6 @@ ELASTIC_SEARCH_USERNAME=elastic
 ELASTIC_SEARCH_PASSWORD=password
 ELASTIC_SEARCH_URL=https://sd.sgi-italia.org:8881
 ELASTIC_SEARCH_INDEX=bibliotecawpsgiitaliaorgsite-post-1
-WORDPRESS_API_ENDPOINT=https://biblioteca-wp.sgi-italia.org/wp-json/wp/v2
 DATABASE_URL="mysql://username:password@biblioteca.sgi-italia.org:3306/db"
 ```
 

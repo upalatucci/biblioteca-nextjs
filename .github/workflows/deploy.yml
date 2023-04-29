@@ -30,5 +30,5 @@ jobs:
           push: true
           tags: upalatucci/biblioteca:latest
           secrets: |
-            "DATABASE_URL=${{ secrets.DATABASE_URL }}"
+            "ENV_WITH_SECRETS=${{ secrets.ENV_WITH_SECRETS }}"
             "SENTRY_SECRET=${{ secrets.SENTRY_SECRET }}"
