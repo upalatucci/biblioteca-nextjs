@@ -50,9 +50,9 @@ const HomeNavbar = () => {
           </a>
         </div>
       </div>
-      
+
       <div className="logo-container container max-w-[1406px] mx-auto relative top-[-44px]">
-      <Link
+        <Link
           href="/"
           className="bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-4 md:mr-0 max-w-[250px] md:max-w-none z-10 hidden md:block absolute top-0"
           style={{
@@ -73,16 +73,23 @@ const HomeNavbar = () => {
           className="inline-block bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-4 md:mr-0 max-w-[250px] md:hidden  md:max-w-none z-10 absolute top-0 right-4 sm:right-10"
           aria-label="La Biblioteca di Nichiren, Home"
         >
-          <Image className="logo-bn" src={Logo} alt="logo" priority width={300} height={150} />
+          <Image
+            className="logo-bn"
+            src={Logo}
+            alt="logo"
+            priority
+            width={300}
+            height={150}
+          />
         </Link>
-
       </div>
 
       <div className="px-8">
-       
-        <nav className={`container max-w-[1400px] mx-auto flex items-center justify-between ${
+        <nav
+          className={`container max-w-[1400px] mx-auto flex items-center justify-between ${
             isHomepage ? "mt-8 md:mt-14" : "mt-8 lg:mt-2"
-          } relative`}>
+          } relative`}
+        >
           <button
             className={classNames(
               "mobileMenu block relative lg:hidden w-12 h-8",
@@ -106,6 +113,7 @@ const HomeNavbar = () => {
               <Link
                 href="/rsnd-vol1"
                 className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center"
+                onClick={closeMobileMenu}
               >
                 <div>
                   Raccolta degli Scritti di
@@ -120,6 +128,7 @@ const HomeNavbar = () => {
               <Link
                 href="/rsnd-vol2"
                 className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center"
+                onClick={closeMobileMenu}
               >
                 <div>
                   Raccolta degli Scritti di
@@ -134,6 +143,7 @@ const HomeNavbar = () => {
               <Link
                 href="/sutra-del-loto"
                 className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center"
+                onClick={closeMobileMenu}
               >
                 <div>Sutra del Loto</div>
               </Link>
@@ -141,19 +151,24 @@ const HomeNavbar = () => {
               <Link
                 href="/glossario"
                 className="!text-left font-sans text-primary uppercase border-b border-gray-200 flex-1 flex flex-col justify-center"
+                onClick={closeMobileMenu}
               >
                 <div>Glossario</div>
               </Link>
               <Link
                 href="/ricerca"
                 className="!text-left font-sans text-primary uppercase flex-1 flex flex-col justify-center"
+                onClick={closeMobileMenu}
               >
                 <div>Ricerca</div>
               </Link>
               {installable && (
                 <button
                   className="!text-left font-sans text-customYellow uppercase flex-1 flex flex-col justify-center border-t border-gray-200"
-                  onClick={install}
+                  onClick={() => {
+                    closeMobileMenu();
+                    install();
+                  }}
                 >
                   Installa
                 </button>
