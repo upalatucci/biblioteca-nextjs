@@ -21,5 +21,5 @@ Da fare:
 - [x] Link ai volumi nella ricerca
 - [x] Link destinatario e luogo nella pagina del post
 - [x] Fare in modo che il menu mobile si chiuda al click sulla voce
-- [ ] nascondere il 2.1 sul poscritto di Adottare...
+- [x] nascondere il 2.1 sul poscritto di Adottare...
 - [x] rendere cliccabile la voce sutra del loto e farlo scendere fino alla lista dei capitoli del sutra

@@ -72,9 +72,11 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
               })}
             >
               <td width="5" className="px-4 py-2">
-                <span className="mr-8 lg:mr-14 font-medium">
-                  {post.number}.
-                </span>{" "}
+                {!post.number.toString().includes(".") && (
+                  <span className="mr-8 lg:mr-14 font-medium">
+                    {post.number}.
+                  </span>
+                )}
               </td>
               <td width="50%" className="px-4 py-2">
                 <Link
