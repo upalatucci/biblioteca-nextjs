@@ -85,7 +85,7 @@ class MyDocument extends Document {
           />
           <meta
             name="twitter:image"
-            content="biblioteca.sgi-italia.org/icons/android-chrome-192x192.png"
+            content="https://biblioteca.sgi-italia.org/android-chrome-192x192.png"
           />
           <meta name="twitter:creator" content="@DavidWShadow" />
           <meta property="og:type" content="website" />
@@ -98,7 +98,7 @@ class MyDocument extends Document {
           <meta property="og:url" content="biblioteca.sgi-italia.org" />
           <meta
             property="og:image"
-            content="biblioteca.sgi-italia.org/icons/apple-touch-icon.png"
+            content="https://biblioteca.sgi-italia.org/apple-touch-icon.png"
           />
 
           <link
