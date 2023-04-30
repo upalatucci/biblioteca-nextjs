@@ -11,10 +11,11 @@ export default async function handler(
     const searchText = req.query.q as string;
     const postId = parseInt(req.query.postId as string);
 
-    const fields = getQueryParamAsArray<FIELDS>(
-      req.query.fields,
-      FIELDS.CONTENT
-    );
+    let fields = getQueryParamAsArray<FIELDS>(req.query.fields, FIELDS.CONTENT);
+
+    if (!searchText || !req.query.fields) {
+      fields = [FIELDS.CONTENT, FIELDS.CENNI_STORICI, FIELDS.NOTE];
+    }
 
     const searchType = req.query.searchType;
 
