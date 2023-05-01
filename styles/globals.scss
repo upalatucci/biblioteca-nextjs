@@ -70,7 +70,7 @@ hr {
   border-color: var(--primary-color);
 }
 #contenuto p a {
-  text-decoration: underline; 
+  text-decoration: underline;
 }
 #contenuto a:hover {
   color: var(--primary-color);
@@ -289,17 +289,17 @@ main .wp-block-image img {
   margin: 50px 0 50px;
 }
 mark {
-    scroll-margin-top: 100px;
-    background-color: #F3E8CA;
-    border-radius: 17px;
-    padding: 0 6px;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
+  scroll-margin-top: 100px;
+  background-color: #f3e8ca;
+  border-radius: 17px;
+  padding: 0 6px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .home span.mark {
-    color: #E5BD55;
-    font-weight: 700;
-    background-color: transparent;
+  color: #e5bd55;
+  font-weight: 700;
+  background-color: transparent;
 }
 
 @media screen and (max-width: 767px) {
@@ -345,10 +345,5 @@ mark {
   }
   .logo-bn {
     max-width: 150px !important;
-  }
-}
-@media all and (max-width: 1470px) {
-  .logo-container a {
-    right:0 !important;
   }
 }
