@@ -51,13 +51,13 @@ const HomeNavbar = () => {
         </div>
       </div>
 
-      <div className="container max-w-[1406px] mx-auto relative top-[-44px]">
+      <div className="container max-w-[1406px] mx-auto relative top-[-44px] px-8">
         <Link
           href="/"
           className={`bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-4 md:mr-0 max-w-[250px] md:max-w-none z-10 hidden md:block absolute top-0 transition-all origin-top ${
             isHomepage
               ? "right-[10%] md:right-[20%] xl:right-[50%] scale-75 xl:scale-100 translate-x-1/2"
-              : "right-[2%] scale-75 translate-x-[10%]"
+              : "right-0 scale-75 translate-x-[10%]"
           }`}
           aria-label="La Biblioteca di Nichiren, Home"
         >

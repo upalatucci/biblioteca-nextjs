@@ -1,4 +1,6 @@
+import Image from "next/image";
 import React from "react";
+import iconClose from "@public/icons/ico-close.svg";
 
 type ShareModalProps = {
   title: string;
@@ -43,10 +45,10 @@ const ShareModal: React.FC<ShareModalProps> = ({ title, onClose }) => {
         <div className="flex items-center justify-between">
           <div className="text-lg font-bold">Condividi su</div>
           <button
-            className="text-gray-500 hover:text-gray-700 text-sans"
+            className="text-gray-500 hover:text-gray-700"
             onClick={onClose}
           >
-            X
+            <Image width={30} height={30} src={iconClose} alt="chiudi" />
           </button>
         </div>
         <div className="mt-4 w-100">
