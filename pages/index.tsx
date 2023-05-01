@@ -160,7 +160,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="font-serif flex flex-row justify-start item-start text-left pt-6 pb-8 ">
-                      <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#EEE8DD] ">
+                      <span className="flex item-center justify-center min-w-[50px] h-[50px] p-3 mr-4 z-10 ico-in-square rounded-xl bg-[#F3E8CA] ">
                         <Image
                           className=""
                           src={GlossaryIcon}
@@ -232,9 +232,9 @@ export default function Home() {
               Che cos&apos;è La Biblioteca di Nichiren
             </h2>
             <p className="text-2xl font-serif text-center mx-4 md:mx-32 lg:mx-64">
-              Benvenuti nella Biblioteca di Nichiren, una <mark>libreria online di
-              testi buddisti aperta a tutti</mark> per la libera consultazione e
-              ricerca. Essa contiene le traduzioni in italiano dei testi
+              Benvenuti nella Biblioteca di Nichiren, una <span className="mark">libreria online di
+              testi buddisti aperta a tutti per la libera consultazione e
+              ricerca.</span> Essa contiene le traduzioni in italiano dei testi
               essenziali del buddismo di Nichiren: La raccolta degli scritti di
               Nichiren Daishonin Vol. 1 e 2 e il Sutra del Loto. Come aiuto alla
               lettura è presente anche un glossario dei termini buddisti usati.
