@@ -168,7 +168,23 @@ export const useOrder = (allGosho: GoshoType[]): UseOrderType => {
   );
 
   const sortedGosho = sortField
-    ? allGosho.sort((a, b) => (a[sortField] > b[sortField] ? 1 : -1))
+    ? allGosho.sort((a, b) => {
+        if (a[sortField] && b[sortField] && typeof a[sortField] === "number") {
+          return (a[sortField] as number) - (b[sortField] as number);
+        }
+
+        const aField = Array.isArray(a[sortField])
+          ? a[sortField]?.[0]
+          : a[sortField];
+        const bField = Array.isArray(b[sortField])
+          ? b[sortField]?.[0]
+          : b[sortField];
+
+        return aField?.toString()?.toUpperCase() >
+          bField?.toString()?.toUpperCase()
+          ? 1
+          : -1;
+      })
     : allGosho;
 
   return {
