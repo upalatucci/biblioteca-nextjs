@@ -30,7 +30,7 @@ const HomeNavbar = () => {
   const isHomepage = router.pathname === "/";
 
   return (
-    <header className="pb-14 relative">
+    <header className="pb-14">
       <div className="top-bar bg-[#212833] px-8 py-2">
         <div className="container max-w-[1406px] mx-auto ">
           <a
@@ -51,38 +51,40 @@ const HomeNavbar = () => {
         </div>
       </div>
 
-      <div className="container max-w-[1406px] mx-auto relative top-[-44px] px-8">
-        <Link
-          href="/"
-          className={`bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-4 md:mr-0 max-w-[250px] md:max-w-none z-10 hidden md:block absolute top-0 transition-all origin-top ${
-            isHomepage
-              ? "right-[10%] md:right-[20%] xl:right-[50%] scale-75 xl:scale-100 translate-x-1/2"
-              : "right-0 scale-75 translate-x-[10%]"
-          }`}
-          aria-label="La Biblioteca di Nichiren, Home"
-        >
-          <Image src={Logo} alt="logo" priority width={300} height={150} />
-        </Link>
+      <div className="px-8">
+        <div className="container max-w-[1400px] mx-auto relative top-[-44px]">
+          <Link
+            href="/"
+            className={`bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 max-w-[250px] md:max-w-none z-10 hidden md:block absolute top-0 transition-all origin-top-right ${
+              isHomepage
+                ? "right-0 xl:right-[50%] scale-75 xl:scale-100 xl:translate-x-1/2"
+                : "right-0 scale-75  translate-x-0"
+            }`}
+            aria-label="La Biblioteca di Nichiren, Home"
+          >
+            <Image src={Logo} alt="logo" priority width={300} height={150} />
+          </Link>
 
-        <Link
-          href="/"
-          className="inline-block bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-4 md:mr-0 max-w-[250px] md:hidden  md:max-w-none z-10 absolute top-0 right-4 sm:right-10"
-          aria-label="La Biblioteca di Nichiren, Home"
-        >
-          <Image
-            className="logo-bn"
-            src={Logo}
-            alt="logo"
-            priority
-            width={300}
-            height={150}
-          />
-        </Link>
+          <Link
+            href="/"
+            className="inline-block bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-4 md:mr-0 max-w-[250px] md:hidden  md:max-w-none z-10 absolute top-0 right-4 sm:right-10"
+            aria-label="La Biblioteca di Nichiren, Home"
+          >
+            <Image
+              className="logo-bn"
+              src={Logo}
+              alt="logo"
+              priority
+              width={300}
+              height={150}
+            />
+          </Link>
+        </div>
       </div>
 
       <div className="px-8">
         <nav
-          className={`container max-w-[1400px] mx-auto flex items-center justify-between ${
+          className={`container max-w-[1400px] mx-auto flex items-center justify-between transition-all ${
             isHomepage ? "mt-8 md:mt-14" : "mt-8 lg:mt-2"
           } relative`}
         >
