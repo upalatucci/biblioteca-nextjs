@@ -312,17 +312,6 @@ mark {
   .post-menu-item-label {
     display: none;
   }
-  .post-menu-list img {
-    width: 100% !important;
-  }
-}
-@media screen and (max-width: 799px) {
-  th:nth-of-type(5),
-  td:nth-of-type(5) {
-    display: none;
-  }
-}
-@media screen and (max-width: 767px) {
   .post-menu {
     flex-direction: column;
   }
