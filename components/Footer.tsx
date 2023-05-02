@@ -153,8 +153,8 @@ const Footer: React.FC = () => {
       
 
       <p className="text-sm text-gray-150 mt-12">
-        © 2023 Soka Gakkai + Istituto Buddista Italiano Soka Gakkai. Tutti i diritti riservati. | Via di Bellagio 2/E
-        50141 Firenze FI | C.F.: 94069310483 | P.IVA: 04935120487 | <a target="_blank" rel="nofollow noreferrer" href="https://privacy.sgi-italia.org/">Privacy & Cookie Policy.</a>
+        © 2023 Soka Gakkai. Tutti i diritti riservati. Istituto Buddista Italiano Soka Gakkai. | Via di Bellagio 2/E
+        50141 Firenze FI | C.F. 94069310483 | P.I. 04935120487 | <a target="_blank" rel="nofollow noreferrer" href="https://privacy.sgi-italia.org/">Privacy & Cookie Policy.</a>
       </p>
     </footer>
   );

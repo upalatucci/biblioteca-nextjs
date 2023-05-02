@@ -174,7 +174,7 @@ export default function Home() {
                           Sfoglia il glossario
                         </h3>
                         <span className="z-10">
-                          Sfoglia il glossario in base alle iniziali del termine
+                          Consulta il glossario in base alle iniziali del termine
                           o ricerca per parola
                         </span>
                       </div>
@@ -235,7 +235,7 @@ export default function Home() {
               Benvenuti nella Biblioteca di Nichiren, una <span className="mark">libreria online di
               testi buddisti aperta a tutti per la libera consultazione e
               ricerca.</span> Essa contiene le traduzioni in italiano dei testi
-              essenziali del buddismo di Nichiren: La raccolta degli scritti di
+              essenziali del Buddismo di Nichiren: La raccolta degli scritti di
               Nichiren Daishonin Vol. 1 e 2 e il Sutra del Loto. Come aiuto alla
               lettura è presente anche un glossario dei termini buddisti usati.
             </p>
