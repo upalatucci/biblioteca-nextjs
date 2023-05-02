@@ -55,7 +55,7 @@ const HomeNavbar = () => {
         <div className="container max-w-[1400px] mx-auto relative top-[-44px]">
           <Link
             href="/"
-            className={`bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 max-w-[250px] md:max-w-none z-10 hidden md:block absolute top-0 transition-all origin-top-right ${
+            className={`bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 max-w-[250px] md:max-w-none z-10 hidden md:block absolute top-0 transition-all duration-300 origin-top-right ${
               isHomepage
                 ? "right-0 xl:right-[50%] scale-75 xl:scale-100 xl:translate-x-1/2"
                 : "right-0 scale-75  translate-x-0"
@@ -67,7 +67,7 @@ const HomeNavbar = () => {
 
           <Link
             href="/"
-            className="inline-block bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-4 md:mr-0 max-w-[250px] md:hidden  md:max-w-none z-10 absolute top-0 right-4 sm:right-10"
+            className="inline-block bg-customYellow rounded-b-3xl px-4 md:px-6 pt-12 pb-4 md:pb-6 mr-0 max-w-[250px] md:hidden  md:max-w-none z-10 absolute top-0 right-0"
             aria-label="La Biblioteca di Nichiren, Home"
           >
             <Image
