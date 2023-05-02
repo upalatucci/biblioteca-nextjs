@@ -6,9 +6,9 @@ import Image from "next/image";
 const CookieBanner = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [withStatistics, setWithStatistics] = useState(true);
-  const [showCookieBanner, setShowCookieBanner] = useState(false);
 
   const { cookiePolicy, handleCookiePolicy } = useCookiePolicy();
+  const [showCookieBanner, setShowCookieBanner] = useState(false);
 
   const onClose = () => {
     setShowCookieBanner(false);
@@ -20,12 +20,22 @@ const CookieBanner = () => {
   };
 
   useEffect(() => {
-    if (!cookiePolicy) {
+    if (cookiePolicy === null) {
       setTimeout(() => setShowCookieBanner(true), 1000);
+    } else if (cookiePolicy !== undefined) {
+      setWithStatistics(cookiePolicy);
     }
   }, [cookiePolicy]);
 
-  if (cookiePolicy || !showCookieBanner) return null;
+  if (!showCookieBanner)
+    return (
+      <div
+        className="fixed transition-all bottom-[-28px] hover:bottom-0 right-10 p-2 pt-4 hover:pt-2 shadow-md border rounded-t-xl bg-defaultBg cursor-pointer"
+        onClick={() => setShowCookieBanner(true)}
+      >
+        <span className="text-sm">Gestisci consenso</span>
+      </div>
+    );
 
   return (
     <div className="bg-defaultBg fixed w-full md:w-auto md:max-w-[550px] left-0 right-0 bottom-0 md:left-auto md:right-4 md:bottom-4 rounded-3xl shadow-md p-4 md:p-8 z-10">
@@ -61,6 +71,7 @@ const CookieBanner = () => {
                 value="statistics"
                 onChange={(event) => setWithStatistics(event.target.checked)}
                 checked={withStatistics}
+                className="cursor-pointer"
               />
             </span>
           </li>

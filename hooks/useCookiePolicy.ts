@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 
 const useCookiePolicy = () => {
-  const [cookiePolicy, setCookiePolicy] = useState<boolean | undefined>();
+  const [cookiePolicy, setCookiePolicy] = useState<boolean | null | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     const savedCookiePolicy = localStorage.getItem("cookiePolicy");
     if (savedCookiePolicy) {
       const policies = JSON.parse(savedCookiePolicy);
       setCookiePolicy(policies?.analitics);
+    } else {
+      setCookiePolicy(null);
     }
   }, []);
 
