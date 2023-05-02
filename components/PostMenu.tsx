@@ -78,7 +78,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
           onClose={() => setOpenShareModal(false)}
         />
       )}
-      <div className="post-menu gap-10 p-8 md:p-10 w-full text-md rounded-3xl shadow-md bg-defaultBg flex sm:flex-row items-center justify-start">
+      <div className="post-menu gap-4 xl:gap-10 p-8 md:p-10 w-full text-md rounded-3xl shadow-md bg-defaultBg flex sm:flex-row items-center justify-start">
         {image && (
           <Link href={imageLink ?? "#"}>
             <div className="image-post-menu">
@@ -86,13 +86,13 @@ const PostMenu: React.FC<PostMenuProps> = ({
             </div>
           </Link>
         )}
-        <ul className="post-menu-list flex sm:flex-row items-start sm:items-center sm:justify-start gap-x-4 gap-y-0 lg:gap-10 flex-wrap w-full">
+        <ul className="post-menu-list flex sm:flex-row items-start sm:items-center sm:justify-start gap-x-4 gap-y-0 xl:gap-x-10 flex-wrap w-full">
           <li className="lg:mx-0 py-2 hover:text-primary">
             <button
               onClick={share}
               className="flex items-center gap-2 font-sans text-md lg:text-lg"
             >
-              <Image src={shareIcon} alt="Condividi" width={15} height={15} />{" "}
+              <Image src={shareIcon} alt="Condividi" width={14} height={14} />{" "}
               <span className="post-menu-item-label">Condividi</span>
             </button>
           </li>
@@ -114,17 +114,17 @@ const PostMenu: React.FC<PostMenuProps> = ({
               <Image
                 src={textSizeIcon}
                 alt="Ridimensiona il testo"
-                width={21}
-                height={21}
+                width={19}
+                height={19}
               />{" "}
               <span className="post-menu-item-label">Dimensione del testo</span>
             </button>
           </li>
 
           {(withBackgrounds || withNotes) && (
-            <span className="block invisible !w-full md:!w-auto md:visible md:inline border-l-2 border-gray-300 h-4 w-2"></span>
+            <span className="block invisible !w-full sm:!w-auto sm:visible sm:inline border-l-2 border-gray-300 h-4 w-2"></span>
           )}
-
+        <div className="flex gap-x-4 gap-y-0 xl:gap-x-10 flex-wrap">
           {withBackgrounds && (
             <li className="py-2 hover:text-primary">
               <a
@@ -159,6 +159,7 @@ const PostMenu: React.FC<PostMenuProps> = ({
               </a>
             </li>
           )}
+          </div>
         </ul>
       </div>
     </div>

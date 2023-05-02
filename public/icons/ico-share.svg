@@ -1,3 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="13.707" height="15.169" viewBox="0 0 13.707 15.169">
-  <path id="Icon_material-share" data-name="Icon material-share" d="M15.923,13.722a2.218,2.218,0,0,0-1.493.586L9,11.148a2.107,2.107,0,0,0,0-1.066l5.369-3.13a2.279,2.279,0,1,0-.731-1.668,2.493,2.493,0,0,0,.069.533L8.338,8.947a2.285,2.285,0,1,0,0,3.335l5.422,3.168a2.148,2.148,0,0,0-.061.495,2.224,2.224,0,1,0,2.224-2.224Z" transform="translate(-4.5 -3)" fill="#0e83a4"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="22.078" height="24.331" viewBox="0 0 22.078 24.331">
+  <g id="Icon_feather-share-2" data-name="Icon feather-share-2" transform="translate(0.9 0.9)">
+    <path id="Tracciato_1913" data-name="Tracciato 1913" d="M29.259,6.38A3.38,3.38,0,1,1,25.88,3,3.38,3.38,0,0,1,29.259,6.38Z" transform="translate(-8.981 -3)" fill="none" stroke="#0e83a4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+    <path id="Tracciato_1914" data-name="Tracciato 1914" d="M11.259,16.88A3.38,3.38,0,1,1,7.88,13.5,3.38,3.38,0,0,1,11.259,16.88Z" transform="translate(-4.5 -5.614)" fill="none" stroke="#0e83a4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+    <path id="Tracciato_1915" data-name="Tracciato 1915" d="M29.259,27.38A3.38,3.38,0,1,1,25.88,24,3.38,3.38,0,0,1,29.259,27.38Z" transform="translate(-8.981 -8.228)" fill="none" stroke="#0e83a4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+    <path id="Tracciato_1916" data-name="Tracciato 1916" d="M12.885,20.265l7.694,4.484" transform="translate(-6.588 -7.298)" fill="none" stroke="#0e83a4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+    <path id="Tracciato_1917" data-name="Tracciato 1917" d="M20.568,9.765l-7.683,4.484" transform="translate(-6.588 -4.684)" fill="none" stroke="#0e83a4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+  </g>
 </svg>
