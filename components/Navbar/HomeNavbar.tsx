@@ -143,7 +143,7 @@ const HomeNavbar = () => {
                 className="!text-left border-b border-gray-200 flex-1 flex flex-col justify-center"
                 onClick={closeMobileMenu}
               >
-                <div>Sutra del Loto</div>
+                <div>SUTRA DEL LOTO</div>
               </Link>
 
               <Link
