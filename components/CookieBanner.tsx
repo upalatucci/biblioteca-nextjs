@@ -30,7 +30,7 @@ const CookieBanner = () => {
   if (!showCookieBanner)
     return (
       <div
-        className="fixed transition-all bottom-[-28px] hover:bottom-0 right-10 p-2 pt-4 hover:pt-2 shadow-md border rounded-t-xl bg-defaultBg cursor-pointer"
+        className="fixed transition-all bottom-0 md:bottom-[-28px] hover:bottom-0 right-20 p-2 pt-2 md:pt-4 hover:pt-2 shadow-md border rounded-t-xl bg-defaultBg cursor-pointer"
         onClick={() => setShowCookieBanner(true)}
       >
         <span className="text-sm">Gestisci consenso</span>
