@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
                 width={125}
                 height={47}
                 src={EreditaIcon}
-                alt="Ereditá della vita"
+                alt="Eredità della vita"
               />
             </a>
         </div>
@@ -115,7 +115,7 @@ const Footer: React.FC = () => {
                 width={190}
                 height={29}
                 src={BSIcon}
-                alt="buddismo e societá"
+                alt="buddismo e società"
               />
             </a>
         </div>
@@ -153,7 +153,7 @@ const Footer: React.FC = () => {
       
 
       <p className="text-sm text-gray-150 mt-12">
-        © 2023 Soka Gakkai. Tutti i diritti riservati. Istituto Buddista Italiano Soka Gakkai. | Via di Bellagio 2/E
+        © 2023 Soka Gakkai. ©Istituto Buddista Italiano Soka Gakkai. | Via di Bellagio 2/E
         50141 Firenze FI | C.F. 94069310483 | P.I. 04935120487 | <a target="_blank" rel="nofollow noreferrer" href="https://privacy.sgi-italia.org/">Privacy & Cookie Policy.</a>
       </p>
     </footer>
