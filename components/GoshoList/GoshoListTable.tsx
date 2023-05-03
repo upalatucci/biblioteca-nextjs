@@ -16,7 +16,7 @@ type GoshoListTableType = {
 const listFormat = (recipients: string[]): string => {
   if (recipients.length === 1) return recipients[0];
 
-  const lastRecipient = recipients.at(-1);
+  const lastRecipient = recipients[recipients.length - 1];
 
   return `${recipients
     .slice(0, recipients.length - 1)

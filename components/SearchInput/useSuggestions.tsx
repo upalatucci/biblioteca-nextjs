@@ -36,7 +36,7 @@ const useSuggestions = ({
 
     if (!words) return;
 
-    setSearchText(words.at(-1));
+    setSearchText(words[words.length - 1]);
     setSuggestionFocusIndex(null);
     setSuggestionVisible(true);
 
