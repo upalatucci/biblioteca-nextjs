@@ -27,7 +27,7 @@ class MyDocument extends Document {
           />
           <meta
             name="description"
-            content="Consulta e ricerca contenuti riguardanti Nichiren ed il Sutra del Loto in italiano"
+            content="Consulta la Biblioteca di Nichiren: una libreria digitale di testi buddisti aperta a tutti per la libera consultazione e ricerca"
           />
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
@@ -85,7 +85,7 @@ class MyDocument extends Document {
           <meta name="twitter:title" content="La Biblioteca di Nichiren" />
           <meta
             name="twitter:description"
-            content="Consulta e ricerca contenuti riguardanti Nichiren ed il Sutra del Loto in italiano"
+            content="Consulta la Biblioteca di Nichiren: una libreria digitale di testi buddisti aperta a tutti per la libera consultazione e ricerca"
           />
           <meta
             name="twitter:image"
@@ -96,7 +96,7 @@ class MyDocument extends Document {
           <meta property="og:title" content="La Biblioteca di Nichiren" />
           <meta
             property="og:description"
-            content="Consulta e ricerca contenuti riguardanti Nichiren ed il Sutra del Loto in italiano"
+            content="Consulta la Biblioteca di Nichiren: una libreria digitale di testi buddisti aperta a tutti per la libera consultazione e ricerca"
           />
           <meta property="og:site_name" content="La Biblioteca di Nichiren" />
           <meta property="og:url" content="biblioteca.sgi-italia.org" />
