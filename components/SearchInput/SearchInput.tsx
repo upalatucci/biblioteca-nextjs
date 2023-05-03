@@ -1,16 +1,4 @@
-import { SearchResponse } from "@elastic/elasticsearch/lib/api/typesWithBodyKey";
-import classNames from "classnames";
-import {
-  ChangeEventHandler,
-  FC,
-  KeyboardEventHandler,
-  MouseEventHandler,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { useQuery } from "react-query";
+import { FC } from "react";
 import useSuggestions from "./useSuggestions";
 
 type SearchInputProps = {

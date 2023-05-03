@@ -33,6 +33,9 @@ const useSuggestions = ({
     if (event.currentTarget.value.endsWith(" ")) return;
 
     const words = event.currentTarget.value?.split(" ");
+
+    if (!words) return;
+
     setSearchText(words.at(-1));
     setSuggestionFocusIndex(null);
     setSuggestionVisible(true);
