@@ -14,7 +14,7 @@ const RecipientsLink: React.FC<RecipientLinkPsrops> = ({
     <>
       Indirizzata a{" "}
       {recipients.map((recipient, index) => (
-        <>
+        <span key={recipient}>
           {index > 0 && index < recipients.length - 1 && ", "}
           {index > 0 && index === recipients.length - 1 && " e "}
           <Link
@@ -28,7 +28,7 @@ const RecipientsLink: React.FC<RecipientLinkPsrops> = ({
           >
             {recipient}
           </Link>
-        </>
+        </span>
       ))}
     </>
   );
