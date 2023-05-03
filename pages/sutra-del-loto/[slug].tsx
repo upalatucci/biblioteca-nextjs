@@ -25,7 +25,7 @@ export default function PostPage({ post }) {
 
   const [highlightedPost] = useHighlightedPost(post);
 
-  if (router.isFallback) {
+  if (router.isFallback || !highlightedPost) {
     return <ArticleLoading originalPost={post} />;
   }
 

@@ -33,7 +33,7 @@ export default function PostPage({ post }: { post: GetStaticPost }) {
   const { fontSize } = useContext(FontSizeContext);
   const [highlightedPost] = useHighlightedPost(post);
 
-  if (router.isFallback) {
+  if (router.isFallback || !highlightedPost) {
     return <ArticleLoading originalPost={post} />;
   }
 
@@ -59,7 +59,7 @@ export default function PostPage({ post }: { post: GetStaticPost }) {
       <Head>
         <title>
           {removeHTMLTags(
-            `${highlightedPost.post_title} | La Biblioteca di Nichiren`
+            `${highlightedPost?.post_title} | La Biblioteca di Nichiren`
           )}
         </title>
         <meta
@@ -81,7 +81,7 @@ export default function PostPage({ post }: { post: GetStaticPost }) {
                       isMainBookContent
                         ? `${highlightedPost?.acf?.acf_numero}. `
                         : ""
-                    } ${highlightedPost.post_title}`,
+                    } ${highlightedPost?.post_title}`,
                   }}
                 ></h2>
                 <p className="pb-14">
