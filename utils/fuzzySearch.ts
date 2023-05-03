@@ -51,7 +51,6 @@ export const highlight = <T extends object>(
     return content;
   };
 
-  console.log(fuseSearchResult);
   return fuseSearchResult
     .filter(({ matches }) => matches && matches.length)
     .map(({ item, matches }) => {

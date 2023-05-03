@@ -59,7 +59,6 @@ const DictionarySearch: React.FC<DictionarySearchProps> = ({
 
   if (filterText?.length > 1) {
     glossarioFiltrato = highlight(fuseRef.current?.search(filterText));
-    console.log(glossarioFiltrato);
   } else if (letter || filterText?.length === 1) {
     const filterByFirstLetter = letter || filterText?.toUpperCase();
     glossarioFiltrato = glossary?.filter((termine) =>

@@ -107,7 +107,6 @@ const useSuggestions = ({
         setSuggestionFocusIndex(nextFocusIndex);
       } else if (event.key === "ArrowUp" && suggestions) {
         event.preventDefault();
-        console.log(suggestionFocusIndex);
 
         if (!suggestionFocusIndex) {
           inputRef.current?.focus();
