@@ -5,7 +5,6 @@ import {
   RSND_VOL_1_CATEGORY_ID,
 } from "@utils/constants";
 import { GetStaticPost } from "lib/db";
-import Link from "next/link";
 import React from "react";
 import PlaceLink from "./PlaceLink";
 import RecipientsLink from "./RecipientsLink";
@@ -13,11 +12,6 @@ import RecipientsLink from "./RecipientsLink";
 type PostMetadataProps = {
   post: GetStaticPost;
 };
-
-const ItalianListFormatted = new Intl.ListFormat("it", {
-  style: "long",
-  type: "conjunction",
-});
 
 const PostMetadata: React.FC<PostMetadataProps> = ({ post }) => {
   const isMainBookContent =

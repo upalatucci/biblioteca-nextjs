@@ -13,10 +13,13 @@ type GoshoListTableType = {
   onSortChange: UseOrderType["onSortChange"];
 };
 
-const ItalianListFormatted = new Intl.ListFormat("it", {
-  style: "long",
-  type: "conjunction",
-});
+const listFormat = (recipients: string[]): string => {
+  if (recipients.length === 1) return recipients[0];
+
+  const lastRecipient = recipients.pop();
+
+  return `${recipients.join(", ")} e ${lastRecipient}`;
+};
 
 const GoshoListTable: React.FC<GoshoListTableType> = ({
   sortedGosho,
@@ -87,7 +90,7 @@ const GoshoListTable: React.FC<GoshoListTableType> = ({
                 </Link>
               </td>
               <td width="20%" className="px-4 py-2 font-medium">
-                {ItalianListFormatted.format(post.recipient)}
+                {listFormat(post.recipient)}
               </td>
               <td width="17%" className="px-4 py-2 font-medium">
                 {post.place}
