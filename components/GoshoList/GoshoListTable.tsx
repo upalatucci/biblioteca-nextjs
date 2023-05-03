@@ -16,9 +16,11 @@ type GoshoListTableType = {
 const listFormat = (recipients: string[]): string => {
   if (recipients.length === 1) return recipients[0];
 
-  const lastRecipient = recipients.pop();
+  const lastRecipient = recipients.at(-1);
 
-  return `${recipients.join(", ")} e ${lastRecipient}`;
+  return `${recipients
+    .slice(0, recipients.length - 1)
+    .join(", ")} e ${lastRecipient}`;
 };
 
 const GoshoListTable: React.FC<GoshoListTableType> = ({

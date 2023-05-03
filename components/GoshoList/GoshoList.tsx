@@ -105,6 +105,4 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   );
 };
 
-export default dynamic(() => Promise.resolve(GoshoList), {
-  ssr: false,
-});
+export default GoshoList;

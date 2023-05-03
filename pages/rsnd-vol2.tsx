@@ -82,7 +82,10 @@ export const getStaticProps: GetStaticProps = async () => {
   const postsWithAcf = posts.map((post) => ({
     title: post.post_title,
     slug: post.post_name,
-    recipient: getAcfMetadataValue(post.d1b1_postmeta, ACF_METADATA.RECIPIENT),
+    recipient: getAcfMetadataValue(
+      post.d1b1_postmeta,
+      ACF_METADATA.RECIPIENT
+    ) as string[],
     place: getAcfMetadataValue(post.d1b1_postmeta, ACF_METADATA.PLACE),
     date: getAcfMetadataValue(post.d1b1_postmeta, ACF_METADATA.DATE),
     number: getAcfMetadataValue(post.d1b1_postmeta, ACF_METADATA.NUMBER),
