@@ -3,6 +3,7 @@ import SearchInput from "../SearchInput";
 import Select from "../Select";
 import GoshoListTable from "./GoshoListTable";
 import { useFilters, useOrder } from "./utils";
+import dynamic from "next/dynamic";
 
 export type GoshoType = {
   title: string;
@@ -30,6 +31,7 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
     recipientOptions,
     clearFilters,
   } = useFilters(jsonData);
+
   const { sortedGosho, sortField, sortAscend, onSortChange } =
     useOrder(filteredGosho);
 
@@ -103,4 +105,6 @@ const GoshoList: React.FC<GoshoListProps> = ({ jsonData }) => {
   );
 };
 
-export default GoshoList;
+export default dynamic(() => Promise.resolve(GoshoList), {
+  ssr: false,
+});

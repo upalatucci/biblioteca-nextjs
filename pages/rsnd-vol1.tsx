@@ -74,7 +74,6 @@ export const getStaticProps: GetStaticProps = async () => {
         post_type: "rsnd",
         d1b1_term_relationships: {
           some: { term_taxonomy_id: RSND_APPENDICE_CAT_ID },
-          none: { term_taxonomy_id: RSND_VOL_2_CATEGORY_ID },
         },
       },
       include: { ...INCLUDE_CATEGORY, ...INCLUDE_NUMBER },
@@ -96,11 +95,17 @@ export const getStaticProps: GetStaticProps = async () => {
     number: getAcfMetadataValue(post.d1b1_postmeta, ACF_METADATA.NUMBER),
   }));
 
-  const appendix = appendixPosts.map((post) => ({
-    title: post.post_title,
-    slug: post.post_name,
-    number: getAcfMetadataValue(post.d1b1_postmeta, ACF_METADATA.NUMBER),
-  }));
+  const appendix = appendixPosts
+    .filter((appendix) =>
+      appendix.d1b1_term_relationships.find(
+        (term) => Number(term.term_taxonomy_id) === RSND_VOL_1_CATEGORY_ID
+      )
+    )
+    .map((post) => ({
+      title: post.post_title,
+      slug: post.post_name,
+      number: getAcfMetadataValue(post.d1b1_postmeta, ACF_METADATA.NUMBER),
+    }));
 
   return {
     props: {

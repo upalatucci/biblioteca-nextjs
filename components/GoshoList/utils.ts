@@ -18,6 +18,7 @@ const generateUniqueOptions = (jsonData: GoshoType[], key) => {
 
     uniqueValues.add(post[key]);
   });
+  console.log(uniqueValues);
 
   return Array.from(uniqueValues);
 };
