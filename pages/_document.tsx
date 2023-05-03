@@ -38,6 +38,10 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#2B5797" />
           <meta name="msapplication-tap-highlight" content="no" />
           <meta name="theme-color" content="#000000" />
+          <meta
+            name="google-site-verification"
+            content="XcmwsGMj4oIVqKtG3bpBLmnz167-tnX1up2uktJI_NY"
+          />
 
           <link rel="apple-touch-icon" href="apple-touch-icon.png" />
           {/* <link
