@@ -30,9 +30,8 @@ ENV ELASTIC_SEARCH_URL=https://sd.sgi-italia.org:8881
 ENV ELASTIC_SEARCH_INDEX=bibliotecawpsgiitaliaorgsite-post-1
 ENV REVALIDATE_SECRET=''
 
-RUN --mount=type=secret,id=SENTRY_SECRET,dst=./.sentryclirc --mount=type=secret,id=ENV_WITH_SECRETS \
-  source /run/secrets/ENV_WITH_SECRETS && \
-  DATABASE_URL=$DATABASE_URL yarn build
+RUN --mount=type=secret,id=SENTRY_SECRET,dst=./.sentryclirc --mount=type=secret,id=DATABASE_URL \
+  DATABASE_URL=$(cat /run/secrets/DATABASE_URL) yarn build
 
 # If using npm comment out above and use below instead
 # RUN npm run build
