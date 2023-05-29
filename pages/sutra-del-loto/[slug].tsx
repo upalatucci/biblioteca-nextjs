@@ -52,7 +52,7 @@ export default function PostPage({ post }) {
         ></meta>
       </Head>
       <main>
-        <div className="bg-defaultBg">
+        <div className="bg-defaultBg print:bg-white">
           <div className="">
             <div className="bg-white py-20 lg:py-32 px-8 print:py-0 rounded-xl shadow-md print:rounded-none print:shadow-none">
               <div className="container mx-auto max-w-[1400px] print:py-0">

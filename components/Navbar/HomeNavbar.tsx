@@ -30,8 +30,8 @@ const HomeNavbar = () => {
   const isHomepage = router.pathname === "/";
 
   return (
-    <header className="pb-14">
-      <div className="top-bar bg-[#212833] px-8 py-2">
+    <header className="pb-14 print:bg-white">
+      <div className="top-bar bg-[#212833] px-8 py-2 print:bg-white">
         <div className="container max-w-[1406px] mx-auto ">
           <a
             href="https://www.sgi-italia.org"
@@ -51,7 +51,7 @@ const HomeNavbar = () => {
         </div>
       </div>
 
-      <div className="px-8">
+      <div className="px-8 print:hidden">
         <div className="container max-w-[1400px] mx-auto relative top-[-44px]">
           <Link
             href="/"
@@ -82,7 +82,7 @@ const HomeNavbar = () => {
         </div>
       </div>
 
-      <div className="px-8">
+      <div className="px-8 print:hidden">
         <nav
           className={`container max-w-[1400px] mx-auto flex items-center justify-between transition-all ${
             isHomepage ? "mt-8 md:mt-14" : "mt-8 lg:mt-2"

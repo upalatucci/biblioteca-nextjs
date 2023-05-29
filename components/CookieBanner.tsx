@@ -30,7 +30,7 @@ const CookieBanner = () => {
   if (!showCookieBanner)
     return (
       <div
-        className="fixed transition-all bottom-[-28px] hover:bottom-0 right-20 p-2 pt-4 hover:pt-2 shadow-md border rounded-t-xl bg-defaultBg cursor-pointer z-10"
+        className="fixed print:hidden transition-all bottom-[-28px] hover:bottom-0 right-20 p-2 pt-4 hover:pt-2 shadow-md border rounded-t-xl bg-defaultBg cursor-pointer z-10"
         onClick={() => setShowCookieBanner(true)}
       >
         <span className="text-sm">Gestisci consenso</span>
@@ -38,7 +38,7 @@ const CookieBanner = () => {
     );
 
   return (
-    <div className="bg-defaultBg fixed w-full md:w-auto md:max-w-[550px] left-0 right-0 bottom-0 md:left-auto md:right-4 md:bottom-4 rounded-3xl shadow-md p-4 md:p-8 z-10">
+    <div className="bg-defaultBg print:hidden fixed w-full md:w-auto md:max-w-[550px] left-0 right-0 bottom-0 md:left-auto md:right-4 md:bottom-4 rounded-3xl shadow-md p-4 md:p-8 z-10">
       <div className="text-lg mb-4 text-center flex justify-evenly">
         <div />
         <span className="flex-1">Gestisci Consenso Cookie</span>
