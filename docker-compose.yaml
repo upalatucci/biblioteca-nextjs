@@ -5,15 +5,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      secrets:
+        - ENV_WITH_SECRETS
     working_dir: /app
     ports:
       - "3000:3000"
     image: biblioteca-app
     env_file:
       - .env.local
-    secrets:
-      - DATABASE_URL
       
 secrets:
-  DATABASE_URL:
-    file: './env.secret'
+  ENV_WITH_SECRETS:
+    file: .env.local
