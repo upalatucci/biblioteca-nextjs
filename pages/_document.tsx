@@ -43,7 +43,7 @@ class MyDocument extends Document {
             content="XcmwsGMj4oIVqKtG3bpBLmnz167-tnX1up2uktJI_NY"
           />
 
-          <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
           {/* <link
             rel="apple-touch-icon"
             sizes="152x152"
