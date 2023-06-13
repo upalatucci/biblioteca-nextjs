@@ -91,7 +91,7 @@ class MyDocument extends Document {
             name="twitter:image"
             content="https://biblioteca.sgi-italia.org/android-chrome-192x192.png"
           />
-          <meta name="twitter:creator" content="@DavidWShadow" />
+          <meta name="twitter:creator" content="@SokaGakkaItalia" />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="La Biblioteca di Nichiren" />
           <meta

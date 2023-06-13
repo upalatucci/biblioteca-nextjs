@@ -54,20 +54,23 @@ export default function PostPage({ post }: { post: GetStaticPost }) {
       ].includes(category)
     );
 
+  const metaTitle = removeHTMLTags(
+    `${highlightedPost?.post_title} | La Biblioteca di Nichiren`
+  );
+
+  const metaDescription = removeHTMLTags(
+    highlightedPost?.post_content?.substring(0, 155)
+  );
+
   return (
     <>
       <Head>
-        <title>
-          {removeHTMLTags(
-            `${highlightedPost?.post_title} | La Biblioteca di Nichiren`
-          )}
-        </title>
-        <meta
-          name="Description"
-          content={removeHTMLTags(
-            highlightedPost?.post_content?.substring(0, 155)
-          )}
-        ></meta>
+        <title>{metaTitle}</title>
+        <meta name="Description" content={metaDescription} />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
       </Head>
       <main>
         <div className="bg-defaultBg print:bg-white">
