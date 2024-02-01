@@ -1,8 +1,10 @@
-const withPWA = require("next-pwa")({
+import { withSentryConfig } from "@sentry/nextjs";
+import createWithPWA from "next-pwa";
+
+const withPWA = createWithPWA({
   dest: "public",
   cacheOnFrontEndNav: true,
   reloadOnOnline: true,
-  swcMinify: true,
   aggressiveFrontEndNavCaching: true,
   disable: process.env.NODE_ENV === "development",
 });
@@ -13,8 +15,6 @@ module.exports = withPWA({
 });
 
 // Inected Content via Sentry Wizard Below
-
-const { withSentryConfig } = require("@sentry/nextjs");
 
 module.exports = withSentryConfig(
   module.exports,
