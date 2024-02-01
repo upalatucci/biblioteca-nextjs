@@ -1,5 +1,10 @@
 const withPWA = require("next-pwa")({
   dest: "public",
+  cacheOnFrontEndNav: true,
+  reloadOnOnline: true,
+  swcMinify: true,
+  aggressiveFrontEndNavCaching: true,
+  disable: process.env.NODE_ENV === "development",
 });
 
 module.exports = withPWA({
