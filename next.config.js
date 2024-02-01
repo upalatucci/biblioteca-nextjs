@@ -5,7 +5,6 @@ const withPWA = createWithPWA({
   dest: "public",
   cacheOnFrontEndNav: true,
   reloadOnOnline: true,
-  aggressiveFrontEndNavCaching: true,
   disable: process.env.NODE_ENV === "development",
 });
 
